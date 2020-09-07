@@ -1,0 +1,26 @@
+{
+	"name": "urn-trx",
+	"version": "0.0.1",
+	"description": "Uranio Transreceiver",
+	"main": "index.js",
+	"scripts": {
+		"start": "node -r source-map-support/register dist/idex.js",
+		"dev": "./node_modules/.bin/tsc-watch --onSuccess \"node -r source-map-support/register ./dist/index.js\""
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+ssh://git@bitbucket.org/nbl7/urn-trx.git"
+	},
+	"keywords": [
+		"uranio",
+		"urn",
+		"trx"
+	],
+	"author": "Andrea Reni <mail@nbl7.net>",
+	"license": "ISC",
+	"homepage": "https://bitbucket.org/nbl7/urn-trx#readme",
+	"devDependencies": {
+		"tsc-watch": "^4.2.9",
+		"typescript": "^4.0.2"
+	}
+}
