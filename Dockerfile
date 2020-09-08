@@ -1,7 +1,7 @@
 FROM node:14.9.0
 WORKDIR /app
-COPY package.json /app
-COPY ../tsconfig.json /app
+COPY ./urn-trx/package.json /app
+COPY ./tsconfig.json /
 RUN npm install
-COPY . /app
+COPY ./urn-trx /app
 CMD ["npm", "run", "dev"]
