@@ -20,6 +20,7 @@
 	"license": "ISC",
 	"homepage": "https://bitbucket.org/nbl7/urn-trx#readme",
 	"devDependencies": {
+		"source-map-support": "^0.5.19",
 		"tsc-watch": "^4.2.9",
 		"typescript": "^4.0.2"
 	}
