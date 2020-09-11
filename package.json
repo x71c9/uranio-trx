@@ -20,6 +20,7 @@
 	"license": "ISC",
 	"homepage": "https://bitbucket.org/nbl7/urn-trx#readme",
 	"devDependencies": {
+		"@types/node": "^14.10.0",
 		"@typescript-eslint/eslint-plugin": "^4.1.0",
 		"@typescript-eslint/parser": "^4.1.0",
 		"eslint": "^7.8.1",

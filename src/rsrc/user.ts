@@ -5,13 +5,9 @@
 /*
  * Import interface IURN_OBJ
  */
-import {IURN_OBJ} from './obj';
+import {IURNResource} from './rsrc';
 
-export interface IURNUser extends IURN_OBJ {
-	
-	
-	
-	
+export interface IURNUser extends IURNResource {
 	/*
 	 * First name
 	 */
