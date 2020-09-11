@@ -9,9 +9,4 @@ export interface IURN_OBJ {
 	 */
 	[key:string]: any;
 	
-	/*
-	 * _id
-	 */
-	_id?: string;
-	
 }
