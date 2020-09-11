@@ -16,7 +16,7 @@ docker-compose up
 
 First time, build an image
 ```
-docker build -t urn-trx:0.0.1
+docker build -t urn-trx:0.0.1 .
 ```
 
 Create and start a container with its own node_modules folder
