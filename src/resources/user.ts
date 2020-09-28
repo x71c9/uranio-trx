@@ -5,9 +5,15 @@
 /*
  * Import interface IURN_OBJ
  */
-import {IURNResource} from './rsrc';
+import {IURNResource} from './resource';
 
 export interface IURNUser extends IURNResource {
+	
+	/*
+	 * Email
+	 */
+	email:string;
+	
 	/*
 	 * First name
 	 */
@@ -22,11 +28,6 @@ export interface IURNUser extends IURNResource {
 	 * Username
 	 */
 	username?:string;
-	
-	/*
-	 * Email
-	 */
-	email?:string;
 	
 	/*
 	 * Type
