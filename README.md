@@ -21,7 +21,7 @@ docker build -t urn-trx:0.0.1 .
 
 Create and start a container with its own node_modules folder
 ```
-docker run -it -v $(pwd):/app -v /app/node_modules/ urn-trx:0.0.1
+docker run -it -v $(pwd):/app -v /app/node_modules/ --netwrk="host" urn-trx:0.0.1
 ```
 
 Start the container

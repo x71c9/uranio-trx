@@ -10,7 +10,8 @@
  * Import URNTRXConfig interface for initializing the URNTRX class
  * Import URNTRX class
  */
-import {URNTRXConfig, URNTRX} from './trx/trx';
+import {URNTRX} from './trx';
+import {URNTRXConfig} from './interfaces/config';
 
 /*
  * URN TRX Singleton factory
