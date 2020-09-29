@@ -20,19 +20,19 @@
 	"license": "ISC",
 	"homepage": "https://bitbucket.org/nbl7/urn-trx#readme",
 	"devDependencies": {
-		"@types/node": "^14.10.0",
-		"@typescript-eslint/eslint-plugin": "^4.1.0",
-		"@typescript-eslint/parser": "^4.1.0",
-		"eslint": "^7.8.1",
+		"@types/node": "^14.11.2",
+		"@typescript-eslint/eslint-plugin": "^4.3.0",
+		"@typescript-eslint/parser": "^4.3.0",
+		"eslint": "^7.10.0",
 		"eslint-config-esnext": "^4.1.0",
 		"eslint-config-node": "^4.1.0",
-		"eslint-plugin-import": "^2.22.0",
+		"eslint-plugin-import": "^2.22.1",
 		"eslint-plugin-node": "^11.1.0",
 		"eslint-plugin-promise": "^4.2.1",
 		"eslint-plugin-standard": "^4.0.1",
 		"source-map-support": "^0.5.19",
 		"tsc-watch": "^4.2.9",
-		"typescript": "^4.0.2"
+		"typescript": "^4.0.3"
 	},
 	"dependencies": {
 		"axios": "^0.19.0"

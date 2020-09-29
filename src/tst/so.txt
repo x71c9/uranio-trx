@@ -1,0 +1,38 @@
+I learned that when you import a module, that module it runs only once - the first time. But I have this situation where it seems it is running twice. Or is it?
+
+``` lang-typescript
+//L.ts
+
+Class L {
+  public names:string[];
+  constructor(){
+    this.names = [];
+  }
+  public log(){
+    for(const n of this.name)
+      console.log(n);
+  }
+}
+export default new L();
+
+```
+``` lang-typescript
+//B.ts
+
+import L from './L';
+L.names['']
+```
+``` lang-typescript
+//A.ts
+
+import L from './L';
+import '.B';
+```
+``` lang-typescript
+//index.ts
+
+import './A';
+```
+
+
+
