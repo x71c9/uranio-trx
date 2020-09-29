@@ -5,7 +5,7 @@ export abstract class URNTRXResource {
 	
 	private _raw:URNTRXRAWInstance;
 	
-	private _path:string;
+	protected _path:string;
 	
 	public constructor(_rawInstance:URNTRXRAWInstance){
 		this._raw = _rawInstance;

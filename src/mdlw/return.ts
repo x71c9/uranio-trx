@@ -11,7 +11,68 @@
 
 import {URNResponse} from './response';
 
-export class URNReturn {
+type SuccessResponseHandler<T> = (p:URNResponse.Success<T>) => void;
+type FailResponseHandler<T> = (p:URNResponse.Fail<T>) => void;
+
+class URNReturn {
+	
+	private _success_handlers: SuccessResponseHandler<any>[];
+	private _fail_handlers: FailResponseHandler<any>[];
+
+	constructor(
+			fail_handlers?:FailResponseHandler<any>|FailResponseHandler<any>[],
+			success_handlers?:SuccessResponseHandler<any>|SuccessResponseHandler<any>[]){
+		this._success_handlers = [];
+		this._fail_handlers = [];
+		if(fail_handlers)
+			this.fail_inject(fail_handlers);
+		if(success_handlers)
+			this.success_inject(success_handlers);
+	}
+	
+	private _add_fail_handler(handler:FailResponseHandler<any>){
+		if(typeof handler === 'function'){
+			this._fail_handlers.push(handler);
+		}
+	}
+	
+	private _add_success_handler(handler:SuccessResponseHandler<any>){
+		if(typeof handler === 'function'){
+			this._success_handlers.push(handler);
+		}
+	}
+	
+	public success_inject(handlers:SuccessResponseHandler<any>|SuccessResponseHandler<any>[])
+			:void{
+		if(Array.isArray(handlers)){
+			for(const h of handlers)
+				this._add_success_handler(h);
+		}else if(handlers){
+			this._add_success_handler(handlers);
+		}
+	}
+
+	public fail_inject(handlers:FailResponseHandler<any>|FailResponseHandler<any>[])
+			:void{
+		if(Array.isArray(handlers)){
+			for(const h of handlers)
+				this._add_fail_handler(h);
+		}else if(handlers){
+			this._add_fail_handler(handlers);
+		}
+	}
+	
+	private run_success_handlers(response: URNResponse.Success<any>)
+			:void{
+		for(const handler of this._success_handlers)
+			handler(response);
+	}
+
+	private run_fail_handlers(response: URNResponse.Fail<any>)
+			:void{
+		for(const handler of this._fail_handlers)
+			handler(response);
+	}
 	
 	/**
 	 * Returns a response for an async function
@@ -25,11 +86,13 @@ export class URNReturn {
 	public async_res<R>(handler:(...args:any[]) => Promise<R>, name?:string){
 		return async (param_object?:any):Promise<URNResponse.Response<R>> => {
 			try{
-				return {
+				const response:URNResponse.Success<R> = {
 					status: 200,
 					success: true,
 					payload: await handler(param_object)
 				};
+				this.run_success_handlers(response);
+				return response;
 			}catch(ex){
 				return this.return_error(500, 'URANIO ERROR ['+name+'] - '+ex.message, null, ex);
 			}
@@ -48,17 +111,19 @@ export class URNReturn {
 	public res<R>(handler:(...args:any[]) => R, name?:string){
 		return (param_object?:any):URNResponse.Response<ReturnType<typeof handler>> => {
 			try{
-				return {
+				const response:URNResponse.Success<R> = {
 					status: 200,
 					success: true,
 					payload: handler(param_object)
 				};
+				this.run_success_handlers(response);
+				return response;
 			}catch(ex){
 				return this.return_error(500, 'URANIO ERROR ['+name+'] - '+ex.message, null, ex);
 			}
 		};
 	}
-
+	
 	/**
 	 * Returns a response object by looking into its payload.
 	 * If there is an error will not look into its playload.
@@ -76,7 +141,7 @@ export class URNReturn {
 			success: false,
 			payload: null
 		};
-
+		
 		if(URNResponse.isFail(result)){
 			return_result.status = result.status;
 			return_result.message = (name) ? name + ' - ' + result.message : result.message;
@@ -98,7 +163,7 @@ export class URNReturn {
 		return return_result;
 		
 	}
-
+	
 	/**
 	 * Returns a response error object
 	 *
@@ -122,6 +187,7 @@ export class URNReturn {
 				ex: (ex) ? ex : null,
 				success: false
 			};
+			this.run_fail_handlers(urn_response);
 			// urn_console.error(urn_response);
 			return urn_response;
 		}else{
@@ -132,11 +198,12 @@ export class URNReturn {
 				ex: null,
 				success: false
 			};
+			this.run_fail_handlers(urn_response);
 			// urn_console.error(urn_response);
 			return urn_response;
 		}
 	}
-
+	
 	/**
 	 * Returns a successful response object
 	 *
@@ -157,6 +224,7 @@ export class URNReturn {
 				message: message,
 				payload: payload
 			};
+			this.run_success_handlers(urn_response);
 			return urn_response;
 		}else{
 			const urn_response:URNResponse.Success = {
@@ -165,10 +233,11 @@ export class URNReturn {
 				message: message,
 				payload: null
 			};
+			this.run_success_handlers(urn_response);
 			return urn_response;
 		}
 	}
-
+	
 	/**
 	 * Returns a successful boolean response with optional message
 	 *
@@ -181,7 +250,7 @@ export class URNReturn {
 			urn_boolean.message = message;
 		return urn_boolean;
 	}
-
+	
 	/**
 	 * Retunrs a not successful boolean response with optional message
 	 *
@@ -196,3 +265,14 @@ export class URNReturn {
 	}
 	
 }
+
+function create_instance(
+		fail_handlers?:FailResponseHandler<any>|FailResponseHandler<any>[],
+		success_handlers?:SuccessResponseHandler<any>|SuccessResponseHandler<any>[])
+		:URNReturn{
+	return new URNReturn(fail_handlers, success_handlers);
+}
+
+export default create_instance;
+
+
