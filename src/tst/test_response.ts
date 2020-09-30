@@ -1,6 +1,6 @@
 // import {URNResponse} from '../mdlw/response';
 
-import urn_return from '../mdlw/return';
+import urn_return from '../return/return';
 
 // import './test_other_response';
 

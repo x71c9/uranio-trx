@@ -20,8 +20,8 @@ class URNReturn {
 	private _fail_handlers: FailResponseHandler<any>[];
 
 	constructor(
-			fail_handlers?:FailResponseHandler<any>|FailResponseHandler<any>[],
-			success_handlers?:SuccessResponseHandler<any>|SuccessResponseHandler<any>[]){
+		fail_handlers?:FailResponseHandler<any> | FailResponseHandler<any>[],
+		success_handlers?:SuccessResponseHandler<any> | SuccessResponseHandler<any>[]){
 		this._success_handlers = [];
 		this._fail_handlers = [];
 		if(fail_handlers)
@@ -42,7 +42,7 @@ class URNReturn {
 		}
 	}
 	
-	public success_inject(handlers:SuccessResponseHandler<any>|SuccessResponseHandler<any>[])
+	public success_inject(handlers:SuccessResponseHandler<any> | SuccessResponseHandler<any>[])
 			:void{
 		if(Array.isArray(handlers)){
 			for(const h of handlers)
@@ -52,7 +52,7 @@ class URNReturn {
 		}
 	}
 
-	public fail_inject(handlers:FailResponseHandler<any>|FailResponseHandler<any>[])
+	public fail_inject(handlers:FailResponseHandler<any> | FailResponseHandler<any>[])
 			:void{
 		if(Array.isArray(handlers)){
 			for(const h of handlers)
@@ -175,9 +175,9 @@ class URNReturn {
 	 * @param payload [optional] - A payload
 	 * @param ex [optional] - An exception
 	 */
-	public return_error(status:number, message:string, payload?:null, ex?:Error|null):URNResponse.Fail;
-	public return_error<T>(status:number, message:string, payload:T, ex?:Error|null):URNResponse.Fail<T>;
-	public return_error<T>(status:number, message:string, payload:T, ex?:Error|null):URNResponse.Fail<T>|URNResponse.Fail{
+	public return_error(status:number, message:string, payload?:null, ex?:Error | null):URNResponse.Fail;
+	public return_error<T>(status:number, message:string, payload:T, ex?:Error | null):URNResponse.Fail<T>;
+	public return_error<T>(status:number, message:string, payload:T, ex?:Error | null):URNResponse.Fail<T> | URNResponse.Fail{
 		// if there is a payload
 		if(arguments.length > 2){
 			const urn_response:URNResponse.Fail<T> = {
@@ -215,7 +215,7 @@ class URNReturn {
 	 */
 	public return_success(message:string, payload?:null):URNResponse.Success;
 	public return_success<T>(message:string, payload:T):URNResponse.Success<T>;
-	public return_success<T>(message:string, payload:T):URNResponse.Success<T>|URNResponse.Success{
+	public return_success<T>(message:string, payload:T):URNResponse.Success<T> | URNResponse.Success{
 		// if there is a payload
 		if(arguments.length > 1){
 			const urn_response:URNResponse.Success<T> = {
@@ -267,8 +267,8 @@ class URNReturn {
 }
 
 function create_instance(
-		fail_handlers?:FailResponseHandler<any>|FailResponseHandler<any>[],
-		success_handlers?:SuccessResponseHandler<any>|SuccessResponseHandler<any>[])
+	fail_handlers?:FailResponseHandler<any>|FailResponseHandler<any>[],
+	success_handlers?:SuccessResponseHandler<any>|SuccessResponseHandler<any>[])
 		:URNReturn{
 	return new URNReturn(fail_handlers, success_handlers);
 }
