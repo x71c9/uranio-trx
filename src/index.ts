@@ -11,8 +11,10 @@
 // });
 
 
-import './tst/test_response';
+//import './tst/test_response';
+
 // import './tst/test_other_response';
 
 // import './A';
 
+import './tst/console_tst';
