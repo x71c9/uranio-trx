@@ -5,20 +5,48 @@
  */
 
 /*
- * Import console for logging
+ * Import URNResponse namespace with all response types and methods
  */
-// import * as urn_console from '../tools/console';
-
 import {URNResponse} from './response';
 
+/**
+ * Type for handling Success reponse. The type is a Function type that accept
+ * a Success response object as its main parameter.
+ */
 type SuccessResponseHandler<T> = (p:URNResponse.Success<T>) => void;
+
+/**
+ * Type for handling Fail reponse. The type is a Function type that accept
+ * a Fail response object as its main parameter.
+ */
 type FailResponseHandler<T> = (p:URNResponse.Fail<T>) => void;
 
+/**
+ * Class URNReturn has all the methods for creating URNResponse objects.
+ * Its constructor accepts arrays of function that can be injected in the responses.
+ * Most common case is for logging.
+ *
+ * Each module that import this class should have its own instance
+ * and its own injected functions.
+ */
 class URNReturn {
 	
+	/**
+	 * List of handlers for a Success response
+	 */
 	private _success_handlers: SuccessResponseHandler<any>[];
-	private _fail_handlers: FailResponseHandler<any>[];
 
+	/**
+	 * List of handlers for a Fail response
+	 */
+	private _fail_handlers: FailResponseHandler<any>[];
+	
+	/**
+	 * Constructor function
+	 *
+	 * @param fail_handlers - will set the array of handlers for Fail response
+	 * @param success_handlers - will set the array of handlers for Success response
+	 */
 	constructor(
 		fail_handlers?:FailResponseHandler<any> | FailResponseHandler<any>[],
 		success_handlers?:SuccessResponseHandler<any> | SuccessResponseHandler<any>[]){
@@ -30,18 +58,36 @@ class URNReturn {
 			this.success_inject(success_handlers);
 	}
 	
+	/**
+	 * Method for checking if the handler is a function and to push it to
+	 * the Fail handlers array
+	 *
+	 * @param handler - the handler to check and add
+	 */
 	private _add_fail_handler(handler:FailResponseHandler<any>){
 		if(typeof handler === 'function'){
 			this._fail_handlers.push(handler);
 		}
 	}
 	
+	/**
+	 * Method for checking if the handler is a function and to push it to
+	 * the Success handlers array
+	 *
+	 * @param handler - the handler to check and add
+	 */
 	private _add_success_handler(handler:SuccessResponseHandler<any>){
 		if(typeof handler === 'function'){
 			this._success_handlers.push(handler);
 		}
 	}
 	
+	/**
+	 * Method that accept one or an array of handlers and will add it to the
+	 * Success handlers array
+	 *
+	 * @param handlers - the handler/s to add
+	 */
 	public success_inject(handlers:SuccessResponseHandler<any> | SuccessResponseHandler<any>[])
 			:void{
 		if(Array.isArray(handlers)){
@@ -51,7 +97,11 @@ class URNReturn {
 			this._add_success_handler(handlers);
 		}
 	}
-
+	
+	/**
+	 * Method that accept one or an array of handlers and will add it to the
+	 * Fail handlers array
+	 */
 	public fail_inject(handlers:FailResponseHandler<any> | FailResponseHandler<any>[])
 			:void{
 		if(Array.isArray(handlers)){
@@ -62,12 +112,22 @@ class URNReturn {
 		}
 	}
 	
+	/**
+	 * Method that will run all the Success handlers for a Success response
+	 *
+	 * @param response - the Success response that will be given to the handlers
+	 */
 	private run_success_handlers(response: URNResponse.Success<any>)
 			:void{
 		for(const handler of this._success_handlers)
 			handler(response);
 	}
-
+	
+	/**
+	 * Method that will run all the Fail handlers for a Fail response
+	 *
+	 * @param response - the Fail response that will be given to the handlers
+	 */
 	private run_fail_handlers(response: URNResponse.Fail<any>)
 			:void{
 		for(const handler of this._fail_handlers)
@@ -131,7 +191,7 @@ class URNReturn {
 	 * Otherwse will return the payload and the message of its payload.
 	 *
 	 * @param result - The main response
-	 * @param name - The name of the response
+	 * @param name [optional] - The name of the response
 	 */
 	inherit_res(result:URNResponse.Response<URNResponse.Response>, name?:string):URNResponse.Response{
 		
@@ -188,7 +248,6 @@ class URNReturn {
 				success: false
 			};
 			this.run_fail_handlers(urn_response);
-			// urn_console.error(urn_response);
 			return urn_response;
 		}else{
 			const urn_response:URNResponse.Fail = {
@@ -199,7 +258,6 @@ class URNReturn {
 				success: false
 			};
 			this.run_fail_handlers(urn_response);
-			// urn_console.error(urn_response);
 			return urn_response;
 		}
 	}
@@ -241,6 +299,7 @@ class URNReturn {
 	/**
 	 * Returns a successful boolean response with optional message
 	 *
+	 * @param message [optional] - A message to append
 	 */
 	return_true(message?:string):URNResponse.UBoolean<true>{
 		const urn_boolean:URNResponse.UBoolean<true> = {
@@ -254,6 +313,7 @@ class URNReturn {
 	/**
 	 * Retunrs a not successful boolean response with optional message
 	 *
+	 * @param message [optional] - A message to append
 	 */
 	return_false(message?:string):URNResponse.UBoolean<false>{
 		const urn_boolean:URNResponse.UBoolean<false> = {
@@ -266,6 +326,10 @@ class URNReturn {
 	
 }
 
+/**
+ * A function the will create a URNReturn instance.
+ * Its parameters are the same as the constructor of the class.
+ */
 function create_instance(
 	fail_handlers?:FailResponseHandler<any>|FailResponseHandler<any>[],
 	success_handlers?:SuccessResponseHandler<any>|SuccessResponseHandler<any>[])
@@ -273,6 +337,9 @@ function create_instance(
 	return new URNReturn(fail_handlers, success_handlers);
 }
 
+/*
+ * Export the function that will create the instance of the class.
+ */
 export default create_instance;
 
 
