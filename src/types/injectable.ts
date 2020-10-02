@@ -1,26 +1,23 @@
-/*
- * Import URNResponse namespace with all response types and methods
- */
-// import {URNResponse} from '../return/response';
-
 /**
- * Type for handling Success reponse. The type is a Function type that accept
- * a Success response object as its main parameter.
+ * Export interface for injectable object.
+ *
+ * This type is used in URNResponse class where the injectable objects
+ * will be used as middleware for the response.
+ *
+ * Every object must have a success_handler and a fail_handler for handling
+ * Success responses and Fail responses.
+ *
  */
-// export type SuccessResponseHandler<T> = (p:URNResponse.Success<T>) => void;
-
-/**
- * Type for handling Fail reponse. The type is a Function type that accept
- * a Fail response object as its main parameter.
- */
-// export type FailResponseHandler<T> = (p:URNResponse.Fail<T>) => void;
-
-
-
 export interface URNResponseInjectable{
 	
+	/**
+	 * Method for handling Success response.
+	 */
 	success_handler<T>(p:T):T;
 	
+	/**
+	 * Method for handling Fail response.
+	 */
 	fail_handler<T>(p:T):T;
 	
 }
