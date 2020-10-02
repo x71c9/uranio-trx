@@ -28,8 +28,11 @@ type LogType = 'error' | 'warn' | 'log' | 'debug' | 'fndebug';
 /**
  * URNLog class
  *
- * Each module can import and create an instance with the function
- * exported at the end of the file.
+ * The class is designed so that each module can import an instance of it
+ * with its own configuration.
+ *
+ * URNLog implements URNResponseInjectable that means it has two methods
+ * that can be injected in the URNResponse class.
  *
  */
 class URNLog implements URNResponseInjectable{
@@ -46,53 +49,6 @@ class URNLog implements URNResponseInjectable{
 		public time_format = "yyyy-mm-dd'T'HH:MM:ss:l",
 		public max_str_length = 174
 	){
-	}
-	
-	/**
-	 * List of all the style that can be used in terminal
-	 */
-	public static terminal_styles = {
-		'reset': "\x1b[0m",
-		'bright' : "\x1b[1m",
-		'dim' : "\x1b[2m",
-		'underscore' : "\x1b[4m",
-		'blink' : "\x1b[5m",
-		'reverse' : "\x1b[7m",
-		'hidden' : "\x1b[8m",
-		'fgBlack' : "\x1b[30m",
-		'fgRed' : "\x1b[31m",
-		'fgGreen' : "\x1b[32m",
-		'fgYellow' : "\x1b[33m",
-		'fgBlue' : "\x1b[34m",
-		'fgMagenta' : "\x1b[35m",
-		'fgCyan' : "\x1b[36m",
-		'fgWhite' : "\x1b[37m",
-		'fgDefault' : "\x1b[39m",
-		'fgLightGrey' : "\x1b[90m",
-		'fgLightRed' : "\x1b[91m",
-		'fgLightGreen' : "\x1b[92m",
-		'fglightYellow' : "'\x1b[93m",
-		'fgLightBlue' : "\x1b[94m",
-		'fgLoghtMagenta' : "\x1b[95m",
-		'fgLightCyan' : "\x1b[96m",
-		'fgLightWhite' : "\x1b[97m",
-		'bgBlack' : "\x1b[40m",
-		'bgRed' : "\x1b[41m",
-		'bgGreen' : "\x1b[42m",
-		'bgYellow' : "\x1b[43m",
-		'bgBlue' : "\x1b[44m",
-		'bgMagenta' : "\x1b[45m",
-		'bgCyan' : "\x1b[46m",
-		'bgWhite' : "\x1b[47m",
-		'bgDefault' : "\x1b[49m",
-		'Light Gray' : "\x1b[100m",
-		'Light Red' : "\x1b[101m",
-		'Light Green' : "\x1b[102m",
-		'Light Yellow' : "\x1b[103m",
-		'Light Blue' : "\x1b[104m",
-		'Light Magenta' : "\x1b[105m",
-		'Light Cyan' : "\x1b[106m",
-		'Light White' : "\x1b[107m"
 	}
 	
 	public success_handler<T>(p:T):T{
@@ -456,6 +412,54 @@ class URNLog implements URNResponseInjectable{
 			str_result = str_result.substr(0, max_str_length) + '...';
 		return str_result;
 	}
+	
+	/**
+	 * List of all the style that can be used in terminal
+	 */
+	public static terminal_styles = {
+		'reset': "\x1b[0m",
+		'bright' : "\x1b[1m",
+		'dim' : "\x1b[2m",
+		'underscore' : "\x1b[4m",
+		'blink' : "\x1b[5m",
+		'reverse' : "\x1b[7m",
+		'hidden' : "\x1b[8m",
+		'fgBlack' : "\x1b[30m",
+		'fgRed' : "\x1b[31m",
+		'fgGreen' : "\x1b[32m",
+		'fgYellow' : "\x1b[33m",
+		'fgBlue' : "\x1b[34m",
+		'fgMagenta' : "\x1b[35m",
+		'fgCyan' : "\x1b[36m",
+		'fgWhite' : "\x1b[37m",
+		'fgDefault' : "\x1b[39m",
+		'fgLightGrey' : "\x1b[90m",
+		'fgLightRed' : "\x1b[91m",
+		'fgLightGreen' : "\x1b[92m",
+		'fglightYellow' : "'\x1b[93m",
+		'fgLightBlue' : "\x1b[94m",
+		'fgLoghtMagenta' : "\x1b[95m",
+		'fgLightCyan' : "\x1b[96m",
+		'fgLightWhite' : "\x1b[97m",
+		'bgBlack' : "\x1b[40m",
+		'bgRed' : "\x1b[41m",
+		'bgGreen' : "\x1b[42m",
+		'bgYellow' : "\x1b[43m",
+		'bgBlue' : "\x1b[44m",
+		'bgMagenta' : "\x1b[45m",
+		'bgCyan' : "\x1b[46m",
+		'bgWhite' : "\x1b[47m",
+		'bgDefault' : "\x1b[49m",
+		'Light Gray' : "\x1b[100m",
+		'Light Red' : "\x1b[101m",
+		'Light Green' : "\x1b[102m",
+		'Light Yellow' : "\x1b[103m",
+		'Light Blue' : "\x1b[104m",
+		'Light Magenta' : "\x1b[105m",
+		'Light Cyan' : "\x1b[106m",
+		'Light White' : "\x1b[107m"
+	}
+	
 }
 
 /**
