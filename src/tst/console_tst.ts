@@ -1,5 +1,5 @@
 
-import urn_log, {URNLogLevel} from '../log/log';
+import urn_log, {URNLogLevel, debug_constructor, debug_methods} from '../log/log';
 
 import urn_return from '../return/return';
 
@@ -13,8 +13,8 @@ const urn_res = urn_return(urn_console);
 // urn_console.debug({debug: 'this is a debug'});
 // urn_console.fndebug({fndebug: 'this is a fndebug'});
 
-// @urn_console.debug_constructor()
-// @urn_console.debug_methods()
+@debug_constructor(urn_console)
+@debug_methods(urn_console)
 class MyClass{
 	
 	public my_method(a:number,b:string){
@@ -25,3 +25,6 @@ class MyClass{
 
 const my_insta = new MyClass();
 my_insta.my_method(3,'AAA');
+
+
+

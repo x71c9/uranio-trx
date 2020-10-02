@@ -9,6 +9,9 @@
  */
 import dateFormat from 'dateformat';
 
+/*
+ * Import URNResponseInjectable interface
+ */
 import {URNResponseInjectable} from '../types/injectable';
 
 /**
@@ -42,7 +45,7 @@ class URNLog implements URNResponseInjectable{
 	 *
 	 * @param log_level - set the log level of the instance. See URNLogLevel type.
 	 * @param time_format - set the time format string.
-	 * @param max_str_length - set the maximun length for the.
+	 * @param max_str_length - set the maximun length for the string when logging methods.
 	 */
 	public constructor(
 		public log_level = URNLogLevel.ERROR,
@@ -51,120 +54,24 @@ class URNLog implements URNResponseInjectable{
 	){
 	}
 	
+	/**
+	 * Implementation of the URNResponseInjectable interface
+	 *
+	 * It will debug Success responses
+	 */
 	public success_handler<T>(p:T):T{
 		this.debug(p);
 		return p;
 	}
-
+	
+	/**
+	 * Implementation of the URNResponseInjectable interface
+	 *
+	 * It will log/error Fail responses
+	 */
 	public fail_handler<T>(p:T):T{
 		this.error(p);
 		return p;
-	}
-	
-	public debug_constructor(){
-		
-		const that = this;
-		
-		/**
-		 * Class @decorator function for loggin constructor with arguments
-		 *
-		 * @param constr_func - the constructor (check Decorator documentation)
-		 */
-		function debug_constructor_decorator<T extends { new (...constr_args:any[]):any }>(constr_func: T){
-			const ExtClass = class extends constr_func {
-				constructor(...args: any[]){
-					that.fndebugCostructor(URNLog.randId(), constr_func.name, URNLog.formatArgs(args, that.max_str_length));
-					super(...args);
-				}
-			};
-			for(const property_name of Object.getOwnPropertyNames(constr_func)) {
-				const descriptor = Object.getOwnPropertyDescriptor(constr_func, property_name)!;
-				if(property_name != 'prototype')
-					Object.defineProperty(ExtClass, property_name, descriptor);
-			}
-			return ExtClass;
-		}
-		return debug_constructor_decorator;
-	}
-	/**
-	 * Helper function that replace method with a new function that logs before and after
-	 * Used in the decorator function debug_method
-	 *
-	 * @param target - the class
-	 * @param descriptor - the method descriptor
-	 * @param property_name - the method name
-	 * @param appendix - a string to add before the name of the property logged
-	 */
-	private replace_method_with_logs(
-		target:any,
-		descriptor:PropertyDescriptor,
-		property_name:string,
-		appendix=''
-	){
-		const original_method = descriptor.value;
-		var that = this;
-		descriptor.value = function(...args:any[]) {
-			const rand_id = URNLog.randId();
-			const target_name = (appendix!='') ? appendix + ' ' + target.name : target.name;
-			that.fndebugMethodWithArgs(
-				rand_id,
-				target_name,
-				property_name,
-				URNLog.formatArgs(args, that.max_str_length)
-			);
-			const result = original_method.apply(this, args);
-			that.fndebugMethodResponse(
-				rand_id,
-				target_name,
-				property_name,
-				URNLog.formatResult(result, that.max_str_length)
-			);
-			if(result instanceof Promise){
-				result.then((data:any) => {
-					that.fndebugMethodResponse(
-						rand_id,
-						target_name,
-						property_name,
-						URNLog.formatResult(data, that.max_str_length),
-						true);
-				}).catch((err:Error) => {
-					that.fndebugMethodResponseError(rand_id, target_name, property_name, err);
-				});
-			}
-			return result;
-		};
-	}
-	
-	public debug_methods(){
-		
-		var that = this;
-		
-		/**
-		 * Class @decorator function for logging each method inside the class
-		 *
-		 * @param target - the class itself (check Decorator documentation)
-		 */
-		// eslint-disable-next-line @typescript-eslint/ban-types
-		function debug_methods_decorator(target:Function){
-			//constructor methods
-			for(const property_name of Object.getOwnPropertyNames(target.prototype)) {
-				const descriptor = Object.getOwnPropertyDescriptor(target.prototype, property_name)!;
-				if(!(descriptor.value instanceof Function) || property_name == 'constructor')
-					continue;
-				that.replace_method_with_logs(target, descriptor, property_name);
-				Object.defineProperty(target.prototype, property_name, descriptor);
-			}
-			//static methods
-			for(const property_name of Object.getOwnPropertyNames(target)) {
-				const descriptor = Object.getOwnPropertyDescriptor(target, property_name)!;
-				if(!(descriptor.value instanceof Function) || property_name == 'constructor')
-					continue;
-				that.replace_method_with_logs(target, descriptor, property_name, '[static]');
-				Object.defineProperty(target, property_name, descriptor);
-			}
-		}
-		
-		return debug_methods_decorator;
 	}
 	
 	/**
@@ -216,6 +123,7 @@ class URNLog implements URNResponseInjectable{
 		if(this.log_level > 0)
 			this.cecho('error', URNLog.terminal_styles.fgRed, -1, ...params);
 	}
+	
 	/**
 	 * Log stack
 	 *
@@ -292,7 +200,6 @@ class URNLog implements URNResponseInjectable{
 			this.log_param(p, stylelog);
 		}
 		console.log(stylelog, ' ');
-		
 	}
 	
 	/**
@@ -463,8 +370,112 @@ class URNLog implements URNResponseInjectable{
 }
 
 /**
- * Exported default function that will generate instances of URNLog class.
+ * Class @decorator function for loggin constructor with arguments
+ * The function will actually return a decorator function.
+ *
+ * @param log_instance - the log instance that will be used for logging
  */
+// eslint-disable-next-line @typescript-eslint/ban-types
+export function debug_constructor(log_instance:URNLog):Function{
+	function debug_constructor_decorator<T extends { new (...constr_args:any[]):any }>(constr_func: T){
+		const ExtClass = class extends constr_func {
+			constructor(...args: any[]){
+				log_instance.fndebugCostructor(URNLog.randId(), constr_func.name, URNLog.formatArgs(args, log_instance.max_str_length));
+				super(...args);
+			}
+		};
+		for(const property_name of Object.getOwnPropertyNames(constr_func)) {
+			const descriptor = Object.getOwnPropertyDescriptor(constr_func, property_name)!;
+			if(property_name != 'prototype')
+				Object.defineProperty(ExtClass, property_name, descriptor);
+		}
+		return ExtClass;
+	}
+	return debug_constructor_decorator;
+}
+
+
+/**
+ * Helper function that replace method with a new function that logs before and after
+ * Used in the decorator function debug_method
+ *
+ * @param target - the class
+ * @param descriptor - the method descriptor
+ * @param property_name - the method name
+ * @param appendix - a string to add before the name of the property logged
+ */
+function replace_method_with_logs(
+	log_instance:URNLog,
+	target:any,
+	descriptor:PropertyDescriptor,
+	property_name:string,
+	appendix=''
+){
+	const original_method = descriptor.value;
+	descriptor.value = function(...args:any[]) {
+		const rand_id = URNLog.randId();
+		const target_name = (appendix!='') ? appendix + ' ' + target.name : target.name;
+		log_instance.fndebugMethodWithArgs(
+			rand_id,
+			target_name,
+			property_name,
+			URNLog.formatArgs(args, log_instance.max_str_length)
+		);
+		const result = original_method.apply(this, args);
+		log_instance.fndebugMethodResponse(
+			rand_id,
+			target_name,
+			property_name,
+			URNLog.formatResult(result, log_instance.max_str_length)
+		);
+		if(result instanceof Promise){
+			result.then((data:any) => {
+				log_instance.fndebugMethodResponse(
+					rand_id,
+					target_name,
+					property_name,
+					URNLog.formatResult(data, log_instance.max_str_length),
+					true);
+			}).catch((err:Error) => {
+				log_instance.fndebugMethodResponseError(rand_id, target_name, property_name, err);
+			});
+		}
+		return result;
+	};
+}
+
+/**
+ * Class @decorator function for logging each method inside the class
+ *
+ * @param target - the class itself (check Decorator documentation)
+ */
+// eslint-disable-next-line @typescript-eslint/ban-types
+export function debug_methods(log_instance:URNLog):Function{
+	// eslint-disable-next-line @typescript-eslint/ban-types
+	function debug_methods_decorator(target:Function){
+		//constructor methods
+		for(const property_name of Object.getOwnPropertyNames(target.prototype)) {
+			const descriptor = Object.getOwnPropertyDescriptor(target.prototype, property_name)!;
+			if(!(descriptor.value instanceof Function) || property_name == 'constructor')
+				continue;
+			replace_method_with_logs(log_instance, target, descriptor, property_name);
+			Object.defineProperty(target.prototype, property_name, descriptor);
+		}
+		//static methods
+		for(const property_name of Object.getOwnPropertyNames(target)) {
+			const descriptor = Object.getOwnPropertyDescriptor(target, property_name)!;
+			if(!(descriptor.value instanceof Function) || property_name == 'constructor')
+				continue;
+			replace_method_with_logs(log_instance, target, descriptor, property_name, '[static]');
+			Object.defineProperty(target, property_name, descriptor);
+		}
+	}
+	return debug_methods_decorator;
+}
+
+/**
+* Exported default function that will generate instances of URNLog class.
+*/
 export default function(
 	log_level = URNLogLevel.ERROR,
 	time_format = "yyyy-mm-dd'T'HH:MM:ss:l",
