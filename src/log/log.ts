@@ -9,14 +9,40 @@
  */
 import dateFormat from 'dateformat';
 
-export enum LogLevel {None, Error, Warning, Log, Debug, FunctionDebug}
+import {URNResponseInjectable} from '../types/injectable';
 
+/**
+ * URNLogLevel enum type
+ * None = 0
+ * Error = 1
+ * ...
+ */
+export enum URNLogLevel {NONE, ERROR, WARNING, LOG, DEBUG, FUNCTION_DEBUG}
+
+/**
+ * LogType type
+ *
+ */
 type LogType = 'error' | 'warn' | 'log' | 'debug' | 'fndebug';
 
-class URNLog {
+/**
+ * URNLog class
+ *
+ * Each module can import and create an instance with the function
+ * exported at the end of the file.
+ *
+ */
+class URNLog implements URNResponseInjectable{
 	
+	/**
+	 * Constructor function
+	 *
+	 * @param log_level - set the log level of the instance. See URNLogLevel type.
+	 * @param time_format - set the time format string.
+	 * @param max_str_length - set the maximun length for the.
+	 */
 	public constructor(
-		public log_level = LogLevel.Error,
+		public log_level = URNLogLevel.ERROR,
 		public time_format = "yyyy-mm-dd'T'HH:MM:ss:l",
 		public max_str_length = 174
 	){
@@ -69,6 +95,16 @@ class URNLog {
 		'Light White' : "\x1b[107m"
 	}
 	
+	public success_handler<T>(p:T):T{
+		this.debug(p);
+		return p;
+	}
+
+	public fail_handler<T>(p:T):T{
+		this.error(p);
+		return p;
+	}
+	
 	public debug_constructor(){
 		
 		const that = this;
@@ -79,8 +115,6 @@ class URNLog {
 		 * @param constr_func - the constructor (check Decorator documentation)
 		 */
 		function debug_constructor_decorator<T extends { new (...constr_args:any[]):any }>(constr_func: T){
-			
-
 			const ExtClass = class extends constr_func {
 				constructor(...args: any[]){
 					that.fndebugCostructor(URNLog.randId(), constr_func.name, URNLog.formatArgs(args, that.max_str_length));
@@ -154,6 +188,7 @@ class URNLog {
 		 *
 		 * @param target - the class itself (check Decorator documentation)
 		 */
+		// eslint-disable-next-line @typescript-eslint/ban-types
 		function debug_methods_decorator(target:Function){
 			//constructor methods
 			for(const property_name of Object.getOwnPropertyNames(target.prototype)) {
@@ -225,7 +260,13 @@ class URNLog {
 		if(this.log_level > 0)
 			this.cecho('error', URNLog.terminal_styles.fgRed, -1, ...params);
 	}
-	
+	/**
+	 * Log stack
+	 *
+	 * @param type - the type of log [error|warn|log|...]. See LogType.
+	 * @param stylelog - formatted string for styling.
+	 * @param depth - how many lines should be log from the stack.
+	 */
 	private log_stack(type:LogType, stylelog:string, depth:number)
 			:void{
 		const stack = new Error().stack;
@@ -252,6 +293,12 @@ class URNLog {
 		}
 	}
 	
+	/**
+	 * Log prameter
+	 *
+	 * @param p - anything to be logged.
+	 * @param stylelog - a formatted string for styling.
+	 */
 	private log_param(p:any, stylelog:string)
 			:void{
 		let processed_param:string[] = [];
@@ -313,6 +360,10 @@ class URNLog {
 	
 	/**
 	 * Debug constructor with arguments
+	 *
+	 * @param rand_id - A random ID that will be use to associate a constructor been called and its response.
+	 * @param constructor_name - The constructor name.
+	 * @param str_args - A string containing the arguments.
 	 */
 	public fndebugCostructor(rand_id:string, constructor_name:string, str_args:string){
 		this.fndebug(`[${rand_id}] new ${constructor_name}(${str_args})`);
@@ -320,6 +371,10 @@ class URNLog {
 	
 	/**
 	 * Debug private constructor with arguments
+	 *
+	 * @param rand_id - A random ID that will be use to associate a constructor been called and its response.
+	 * @param constructor_name - The constructor name.
+	 * @param str_args - A string containing the arguments.
 	 */
 	public fndebugPrivateCostructor(rand_id:string, constructor_name:string, str_args:string){
 		this.fndebug(`[${rand_id}] private ${constructor_name}(${str_args})`);
@@ -327,6 +382,11 @@ class URNLog {
 	
 	/**
 	 * Debug a method with arguments
+	 *
+	 * @param rand_id - A random ID that will be use to associate a constructor been called and its response.
+	 * @param target_name - The name of the class being called.
+	 * @param method - The name of the method being called.
+	 * @param str_args - A string containing the arguments.
 	 */
 	public fndebugMethodWithArgs(rand_id:string, target_name:string, method:string, str_args:string):void{
 		this.fndebug(`[${rand_id}] ${target_name}.${method}(${str_args})`);
@@ -334,6 +394,12 @@ class URNLog {
 	
 	/**
 	 * Debug a response of a method
+	 *
+	 * @param rand_id - A random ID that will be use to associate a constructor been called and its response.
+	 * @param target_name - The name of the class being called.
+	 * @param method - The name of the method being called.
+	 * @param str_result - The result of the method as string.
+	 * @param is_promise - A boolean value, true if the method return a Promise.
 	 */
 	public fndebugMethodResponse(rand_id:string, target_name:string, method:string, str_result:string, is_promise=false):void{
 		const promise_str = (is_promise) ? ' [Promise]' : '';
@@ -341,7 +407,12 @@ class URNLog {
 	}
 	
 	/**
-	 * Debug a response method error 
+	 * Debug a response method error
+	 *
+	 * @param rand_id - A random ID that will be use to associate a constructor been called and its response.
+	 * @param target_name - The name of the class being called.
+	 * @param method - The name of the method being called.
+	 * @param error - The error to log.
 	 */
 	public fndebugMethodResponseError(rand_id:string, target_name:string, method:string, error:Error):void{
 		this.fndebug(`[${rand_id}] [R] ${target_name}.${method}: ERROR`);
@@ -350,13 +421,18 @@ class URNLog {
 	
 	/**
 	 * Format arguments
+	 *
+	 * @param args - Array of paramter to format.
+	 * @param max_str_length - Max string length for formatted arguments.
 	 */
 	public static formatArgs(args:any[], max_str_length:number):string{
 		let str_args = (args.length > 0) ? `${args}` : '';
 		try{
 			str_args = (args.length > 0) ? URNLog.jsonOneLine(args) : '';
 			str_args = str_args.substr(1,str_args.length-2);
-		}catch(e){}
+		}catch(e){
+			str_args = `[CANNOT FORMAT ARGUMENTS][${e.message}]`;
+		}
 		if(typeof str_args == 'string' && str_args.length > max_str_length)
 			str_args = str_args.substr(0, max_str_length) + '...';
 		return str_args;
@@ -364,21 +440,29 @@ class URNLog {
 	
 	/**
 	 * Format response into string for debugging
+	 *
+	 * @param result - The result to log.
+	 * @param max_str_length - Max string length for formatted result.
 	 */
 	public static formatResult(result:any, max_str_length:number):string{
 		let str_result = `${result}`;
 		try{
 			str_result = `${result}`;
 			str_result = URNLog.jsonOneLine(result);
-		}catch(e){}
+		}catch(e){
+			str_result = `[CANNOT FORMAT RESULT][${e.message}]`;
+		}
 		if(typeof str_result == 'string' && str_result.length > max_str_length)
 			str_result = str_result.substr(0, max_str_length) + '...';
 		return str_result;
 	}
 }
 
+/**
+ * Exported default function that will generate instances of URNLog class.
+ */
 export default function(
-	log_level = LogLevel.Error,
+	log_level = URNLogLevel.ERROR,
 	time_format = "yyyy-mm-dd'T'HH:MM:ss:l",
 	max_str_length = 174)
 		:URNLog{

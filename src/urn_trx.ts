@@ -11,7 +11,7 @@
  * Import URNTRX class
  */
 import {URNTRX} from './trx';
-import {URNTRXConfig} from './interfaces/config';
+import {URNTRXConfig} from './types/config';
 
 /*
  * URN TRX Singleton factory

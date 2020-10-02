@@ -8,7 +8,7 @@
 
 import urn_trx_raw, {URNTRXRAWInstance} from './urn_raw';
 
-import {URNTRXConfig} from './interfaces/config';
+import {URNTRXConfig} from './types/config';
 
 import {URNTRXUsers} from './trxs/users';
 
