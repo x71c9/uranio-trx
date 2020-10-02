@@ -4,15 +4,15 @@ import urn_return from '../return/return';
 
 // import './test_other_response';
 
-function mylog(data:any){
-	console.log('MYLOG', data);
-}
+// function mylog(data:any){
+//   console.log('MYLOG', data);
+// }
 
-function myerror(data:any){
-	console.error('MYERR',data);
-}
+// function myerror(data:any){
+//   console.error('MYERR',data);
+// }
 
-const urn_ret = urn_return(myerror, [mylog]);
+const urn_ret = urn_return();
 
 // urn_ret.success_inject(mylog);
 // urn_ret.fail_inject(myerror);

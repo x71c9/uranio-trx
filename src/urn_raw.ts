@@ -7,7 +7,7 @@
  */
 
 import axios, {AxiosInstance, AxiosRequestConfig} from 'axios';
-import {URNTRXConfig} from './interfaces/config';
+import {URNTRXConfig} from './types/config';
 
 export interface URNTRXRAWInstance extends AxiosInstance{}
 

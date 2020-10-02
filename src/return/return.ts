@@ -4,22 +4,12 @@
  * @packageDocumentation
  */
 
-/*
- * Import URNResponse namespace with all response types and methods
- */
+// /*
+//  * Import URNResponse namespace with all response types and methods
+//  */
 import {URNResponse} from './response';
 
-/**
- * Type for handling Success reponse. The type is a Function type that accept
- * a Success response object as its main parameter.
- */
-type SuccessResponseHandler<T> = (p:URNResponse.Success<T>) => void;
-
-/**
- * Type for handling Fail reponse. The type is a Function type that accept
- * a Fail response object as its main parameter.
- */
-type FailResponseHandler<T> = (p:URNResponse.Fail<T>) => void;
+import {URNResponseInjectable} from '../types/injectable';
 
 /**
  * Class URNReturn has all the methods for creating URNResponse objects.
@@ -34,12 +24,12 @@ class URNReturn {
 	/**
 	 * List of handlers for a Success response
 	 */
-	private _success_handlers: SuccessResponseHandler<any>[];
+	// private _success_handlers: SuccessResponseHandler<any>[];
 
 	/**
 	 * List of handlers for a Fail response
 	 */
-	private _fail_handlers: FailResponseHandler<any>[];
+	// private _fail_handlers: FailResponseHandler<any>[];
 	
 	/**
 	 * Constructor function
@@ -48,14 +38,16 @@ class URNReturn {
 	 * @param success_handlers - will set the array of handlers for Success response
 	 */
 	constructor(
-		fail_handlers?:FailResponseHandler<any> | FailResponseHandler<any>[],
-		success_handlers?:SuccessResponseHandler<any> | SuccessResponseHandler<any>[]){
-		this._success_handlers = [];
-		this._fail_handlers = [];
-		if(fail_handlers)
-			this.fail_inject(fail_handlers);
-		if(success_handlers)
-			this.success_inject(success_handlers);
+		public inject?:URNResponseInjectable
+	){
+		// fail_handlers?:FailResponseHandler<any> | FailResponseHandler<any>[],
+		// success_handlers?:SuccessResponseHandler<any> | SuccessResponseHandler<any>[]){
+		// this._success_handlers = [];
+		// this._fail_handlers = [];
+		// if(fail_handlers)
+		//   this.fail_inject(fail_handlers);
+		// if(success_handlers)
+		//   this.success_inject(success_handlers);
 	}
 	
 	/**
@@ -64,11 +56,11 @@ class URNReturn {
 	 *
 	 * @param handler - the handler to check and add
 	 */
-	private _add_fail_handler(handler:FailResponseHandler<any>){
-		if(typeof handler === 'function'){
-			this._fail_handlers.push(handler);
-		}
-	}
+	// private _add_fail_handler(handler:FailResponseHandler<any>){
+	//   if(typeof handler === 'function'){
+	//     this._fail_handlers.push(handler);
+	//   }
+	// }
 	
 	/**
 	 * Method for checking if the handler is a function and to push it to
@@ -76,11 +68,11 @@ class URNReturn {
 	 *
 	 * @param handler - the handler to check and add
 	 */
-	private _add_success_handler(handler:SuccessResponseHandler<any>){
-		if(typeof handler === 'function'){
-			this._success_handlers.push(handler);
-		}
-	}
+	// private _add_success_handler(handler:SuccessResponseHandler<any>){
+	//   if(typeof handler === 'function'){
+	//     this._success_handlers.push(handler);
+	//   }
+	// }
 	
 	/**
 	 * Method that accept one or an array of handlers and will add it to the
@@ -88,51 +80,51 @@ class URNReturn {
 	 *
 	 * @param handlers - the handler/s to add
 	 */
-	public success_inject(handlers:SuccessResponseHandler<any> | SuccessResponseHandler<any>[])
-			:void{
-		if(Array.isArray(handlers)){
-			for(const h of handlers)
-				this._add_success_handler(h);
-		}else if(handlers){
-			this._add_success_handler(handlers);
-		}
-	}
+	// public success_inject(handlers:SuccessResponseHandler<any> | SuccessResponseHandler<any>[])
+	//     :void{
+	//   if(Array.isArray(handlers)){
+	//     for(const h of handlers)
+	//       this._add_success_handler(h);
+	//   }else if(handlers){
+	//     this._add_success_handler(handlers);
+	//   }
+	// }
 	
 	/**
 	 * Method that accept one or an array of handlers and will add it to the
 	 * Fail handlers array
 	 */
-	public fail_inject(handlers:FailResponseHandler<any> | FailResponseHandler<any>[])
-			:void{
-		if(Array.isArray(handlers)){
-			for(const h of handlers)
-				this._add_fail_handler(h);
-		}else if(handlers){
-			this._add_fail_handler(handlers);
-		}
-	}
+	// public fail_inject(handlers:FailResponseHandler<any> | FailResponseHandler<any>[])
+	//     :void{
+	//   if(Array.isArray(handlers)){
+	//     for(const h of handlers)
+	//       this._add_fail_handler(h);
+	//   }else if(handlers){
+	//     this._add_fail_handler(handlers);
+	//   }
+	// }
 	
 	/**
 	 * Method that will run all the Success handlers for a Success response
 	 *
 	 * @param response - the Success response that will be given to the handlers
 	 */
-	private run_success_handlers(response: URNResponse.Success<any>)
-			:void{
-		for(const handler of this._success_handlers)
-			handler(response);
-	}
+	// private run_success_handlers(response: URNResponse.Success<any>)
+	//     :void{
+	//   for(const handler of this._success_handlers)
+	//     handler(response);
+	// }
 	
 	/**
 	 * Method that will run all the Fail handlers for a Fail response
 	 *
 	 * @param response - the Fail response that will be given to the handlers
 	 */
-	private run_fail_handlers(response: URNResponse.Fail<any>)
-			:void{
-		for(const handler of this._fail_handlers)
-			handler(response);
-	}
+	// private run_fail_handlers(response: URNResponse.Fail<any>)
+	//     :void{
+	//   for(const handler of this._fail_handlers)
+	//     handler(response);
+	// }
 	
 	/**
 	 * Returns a response for an async function
@@ -151,7 +143,10 @@ class URNReturn {
 					success: true,
 					payload: await handler(param_object)
 				};
-				this.run_success_handlers(response);
+				if(this.inject && this.inject.success_handler){
+					return this.inject.success_handler(response);
+				}
+				// this.run_success_handlers(response);
 				return response;
 			}catch(ex){
 				return this.return_error(500, 'URANIO ERROR ['+name+'] - '+ex.message, null, ex);
@@ -176,7 +171,10 @@ class URNReturn {
 					success: true,
 					payload: handler(param_object)
 				};
-				this.run_success_handlers(response);
+				if(this.inject && this.inject.success_handler){
+					return this.inject.success_handler(response);
+				}
+				// this.run_success_handlers(response);
 				return response;
 			}catch(ex){
 				return this.return_error(500, 'URANIO ERROR ['+name+'] - '+ex.message, null, ex);
@@ -247,7 +245,10 @@ class URNReturn {
 				ex: (ex) ? ex : null,
 				success: false
 			};
-			this.run_fail_handlers(urn_response);
+			if(this.inject && this.inject.fail_handler){
+				return this.inject.fail_handler(urn_response);
+			}
+			// this.run_fail_handlers(urn_response);
 			return urn_response;
 		}else{
 			const urn_response:URNResponse.Fail = {
@@ -257,7 +258,10 @@ class URNReturn {
 				ex: null,
 				success: false
 			};
-			this.run_fail_handlers(urn_response);
+			if(this.inject && this.inject.fail_handler){
+				return this.inject.fail_handler(urn_response);
+			}
+			// this.run_fail_handlers(urn_response);
 			return urn_response;
 		}
 	}
@@ -282,7 +286,10 @@ class URNReturn {
 				message: message,
 				payload: payload
 			};
-			this.run_success_handlers(urn_response);
+			if(this.inject && this.inject.success_handler){
+				return this.inject.success_handler(urn_response);
+			}
+			// this.run_success_handlers(urn_response);
 			return urn_response;
 		}else{
 			const urn_response:URNResponse.Success = {
@@ -291,7 +298,10 @@ class URNReturn {
 				message: message,
 				payload: null
 			};
-			this.run_success_handlers(urn_response);
+			if(this.inject && this.inject.success_handler){
+				return this.inject.success_handler(urn_response);
+			}
+			// this.run_success_handlers(urn_response);
 			return urn_response;
 		}
 	}
@@ -330,11 +340,14 @@ class URNReturn {
  * A function the will create a URNReturn instance.
  * Its parameters are the same as the constructor of the class.
  */
-function create_instance(
-	fail_handlers?:FailResponseHandler<any>|FailResponseHandler<any>[],
-	success_handlers?:SuccessResponseHandler<any>|SuccessResponseHandler<any>[])
-		:URNReturn{
-	return new URNReturn(fail_handlers, success_handlers);
+// function create_instance(
+//   fail_handlers?:FailResponseHandler<any>|FailResponseHandler<any>[],
+//   success_handlers?:SuccessResponseHandler<any>|SuccessResponseHandler<any>[])
+//     :URNReturn{
+//   return new URNReturn(fail_handlers, success_handlers);
+// }
+function create_instance(inject?:URNResponseInjectable):URNReturn{
+	return new URNReturn(inject);
 }
 
 /*

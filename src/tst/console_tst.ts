@@ -1,27 +1,27 @@
 
-import urn_log, {LogLevel as URNLogLevel} from '../log/log';
-// const urn_console = urn_log(URNLogLevel.FunctionDebug, "HH:MM:ss:l");
-const urn_console = urn_log(URNLogLevel.FunctionDebug);
+import urn_log, {URNLogLevel} from '../log/log';
 
-urn_console.error({error: 'this is an error'});
-urn_console.warn({warning: 'this is a warning'});
-urn_console.log({log: 'this is a log'});
-// urn_console.log(false, 0, undefined, {name: 'an object name'});
-// urn_console.log(0);
-// urn_console.log(null);
-// urn_console.log(undefined);
-urn_console.debug({debug: 'this is a debug'});
-urn_console.fndebug({fndebug: 'this is a fndebug'});
+import urn_return from '../return/return';
 
-@urn_console.debug_constructor()
-@urn_console.debug_methods()
+const urn_console = urn_log(URNLogLevel.FUNCTION_DEBUG, "HH:MM:ss:l");
+
+const urn_res = urn_return(urn_console);
+
+// urn_console.error({error: 'this is an error'});
+// urn_console.warn({warning: 'this is a warning'});
+// urn_console.log({log: 'this is a log'});
+// urn_console.debug({debug: 'this is a debug'});
+// urn_console.fndebug({fndebug: 'this is a fndebug'});
+
+// @urn_console.debug_constructor()
+// @urn_console.debug_methods()
 class MyClass{
 	
-	public my_method(){
-		return 3;
+	public my_method(a:number,b:string){
+		return urn_res.return_success('Valid', a + b);
 	}
 	
 }
 
 const my_insta = new MyClass();
-my_insta.my_method();
+my_insta.my_method(3,'AAA');
