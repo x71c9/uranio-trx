@@ -17,4 +17,9 @@
 
 // import './A';
 
+import log_defaults from './log/defaults';
+
 import './tst/console_tst';
+
+console.log(log_defaults);
+
