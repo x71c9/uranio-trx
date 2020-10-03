@@ -6,6 +6,7 @@ import urn_return from '../return/return';
 // log_defaults.log_level = URNLogLevel.FUNCTION_DEBUG;
 
 urn_log.defaults.log_level = URNLogLevel.FUNCTION_DEBUG;
+// urn_log.defaults.context = 'browser';
 
 const urn_console = urn_log({log_level:URNLogLevel.FUNCTION_DEBUG, time_format:"HH:MM:ss:l"});
 // const urn_console = urn_log();
