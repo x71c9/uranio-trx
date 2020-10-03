@@ -36,6 +36,8 @@ class URNLog implements URNResponseInjectable{
 	
 	public max_str_length:number;
 	
+	public context:'terminal'|'browser';
+	
 	/**
 	 * Constructor function
 	 *
@@ -50,6 +52,7 @@ class URNLog implements URNResponseInjectable{
 		this.log_level = merged_config.log_level,
 		this.time_format = merged_config.time_format,
 		this.max_str_length = merged_config.max_str_length;
+		this.context = merged_config.context;
 	}
 	
 	/**
@@ -99,7 +102,7 @@ class URNLog implements URNResponseInjectable{
 	 */
 	public log(...params:any[]){
 		if(this.log_level > 2)
-			this.cecho('log', URNLog.terminal_styles.fgDefault, 2, ...params);
+			this.cecho('log', URNLog.terminal_styles.fgLightBlue, 2, ...params);
 	}
 	
 	/**
@@ -151,7 +154,11 @@ class URNLog implements URNResponseInjectable{
 			let string = '';
 			string += head_string;
 			string += (call_info != null) ? call_info[1] : psc.split('at ')[1];
-			console.log(stylelog, string);
+			if(this.context == 'browser'){
+				console.log('%c%s', stylelog, string);
+			}else{
+				console.log(stylelog, string);
+			}
 		}
 	}
 	
@@ -180,7 +187,11 @@ class URNLog implements URNResponseInjectable{
 			processed_param = ['null'];
 		}
 		for(const pp of processed_param){
-			console.log(stylelog, pp);
+			if(this.context == 'browser'){
+				console.log('%c%s', stylelog, pp);
+			}else{
+				console.log(stylelog, pp);
+			}
 		}
 	}
 	
@@ -191,13 +202,28 @@ class URNLog implements URNResponseInjectable{
 	 * @param style - terminal_style to use for the log
 	 * @param ...params - variables to log
 	 */
-	private cecho(type:LogType, style='', depth=1, ...params:any[]){
-		const stylelog = style + '%s' + URNLog.terminal_styles.reset;
+	private cecho(type:LogType, style:string|string[]='', depth=1, ...params:any[]){
+		
+		let stylelog = style + '%s' + URNLog.terminal_styles.reset;
+		
+		if(this.context == 'browser'){
+			if(Array.isArray(style)){
+				stylelog = style.join(' ');
+			}else{
+				stylelog = style;
+			}
+		}
+		
 		this.log_stack(type, stylelog, depth);
 		for(const p of params){
 			this.log_param(p, stylelog);
 		}
-		console.log(stylelog, ' ');
+		
+		if(this.context == 'browser'){
+			console.log('%c%s', stylelog, ' ');
+		}else{
+			console.log(stylelog, ' ');
+		}
 	}
 	
 	/**
@@ -341,7 +367,7 @@ class URNLog implements URNResponseInjectable{
 		'fgLightGrey' : "\x1b[90m",
 		'fgLightRed' : "\x1b[91m",
 		'fgLightGreen' : "\x1b[92m",
-		'fglightYellow' : "'\x1b[93m",
+		'fglightYellow' : "\x1b[93m",
 		'fgLightBlue' : "\x1b[94m",
 		'fgLoghtMagenta' : "\x1b[95m",
 		'fgLightCyan' : "\x1b[96m",
@@ -365,7 +391,35 @@ class URNLog implements URNResponseInjectable{
 		'Light White' : "\x1b[107m"
 	}
 	
+	public static console_styles = {
+		underline: 'text-decoration: underline;',
+		fg_black: 'color: black;',
+		fg_red: 'color: red;',
+		fg_green: 'color: green;',
+		fg_yellow: 'color: yellow;',
+		fg_orange: 'color: #e69500;',
+		fg_blue: 'color: blue;',
+		fg_magenta: 'color: magenta;',
+		fg_cyan: 'color: cyan;',
+		fg_white: 'color: white;',
+		fg_grey: 'color: grey;',
+		fg_fndebug: 'color: #848484;',
+		fg_debug: 'color: #4880ae;',
+		fg_log: 'color: #006ec8;',
+		fg_warn: 'color: #cf8d00;',
+		fg_error: 'color: #e20000;',
+		bg_black: 'background-color: black;',
+		bg_red: 'background-color: red;',
+		bg_green: 'background-color: green;',
+		bg_yellow: 'background-color: yellow;',
+		bg_blue: 'background-color: blue;',
+		bg_magenta: 'background-color: magenta;',
+		bg_cyan: 'background-color: cyan;',
+		bg_white: 'background-color: white;'
+	};
+	
 }
+
 
 /**
  * Class @decorator function for loggin constructor with arguments
@@ -472,12 +526,12 @@ export function debug_methods(log_instance:URNLog):Function{
 	}
 	return debug_methods_decorator;
 }
+
 /**
 * Exported default function that will generate instances of URNLog class.
 */
 function create_instance(config?:Partial<LogConfig>)
 		:URNLog{
-	
 	return new URNLog(config);
 }
 

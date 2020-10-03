@@ -4,3 +4,99 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+AbstractResponse	return/response.ts	/^	interface AbstractResponse<T = null> {$/;"	i
+Fail	return/response.ts	/^	export interface Fail<T = null> extends AbstractResponse<T> {$/;"	i
+IURNResource	resources/resource.ts	/^export interface IURNResource extends IURN_OBJ {$/;"	i
+IURNUser	resources/user.ts	/^export interface IURNUser extends IURNResource {$/;"	i
+IURN_OBJ	resources/obj.ts	/^export interface IURN_OBJ {$/;"	i
+L	tst/A.ts	/^import L from '.\/L';$/;"	I
+L	tst/B.ts	/^import L from '.\/L';$/;"	I
+L	tst/L.ts	/^class L {$/;"	c
+LogConfig	log/defaults.ts	/^export interface LogConfig extends Object{$/;"	i
+LogType	types/log.ts	/^export type LogType = 'error' | 'warn' | 'log' | 'debug' | 'fndebug';$/;"	t
+MyClass	tst/console_tst.ts	/^class MyClass{$/;"	c
+Response	return/response.ts	/^	export type Response<T = null, K = null> = Success<T> | Fail<K>;$/;"	t
+ReturnType	return/response.ts	/^	export type ReturnType<T> = T extends (...args: any[]) => infer R ? R : any;$/;"	t
+Success	return/response.ts	/^	export interface Success<T = null> extends AbstractResponse<T> {$/;"	i
+UBoolean	return/response.ts	/^	export interface UBoolean<T extends boolean = boolean> {$/;"	i
+URNLog	log/log.ts	/^class URNLog implements URNResponseInjectable{$/;"	c
+URNLogContext	log/defaults.ts	/^export type URNLogContext = 'terminal'|'browser';$/;"	t
+URNLogLevel	types/log.ts	/^export enum URNLogLevel {NONE, ERROR, WARNING, LOG, DEBUG, FUNCTION_DEBUG}$/;"	e
+URNResponseInjectable	types/injectable.ts	/^export interface URNResponseInjectable{$/;"	i
+URNReturn	return/return.ts	/^class URNReturn {$/;"	c
+URNTRX	trx.ts	/^export class URNTRX {$/;"	c
+URNTRXConfig	types/config.ts	/^export interface URNTRXConfig{$/;"	i
+URNTRXRAWFactory	urn_raw.ts	/^export interface URNTRXRAWFactory {$/;"	i
+URNTRXRAWInstance	urn_raw.ts	/^export interface URNTRXRAWInstance extends AxiosInstance{}$/;"	i
+URNTRXResource	trxs/resources.ts	/^export abstract class URNTRXResource {$/;"	c
+URNTRXUsers	trxs/users.ts	/^export class URNTRXUsers extends URNTRXResource {$/;"	c
+_add_inject	return/return.ts	/^	private _add_inject(inject_object:URNResponseInjectable){$/;"	m
+_path	trxs/resources.ts	/^	protected _path:string;$/;"	m
+_raw	trxs/resources.ts	/^	private _raw:URNTRXRAWInstance;$/;"	m
+_run_fail_handlers	return/return.ts	/^	private _run_fail_handlers<T>(response: URNResponse.Fail<T>)$/;"	m
+_run_success_handlers	return/return.ts	/^	private _run_success_handlers<T>(response: URNResponse.Success<T>)$/;"	m
+_trx_raw	trx.ts	/^	private _trx_raw:URNTRXRAWInstance;$/;"	m
+async_res	return/return.ts	/^	public async_res<R>(handler:(...args:any[]) => Promise<R>, name?:string){$/;"	m
+axios	urn_raw.ts	/^import axios, {AxiosInstance, AxiosRequestConfig} from 'axios';$/;"	I
+cecho	log/log.ts	/^	private cecho(type:LogType, style='', depth=1, ...params:any[]){$/;"	m
+console_styles	log/log.ts	/^	public static console_styles = {$/;"	m
+constructor	log/log.ts	/^	public constructor(config?:Partial<LogConfig>){$/;"	m
+constructor	trxs/resources.ts	/^	public constructor(_rawInstance:URNTRXRAWInstance){$/;"	m
+context	log/log.ts	/^	public context:'terminal'|'browser';$/;"	m
+create_instance	log/log.ts	/^function create_instance(config?:Partial<LogConfig>)$/;"	f
+create_instance	return/return.ts	/^function create_instance(inject?:URNResponseInjectable):URNReturn{$/;"	f
+dateFormat	log/log.ts	/^import dateFormat from 'dateformat';$/;"	I
+debug	log/log.ts	/^	public debug(...params:any[]){$/;"	m
+debug_constructor	log/log.ts	/^export function debug_constructor(log_instance:URNLog):Function{$/;"	f
+debug_constructor_decorator	log/log.ts	/^	function debug_constructor_decorator<T extends { new (...constr_args:any[]):any }>(constr_func: T){$/;"	f
+debug_methods	log/log.ts	/^export function debug_methods(log_instance:URNLog):Function{$/;"	f
+debug_methods_decorator	log/log.ts	/^	function debug_methods_decorator(target:Function){$/;"	f
+error	log/log.ts	/^	public error(...params:any[]){$/;"	m
+f1	tst/A.ts	/^function f1(){$/;"	f
+f2	tst/B.ts	/^function f2(){$/;"	f
+fail_handler	log/log.ts	/^	public fail_handler<T>(p:T):T{$/;"	m
+fndebug	log/log.ts	/^	public fndebug(...params:any[]){$/;"	m
+fndebugCostructor	log/log.ts	/^	public fndebugCostructor(rand_id:string, constructor_name:string, str_args:string){$/;"	m
+fndebugMethodResponse	log/log.ts	/^	public fndebugMethodResponse(rand_id:string, target_name:string, method:string, str_result:string, is_promise=false):void{$/;"	m
+fndebugMethodResponseError	log/log.ts	/^	public fndebugMethodResponseError(rand_id:string, target_name:string, method:string, error:Error):void{$/;"	m
+fndebugMethodWithArgs	log/log.ts	/^	public fndebugMethodWithArgs(rand_id:string, target_name:string, method:string, str_args:string):void{$/;"	m
+fndebugPrivateCostructor	log/log.ts	/^	public fndebugPrivateCostructor(rand_id:string, constructor_name:string, str_args:string){$/;"	m
+fns	tst/L.ts	/^	public fns:(() => void)[];$/;"	m
+formatArgs	log/log.ts	/^	public static formatArgs(args:any[], max_str_length:number):string{$/;"	m
+formatResult	log/log.ts	/^	public static formatResult(result:any, max_str_length:number):string{$/;"	m
+get	trxs/resources.ts	/^	public get(){$/;"	m
+inject_objects	return/return.ts	/^	public inject_objects: URNResponseInjectable[];$/;"	m
+isFail	return/response.ts	/^	export function isFail(response:Response<any,any>): response is Fail {$/;"	f
+isFalse	return/response.ts	/^	export function isFalse(response:UBoolean<any>): response is UBoolean<false> {$/;"	f
+isSuccess	return/response.ts	/^	export function isSuccess(response:Response<any,any>): response is Success {$/;"	f
+isTrue	return/response.ts	/^	export function isTrue(response:UBoolean<any>): response is UBoolean<true> {$/;"	f
+jsonOneLine	log/log.ts	/^	public static jsonOneLine(obj:any,white_space=' '):string{$/;"	m
+log	log/log.ts	/^	public log(...params:any[]){$/;"	m
+log	tst/L.ts	/^	public log(){$/;"	m
+log_defaults	index.ts	/^import log_defaults from '.\/log\/defaults';$/;"	I
+log_defaults	log/log.ts	/^import log_defaults, {LogConfig, merge_config} from '.\/defaults';$/;"	I
+log_level	log/log.ts	/^	public log_level:URNLogLevel;$/;"	m
+log_param	log/log.ts	/^	private log_param(p:any, stylelog:string)$/;"	m
+log_stack	log/log.ts	/^	private log_stack(type:LogType, stylelog:string, depth:number)$/;"	m
+max_str_length	log/log.ts	/^	public max_str_length:number;$/;"	m
+merge_config	log/defaults.ts	/^export function merge_config(partial_config:Partial<LogConfig>|undefined, default_config:LogConfig)$/;"	f
+my_method	tst/console_tst.ts	/^	public my_method(a:number,b:string){$/;"	m
+push_injects	return/return.ts	/^	public push_injects(inject_objects:URNResponseInjectable|URNResponseInjectable[])$/;"	m
+randId	log/log.ts	/^	public static randId():string{$/;"	m
+replace_method_with_logs	log/log.ts	/^function replace_method_with_logs($/;"	f
+res	return/return.ts	/^	public res<R>(handler:(...args:any[]) => R, name?:string){$/;"	m
+return_error	return/return.ts	/^	public return_error(status:number, message:string, payload?:null, ex?:Error | null):URNResponse.Fail;$/;"	m
+return_error	return/return.ts	/^	public return_error<T>(status:number, message:string, payload:T, ex?:Error | null):URNResponse.Fail<T> | URNResponse.Fail{$/;"	m
+return_error	return/return.ts	/^	public return_error<T>(status:number, message:string, payload:T, ex?:Error | null):URNResponse.Fail<T>;$/;"	m
+return_success	return/return.ts	/^	public return_success(message:string, payload?:null):URNResponse.Success;$/;"	m
+return_success	return/return.ts	/^	public return_success<T>(message:string, payload:T):URNResponse.Success<T> | URNResponse.Success{$/;"	m
+return_success	return/return.ts	/^	public return_success<T>(message:string, payload:T):URNResponse.Success<T>;$/;"	m
+success_handler	log/log.ts	/^	public success_handler<T>(p:T):T{$/;"	m
+terminal_styles	log/log.ts	/^	public static terminal_styles = {$/;"	m
+time_format	log/log.ts	/^	public time_format:string;$/;"	m
+urn_log	tst/console_tst.ts	/^import urn_log, {debug_constructor, debug_methods} from '..\/log\/log';$/;"	I
+urn_return	tst/console_tst.ts	/^import urn_return from '..\/return\/return';$/;"	I
+urn_return	tst/test_response.ts	/^import urn_return from '..\/return\/return';$/;"	I
+urn_trx_raw	trx.ts	/^import urn_trx_raw, {URNTRXRAWInstance} from '.\/urn_raw';$/;"	I
+users	trx.ts	/^	public users:URNTRXUsers;$/;"	m
+warn	log/log.ts	/^	public warn(...params:any[]){$/;"	m

@@ -1,6 +1,8 @@
 
 import {URNLogLevel} from '../types/log';
 
+export type URNLogContext = 'terminal'|'browser';
+
 export interface LogConfig extends Object{
 	
 	[key:string]: any,
@@ -10,6 +12,9 @@ export interface LogConfig extends Object{
 	time_format: string;
 	
 	max_str_length: number;
+	
+	context:URNLogContext;
+	
 }
 
 const defaults:LogConfig = {
@@ -18,7 +23,9 @@ const defaults:LogConfig = {
 	
 	time_format: "yyyy-mm-dd'T'HH:MM:ss:l",
 	
-	max_str_length: 174
+	max_str_length: 174,
+	
+	context: 'terminal'
 };
 
 export function merge_config(partial_config:Partial<LogConfig>|undefined, default_config:LogConfig)

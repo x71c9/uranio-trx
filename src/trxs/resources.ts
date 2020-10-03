@@ -1,18 +1,25 @@
 
-import {URNTRXRAWInstance} from '../urn_raw';
+import {URNResponse} from '../return/response';
+
+import {URNTRXRAW} from '../urn_raw';
 
 export abstract class URNTRXResource {
 	
-	private _raw:URNTRXRAWInstance;
+	private _raw:URNTRXRAW;
 	
 	protected _path:string;
 	
-	public constructor(_rawInstance:URNTRXRAWInstance){
+	public constructor(_rawInstance:URNTRXRAW){
 		this._raw = _rawInstance;
+		
+		/*
+		 * _path must be overwritten in subclasses
+		 */
 		this._path = '';
 	}
 	
-	public get(){
+	public async get()
+			:Promise<URNResponse.Response<any,any>>{
 		return this._raw.get(this._path);
 	}
 }

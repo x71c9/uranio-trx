@@ -11,6 +11,7 @@
  * Import URNTRX class
  */
 import {URNTRX} from './trx';
+
 import {URNTRXConfig} from './types/config';
 
 /*
