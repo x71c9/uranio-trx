@@ -1,9 +1,15 @@
-
-import urn_log, {URNLogLevel, debug_constructor, debug_methods} from '../log/log';
-
+import {URNLogLevel} from '../types/log';
+import urn_log, {debug_constructor, debug_methods} from '../log/log';
 import urn_return from '../return/return';
 
-const urn_console = urn_log(URNLogLevel.FUNCTION_DEBUG, "HH:MM:ss:l");
+// import log_defaults from '../log/defaults';
+// log_defaults.log_level = URNLogLevel.FUNCTION_DEBUG;
+
+urn_log.defaults.log_level = URNLogLevel.FUNCTION_DEBUG;
+
+const urn_console = urn_log({log_level:URNLogLevel.FUNCTION_DEBUG, time_format:"HH:MM:ss:l"});
+// const urn_console = urn_log();
+
 
 const urn_res = urn_return(urn_console);
 

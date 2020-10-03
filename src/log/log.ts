@@ -14,19 +14,9 @@ import dateFormat from 'dateformat';
  */
 import {URNResponseInjectable} from '../types/injectable';
 
-/**
- * URNLogLevel enum type
- * None = 0
- * Error = 1
- * ...
- */
-export enum URNLogLevel {NONE, ERROR, WARNING, LOG, DEBUG, FUNCTION_DEBUG}
+import log_defaults, {LogConfig, merge_config} from './defaults';
 
-/**
- * LogType type
- *
- */
-type LogType = 'error' | 'warn' | 'log' | 'debug' | 'fndebug';
+import {URNLogLevel, LogType} from '../types/log';
 
 /**
  * URNLog class
@@ -40,6 +30,12 @@ type LogType = 'error' | 'warn' | 'log' | 'debug' | 'fndebug';
  */
 class URNLog implements URNResponseInjectable{
 	
+	public log_level:URNLogLevel;
+	
+	public time_format:string;
+	
+	public max_str_length:number;
+	
 	/**
 	 * Constructor function
 	 *
@@ -47,11 +43,13 @@ class URNLog implements URNResponseInjectable{
 	 * @param time_format - set the time format string.
 	 * @param max_str_length - set the maximun length for the string when logging methods.
 	 */
-	public constructor(
-		public log_level = URNLogLevel.ERROR,
-		public time_format = "yyyy-mm-dd'T'HH:MM:ss:l",
-		public max_str_length = 174
-	){
+	public constructor(config?:Partial<LogConfig>){
+		
+		const merged_config = merge_config(config, log_defaults);
+		
+		this.log_level = merged_config.log_level,
+		this.time_format = merged_config.time_format,
+		this.max_str_length = merged_config.max_str_length;
 	}
 	
 	/**
@@ -447,6 +445,8 @@ function replace_method_with_logs(
 /**
  * Class @decorator function for logging each method inside the class
  *
+ * The function return a decorator function.
+ *
  * @param target - the class itself (check Decorator documentation)
  */
 // eslint-disable-next-line @typescript-eslint/ban-types
@@ -472,16 +472,18 @@ export function debug_methods(log_instance:URNLog):Function{
 	}
 	return debug_methods_decorator;
 }
-
 /**
 * Exported default function that will generate instances of URNLog class.
 */
-export default function(
-	log_level = URNLogLevel.ERROR,
-	time_format = "yyyy-mm-dd'T'HH:MM:ss:l",
-	max_str_length = 174)
+function create_instance(config?:Partial<LogConfig>)
 		:URNLog{
-	return new URNLog(log_level, time_format, max_str_length);
+	
+	return new URNLog(config);
 }
+
+create_instance.defaults = log_defaults;
+
+export default create_instance;
+
 
 
