@@ -1,11 +1,7 @@
 import * as urn_log from '../log/log';
 import urn_return from '../return/return';
 
-urn_log.config.log_level = 5;
-
-const injectable = urn_log.create_injectable_logger();
-
-const urn_ret = urn_return(injectable);
+const urn_ret = urn_return(urn_log.response_injector);
 
 // urn_log.error({name: 'this is an error'});
 // urn_log.warn({name: 'this is a warning'});

@@ -1,3 +1,4 @@
+import {terminal_log_injector} from '../log/console_injector';
 
 import {URNLogLevel, URNLogContext} from './log.t';
 
@@ -13,7 +14,7 @@ interface LogDefaults {
 	
 	context:URNLogContext;
 	
-	injects?:URNLogInjectable;
+	injectors:URNLogInjectable[];
 	
 }
 
@@ -25,7 +26,11 @@ const log_defaults:LogDefaults = {
 	
 	max_str_length: 174,
 	
-	context: 'terminal'
+	context: 'terminal',
+	
+	injectors: [
+		terminal_log_injector
+	]
 	
 };
 
