@@ -5,9 +5,9 @@
 /*
  * Import interface IURN_OBJ
  */
-import {IURN_OBJ} from './obj';
+import {URN_OBJ} from './obj';
 
-export interface IURNResource extends IURN_OBJ {
+export interface URNResource extends URN_OBJ {
 	
 	/*
 	 * _id

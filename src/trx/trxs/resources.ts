@@ -3,7 +3,7 @@ import {URNResponse} from '../../return/return.t';
 
 import {URNTRXRAW} from '../../raw/raw';
 
-export abstract class URNTRXResource {
+export abstract class URNTRXResource<Model> {
 	
 	private _raw:URNTRXRAW;
 	
@@ -19,7 +19,7 @@ export abstract class URNTRXResource {
 	}
 	
 	public async get()
-			:Promise<URNResponse.Response<any,any>>{
+			:Promise<URNResponse.Response<Model[],any>>{
 		return this._raw.get(this._path);
 	}
 }

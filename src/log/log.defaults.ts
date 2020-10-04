@@ -1,4 +1,4 @@
-import {terminal_log_injector} from '../log/console_injector';
+import {terminal_log_injector, browser_log_injector} from '../log/console_injector';
 
 import {URNLogLevel, URNLogContext} from './log.t';
 
@@ -18,6 +18,9 @@ interface LogDefaults {
 	
 }
 
+const log_injector = (typeof process === undefined) ?
+	browser_log_injector : terminal_log_injector;
+
 const log_defaults:LogDefaults = {
 	
 	log_level: URNLogLevel.ERROR,
@@ -28,9 +31,7 @@ const log_defaults:LogDefaults = {
 	
 	context: 'terminal',
 	
-	injectors: [
-		terminal_log_injector
-	]
+	injectors: [log_injector]
 	
 };
 

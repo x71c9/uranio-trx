@@ -1,5 +1,5 @@
 /*
- * Main file for URN TRX Factory singleton
+ * Main file for URN TRX Factory
  *
  * The object has a function that will create instances of URNTRX class
  *

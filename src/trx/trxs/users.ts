@@ -3,7 +3,9 @@ import {URNTRXResource} from './resources';
 
 import {URNTRXRAW} from '../../raw/raw';
 
-export class URNTRXUsers extends URNTRXResource {
+import {URNUser} from '../../models/user';
+
+export class URNTRXUsers extends URNTRXResource<URNUser> {
 	
 	constructor(_rawInstance:URNTRXRAW){
 		
