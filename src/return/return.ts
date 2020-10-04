@@ -7,12 +7,12 @@
 /*
  * Import URNResponse namespace with all response types and methods
  */
-import {URNResponse} from './response';
+import {URNResponse} from './return.t';
 
 /*
  * Import URNResponseInjectable interface
  */
-import {URNResponseInjectable} from '../types/injectable';
+import {URNResponseInjectable} from '../util/injectable.t';
 
 /**
  * Class URNReturn has all the methods for creating URNResponse objects.

@@ -1,5 +1,5 @@
 
-import {URNResponse} from '../return/response';
+import {URNResponse} from '../return/return.t';
 
 import {URNTRXRAW} from '../urn_raw';
 
