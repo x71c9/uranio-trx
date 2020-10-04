@@ -10,15 +10,11 @@
  * Import URNTRXConfig interface for initializing the URNTRX class
  * Import URNTRX class
  */
-import {URNTRX} from './trx';
+import {URNTRX} from './trx/trx';
 
-import {URNTRXConfig} from './types/config';
+import {URNTRXConfig} from './urn_trx.t';
 
-/*
- * URN TRX Singleton factory
- */
 const urn_trx_factory = {
-	
 	/*
 	 * It will create instances of URNTRX
 	 *
@@ -28,9 +24,7 @@ const urn_trx_factory = {
 	 */
 	create(config:URNTRXConfig)
 			:URNTRX{
-		
 		return new URNTRX(config);
-		
 	}
 	
 };

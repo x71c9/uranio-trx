@@ -1,6 +1,9 @@
 /**
  * Module for logging
  *
+ * Use like
+ * import * as urn_console from './log/log';
+ *
  * @packageDocumentation
  */
 
@@ -9,13 +12,30 @@
  */
 import dateFormat from 'dateformat';
 
-import log_config from './log.config';
-export {log_config as config};
+/*
+ * Import log configuration file
+ */
+import log_defaults from './log.defaults';
 
-import {LogType} from './log.t';
-export {LogType};
+/*
+ * Import URNLogType
+ */
+import {URNLogType} from './log.t';
 
-import {URNResponseInjectable} from '../util/injectable.t';
+/*
+ * Export imported URNLogLevel as LogLevel
+ */
+export {URNLogLevel as LogLevel} from './log.t';
+
+/*
+ * Export log_defaults as config
+ */
+export {log_defaults as config};
+
+/*
+ * Import URNResponseInjectable
+ */
+import {URNResponseInjectable} from '../util/response_injectable.t';
 
 /**
  * Debug functions log
@@ -24,10 +44,11 @@ import {URNResponseInjectable} from '../util/injectable.t';
  */
 export function fndebug(...params:any[])
 		:void{
-	const style = (log_config.context == 'browser') ?
+	const style = (log_defaults.context == 'browser') ?
 		console_styles.fg_fndebug : terminal_styles.fgCyan;
-	if(log_config.log_level > 4)
-		cecho('fndebug', style, 1, 6, ...params);
+	if(log_defaults.log_level > 4){
+		cecho('fndebug', style, 6, 1, ...params);
+	}
 }
 
 /**
@@ -37,10 +58,11 @@ export function fndebug(...params:any[])
  */
 export function debug(...params:any[])
 		:void{
-	const style = (log_config.context == 'browser') ?
+	const style = (log_defaults.context == 'browser') ?
 		console_styles.fg_debug : terminal_styles.fgBlue;
-	if(log_config.log_level > 3)
-		cecho('debug', style, 1, 4, ...params);
+	if(log_defaults.log_level > 3){
+		cecho('debug', style, 4, 1, ...params);
+	}
 }
 
 /**
@@ -50,10 +72,11 @@ export function debug(...params:any[])
  */
 export function log(...params:any[])
 		:void{
-	const style = (log_config.context == 'browser') ?
+	const style = (log_defaults.context == 'browser') ?
 		console_styles.fg_log : terminal_styles.fgLightBlue;
-	if(log_config.log_level > 2)
-		cecho('log', style, 2, 4, ...params);
+	if(log_defaults.log_level > 2){
+		cecho('log', style, 4, 2, ...params);
+	}
 }
 
 /**
@@ -63,10 +86,11 @@ export function log(...params:any[])
  */
 export function warn(...params:any[])
 		:void{
-	const style = (log_config.context == 'browser') ?
+	const style = (log_defaults.context == 'browser') ?
 		console_styles.fg_warn : terminal_styles.fgYellow;
-	if(log_config.log_level > 1)
-		cecho('warn', style, 3, 4, ...params);
+	if(log_defaults.log_level > 1){
+		cecho('warn', style, 4, 3, ...params);
+	}
 }
 
 /**
@@ -76,30 +100,31 @@ export function warn(...params:any[])
  */
 export function error(...params:any[])
 		:void{
-	const style = (log_config.context == 'browser') ?
+	const style = (log_defaults.context == 'browser') ?
 		console_styles.fg_error : terminal_styles.fgRed;
-	if(log_config.log_level > 0)
-		cecho('error', style, -1, 4, ...params);
+	if(log_defaults.log_level > 0){
+		cecho('error', style, 4, -1, ...params);
+	}
 }
 
 /**
  * Log stack
  *
- * @param type - the type of log [error|warn|log|...]. See LogType.
+ * @param type - the type of log [error|warn|log|...]. See URNLogType.
  * @param stylelog - formatted string for styling.
  * @param depth - how many lines should be log from the stack.
+ * @param start - at what line the stack should start.
  */
-function log_stack(type:LogType, stylelog:string, depth:number, start=4)
+function log_stack(type:URNLogType, stylelog:string, start=4, depth=-1)
 		:void{
 	const stack = new Error().stack;
 	if(stack == undefined){
 		console.error('CANNOT LOG STACK');
 		return;
 	}
-	const now = dateFormat(new Date(), log_config.time_format);
+	const now = dateFormat(new Date(), log_defaults.time_format);
 	const head_string = now + ' <' + type + '> ';
 	const splitted_stack = stack.split('\n');
-	
 	const till = (depth == -1) ? splitted_stack.length - 4 : depth;
 	for(let i = start; i < start + till && i < splitted_stack.length; i++){
 		const psc = splitted_stack[i];
@@ -107,7 +132,7 @@ function log_stack(type:LogType, stylelog:string, depth:number, start=4)
 		let string = '';
 		string += head_string;
 		string += (call_info != null) ? call_info[1] : psc.split('at ')[1];
-		if(log_config.context == 'browser'){
+		if(log_defaults.context == 'browser'){
 			console.log('%c%s', stylelog, string);
 		}else{
 			console.log(stylelog, string);
@@ -140,7 +165,7 @@ function log_param(p:any, stylelog:string)
 		processed_param = ['null'];
 	}
 	for(const pp of processed_param){
-		if(log_config.context == 'browser'){
+		if(log_defaults.context == 'browser'){
 			console.log('%c%s', stylelog, pp);
 		}else{
 			console.log(stylelog, pp);
@@ -153,23 +178,25 @@ function log_param(p:any, stylelog:string)
  *
  * @param type - type of log
  * @param style - terminal_style to use for the log
+ * @param depth - how many lines of stack should be printed
+ * @param start - at what line the stack should start
  * @param ...params - variables to log
  */
-function cecho(type:LogType, style:string|string[], depth:number, start:number, ...params:any[])
+function cecho(type:URNLogType, style:string|string[], start:number, depth:number, ...params:any[])
 		:void{
 	let stylelog = style + '%s' + terminal_styles.reset;
-	if(log_config.context == 'browser'){
+	if(log_defaults.context == 'browser'){
 		if(Array.isArray(style)){
 			stylelog = style.join(' ');
 		}else{
 			stylelog = style;
 		}
 	}
-	log_stack(type, stylelog, depth, start);
+	log_stack(type, stylelog, start, depth);
 	for(const p of params){
 		log_param(p, stylelog);
 	}
-	if(log_config.context == 'browser'){
+	if(log_defaults.context == 'browser'){
 		console.log('%c%s', stylelog, ' ');
 	}else{
 		console.log(stylelog, ' ');
@@ -203,7 +230,8 @@ export function jsonOneLine(obj:any, white_space=' '):string{
  * @param constructor_name - The constructor name.
  * @param str_args - A string containing the arguments.
  */
-export function fndebugCostructor(rand_id:string, constructor_name:string, str_args:string){
+export function fndebugCostructor(rand_id:string, constructor_name:string, str_args:string)
+		:void{
 	fndebug(`[${rand_id}] new ${constructor_name}(${str_args})`);
 }
 
@@ -214,7 +242,8 @@ export function fndebugCostructor(rand_id:string, constructor_name:string, str_a
  * @param constructor_name - The constructor name.
  * @param str_args - A string containing the arguments.
  */
-export function fndebugPrivateCostructor(rand_id:string, constructor_name:string, str_args:string){
+export function fndebugPrivateCostructor(rand_id:string, constructor_name:string, str_args:string)
+		:void{
 	fndebug(`[${rand_id}] private ${constructor_name}(${str_args})`);
 }
 
@@ -226,7 +255,8 @@ export function fndebugPrivateCostructor(rand_id:string, constructor_name:string
  * @param method - The name of the method being called.
  * @param str_args - A string containing the arguments.
  */
-export function fndebugMethodWithArgs(rand_id:string, target_name:string, method:string, str_args:string):void{
+export function fndebugMethodWithArgs(rand_id:string, target_name:string, method:string, str_args:string)
+		:void{
 	fndebug(`[${rand_id}] ${target_name}.${method}(${str_args})`);
 }
 
@@ -239,7 +269,8 @@ export function fndebugMethodWithArgs(rand_id:string, target_name:string, method
  * @param str_result - The result of the method as string.
  * @param is_promise - A boolean value, true if the method return a Promise.
  */
-export function fndebugMethodResponse(rand_id:string, target_name:string, method:string, str_result:string, is_promise=false):void{
+export function fndebugMethodResponse(rand_id:string, target_name:string, method:string, str_result:string, is_promise=false)
+		:void{
 	const promise_str = (is_promise) ? ' [Promise]' : '';
 	fndebug(`[${rand_id}] [R]${promise_str} ${target_name}.${method}:`, `${str_result}`);
 }
@@ -252,7 +283,8 @@ export function fndebugMethodResponse(rand_id:string, target_name:string, method
  * @param method - The name of the method being called.
  * @param error - The error to log.
  */
-export function fndebugMethodResponseError(rand_id:string, target_name:string, method:string, error:Error):void{
+export function fndebugMethodResponseError(rand_id:string, target_name:string, method:string, error:Error)
+		:void{
 	fndebug(`[${rand_id}] [R] ${target_name}.${method}: ERROR`);
 	fndebug(error);
 }
@@ -263,7 +295,8 @@ export function fndebugMethodResponseError(rand_id:string, target_name:string, m
  * @param args - Array of paramter to format.
  * @param max_str_length - Max string length for formatted arguments.
  */
-export function formatArgs(args:any[], max_str_length:number):string{
+export function formatArgs(args:any[], max_str_length:number)
+		:string{
 	let str_args = (args.length > 0) ? `${args}` : '';
 	try{
 		str_args = (args.length > 0) ? jsonOneLine(args) : '';
@@ -282,7 +315,9 @@ export function formatArgs(args:any[], max_str_length:number):string{
  * @param result - The result to log.
  * @param max_str_length - Max string length for formatted result.
  */
-export function formatResult(result:any, max_str_length:number):string{
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export function formatResult(result:any, max_str_length:number)
+		:string{
 	let str_result = `${result}`;
 	try{
 		str_result = `${result}`;
@@ -380,7 +415,7 @@ export function debug_constructor<T extends { new (...constr_args:any[]):any }>(
 		:{new (...a:any[]):any}{
 	const ExtClass = class extends constr_func {
 		constructor(...args: any[]){
-			fndebugCostructor(randId(), constr_func.name, formatArgs(args, log_config.max_str_length));
+			fndebugCostructor(randId(), constr_func.name, formatArgs(args, log_defaults.max_str_length));
 			super(...args);
 		}
 	};
@@ -416,14 +451,14 @@ function replace_method_with_logs(
 			rand_id,
 			target_name,
 			property_name,
-			formatArgs(args, log_config.max_str_length)
+			formatArgs(args, log_defaults.max_str_length)
 		);
 		const result = original_method.apply(this, args);
 		fndebugMethodResponse(
 			rand_id,
 			target_name,
 			property_name,
-			formatResult(result, log_config.max_str_length)
+			formatResult(result, log_defaults.max_str_length)
 		);
 		if(result instanceof Promise){
 			result.then((data:any) => {
@@ -431,7 +466,7 @@ function replace_method_with_logs(
 					rand_id,
 					target_name,
 					property_name,
-					formatResult(data, log_config.max_str_length),
+					formatResult(data, log_defaults.max_str_length),
 					true);
 			}).catch((err:Error) => {
 				fndebugMethodResponseError(rand_id, target_name, property_name, err);
@@ -448,8 +483,6 @@ function replace_method_with_logs(
  *
  * @param target - the class itself (check Decorator documentation)
  */
-// eslint-disable-next-line @typescript-eslint/ban-types
-// export function debug_methods(log_instance:URNLog):Function{
 // eslint-disable-next-line @typescript-eslint/ban-types
 export function debug_methods(target:Function):void{
 	//constructor methods
@@ -470,20 +503,25 @@ export function debug_methods(target:Function):void{
 	}
 }
 
+/**
+ * Method for creating an injectable object
+ *
+ * This object can be used in "return" module.
+ */
 export function create_injectable_logger()
 		:URNResponseInjectable{
 	return {
 		success_handler: (p) => {
-			const style = (log_config.context == 'browser') ?
+			const style = (log_defaults.context == 'browser') ?
 				console_styles.fg_log : terminal_styles.fgLightBlue;
-			if(log_config.log_level > 2)
+			if(log_defaults.log_level > 2)
 				cecho('log', style, 2, 8, p);
 			return p;
 		},
 		fail_handler: (p) => {
-			const style = (log_config.context == 'browser') ?
+			const style = (log_defaults.context == 'browser') ?
 				console_styles.fg_error : terminal_styles.fgRed;
-			if(log_config.log_level > 0)
+			if(log_defaults.log_level > 0)
 				cecho('error', style, -1, 8, p);
 			return p;
 		}

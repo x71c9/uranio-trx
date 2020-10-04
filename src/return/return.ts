@@ -12,7 +12,7 @@ import {URNResponse} from './return.t';
 /*
  * Import URNResponseInjectable interface
  */
-import {URNResponseInjectable} from '../util/injectable.t';
+import {URNResponseInjectable} from '../util/response_injectable.t';
 
 /**
  * Class URNReturn has all the methods for creating URNResponse objects.

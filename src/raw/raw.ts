@@ -8,11 +8,11 @@
 
 import axios, {AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios';
 
-import {URNTRXConfig} from './types/config';
+import {URNTRXConfig} from '../urn_trx.t';
 
-import {URNResponse} from './return/return.t';
+import {URNResponse} from '../return/return.t';
 
-import urn_return from './return/return';
+import urn_return from '../return/return';
 
 // import urn_log from './log/log';
 // const urn_console = urn_log();
@@ -47,19 +47,12 @@ export class URNTRXRAW {
 	
 }
 
-const urn_trx_raw = {
-	
-	create(config: URNTRXConfig)
-			:URNTRXRAW{
-		
-		const axios_config:AxiosRequestConfig = {
-			baseURL: config.base_url
-		};
-		const axios_instance = axios.create(axios_config);
-		return new URNTRXRAW(axios_instance);
-		
-	}
-	
-};
+export function create(config: URNTRXConfig)
+		:URNTRXRAW{
+	const axios_config:AxiosRequestConfig = {
+		baseURL: config.base_url
+	};
+	const axios_instance = axios.create(axios_config);
+	return new URNTRXRAW(axios_instance);
+}
 
-export default urn_trx_raw;

@@ -1,7 +1,7 @@
 
-import {URNResponse} from '../return/return.t';
+import {URNResponse} from '../../return/return.t';
 
-import {URNTRXRAW} from '../urn_raw';
+import {URNTRXRAW} from '../../raw/raw';
 
 export abstract class URNTRXResource {
 	
