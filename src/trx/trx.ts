@@ -6,15 +6,18 @@
  * @packageDocumentation
  */
 
-import urn_trx_raw, {URNTRXRAW} from './urn_raw';
+/*
+ *
+ */
+import * as urn_trx_raw from '../raw/raw';
 
-import {URNTRXConfig} from './types/config';
+import {URNTRXConfig} from '../urn_trx.t';
 
 import {URNTRXUsers} from './trxs/users';
 
 export class URNTRX {
 	
-	private _trx_raw:URNTRXRAW;
+	private _trx_raw:urn_trx_raw.URNTRXRAW;
 	
 	public users:URNTRXUsers;
 	

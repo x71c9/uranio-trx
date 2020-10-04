@@ -1,7 +1,7 @@
 
 import {URNTRXResource} from './resources';
 
-import {URNTRXRAW} from '../urn_raw';
+import {URNTRXRAW} from '../../raw/raw';
 
 export class URNTRXUsers extends URNTRXResource {
 	
