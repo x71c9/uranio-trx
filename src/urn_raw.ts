@@ -10,11 +10,14 @@ import axios, {AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios';
 
 import {URNTRXConfig} from './types/config';
 
-import {URNResponse} from './return/response';
+import {URNResponse} from './return/return.t';
+
 import urn_return from './return/return';
-import urn_log from './log/log';
-const urn_console = urn_log();
-const urn_ret = urn_return(urn_console);
+
+// import urn_log from './log/log';
+// const urn_console = urn_log();
+// const urn_ret = urn_return(urn_console);
+const urn_ret = urn_return();
 
 // export interface URNTRXRAWInstance extends AxiosInstance{}
 

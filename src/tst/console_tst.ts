@@ -1,37 +1,30 @@
-import {URNLogLevel} from '../types/log';
-import urn_log, {debug_constructor, debug_methods} from '../log/log';
+import * as urn_log from '../log/log';
 import urn_return from '../return/return';
 
-// import log_defaults from '../log/defaults';
-// log_defaults.log_level = URNLogLevel.FUNCTION_DEBUG;
+urn_log.config.log_level = 5;
 
-urn_log.defaults.log_level = URNLogLevel.FUNCTION_DEBUG;
-// urn_log.defaults.context = 'browser';
+const injectable = urn_log.create_injectable_logger();
 
-const urn_console = urn_log({log_level:URNLogLevel.FUNCTION_DEBUG, time_format:"HH:MM:ss:l"});
-// const urn_console = urn_log();
+const urn_ret = urn_return(injectable);
 
+// urn_log.error({name: 'this is an error'});
+// urn_log.warn({name: 'this is a warning'});
+// urn_log.log({name: 'this is a log'});
+// urn_log.debug({name: 'this is a debug'});
+// urn_log.fndebug({name: 'this is a fndebug'});
 
-const urn_res = urn_return(urn_console);
-
-// urn_console.error({error: 'this is an error'});
-// urn_console.warn({warning: 'this is a warning'});
-// urn_console.log({log: 'this is a log'});
-// urn_console.debug({debug: 'this is a debug'});
-// urn_console.fndebug({fndebug: 'this is a fndebug'});
-
-@debug_constructor(urn_console)
-@debug_methods(urn_console)
+@urn_log.debug_constructor
+@urn_log.debug_methods
 class MyClass{
 	
 	public my_method(a:number,b:string){
-		return urn_res.return_success('Valid', a + b);
+		// return a + b;
+		urn_ret.return_error(500, 'ERROR', null);
+		return urn_ret.return_success('Valid', a + b);
 	}
 	
 }
-
 const my_insta = new MyClass();
 my_insta.my_method(3,'AAA');
-
 
 
