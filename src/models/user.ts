@@ -5,9 +5,9 @@
 /*
  * Import interface IURN_OBJ
  */
-import {IURNResource} from './resource';
+import {URNResource} from './resource';
 
-export interface IURNUser extends IURNResource {
+export interface URNUser extends URNResource {
 	
 	/*
 	 * Email

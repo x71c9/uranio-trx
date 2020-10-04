@@ -8,24 +8,15 @@
 
 import axios, {AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios';
 
-import {URNTRXConfig} from '../urn_trx.t';
-
 import {URNResponse} from '../return/return.t';
 
 import urn_return from '../return/return';
 
-// import urn_log from './log/log';
-// const urn_console = urn_log();
-// const urn_ret = urn_return(urn_console);
-const urn_ret = urn_return();
+import * as urn_log from '../log/log';
 
-// export interface URNTRXRAWInstance extends AxiosInstance{}
+const urn_ret = urn_return(urn_log.response_injector);
 
-// export interface URNTRXRAWFactory {
-	
-//   create(config: URNTRXConfig):URNTRXRAW;
-	
-// }
+import {URNTRXConfig} from '../urn_trx.t';
 
 export class URNTRXRAW {
 	
@@ -36,9 +27,21 @@ export class URNTRXRAW {
 		try{
 			const axios_response = await this._axios_instance.get(url);
 			if(axios_response.status != 200){
-				return urn_ret.return_error<AxiosResponse>(500, 'URN ERROR [URNTRXRAW]', axios_response);
+				return urn_ret.return_error<AxiosResponse>(
+					500,
+					'URN ERROR [URNTRXRAW]',
+					axios_response
+				);
 			}else{
-				return urn_ret.return_success<AxiosResponse>(`.get[${url}]`, axios_response.data);
+				if(URNResponse.isResponse(axios_response.data)){
+					return axios_response.data;
+				}else{
+					return urn_ret.return_error<AxiosResponse>(
+						500,
+						'URN ERROR [URNTRXRAW] -  Response is not a URNResponse',
+						axios_response
+					);
+				}
 			}
 		}catch(e){
 			return urn_ret.return_error(500, 'URN ERROR [URNTRXRAW] - Axios Error', null, e);

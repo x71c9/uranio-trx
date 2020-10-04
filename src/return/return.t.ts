@@ -13,7 +13,7 @@ export namespace URNResponse {
 		/*
 		 * If it is set to true the response has no error
 		 */
-		success:boolean|null;
+		success:boolean;
 		
 		/*
 		 * The payload of the response
@@ -119,27 +119,36 @@ export namespace URNResponse {
 	export type ReturnType<T> = T extends (...args: any[]) => infer R ? R : any;
 	
 	/**
+	 * Return true if the response is a Response
+	 *
+	 * @param response - a possible Response
+	 */
+	export function isResponse<T,Q>(response:Response<T,Q>): response is Response<T,Q> {
+		return (typeof response.success !== undefined && typeof response.status !== undefined);
+	}
+	
+	/**
 	 * Return true if the response is a Success
 	 *
-	 * @param response - an Response
+	 * @param response - a Response
 	 */
-	export function isSuccess(response:Response<any,any>): response is Success {
+	export function isSuccess<T,Q>(response:Response<T,Q>): response is Success<T> {
 		return response.success;
 	}
 	
 	/**
 	 * Return true if the response is a Fail
 	 *
-	 * @param response - an Response
+	 * @param response - a Response
 	 */
-	export function isFail(response:Response<any,any>): response is Fail {
+	export function isFail<T,Q>(response:Response<T,Q>): response is Fail<Q> {
 		return !response.success;
 	}
 	
 	/**
 	 * Return true if the response is a Boolean<true>
 	 *
-	 * @param response - an Response
+	 * @param response - a Response
 	 */
 	export function isTrue(response:UBoolean<any>): response is UBoolean<true> {
 		return response.success;
@@ -148,7 +157,7 @@ export namespace URNResponse {
 	/**
 	 * Return true if the response is a Boolean<false>
 	 *
-	 * @param response - an Response
+	 * @param response - a Response
 	 */
 	export function isFalse(response:UBoolean<any>): response is UBoolean<false> {
 		return !response.success;
