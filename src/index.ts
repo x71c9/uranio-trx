@@ -1,18 +1,21 @@
-import urn_trx from './urn_trx';
 
-import * as urn_console from './log/log';
-urn_console.config.log_level = urn_console.LogLevel.FUNCTION_DEBUG;
+// import urn_lib from 'urn-lib';
 
-const utrx = urn_trx.create({base_url: 'http://localhost:80/api'});
+// import urn_trx from './urn_trx';
 
-import {URNResponse} from './return/return.t';
 
-urn_console.log('Initializing...');
+// urn_lib.console.config.log_level = urn_lib.log.LogLevel.FUNCTION_DEBUG;
 
-utrx.users.get().then((response) => {
-	if(URNResponse.isSuccess(response))
-		urn_console.log(response.payload[0].first_name);
-});
+// const utrx = urn_trx.create({base_url: 'http://localhost:80/api'});
+
+// // import {URNResponse} from './return/return.t';
+
+// urn_lib.log.log('Initializing...');
+
+// utrx.users.get().then((response) => {
+//   if(URNResponse.isSuccess(response))
+//     urn_console.log(response.payload[0].first_name);
+// });
 
 // utrx.users.get().then((response) => {
 //   if(response.success == false)
