@@ -4,7 +4,7 @@
  * @packageDocumentation
  */
 
-import * as urn_hook_users from '../hooks/users';
+import * as urn_hook_users from './users';
 
 import {Hook} from './hook';
 
