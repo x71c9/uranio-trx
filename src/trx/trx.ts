@@ -1,31 +1,29 @@
 /**
- * Class for URNTRX
+ * Module for TRX
  *
- * Main class that will contain all the TRX classes for each Resource
+ * Main class that contains all the Hooks
  *
  * @packageDocumentation
  */
 
-/*
- *
- */
-import * as urn_trx_raw from '../raw/raw';
+import * as urn_raw from '../raw/';
 
-import {URNTRXConfig} from '../urn_trx.t';
+import * as urn_hooks from '../hooks';
 
-import {URNTRXUsers} from './trxs/users';
+export interface TRXConfig extends urn_raw.Config {}
 
-export class URNTRX {
+export class TRX {
 	
-	private _trx_raw:urn_trx_raw.URNTRXRAW;
+	private _raw:urn_raw.Raw;
 	
-	public users:URNTRXUsers;
+	public users:urn_hooks.users.HookUsers;
 	
-	constructor(config:URNTRXConfig){
+	constructor(config:TRXConfig){
 		
-		this._trx_raw = urn_trx_raw.create(config);
+		this._raw = urn_raw.create(config);
 		
-		this.users = new URNTRXUsers(this._trx_raw);
+		this.users = urn_hooks.users.create(this._raw);
 		
 	}
+	
 }
