@@ -25,7 +25,7 @@ class URNTRXRaw {
 			if(axios_response.status != 200){
 				return urn_ret.return_error<AxiosResponse>(
 					500,
-					'URN ERROR [URNTRXRAW]',
+					'URN ERROR [URNTRXRaw]',
 					axios_response
 				);
 			}else{
@@ -34,13 +34,18 @@ class URNTRXRaw {
 				}else{
 					return urn_ret.return_error<AxiosResponse>(
 						500,
-						'URN ERROR [URNTRXRAW] -  Response is not an URANIO General Response',
+						'URN ERROR [URNTRXRaw] -  Response is not an URANIO General Response',
 						axios_response
 					);
 				}
 			}
 		}catch(e){
-			return urn_ret.return_error(500, 'URN ERROR [URNTRXRAW] - Axios Error', null, e);
+			return urn_ret.return_error(
+				500,
+				'URN ERROR [URNTRXRaw] - Axios Error',
+				null,
+				e
+			);
 		}
 	}
 	
@@ -49,14 +54,14 @@ class URNTRXRaw {
 /*
  * Export only the type of the class URNTRXRaw
  */
-export type Raw = InstanceType<typeof URNTRXRaw>;
+export type RawInstance = InstanceType<typeof URNTRXRaw>;
 
 /**
  * A function the will create a Raw instance.
  * Its parameters are the same as the constructor of the class.
  */
 export default function create_instance(config: Config)
-		:Raw{
+		:RawInstance{
 	const axios_config:AxiosRequestConfig = {
 		baseURL: config.base_url
 	};

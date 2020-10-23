@@ -12,11 +12,11 @@ import * as urn_hooks from '../hooks';
 
 export interface TRXConfig extends urn_raw.Config {}
 
-export class TRX {
+class URNTRX {
 	
-	private _raw:urn_raw.Raw;
+	private _raw:urn_raw.RawInstance;
 	
-	public users:urn_hooks.users.HookUsers;
+	public users:urn_hooks.users.HookUsersInstance;
 	
 	constructor(config:TRXConfig){
 		
@@ -26,4 +26,15 @@ export class TRX {
 		
 	}
 	
+}
+
+/*
+ * Export only type of class TRX
+ */
+export type TRXInstance = InstanceType<typeof URNTRX>;
+
+
+export function create(config:TRXConfig)
+		:TRXInstance{
+	return new URNTRX(config);
 }
