@@ -14,6 +14,8 @@ import {Config} from './types';
 
 const urn_ret = urn_return.create(urn_log.return_injector);
 
+@urn_log.decorators.debug_constructor
+@urn_log.decorators.debug_methods
 class URNTRXRaw {
 	
 	constructor(private _axios_instance:AxiosInstance){}
@@ -62,6 +64,9 @@ export type RawInstance = InstanceType<typeof URNTRXRaw>;
  */
 export default function create_instance(config: Config)
 		:RawInstance{
+	
+	urn_log.fn_debug('create_instance for URNTRXRaw');
+	
 	const axios_config:AxiosRequestConfig = {
 		baseURL: config.base_url
 	};
