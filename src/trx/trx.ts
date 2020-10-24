@@ -6,12 +6,16 @@
  * @packageDocumentation
  */
 
+import {urn_log} from 'urn-lib';
+
 import * as urn_raw from '../raw/';
 
 import * as urn_hooks from '../hooks';
 
 export interface TRXConfig extends urn_raw.Config {}
 
+@urn_log.decorators.debug_constructor
+@urn_log.decorators.debug_methods
 class URNTRX {
 	
 	private _raw:urn_raw.RawInstance;
@@ -36,5 +40,8 @@ export type TRXInstance = InstanceType<typeof URNTRX>;
 
 export function create(config:TRXConfig)
 		:TRXInstance{
+	
+	urn_log.fn_debug('create for URNTRX');
+	
 	return new URNTRX(config);
 }
