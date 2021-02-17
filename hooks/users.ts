@@ -15,7 +15,7 @@ import {Hook} from './hook';
 
 @urn_log.decorators.debug_constructor
 @urn_log.decorators.debug_methods
-class URNHookUsers extends Hook<urn_mdls.User> {
+class URNHookUsers extends Hook<urn_mdls.resources.Resource> {
 	
 	constructor(_raw_instance:RawInstance){
 		
