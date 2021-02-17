@@ -10,7 +10,7 @@ import {urn_log} from 'urn-lib';
 
 import * as urn_raw from '../raw/';
 
-import * as urn_hooks from '../hooks';
+import * as urn_hooks from '../hooks/';
 
 export interface TRXConfig extends urn_raw.Config {}
 

@@ -27,7 +27,9 @@ class URNTRXRaw {
 			if(axios_response.status != 200){
 				return urn_ret.return_error<AxiosResponse>(
 					500,
+					'Request failed.',
 					'URN ERROR [URNTRXRaw]',
+					axios_response.statusText,
 					axios_response
 				);
 			}else{
@@ -36,7 +38,9 @@ class URNTRXRaw {
 				}else{
 					return urn_ret.return_error<AxiosResponse>(
 						500,
+						'Request failed.',
 						'URN ERROR [URNTRXRaw] -  Response is not an URANIO General Response',
+						axios_response.statusText,
 						axios_response
 					);
 				}
@@ -44,7 +48,9 @@ class URNTRXRaw {
 		}catch(e){
 			return urn_ret.return_error(
 				500,
+				'Request failed.',
 				'URN ERROR [URNTRXRaw] - Axios Error',
+				e.message,
 				null,
 				e
 			);
