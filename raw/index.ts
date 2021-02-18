@@ -6,9 +6,9 @@
 
 export * from './types';
 
-import create_instance, {RawInstance} from './raw';
+import {create as create_axios, AxiosRawInstance} from './axios';
 
 export {
-	create_instance as create,
-	RawInstance
+	create_axios,
+	AxiosRawInstance
 };

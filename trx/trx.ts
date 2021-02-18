@@ -6,42 +6,53 @@
  * @packageDocumentation
  */
 
-import {urn_log} from 'urn-lib';
+// import {urn_log} from 'urn-lib';
 
-import * as urn_raw from '../raw/';
+// import {TRXConfiguration} from '../types';
 
-import * as urn_hooks from '../hooks/';
+// import * as urn_raw from '../raw/';
 
-export interface TRXConfig extends urn_raw.Config {}
-
-@urn_log.decorators.debug_constructor
-@urn_log.decorators.debug_methods
-class URNTRX {
+// @urn_log.decorators.debug_constructor
+// @urn_log.decorators.debug_methods
+// class URNTRX {
 	
-	private _raw:urn_raw.RawInstance;
+//   private _raw:urn_raw.RAW;
 	
-	public users:urn_hooks.users.HookUsersInstance;
+//   // public base_url:string;
 	
-	constructor(config:TRXConfig){
+//   constructor(config:TRXConfiguration){
 		
-		this._raw = urn_raw.create(config);
+//     // this.base_url = config.base_url;
 		
-		this.users = urn_hooks.users.create(this._raw);
+//     if(config.raw){
+//       switch(config.raw){
+//         case 'axios':{
+//           this._raw = urn_raw.create_axios(config);
+//           break;
+//         }
+//       }
+//     }else{
+//       this._raw = urn_raw.create_axios(config);
+//     }
 		
-	}
+//   }
 	
-}
+//   public create_hook(atom:AtomName):Hook{
+		
+//   }
+	
+// }
 
 /*
  * Export only type of class TRX
  */
-export type TRXInstance = InstanceType<typeof URNTRX>;
+// export type TRXInstance = InstanceType<typeof URNTRX>;
 
 
-export function create(config:TRXConfig)
-		:TRXInstance{
+// export function create_trx(config:TRXConfiguration)
+//     :TRXInstance{
 	
-	urn_log.fn_debug('create for URNTRX');
+//   urn_log.fn_debug('Create URNTRX');
 	
-	return new URNTRX(config);
-}
+//   return new URNTRX(config);
+// }
