@@ -4,6 +4,6 @@
  * @packageDocumentation
  */
 
-// import urn_trx from './main';
+import * as urn_trx from './srv/main';
 
-// export default urn_trx;
+export default urn_trx;
