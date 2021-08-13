@@ -1,5 +1,5 @@
 /**
- * Module for AxiosRaw
+ * Axios class module
  *
  * @packageDocumentation
  */
@@ -10,13 +10,13 @@ import {urn_log, urn_return, urn_response} from 'urn-lib';
 
 const urn_ret = urn_return.create();
 
-import {Configuration} from '../types';
+import {Configuration} from '../../types';
 
-import {RAW} from './types';
+import {Trx} from '../types';
 
 @urn_log.util.decorators.debug_constructor
 @urn_log.util.decorators.debug_methods
-class AxiosRaw implements RAW{
+class AxiosCaller implements Trx {
 	
 	constructor(private _axios_instance:AxiosInstance){}
 	
@@ -70,23 +70,14 @@ async function _handle_axios_call(handler:() => Promise<AxiosResponse>)
 	}
 }
 
-/*
- * Export only the type of the class URNTRXRaw
- */
-export type AxiosRawInstance = InstanceType<typeof AxiosRaw>;
+export type AxiosRawInstance = InstanceType<typeof AxiosCaller>;
 
-/**
- * A function the will create an AxiosRawInstance.
- */
-export function create(config: Configuration)
-		:AxiosRawInstance{
-	
-	urn_log.fn_debug('Create URNTRXRaw');
-	
+export function create(config: Configuration):AxiosCaller{
+	urn_log.fn_debug(`Create AxiosCaller`);
 	const axios_config:AxiosRequestConfig = {
 		baseURL: config.base_url
 	};
 	const axios_instance = axios.create(axios_config);
-	return new AxiosRaw(axios_instance);
+	return new AxiosCaller(axios_instance);
 }
 
