@@ -12,8 +12,4 @@ export const trx_config:FullConfiguration = {
 	
 	...api_config,
 	
-	caller: 'axios',
-	
-	base_url: 'http://localhost:8888/uranio/api'
-	
 };

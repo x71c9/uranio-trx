@@ -6,11 +6,7 @@
 
 import {FullConfiguration as ApiFullConfiguration} from 'uranio-api/types';
 
-import {CallerName} from '../trx/';
-
 type RequiredConfigParams = {
-	caller: CallerName
-	base_url: string
 }
 
 type OptionalConfigParam = {

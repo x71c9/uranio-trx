@@ -10,13 +10,17 @@ import {urn_log, urn_return, urn_response} from 'urn-lib';
 
 const urn_ret = urn_return.create();
 
+import {trx_config} from '../../conf/defaults';
+
+import * as api_types from '../../api/cln/types';
+
 import {Configuration} from '../../types';
 
 import {Trx} from '../types';
 
 @urn_log.util.decorators.debug_constructor
 @urn_log.util.decorators.debug_methods
-class AxiosCaller implements Trx {
+class AxiosTrx implements Trx {
 	
 	constructor(private _axios_instance:AxiosInstance){}
 	
@@ -70,14 +74,15 @@ async function _handle_axios_call(handler:() => Promise<AxiosResponse>)
 	}
 }
 
-export type AxiosRawInstance = InstanceType<typeof AxiosCaller>;
+export type AxiosRawInstance = InstanceType<typeof AxiosTrx>;
 
-export function create(config: Configuration):AxiosCaller{
-	urn_log.fn_debug(`Create AxiosCaller`);
+export function create(atom_name:api_types.AtomName)
+		:AxiosTrx{
+	urn_log.fn_debug(`Create AxiosTrx`);
 	const axios_config:AxiosRequestConfig = {
-		baseURL: config.base_url
+		baseURL: trx_config.base_url
 	};
 	const axios_instance = axios.create(axios_config);
-	return new AxiosCaller(axios_instance);
+	return new AxiosTrx(axios_instance);
 }
 
