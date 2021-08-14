@@ -13,10 +13,4 @@ export {FullConfiguration, Configuration};
 
 export * from '../typ/conf';
 
-// Override Book from '../core/srv/types' by '../typ/book_cln'
-// import {Book} from '../typ/book_srv';
-
-// export {Book};
-
-// export * from '../typ/book_srv';
-
+export * from '../raw/types';

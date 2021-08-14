@@ -10,7 +10,9 @@ import {urn_log, urn_return, urn_response} from 'urn-lib';
 
 const urn_ret = urn_return.create();
 
-import {Configuration} from '../types';
+import {trx_client_config} from '../cln/defaults';
+
+import {ClientConfiguration} from '../cln/types';
 
 import {RAW} from './types';
 
@@ -78,13 +80,15 @@ export type AxiosRawInstance = InstanceType<typeof AxiosRaw>;
 /**
  * A function the will create an AxiosRawInstance.
  */
-export function create(config: Configuration)
+export function create(config?: ClientConfiguration)
 		:AxiosRawInstance{
 	
 	urn_log.fn_debug('Create URNTRXRaw');
 	
+	const base_url = config?.base_url || trx_client_config.base_url;
+	
 	const axios_config:AxiosRequestConfig = {
-		baseURL: config.base_url
+		baseURL: base_url
 	};
 	const axios_instance = axios.create(axios_config);
 	return new AxiosRaw(axios_instance);

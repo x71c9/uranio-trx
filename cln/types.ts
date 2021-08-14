@@ -6,13 +6,6 @@
 
 export * from '../api/cln/types';
 
-export * from '../typ/conf';
+export * from '../typ/conf_cln';
 
-// Override Book from '../core/cln/types' by '../typ/book_cln'
-// import {Book} from '../typ/book_cln';
-
-// export {Book};
-
-// export * from '../typ/book_cln';
-
-// export * from '../typ/request';
+export * from '../raw/types';

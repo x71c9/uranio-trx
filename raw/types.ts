@@ -1,11 +1,12 @@
 /**
- *
  * Type module for raw
  *
  * @packageDocumentation
  */
 
 import {urn_response} from 'urn-lib';
+
+export type RawName = 'axios'; // japi, fetch
 
 export interface RAW {
 	
