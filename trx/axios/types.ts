@@ -1,5 +1,0 @@
-/**
- * Axios type module
- *
- * @packageDocumentation
- */
