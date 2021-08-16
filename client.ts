@@ -4,11 +4,6 @@
  * @packageDocumentation
  */
 
-import api from 'uranio-api/client';
+import * as urn_trx_client from './cln/main';
 
-import * as types from './cln/types';
-
-export default {
-	api,
-	types
-};
+export default urn_trx_client;
