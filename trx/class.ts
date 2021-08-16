@@ -21,18 +21,20 @@ import * as client_types from '../cln/types';
 
 import {create as create_raw} from '../raw/';
 
+import {HookArguments} from './types';
+
 @urn_log.util.decorators.debug_constructor
 @urn_log.util.decorators.debug_methods
-class TRX {
+class TRX<A extends client_types.AtomName> {
 	
 	private raw:client_types.RAW;
 	
-	constructor(public atom_name:client_types.AtomName){
+	constructor(public atom_name:A){
 		this.raw = create_raw();
 	}
 	
-	public route(route_name:string)
-			:(...args:any) => Promise<urn_response.General<any, any>>{
+	public hook(route_name:client_types.RouteName<A>)
+			:(args:HookArguments) => Promise<urn_response.General<any, any>>{
 		_check_atom(this.atom_name);
 		const route = _get_route(this.atom_name, route_name);
 		const splitted_url = route.url.split('/');
@@ -50,26 +52,25 @@ class TRX {
 				params.push(param_name);
 			}
 		}
-		switch(params.length){
-			case 0:{
-				return async () => {
-					return await this.raw.get('/');
-				};
+		return async (args:HookArguments) => {
+			const url = route.url;
+			for(const param of params){
+				if(urn_util.object.has_key(args, 'params') && typeof args.params?.[param] === 'string'){
+					url.replace(`/:${param}`, args.params[param]);
+				}
 			}
-			case 1:{
-				return async (p:string) => {
-					const url = route.url.replace(`/:${params[0]}`, p);
-					return await this.raw.get(url);
-				};
+			switch(route.method){
+				case client_types.RouteMethod.GET:{
+					return await this.raw.get(url, args.query);
+				}
+				case client_types.RouteMethod.POST:{
+					return await this.raw.post(url, args.body, args.query);
+				}
+				case client_types.RouteMethod.DELETE:{
+					return await this.raw.delete(url, args.query);
+				}
 			}
-			default:
-			case 2:{
-				return async (p:string, q:string) => {
-					const url = route.url.replace(`/:${params[0]}`, p).replace(`/:${params[1]}`, q);
-					return await this.raw.get(url);
-				};
-			}
-		}
+		};
 	}
 	
 }
@@ -85,9 +86,13 @@ function _check_atom(atom_name:client_types.AtomName)
 	);
 }
 
-function _get_route(atom_name:client_types.AtomName, route_name:string)
-		:client_types.Book.Definition.Api.Routes.Route{
-	return urn_api_client.routes.route_def(atom_name, route_name);
+function _get_route<A extends client_types.AtomName>(
+	atom_name:client_types.AtomName,
+	route_name:client_types.RouteName<A>
+):client_types.Book.Definition.Api.Routes.Route{
+	
+	return urn_api_client.routes.route_def(atom_name, route_name as any);
+	
 	// if(urn_util.object.has_key(urn_api_client.routes.default_routes, route_name)){
 	//   return urn_api_client.routes.default_routes[route_name];
 	// }
@@ -102,9 +107,9 @@ function _get_route(atom_name:client_types.AtomName, route_name:string)
 
 export type TRXInstance = InstanceType<typeof TRX>;
 
-export function create(atom_name:client_types.AtomName)
-		:TRXInstance{
-	urn_log.fn_debug('Create TRX');
+export function create<A extends client_types.AtomName>(atom_name:A)
+		:TRX<A>{
+	urn_log.fn_debug(`Create TRX [${atom_name}]`);
 	return new TRX(atom_name);
 }
 

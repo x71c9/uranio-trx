@@ -8,9 +8,15 @@ import {urn_log} from 'urn-lib';
 
 urn_log.defaults.log_level = urn_log.LogLevel.FUNCTION_DEBUG;
 
-import urn_trx from './index';
+import urn_trx from './client';
 
 console.log(urn_trx.types.AuthAction);
+
+const users = urn_trx.trx.create('user');
+const find_id = users.hook('find_id');
+
+console.log(find_id);
+
 
 // console.log(urn_api.lib.log.defaults);
 

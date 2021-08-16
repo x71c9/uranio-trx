@@ -4,6 +4,8 @@
  * @packageDocumentation
  */
 
+import querystring from 'querystring';
+
 import axios, {AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios';
 
 import {urn_log, urn_return, urn_response} from 'urn-lib';
@@ -14,7 +16,7 @@ import {trx_client_config} from '../cln/defaults';
 
 import {ClientConfiguration} from '../cln/types';
 
-import {RAW} from './types';
+import {RAW, QueryObject} from './types';
 
 @urn_log.util.decorators.debug_constructor
 @urn_log.util.decorators.debug_methods
@@ -22,24 +24,37 @@ class AxiosRaw implements RAW{
 	
 	constructor(private _axios_instance:AxiosInstance){}
 	
-	public async get(url:string):Promise<urn_response.General<any,any>>{
+	public async get(url:string, query?:QueryObject)
+			:Promise<urn_response.General<any,any>>{
 		return await _handle_axios_call(async () => {
-			return await this._axios_instance.get(url);
+			return await this._axios_instance.get(_url_with_query(url, query));
 		});
 	}
 	
-	public async post(url:string, body:any):Promise<urn_response.General<any,any>>{
+	public async post(url:string, body:any, query?:QueryObject)
+			:Promise<urn_response.General<any,any>>{
 		return await _handle_axios_call(async () => {
-			return await this._axios_instance.post(url, body);
+			return await this._axios_instance.post(_url_with_query(url, query), body);
 		});
 	}
 	
-	public async delete(url:string):Promise<urn_response.General<any,any>>{
+	public async delete(url:string, query?:QueryObject)
+			:Promise<urn_response.General<any,any>>{
 		return await _handle_axios_call(async () => {
-			return await this._axios_instance.delete(url);
+			return await this._axios_instance.delete(_url_with_query(url, query));
 		});
 	}
 	
+}
+
+function _url_with_query(url:string, query?:QueryObject):string{
+	let full_url = url;
+	if(query){
+		// const query_string = new URLSearchParams(query);
+		const query_string = querystring.encode(query);
+		full_url += `?${query_string}`;
+	}
+	return full_url;
 }
 
 async function _handle_axios_call(handler:() => Promise<AxiosResponse>)
