@@ -8,26 +8,31 @@ import {urn_log} from 'urn-lib';
 
 urn_log.defaults.log_level = urn_log.LogLevel.FUNCTION_DEBUG;
 
-import urn_trx from './client';
+// import urn_trx from './client';
 
-console.log(urn_trx.types.AuthAction);
+import uranio from './index';
 
-const users = urn_trx.trx.create('user');
-const find_id = users.hook('find');
-
-const args:urn_trx.types.HookArguments<'user', 'find_id'> = {
-	params: {
-		id: 'dskfjdslkfjlsdkjf'
-	},
-	// query: {
-	//   // filter: {
-	//   //   email: ''
-	//   // }
-	// }
-};
-
-// find_id({params: {id:''}, query: {options: ''}}).then(r => console.log(r)).catch(e => console.error(e));
-find_id(args).then(r => console.log(r)).catch(e => console.error(e));
+const service = uranio.api.service.create();
+service.listen(8888, () => {
+	
+	setTimeout(() => {
+		const karts = uranio.trx.create('kart');
+		const mycustom = karts.hook('mycustom');
+		const args:uranio.types.HookArguments<'kart', 'mycustom'> = {
+			params: {
+				id: '611bedc525e7b32c3f6415d8',
+				date: 'kajflkdsa'
+			},
+			query: {
+				sick: {
+					email: ''
+				}
+			}
+		};
+		mycustom(args).then(r => console.log(r)).catch(e => console.error(e));
+	}, 3000);
+	
+});
 
 
 
@@ -49,6 +54,7 @@ find_id(args).then(r => console.log(r)).catch(e => console.error(e));
 //   headers: {},
 //   multiValueHeaders: {},
 //   queryStringParameters: null,
+	
 //   multiValueQueryStringParametes: null,
 //   body: null,
 //   isBase64Encoded: false
@@ -68,3 +74,4 @@ find_id(args).then(r => console.log(r)).catch(e => console.error(e));
 // urn_lambda.handle(event, context).then((_r) => {
 //   console.log(_r);
 // });
+

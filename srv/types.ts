@@ -14,3 +14,6 @@ export {FullConfiguration, Configuration};
 export * from '../typ/conf';
 
 export * from '../raw/types';
+
+export * from '../trx/types';
+
