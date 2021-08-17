@@ -14,31 +14,31 @@ const urn_ret = urn_return.create();
 
 import {trx_client_config} from '../cln/defaults';
 
-import {ClientConfiguration} from '../cln/types';
+import * as client_types from '../cln/types';
 
-import {RAW, QueryObject} from './types';
+import {RAW} from './types';
 
 @urn_log.util.decorators.debug_constructor
 @urn_log.util.decorators.debug_methods
-class AxiosRaw implements RAW{
+class AxiosRaw<A extends client_types.AtomName> implements RAW<A>{
 	
 	constructor(private _axios_instance:AxiosInstance){}
 	
-	public async get(url:string, query?:QueryObject)
+	public async get<R extends client_types.RouteName<A>>(url:string, query?:client_types.HookQuery<A,R>)
 			:Promise<urn_response.General<any,any>>{
 		return await _handle_axios_call(async () => {
 			return await this._axios_instance.get(_url_with_query(url, query));
 		});
 	}
 	
-	public async post(url:string, body:any, query?:QueryObject)
+	public async post<R extends client_types.RouteName<A>>(url:string, body:any, query?:client_types.HookQuery<A,R>)
 			:Promise<urn_response.General<any,any>>{
 		return await _handle_axios_call(async () => {
 			return await this._axios_instance.post(_url_with_query(url, query), body);
 		});
 	}
 	
-	public async delete(url:string, query?:QueryObject)
+	public async delete<R extends client_types.RouteName<A>>(url:string, query?:client_types.HookQuery<A,R>)
 			:Promise<urn_response.General<any,any>>{
 		return await _handle_axios_call(async () => {
 			return await this._axios_instance.delete(_url_with_query(url, query));
@@ -47,7 +47,10 @@ class AxiosRaw implements RAW{
 	
 }
 
-function _url_with_query(url:string, query?:QueryObject):string{
+function _url_with_query<A extends client_types.AtomName, R extends client_types.RouteName<A>>(
+	url:string,
+	query?:client_types.HookQuery<A,R>
+):string{
 	let full_url = url;
 	if(query){
 		// const query_string = new URLSearchParams(query);
@@ -95,7 +98,7 @@ export type AxiosRawInstance = InstanceType<typeof AxiosRaw>;
 /**
  * A function the will create an AxiosRawInstance.
  */
-export function create(config?: ClientConfiguration)
+export function create(config?: client_types.ClientConfiguration)
 		:AxiosRawInstance{
 	
 	urn_log.fn_debug('Create URNTRXRaw');

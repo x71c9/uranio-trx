@@ -13,9 +13,22 @@ import urn_trx from './client';
 console.log(urn_trx.types.AuthAction);
 
 const users = urn_trx.trx.create('user');
-const find_id = users.hook('find_id');
+const find_id = users.hook('find');
 
-console.log(find_id);
+const args:urn_trx.types.HookArguments<'user', 'find_id'> = {
+	params: {
+		id: 'dskfjdslkfjlsdkjf'
+	},
+	// query: {
+	//   // filter: {
+	//   //   email: ''
+	//   // }
+	// }
+};
+
+// find_id({params: {id:''}, query: {options: ''}}).then(r => console.log(r)).catch(e => console.error(e));
+find_id(args).then(r => console.log(r)).catch(e => console.error(e));
+
 
 
 // console.log(urn_api.lib.log.defaults);
