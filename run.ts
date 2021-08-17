@@ -25,7 +25,8 @@ service.listen(8888, () => {
 			},
 			query: {
 				sick: {
-					email: ''
+					email: '',
+					email2: 'SS'
 				}
 			}
 		};
