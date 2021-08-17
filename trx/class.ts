@@ -13,7 +13,7 @@ const urn_exc = urn_exception.init(`TRX`, `TRX module.`);
 
 import {atom_book} from 'uranio-books-client/atom';
 
-// import {api_book} from 'uranio-books-client/api';
+import {api_book} from 'uranio-books-client/api';
 
 import urn_api_client from 'uranio-api/client';
 
@@ -53,13 +53,14 @@ class TRX<A extends client_types.AtomName> {
 			}
 		}
 		return async (args:HookArguments<A,R>) => {
-			const url = route.url;
+			const atom_api_url = api_book[this.atom_name].api.url;
+			let url = `${atom_api_url}${route.url}`;
 			for(const param of params){
 				if(
 					urn_util.object.has_key(args, 'params') &&
 					typeof args.params?.[param as client_types.RouteParam<A,R>] === 'string'
 				){
-					url.replace(`/:${param}`, args.params[param as client_types.RouteParam<A,R>] as string);
+					url = url.replace(`:${param}`, args.params[param as client_types.RouteParam<A,R>] as string);
 				}
 			}
 			switch(route.method){

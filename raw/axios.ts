@@ -85,7 +85,9 @@ async function _handle_axios_call(handler:() => Promise<AxiosResponse>)
 			500,
 			'Cannot make request.',
 			'AXIOSRAW_FAILED',
-			ex.message
+			ex.message,
+			null,
+			ex
 		);
 	}
 }
