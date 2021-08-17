@@ -27,16 +27,16 @@ import {HookArguments} from './types';
 @urn_log.util.decorators.debug_methods
 class TRX<A extends client_types.AtomName> {
 	
-	private raw:client_types.RAW;
+	private raw:client_types.RAW<A>;
 	
 	constructor(public atom_name:A){
 		this.raw = create_raw();
 	}
 	
-	public hook(route_name:client_types.RouteName<A>)
-			:(args:HookArguments) => Promise<urn_response.General<any, any>>{
+	public hook<R extends client_types.RouteName<A>>(route_name:R)
+			:(args:HookArguments<A,R>) => Promise<urn_response.General<any, any>>{
 		_check_atom(this.atom_name);
-		const route = _get_route(this.atom_name, route_name);
+		const route = _get_route(this.atom_name, route_name as client_types.RouteName<A>);
 		const splitted_url = route.url.split('/');
 		const params:string[] = [];
 		for(const split of splitted_url){
@@ -52,11 +52,14 @@ class TRX<A extends client_types.AtomName> {
 				params.push(param_name);
 			}
 		}
-		return async (args:HookArguments) => {
+		return async (args:HookArguments<A,R>) => {
 			const url = route.url;
 			for(const param of params){
-				if(urn_util.object.has_key(args, 'params') && typeof args.params?.[param] === 'string'){
-					url.replace(`/:${param}`, args.params[param]);
+				if(
+					urn_util.object.has_key(args, 'params') &&
+					typeof args.params?.[param as client_types.RouteParam<A,R>] === 'string'
+				){
+					url.replace(`/:${param}`, args.params[param as client_types.RouteParam<A,R>] as string);
 				}
 			}
 			switch(route.method){

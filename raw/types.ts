@@ -8,17 +8,22 @@ import {urn_response} from 'urn-lib';
 
 export type RawName = 'axios'; // japi, fetch
 
-export type QueryObject = {
-	[k:string]: string
-}
+import * as client_types from '../cln/types';
 
-export interface RAW {
+// export type QueryObject = {
+//   [k:string]: string
+// }
+
+export interface RAW<A extends client_types.AtomName> {
 	
-	get(url:string, query?:QueryObject):Promise<urn_response.General<any,any>>
+	get<R extends client_types.RouteName<A>>(url:string, query?:client_types.HookQuery<A,R>)
+		:Promise<urn_response.General<any,any>>
 	
-	post(url:string, body:any, query?:QueryObject):Promise<urn_response.General<any,any>>
+	post<R extends client_types.RouteName<A>>(url:string, body:any, query?:client_types.HookQuery<A,R>)
+		:Promise<urn_response.General<any,any>>
 	
-	delete(url:string, query?:QueryObject):Promise<urn_response.General<any,any>>
+	delete<R extends client_types.RouteName<A>>(url:string, query?:client_types.HookQuery<A,R>)
+		:Promise<urn_response.General<any,any>>
 	
 }
 
