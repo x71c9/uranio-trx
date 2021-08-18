@@ -34,7 +34,7 @@ class TRX<A extends client_types.AtomName> {
 	}
 	
 	public hook<R extends client_types.RouteName<A>>(route_name:R)
-			:(args:HookArguments<A,R>) => Promise<urn_response.General<any, any>>{
+			:(args:HookArguments<A,R>) => Promise<urn_response.General<A, any>>{
 		_check_atom(this.atom_name);
 		const route = _get_route(this.atom_name, route_name as client_types.RouteName<A>);
 		const splitted_url = route.url.split('/');
