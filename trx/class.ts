@@ -13,7 +13,7 @@ const urn_exc = urn_exception.init(`TRX`, `TRX module.`);
 
 import {atom_book} from 'uranio-books-client/atom';
 
-import {api_book} from 'uranio-books-client/api';
+import {dock_book} from 'uranio-books-client/dock';
 
 import urn_api_client from 'uranio-api/client';
 
@@ -53,7 +53,7 @@ class TRX<A extends client_types.AtomName> {
 			}
 		}
 		return async (args:HookArguments<A,R>) => {
-			const atom_api_url = api_book[this.atom_name].api.url;
+			const atom_api_url = dock_book[this.atom_name].dock.url;
 			let url = `${atom_api_url}${route.url}`;
 			for(const param of params){
 				if(
@@ -93,14 +93,14 @@ function _check_atom(atom_name:client_types.AtomName)
 function _get_route<A extends client_types.AtomName>(
 	atom_name:client_types.AtomName,
 	route_name:client_types.RouteName<A>
-):client_types.Book.Definition.Api.Routes.Route{
+):client_types.Book.Definition.Dock.Routes.Route{
 	
 	return urn_api_client.routes.route_def(atom_name, route_name as any);
 	
 	// if(urn_util.object.has_key(urn_api_client.routes.default_routes, route_name)){
 	//   return urn_api_client.routes.default_routes[route_name];
 	// }
-	// if(urn_util.object.has_key(api_book[atom_name], route_name)){
+	// if(urn_util.object.has_key(dock_book[atom_name], route_name)){
 	//   return true;
 	// }
 	// throw urn_exc.create_not_found(
