@@ -54,7 +54,9 @@ class Base<A extends client_types.AtomName> {
 		}
 		return async (args:HookArguments<A,R>) => {
 			const atom_api_url = dock_book[this.atom_name].dock.url;
-			let url = `${atom_api_url}${route.url}`;
+			const atom_def = atom_book[this.atom_name] as client_types.Book.Definition;
+			const connection_url = (atom_def.connection && atom_def.connection === 'log') ? `/logs` : '';
+			let url = `${connection_url}${atom_api_url}${route.url}`;
 			for(const param of params){
 				if(
 					urn_util.object.has_key(args, 'params') &&
