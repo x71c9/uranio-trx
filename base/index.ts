@@ -1,5 +1,5 @@
 /**
- * TRX index module
+ * Base index module
  *
  * @packageDocumentation
  */
