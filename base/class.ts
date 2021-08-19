@@ -1,5 +1,5 @@
 /**
- * Module for TRX
+ * Module for Base
  *
  * @packageDocumentation
  */
@@ -9,7 +9,7 @@ import {urn_util, urn_log, urn_response, urn_exception} from 'urn-lib';
 
 // const urn_ret = urn_return.create(urn_log.util.return_injector);
 
-const urn_exc = urn_exception.init(`TRX`, `TRX module.`);
+const urn_exc = urn_exception.init(`Base`, `Base module.`);
 
 import {atom_book} from 'uranio-books-client/atom';
 
@@ -25,7 +25,7 @@ import {HookArguments} from './types';
 
 @urn_log.util.decorators.debug_constructor
 @urn_log.util.decorators.debug_methods
-class TRX<A extends client_types.AtomName> {
+class Base<A extends client_types.AtomName> {
 	
 	private raw:client_types.RAW<A>;
 	
@@ -85,8 +85,8 @@ function _check_atom(atom_name:client_types.AtomName)
 		return true;
 	}
 	throw urn_exc.create_not_found(
-		`TRXATOM_UNDEFINED`,
-		`TRX Atom not found for atom [${atom_name}].`
+		`BASEATOM_UNDEFINED`,
+		`Base Atom not found for atom [${atom_name}].`
 	);
 }
 
@@ -104,16 +104,16 @@ function _get_route<A extends client_types.AtomName>(
 	//   return true;
 	// }
 	// throw urn_exc.create_not_found(
-	//   `TRXROUTE_UNDEFINED`,
-	//   `TRX Route not found for atom [${atom_name}] route [${route_name}].`
+	//   `BASEROUTE_UNDEFINED`,
+	//   `BASE Route not found for atom [${atom_name}] route [${route_name}].`
 	// );
 }
 
-export type TRXInstance = InstanceType<typeof TRX>;
+export type BaseInstance = InstanceType<typeof Base>;
 
 export function create<A extends client_types.AtomName>(atom_name:A)
-		:TRX<A>{
-	urn_log.fn_debug(`Create TRX [${atom_name}]`);
-	return new TRX(atom_name);
+		:Base<A>{
+	urn_log.fn_debug(`Create Base [${atom_name}]`);
+	return new Base(atom_name);
 }
 

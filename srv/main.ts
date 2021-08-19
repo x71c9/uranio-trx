@@ -11,7 +11,9 @@ import core from 'uranio-core';
 
 import api from 'uranio-api';
 
-import * as trx from '../trx/';
+import * as base from '../base/';
+
+import {hooks} from '../hooks/';
 
 import * as types from './types';
 
@@ -19,6 +21,7 @@ export {
 	lib,
 	api,
 	core,
-	trx,
+	base,
+	hooks,
 	types,
 };
