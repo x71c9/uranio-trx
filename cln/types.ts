@@ -10,4 +10,4 @@ export * from '../typ/conf_cln';
 
 export * from '../raw/types';
 
-export * from '../trx/types';
+export * from '../base/types';
