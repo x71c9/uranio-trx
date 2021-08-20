@@ -105,13 +105,28 @@ async function _handle_axios_call(handler:() => Promise<AxiosResponse>)
 			}
 		}
 	}catch(ex){
-		return urn_ret.return_error(
-			ex.response.data.status,
-			ex.response.data.message,
-			ex.response.data.err_code,
-			ex.response.data.err_msg,
-			ex.response.data.payload
-		);
+		if(typeof ex.response.data === 'string'){
+			const payload = {
+				path: ex.response.request.path
+			};
+			return urn_ret.return_error(
+				ex.response.status,
+				ex.response.statusText,
+				'RAW_ERROR',
+				'Cannot make request.',
+				payload,
+				ex
+			);
+		}else{
+			return urn_ret.return_error(
+				ex.response.data.status,
+				ex.response.data.message,
+				ex.response.data.err_code,
+				ex.response.data.err_msg,
+				ex.response.data.payload,
+				ex
+			);
+		}
 	}
 }
 
