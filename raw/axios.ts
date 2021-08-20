@@ -106,12 +106,11 @@ async function _handle_axios_call(handler:() => Promise<AxiosResponse>)
 		}
 	}catch(ex){
 		return urn_ret.return_error(
-			500,
-			'Cannot make request.',
-			'AXIOSRAW_FAILED',
-			ex.message,
-			null,
-			ex
+			ex.response.data.status,
+			ex.response.data.message,
+			ex.response.data.err_code,
+			ex.response.data.err_msg,
+			ex.response.data.payload
 		);
 	}
 }
