@@ -19,7 +19,7 @@ import * as client_types from '../cln/types';
 import {RAW} from './types';
 
 const axios_config = {
-	headers: {'user-agent': 'Uranio TRX 0.0.1'}
+	// headers: {'user-agent': 'Uranio TRX 0.0.1'}
 };
 
 @urn_log.util.decorators.debug_constructor
