@@ -35,7 +35,7 @@ class Base<A extends client_types.AtomName> {
 	
 	public hook<R extends client_types.RouteName<A>>(route_name:R)
 			:(args:HookArguments<A,R>) => Promise<urn_response.General<A, any>>{
-		_check_atom(this.atom_name);
+		_check_atom_name(this.atom_name);
 		const route = _get_route(this.atom_name, route_name as client_types.RouteName<A>);
 		const splitted_url = route.url.split('/');
 		const params:string[] = [];
@@ -45,7 +45,7 @@ class Base<A extends client_types.AtomName> {
 				if(splitted_split.length !== 2){
 					throw urn_exc.create(
 						`INVALID_ROUTE_URL`,
-						`Invalid Route URL format [${route.url}]`
+						`Invalid Route URL format \`${route.url}\``
 					);
 				}
 				const param_name = splitted_split[1];
@@ -81,14 +81,14 @@ class Base<A extends client_types.AtomName> {
 	
 }
 
-function _check_atom(atom_name:client_types.AtomName)
+function _check_atom_name(atom_name:client_types.AtomName)
 		:true{
 	if(urn_util.object.has_key(atom_book, atom_name)){
 		return true;
 	}
 	throw urn_exc.create_not_found(
 		`BASEATOM_UNDEFINED`,
-		`Base Atom not found for atom [${atom_name}].`
+		`Base Atom not found for atom \`${atom_name}\`.`
 	);
 }
 
@@ -107,7 +107,7 @@ function _get_route<A extends client_types.AtomName>(
 	// }
 	// throw urn_exc.create_not_found(
 	//   `BASEROUTE_UNDEFINED`,
-	//   `BASE Route not found for atom [${atom_name}] route [${route_name}].`
+	//   `BASE Route not found for atom \`${atom_name}\` route \`${route_name}\`.`
 	// );
 }
 
