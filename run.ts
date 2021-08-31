@@ -36,7 +36,7 @@ service.listen(8888, () => {
 		// mycustom(args).then(r => console.log(r)).catch(e => console.error(e));
 		// const a = await uranio.hooks.karts.mycustom('611bedc525e7b32c3f6415d8', 'djkhd');
 		// console.log(a);
-		uranio.hooks.mykarts.find_id('60edb8c8fba3474b9731b978').then(e => console.log(e)).catch(e => console.error(e));
+		uranio.hooks.products.delete('6128faa891988267692430a7').then(e => console.log(e)).catch(e => console.error(e));
 	}, 3000);
 	
 });

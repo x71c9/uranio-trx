@@ -73,14 +73,16 @@ function _url_with_query<A extends client_types.AtomName, R extends client_types
 ):string{
 	let full_url = url;
 	if(query){
-		// const query_string = new URLSearchParams(query as any);
-		// const query_string = querystring.encode(query);
 		const query_string = _serialize(query);
-		console.log(query);
-		console.log(query_string);
 		full_url += `?${query_string}`;
 	}
 	return full_url;
+}
+
+type ExPayload = {
+	path?: string,
+	request?: any,
+	response?: any
 }
 
 async function _handle_axios_call(handler:() => Promise<AxiosResponse>)
@@ -106,9 +108,20 @@ async function _handle_axios_call(handler:() => Promise<AxiosResponse>)
 		}
 	}catch(ex){
 		if(typeof ex.response.data === 'string'){
-			const payload = {
-				path: ex.response.request.path
-			};
+			let payload:ExPayload = {};
+			if(ex.response?.request?.path){
+				payload = {
+					path: ex.response.request.path
+				};
+			}else if(ex.response?.request){
+				payload = {
+					request: ex.response.request
+				};
+			}else if(ex.response){
+				payload = {
+					response: ex.response
+				};
+			}
 			return urn_ret.return_error(
 				ex.response.status,
 				ex.response.statusText,
@@ -149,6 +162,14 @@ export function create(config?: client_types.ClientConfiguration)
 		baseURL: base_url
 	};
 	const axios_instance = axios.create(axios_config);
+	// axios_instance.interceptors.request.use(request => {
+	//   console.log('Starting Request', JSON.stringify(request, null, 2));
+	//   return request;
+	// });
+	// axios_instance.interceptors.response.use(response => {
+	//   console.log('Response:', JSON.stringify(response, null, 2));
+	//   return response;
+	// });
 	return new AxiosRaw(axios_instance);
 }
 
