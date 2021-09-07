@@ -1,19 +1,55 @@
 /**
- * TRX types module
+ * TRX client_types module
  *
  * @packageDocumentation
  */
 
+import {urn_response} from 'urn-lib';
+
 import * as client_types from '../cln/types';
 
-// import uranio_api_client from 'uranio-api/client';
+import {dock_book} from 'uranio-books-client/dock';
 
-// import {api_book} from 'uranio-books-client/api';
+export namespace Hook {
 
-export type HookArguments<A extends client_types.AtomName, R extends client_types.RouteName<A>> = {
-	params?: HookParams<A,R>
-	query?: HookQuery<A,R>
-	body?: any
+	export type Arguments<A extends client_types.AtomName, R extends client_types.RouteName<A>> = {
+		params?: Params<A,R>
+		query?: Query<A,R>
+		body?: any
+	}
+
+	export type Params<A extends client_types.AtomName, R extends client_types.RouteName<A>> =
+		client_types.Api.Request.Params<A,R>;
+
+	export type Query<A extends client_types.AtomName, R extends client_types.RouteName<A>> =
+		client_types.Api.Request.Query<A,R>;
+		
+	export type DefaultResponse<A extends client_types.AtomName, R extends client_types.RouteDefaultName, D extends client_types.Depth> =
+		R extends 'count' ? number :
+		R extends 'find_id' ? urn_response.General<client_types.Molecule<A,D>, any> :
+		R extends 'find' ? urn_response.General<client_types.Molecule<A,D>[], any> :
+		R extends 'find_one' ? urn_response.General<client_types.Molecule<A,D>, any> :
+		R extends 'insert' ? urn_response.General<client_types.Molecule<A,D>, any> :
+		R extends 'update' ? urn_response.General<client_types.Molecule<A,D>,any> :
+		R extends 'delete' ? urn_response.General<client_types.Molecule<A,D>,any> :
+		never;
+
+	export type CustomResponse<A extends client_types.AtomName, R extends client_types.RouteName<A>> =
+		'routes' extends keyof typeof dock_book[A]['dock'] ?
+		R extends keyof typeof dock_book[A]['dock']['routes'] ?
+		'return' extends keyof typeof dock_book[A]['dock']['routes'][R] ?
+		typeof dock_book[A]['dock']['routes'][R]['return'] :
+		any :
+		any :
+		any;
+
+	export type Response<A extends client_types.AtomName, R extends client_types.RouteName<A>, D extends client_types.Depth> =
+		R extends client_types.RouteDefaultName ? DefaultResponse<A, R, D> :
+		'routes' extends keyof typeof dock_book[A]['dock'] ?
+		R extends keyof typeof dock_book[A]['dock']['routes'] ? CustomResponse<A, R> :
+		never :
+		never;
+
 }
 
 // export type HookParams<A extends client_types.AtomName, R extends client_types.RouteName<A>> = {
@@ -21,16 +57,8 @@ export type HookArguments<A extends client_types.AtomName, R extends client_type
 // }
 
 // export type HookQuery<A extends client_types.AtomName, R extends client_types.RouteName<A>> = {
-//   [k in uranio_api_client.types.RouteQuery<A,R>]: uranio_api_client.types.RouteQueryValue<A,R,k>
+//   [k in uranio_api_client.client_types.RouteQuery<A,R>]: uranio_api_client.client_types.RouteQueryValue<A,R,k>
 // }
-
-export type HookParams<A extends client_types.AtomName, R extends client_types.RouteName<A>> =
-	client_types.Api.Request.Params<A,R>;
-
-export type HookQuery<A extends client_types.AtomName, R extends client_types.RouteName<A>> =
-	client_types.Api.Request.Query<A,R>;
-	
-
 
 // type DefaultRouteURL<A extends client_types.AtomName, R extends client_types.RouteName<A>> =
 //   R extends keyof typeof uranio_api_client.routes.default_routes ?
