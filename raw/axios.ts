@@ -28,21 +28,21 @@ class AxiosRaw<A extends client_types.AtomName> implements RAW<A>{
 	
 	constructor(private _axios_instance:AxiosInstance){}
 	
-	public async get<R extends client_types.RouteName<A>>(url:string, query?:client_types.HookQuery<A,R>)
+	public async get<R extends client_types.RouteName<A>>(url:string, query?:client_types.Hook.Query<A,R>)
 			:Promise<urn_response.General<any,any>>{
 		return await _handle_axios_call(async () => {
 			return await this._axios_instance.get(_url_with_query(url, query), axios_config);
 		});
 	}
 	
-	public async post<R extends client_types.RouteName<A>>(url:string, body:any, query?:client_types.HookQuery<A,R>)
+	public async post<R extends client_types.RouteName<A>>(url:string, body:any, query?:client_types.Hook.Query<A,R>)
 			:Promise<urn_response.General<any,any>>{
 		return await _handle_axios_call(async () => {
 			return await this._axios_instance.post(_url_with_query(url, query), body, axios_config);
 		});
 	}
 	
-	public async delete<R extends client_types.RouteName<A>>(url:string, query?:client_types.HookQuery<A,R>)
+	public async delete<R extends client_types.RouteName<A>>(url:string, query?:client_types.Hook.Query<A,R>)
 			:Promise<urn_response.General<any,any>>{
 		return await _handle_axios_call(async () => {
 			return await this._axios_instance.delete(_url_with_query(url, query), axios_config);
@@ -69,7 +69,7 @@ function _serialize(obj:any, prefix=''):string{
 
 function _url_with_query<A extends client_types.AtomName, R extends client_types.RouteName<A>>(
 	url:string,
-	query?:client_types.HookQuery<A,R>
+	query?:client_types.Hook.Query<A,R>
 ):string{
 	let full_url = url;
 	if(query){

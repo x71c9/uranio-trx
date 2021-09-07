@@ -5,7 +5,8 @@
  */
 
 // import {urn_util, urn_log, urn_return, urn_response, urn_exception} from 'urn-lib';
-import {urn_util, urn_log, urn_response, urn_exception} from 'urn-lib';
+// import {urn_util, urn_log, urn_response, urn_exception} from 'urn-lib';
+import {urn_util, urn_log, urn_exception} from 'urn-lib';
 
 // const urn_ret = urn_return.create(urn_log.util.return_injector);
 
@@ -21,7 +22,7 @@ import * as client_types from '../cln/types';
 
 import {create as create_raw} from '../raw/';
 
-import {HookArguments} from './types';
+import {Hook} from './types';
 
 @urn_log.util.decorators.debug_constructor
 @urn_log.util.decorators.debug_methods
@@ -33,8 +34,8 @@ class Base<A extends client_types.AtomName> {
 		this.raw = create_raw();
 	}
 	
-	public hook<R extends client_types.RouteName<A>>(route_name:R)
-			:(args:HookArguments<A,R>) => Promise<urn_response.General<A, any>>{
+	public hook<R extends client_types.RouteName<A>, D extends client_types.Depth = 0>(route_name:R)
+			:(args:Hook.Arguments<A,R>) => Promise<client_types.Hook.Response<A,R,D>>{
 		_check_atom_name(this.atom_name);
 		const route = _get_route(this.atom_name, route_name as client_types.RouteName<A>);
 		const splitted_url = route.url.split('/');
@@ -52,7 +53,7 @@ class Base<A extends client_types.AtomName> {
 				params.push(param_name);
 			}
 		}
-		return async (args:HookArguments<A,R>) => {
+		return async (args:Hook.Arguments<A,R>) => {
 			const atom_api_url = dock_book[this.atom_name].dock.url;
 			const atom_def = atom_book[this.atom_name] as client_types.Book.Definition;
 			const connection_url = (atom_def.connection && atom_def.connection === 'log') ? `/logs` : '';
@@ -67,13 +68,13 @@ class Base<A extends client_types.AtomName> {
 			}
 			switch(route.method){
 				case client_types.RouteMethod.GET:{
-					return await this.raw.get(url, args.query);
+					return await this.raw.get(url, args.query) as client_types.Hook.Response<A, R, D>;
 				}
 				case client_types.RouteMethod.POST:{
-					return await this.raw.post(url, args.body, args.query);
+					return await this.raw.post(url, args.body, args.query) as client_types.Hook.Response<A, R, D>;
 				}
 				case client_types.RouteMethod.DELETE:{
-					return await this.raw.delete(url, args.query);
+					return await this.raw.delete(url, args.query) as client_types.Hook.Response<A, R, D>;
 				}
 			}
 		};

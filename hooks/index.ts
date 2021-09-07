@@ -8,17 +8,17 @@ import * as uranio from "../cln/main";
 
 export const hooks = {
 	superusers: {
-		find: async (options?: uranio.types.HookArguments<"superuser", "find">) => {
-			const args: uranio.types.HookArguments<"superuser", "find"> = {
+		find: async (options?: uranio.types.Hook.Arguments<"superuser", "find">) => {
+			const args: uranio.types.Hook.Arguments<"superuser", "find"> = {
 				...options,
 			};
 			return await uranio.base.create("superuser").hook("find")(args);
 		},
 		find_id: async (
 			id: string,
-			options?: uranio.types.HookArguments<"superuser", "find_id">
+			options?: uranio.types.Hook.Arguments<"superuser", "find_id">
 		) => {
-			const args: uranio.types.HookArguments<"superuser", "find_id"> = {
+			const args: uranio.types.Hook.Arguments<"superuser", "find_id"> = {
 				params: {
 					id: id,
 				},
@@ -27,26 +27,26 @@ export const hooks = {
 			return await uranio.base.create("superuser").hook("find_id")(args);
 		},
 		find_one: async (
-			options?: uranio.types.HookArguments<"superuser", "find_one">
+			options?: uranio.types.Hook.Arguments<"superuser", "find_one">
 		) => {
-			const args: uranio.types.HookArguments<"superuser", "find_one"> = {
+			const args: uranio.types.Hook.Arguments<"superuser", "find_one"> = {
 				...options,
 			};
 			return await uranio.base.create("superuser").hook("find_one")(args);
 		},
 		insert: async (
-			options?: uranio.types.HookArguments<"superuser", "insert">
+			options?: uranio.types.Hook.Arguments<"superuser", "insert">
 		) => {
-			const args: uranio.types.HookArguments<"superuser", "insert"> = {
+			const args: uranio.types.Hook.Arguments<"superuser", "insert"> = {
 				...options,
 			};
 			return await uranio.base.create("superuser").hook("insert")(args);
 		},
 		update: async (
 			id: string,
-			options?: uranio.types.HookArguments<"superuser", "update">
+			options?: uranio.types.Hook.Arguments<"superuser", "update">
 		) => {
-			const args: uranio.types.HookArguments<"superuser", "update"> = {
+			const args: uranio.types.Hook.Arguments<"superuser", "update"> = {
 				params: {
 					id: id,
 				},
@@ -56,9 +56,9 @@ export const hooks = {
 		},
 		delete: async (
 			id: string,
-			options?: uranio.types.HookArguments<"superuser", "delete">
+			options?: uranio.types.Hook.Arguments<"superuser", "delete">
 		) => {
-			const args: uranio.types.HookArguments<"superuser", "delete"> = {
+			const args: uranio.types.Hook.Arguments<"superuser", "delete"> = {
 				params: {
 					id: id,
 				},
@@ -68,17 +68,17 @@ export const hooks = {
 		},
 	},
 	users: {
-		find: async (options?: uranio.types.HookArguments<"user", "find">) => {
-			const args: uranio.types.HookArguments<"user", "find"> = {
+		find: async (options?: uranio.types.Hook.Arguments<"user", "find">) => {
+			const args: uranio.types.Hook.Arguments<"user", "find"> = {
 				...options,
 			};
 			return await uranio.base.create("user").hook("find")(args);
 		},
 		find_id: async (
 			id: string,
-			options?: uranio.types.HookArguments<"user", "find_id">
+			options?: uranio.types.Hook.Arguments<"user", "find_id">
 		) => {
-			const args: uranio.types.HookArguments<"user", "find_id"> = {
+			const args: uranio.types.Hook.Arguments<"user", "find_id"> = {
 				params: {
 					id: id,
 				},
@@ -87,24 +87,24 @@ export const hooks = {
 			return await uranio.base.create("user").hook("find_id")(args);
 		},
 		find_one: async (
-			options?: uranio.types.HookArguments<"user", "find_one">
+			options?: uranio.types.Hook.Arguments<"user", "find_one">
 		) => {
-			const args: uranio.types.HookArguments<"user", "find_one"> = {
+			const args: uranio.types.Hook.Arguments<"user", "find_one"> = {
 				...options,
 			};
 			return await uranio.base.create("user").hook("find_one")(args);
 		},
-		insert: async (options?: uranio.types.HookArguments<"user", "insert">) => {
-			const args: uranio.types.HookArguments<"user", "insert"> = {
+		insert: async (options?: uranio.types.Hook.Arguments<"user", "insert">) => {
+			const args: uranio.types.Hook.Arguments<"user", "insert"> = {
 				...options,
 			};
 			return await uranio.base.create("user").hook("insert")(args);
 		},
 		update: async (
 			id: string,
-			options?: uranio.types.HookArguments<"user", "update">
+			options?: uranio.types.Hook.Arguments<"user", "update">
 		) => {
-			const args: uranio.types.HookArguments<"user", "update"> = {
+			const args: uranio.types.Hook.Arguments<"user", "update"> = {
 				params: {
 					id: id,
 				},
@@ -114,9 +114,9 @@ export const hooks = {
 		},
 		delete: async (
 			id: string,
-			options?: uranio.types.HookArguments<"user", "delete">
+			options?: uranio.types.Hook.Arguments<"user", "delete">
 		) => {
-			const args: uranio.types.HookArguments<"user", "delete"> = {
+			const args: uranio.types.Hook.Arguments<"user", "delete"> = {
 				params: {
 					id: id,
 				},
@@ -126,17 +126,17 @@ export const hooks = {
 		},
 	},
 	groups: {
-		find: async (options?: uranio.types.HookArguments<"group", "find">) => {
-			const args: uranio.types.HookArguments<"group", "find"> = {
+		find: async (options?: uranio.types.Hook.Arguments<"group", "find">) => {
+			const args: uranio.types.Hook.Arguments<"group", "find"> = {
 				...options,
 			};
 			return await uranio.base.create("group").hook("find")(args);
 		},
 		find_id: async (
 			id: string,
-			options?: uranio.types.HookArguments<"group", "find_id">
+			options?: uranio.types.Hook.Arguments<"group", "find_id">
 		) => {
-			const args: uranio.types.HookArguments<"group", "find_id"> = {
+			const args: uranio.types.Hook.Arguments<"group", "find_id"> = {
 				params: {
 					id: id,
 				},
@@ -145,24 +145,24 @@ export const hooks = {
 			return await uranio.base.create("group").hook("find_id")(args);
 		},
 		find_one: async (
-			options?: uranio.types.HookArguments<"group", "find_one">
+			options?: uranio.types.Hook.Arguments<"group", "find_one">
 		) => {
-			const args: uranio.types.HookArguments<"group", "find_one"> = {
+			const args: uranio.types.Hook.Arguments<"group", "find_one"> = {
 				...options,
 			};
 			return await uranio.base.create("group").hook("find_one")(args);
 		},
-		insert: async (options?: uranio.types.HookArguments<"group", "insert">) => {
-			const args: uranio.types.HookArguments<"group", "insert"> = {
+		insert: async (options?: uranio.types.Hook.Arguments<"group", "insert">) => {
+			const args: uranio.types.Hook.Arguments<"group", "insert"> = {
 				...options,
 			};
 			return await uranio.base.create("group").hook("insert")(args);
 		},
 		update: async (
 			id: string,
-			options?: uranio.types.HookArguments<"group", "update">
+			options?: uranio.types.Hook.Arguments<"group", "update">
 		) => {
-			const args: uranio.types.HookArguments<"group", "update"> = {
+			const args: uranio.types.Hook.Arguments<"group", "update"> = {
 				params: {
 					id: id,
 				},
@@ -172,9 +172,9 @@ export const hooks = {
 		},
 		delete: async (
 			id: string,
-			options?: uranio.types.HookArguments<"group", "delete">
+			options?: uranio.types.Hook.Arguments<"group", "delete">
 		) => {
-			const args: uranio.types.HookArguments<"group", "delete"> = {
+			const args: uranio.types.Hook.Arguments<"group", "delete"> = {
 				params: {
 					id: id,
 				},
@@ -184,17 +184,17 @@ export const hooks = {
 		},
 	},
 	errors: {
-		find: async (options?: uranio.types.HookArguments<"error", "find">) => {
-			const args: uranio.types.HookArguments<"error", "find"> = {
+		find: async (options?: uranio.types.Hook.Arguments<"error", "find">) => {
+			const args: uranio.types.Hook.Arguments<"error", "find"> = {
 				...options,
 			};
 			return await uranio.base.create("error").hook("find")(args);
 		},
 		find_id: async (
 			id: string,
-			options?: uranio.types.HookArguments<"error", "find_id">
+			options?: uranio.types.Hook.Arguments<"error", "find_id">
 		) => {
-			const args: uranio.types.HookArguments<"error", "find_id"> = {
+			const args: uranio.types.Hook.Arguments<"error", "find_id"> = {
 				params: {
 					id: id,
 				},
@@ -203,24 +203,24 @@ export const hooks = {
 			return await uranio.base.create("error").hook("find_id")(args);
 		},
 		find_one: async (
-			options?: uranio.types.HookArguments<"error", "find_one">
+			options?: uranio.types.Hook.Arguments<"error", "find_one">
 		) => {
-			const args: uranio.types.HookArguments<"error", "find_one"> = {
+			const args: uranio.types.Hook.Arguments<"error", "find_one"> = {
 				...options,
 			};
 			return await uranio.base.create("error").hook("find_one")(args);
 		},
-		insert: async (options?: uranio.types.HookArguments<"error", "insert">) => {
-			const args: uranio.types.HookArguments<"error", "insert"> = {
+		insert: async (options?: uranio.types.Hook.Arguments<"error", "insert">) => {
+			const args: uranio.types.Hook.Arguments<"error", "insert"> = {
 				...options,
 			};
 			return await uranio.base.create("error").hook("insert")(args);
 		},
 		update: async (
 			id: string,
-			options?: uranio.types.HookArguments<"error", "update">
+			options?: uranio.types.Hook.Arguments<"error", "update">
 		) => {
-			const args: uranio.types.HookArguments<"error", "update"> = {
+			const args: uranio.types.Hook.Arguments<"error", "update"> = {
 				params: {
 					id: id,
 				},
@@ -230,9 +230,9 @@ export const hooks = {
 		},
 		delete: async (
 			id: string,
-			options?: uranio.types.HookArguments<"error", "delete">
+			options?: uranio.types.Hook.Arguments<"error", "delete">
 		) => {
-			const args: uranio.types.HookArguments<"error", "delete"> = {
+			const args: uranio.types.Hook.Arguments<"error", "delete"> = {
 				params: {
 					id: id,
 				},
@@ -242,17 +242,17 @@ export const hooks = {
 		},
 	},
 	requests: {
-		find: async (options?: uranio.types.HookArguments<"request", "find">) => {
-			const args: uranio.types.HookArguments<"request", "find"> = {
+		find: async (options?: uranio.types.Hook.Arguments<"request", "find">) => {
+			const args: uranio.types.Hook.Arguments<"request", "find"> = {
 				...options,
 			};
 			return await uranio.base.create("request").hook("find")(args);
 		},
 		find_id: async (
 			id: string,
-			options?: uranio.types.HookArguments<"request", "find_id">
+			options?: uranio.types.Hook.Arguments<"request", "find_id">
 		) => {
-			const args: uranio.types.HookArguments<"request", "find_id"> = {
+			const args: uranio.types.Hook.Arguments<"request", "find_id"> = {
 				params: {
 					id: id,
 				},
@@ -261,26 +261,26 @@ export const hooks = {
 			return await uranio.base.create("request").hook("find_id")(args);
 		},
 		find_one: async (
-			options?: uranio.types.HookArguments<"request", "find_one">
+			options?: uranio.types.Hook.Arguments<"request", "find_one">
 		) => {
-			const args: uranio.types.HookArguments<"request", "find_one"> = {
+			const args: uranio.types.Hook.Arguments<"request", "find_one"> = {
 				...options,
 			};
 			return await uranio.base.create("request").hook("find_one")(args);
 		},
 		insert: async (
-			options?: uranio.types.HookArguments<"request", "insert">
+			options?: uranio.types.Hook.Arguments<"request", "insert">
 		) => {
-			const args: uranio.types.HookArguments<"request", "insert"> = {
+			const args: uranio.types.Hook.Arguments<"request", "insert"> = {
 				...options,
 			};
 			return await uranio.base.create("request").hook("insert")(args);
 		},
 		update: async (
 			id: string,
-			options?: uranio.types.HookArguments<"request", "update">
+			options?: uranio.types.Hook.Arguments<"request", "update">
 		) => {
-			const args: uranio.types.HookArguments<"request", "update"> = {
+			const args: uranio.types.Hook.Arguments<"request", "update"> = {
 				params: {
 					id: id,
 				},
@@ -290,9 +290,9 @@ export const hooks = {
 		},
 		delete: async (
 			id: string,
-			options?: uranio.types.HookArguments<"request", "delete">
+			options?: uranio.types.Hook.Arguments<"request", "delete">
 		) => {
-			const args: uranio.types.HookArguments<"request", "delete"> = {
+			const args: uranio.types.Hook.Arguments<"request", "delete"> = {
 				params: {
 					id: id,
 				},
@@ -302,17 +302,17 @@ export const hooks = {
 		},
 	},
 	mykarts: {
-		find: async (options?: uranio.types.HookArguments<"mykart", "find">) => {
-			const args: uranio.types.HookArguments<"mykart", "find"> = {
+		find: async (options?: uranio.types.Hook.Arguments<"mykart", "find">) => {
+			const args: uranio.types.Hook.Arguments<"mykart", "find"> = {
 				...options,
 			};
 			return await uranio.base.create("mykart").hook("find")(args);
 		},
 		find_id: async (
 			id: string,
-			options?: uranio.types.HookArguments<"mykart", "find_id">
+			options?: uranio.types.Hook.Arguments<"mykart", "find_id">
 		) => {
-			const args: uranio.types.HookArguments<"mykart", "find_id"> = {
+			const args: uranio.types.Hook.Arguments<"mykart", "find_id"> = {
 				params: {
 					id: id,
 				},
@@ -321,26 +321,26 @@ export const hooks = {
 			return await uranio.base.create("mykart").hook("find_id")(args);
 		},
 		find_one: async (
-			options?: uranio.types.HookArguments<"mykart", "find_one">
+			options?: uranio.types.Hook.Arguments<"mykart", "find_one">
 		) => {
-			const args: uranio.types.HookArguments<"mykart", "find_one"> = {
+			const args: uranio.types.Hook.Arguments<"mykart", "find_one"> = {
 				...options,
 			};
 			return await uranio.base.create("mykart").hook("find_one")(args);
 		},
 		insert: async (
-			options?: uranio.types.HookArguments<"mykart", "insert">
+			options?: uranio.types.Hook.Arguments<"mykart", "insert">
 		) => {
-			const args: uranio.types.HookArguments<"mykart", "insert"> = {
+			const args: uranio.types.Hook.Arguments<"mykart", "insert"> = {
 				...options,
 			};
 			return await uranio.base.create("mykart").hook("insert")(args);
 		},
 		update: async (
 			id: string,
-			options?: uranio.types.HookArguments<"mykart", "update">
+			options?: uranio.types.Hook.Arguments<"mykart", "update">
 		) => {
-			const args: uranio.types.HookArguments<"mykart", "update"> = {
+			const args: uranio.types.Hook.Arguments<"mykart", "update"> = {
 				params: {
 					id: id,
 				},
@@ -350,9 +350,9 @@ export const hooks = {
 		},
 		delete: async (
 			id: string,
-			options?: uranio.types.HookArguments<"mykart", "delete">
+			options?: uranio.types.Hook.Arguments<"mykart", "delete">
 		) => {
-			const args: uranio.types.HookArguments<"mykart", "delete"> = {
+			const args: uranio.types.Hook.Arguments<"mykart", "delete"> = {
 				params: {
 					id: id,
 				},
@@ -362,17 +362,17 @@ export const hooks = {
 		},
 	},
 	products: {
-		find: async (options?: uranio.types.HookArguments<"product", "find">) => {
-			const args: uranio.types.HookArguments<"product", "find"> = {
+		find: async (options?: uranio.types.Hook.Arguments<"product", "find">) => {
+			const args: uranio.types.Hook.Arguments<"product", "find"> = {
 				...options,
 			};
 			return await uranio.base.create("product").hook("find")(args);
 		},
 		find_id: async (
 			id: string,
-			options?: uranio.types.HookArguments<"product", "find_id">
+			options?: uranio.types.Hook.Arguments<"product", "find_id">
 		) => {
-			const args: uranio.types.HookArguments<"product", "find_id"> = {
+			const args: uranio.types.Hook.Arguments<"product", "find_id"> = {
 				params: {
 					id: id,
 				},
@@ -381,26 +381,26 @@ export const hooks = {
 			return await uranio.base.create("product").hook("find_id")(args);
 		},
 		find_one: async (
-			options?: uranio.types.HookArguments<"product", "find_one">
+			options?: uranio.types.Hook.Arguments<"product", "find_one">
 		) => {
-			const args: uranio.types.HookArguments<"product", "find_one"> = {
+			const args: uranio.types.Hook.Arguments<"product", "find_one"> = {
 				...options,
 			};
 			return await uranio.base.create("product").hook("find_one")(args);
 		},
 		insert: async (
-			options?: uranio.types.HookArguments<"product", "insert">
+			options?: uranio.types.Hook.Arguments<"product", "insert">
 		) => {
-			const args: uranio.types.HookArguments<"product", "insert"> = {
+			const args: uranio.types.Hook.Arguments<"product", "insert"> = {
 				...options,
 			};
 			return await uranio.base.create("product").hook("insert")(args);
 		},
 		update: async (
 			id: string,
-			options?: uranio.types.HookArguments<"product", "update">
+			options?: uranio.types.Hook.Arguments<"product", "update">
 		) => {
-			const args: uranio.types.HookArguments<"product", "update"> = {
+			const args: uranio.types.Hook.Arguments<"product", "update"> = {
 				params: {
 					id: id,
 				},
@@ -410,9 +410,9 @@ export const hooks = {
 		},
 		delete: async (
 			id: string,
-			options?: uranio.types.HookArguments<"product", "delete">
+			options?: uranio.types.Hook.Arguments<"product", "delete">
 		) => {
-			const args: uranio.types.HookArguments<"product", "delete"> = {
+			const args: uranio.types.Hook.Arguments<"product", "delete"> = {
 				params: {
 					id: id,
 				},
