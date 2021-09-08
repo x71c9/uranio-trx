@@ -8,7 +8,7 @@ import {urn_response} from 'urn-lib';
 
 import * as client_types from '../cln/types';
 
-import {dock_book} from 'uranio-books-client/dock';
+import {dock_book} from 'uranio-books/dock';
 
 export namespace Hook {
 
