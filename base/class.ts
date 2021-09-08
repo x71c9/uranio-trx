@@ -12,9 +12,9 @@ import {urn_util, urn_log, urn_exception} from 'urn-lib';
 
 const urn_exc = urn_exception.init(`Base`, `Base module.`);
 
-import {atom_book} from 'uranio-books-client/atom';
+import {atom_book} from 'uranio-books/atom';
 
-import {dock_book} from 'uranio-books-client/dock';
+import {dock_book} from 'uranio-books/dock';
 
 import urn_api_client from 'uranio-api/client';
 
