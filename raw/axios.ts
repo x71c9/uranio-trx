@@ -107,7 +107,16 @@ async function _handle_axios_call(handler:() => Promise<AxiosResponse>)
 			}
 		}
 	}catch(ex){
-		if(typeof ex.response.data === 'string'){
+		if(!ex.response) {
+			return urn_ret.return_error(
+				400,
+				'Unable to make request.',
+				'UNABLE_TO_MAKE_REQUEST',
+				ex.message,
+				undefined,
+				ex
+			);
+		}else if(typeof ex.response?.data === 'string'){
 			let payload:ExPayload = {};
 			if(ex.response?.request?.path){
 				payload = {
