@@ -35,18 +35,22 @@ export namespace Hook {
 		never;
 
 	export type CustomResponse<A extends client_types.AtomName, R extends client_types.RouteName<A>> =
+		'dock' extends keyof typeof dock_book[A] ?
 		'routes' extends keyof typeof dock_book[A]['dock'] ?
 		R extends keyof typeof dock_book[A]['dock']['routes'] ?
 		'return' extends keyof typeof dock_book[A]['dock']['routes'][R] ?
 		typeof dock_book[A]['dock']['routes'][R]['return'] :
 		any :
 		any :
+		any :
 		any;
 
 	export type Response<A extends client_types.AtomName, R extends client_types.RouteName<A>, D extends client_types.Depth> =
 		R extends client_types.RouteDefaultName ? DefaultResponse<A, R, D> :
+		'dock' extends keyof typeof dock_book[A] ?
 		'routes' extends keyof typeof dock_book[A]['dock'] ?
 		R extends keyof typeof dock_book[A]['dock']['routes'] ? CustomResponse<A, R> :
+		never :
 		never :
 		never;
 
