@@ -54,7 +54,14 @@ class Base<A extends client_types.AtomName> {
 			}
 		}
 		return async (args:Hook.Arguments<A,R>) => {
-			const atom_api_url = dock_book[this.atom_name].dock.url;
+			const dock_def = dock_book[this.atom_name] as client_types.Book.BasicDefinition;
+			if(!urn_util.object.has_key(dock_def, 'dock')){
+				throw urn_exc.create(
+					`INVALID_DOCK_DEF`,
+					`Invalid dock book for \`${this.atom_name}\`. Cannot find dock definition.`
+				);
+			}
+			const atom_api_url = dock_def.dock?.url || `/${this.atom_name}s`;
 			const atom_def = atom_book[this.atom_name] as client_types.Book.Definition;
 			const connection_url = (atom_def.connection && atom_def.connection === 'log') ? `/logs` : '';
 			let url = `${connection_url}${atom_api_url}${route.url}`;
