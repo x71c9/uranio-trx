@@ -54,7 +54,7 @@ class Base<A extends client_types.AtomName> {
 			}
 		}
 		return async (args:Hook.Arguments<A,R>) => {
-			const dock_def = dock_book[this.atom_name] as client_types.Book.BasicDefinition;
+			const dock_def = dock_book[this.atom_name];
 			if(!urn_util.object.has_key(dock_def, 'dock')){
 				throw urn_exc.create(
 					`INVALID_DOCK_DEF`,
