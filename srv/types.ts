@@ -6,7 +6,7 @@
 
 export * from '../api/srv/types';
 
-// Override Book from '../core/srv/types' by '../typ/book_cln'
+// Override Book from '../api/srv/types' by '../typ/book_cln'
 import {FullConfiguration, Configuration} from '../typ/conf';
 
 export {FullConfiguration, Configuration};
