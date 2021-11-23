@@ -25,7 +25,7 @@ export namespace Hook {
 		client_types.Api.Request.Query<A,R>;
 		
 	export type DefaultResponse<A extends client_types.AtomName, R extends client_types.RouteDefaultName, D extends client_types.Depth> =
-		R extends 'count' ? number :
+		R extends 'count' ? urn_response.General<number, any> :
 		R extends 'find_id' ? urn_response.General<client_types.Molecule<A,D>, any> :
 		R extends 'find' ? urn_response.General<client_types.Molecule<A,D>[], any> :
 		R extends 'find_one' ? urn_response.General<client_types.Molecule<A,D>, any> :
