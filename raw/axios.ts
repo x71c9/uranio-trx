@@ -51,21 +51,21 @@ class AxiosRaw<A extends client_types.AtomName> implements RAW<A>{
 	
 }
 
-function _serialize(obj:any, prefix=''):string{
-	const str = [];
-	for (const p in obj) {
-		if (urn_util.object.has_key(obj, p)) {
-			const k = prefix ?
-				prefix + "[" + p + "]" :
-				p;
-			const v = obj[p];
-			str.push((v !== null && typeof v === "object") ?
-				_serialize(v, k) :
-				encodeURIComponent(k) + "=" + encodeURIComponent(v));
-		}
-	}
-	return str.join("&");
-}
+// function _serialize(obj:any, prefix=''):string{
+//   const str = [];
+//   for (const p in obj) {
+//     if (urn_util.object.has_key(obj, p)) {
+//       const k = prefix ?
+//         prefix + "[" + p + "]" :
+//         p;
+//       const v = obj[p];
+//       str.push((v !== null && typeof v === "object") ?
+//         _serialize(v, k) :
+//         encodeURIComponent(k) + "=" + encodeURIComponent(v));
+//     }
+//   }
+//   return str.join("&");
+// }
 
 function _url_with_query<A extends client_types.AtomName, R extends client_types.RouteName<A>>(
 	url:string,
@@ -73,7 +73,7 @@ function _url_with_query<A extends client_types.AtomName, R extends client_types
 ):string{
 	let full_url = url;
 	if(query){
-		const query_string = _serialize(query);
+		const query_string = urn_util.object.serialize(query);
 		full_url += `?${query_string}`;
 	}
 	return full_url;
