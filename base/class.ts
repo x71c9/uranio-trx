@@ -12,9 +12,11 @@ import {urn_util, urn_log, urn_exception} from 'urn-lib';
 
 const urn_exc = urn_exception.init(`Base`, `Base module.`);
 
-import {atom_book} from 'uranio-books/atom';
+// import {atom_book} from 'uranio-books/atom';
 
-import {dock_book} from 'uranio-books/dock';
+// import {dock_book} from 'uranio-books/dock';
+
+// import urn_core_client from 'uranio-core/client';
 
 import urn_api_client from 'uranio-api/client';
 
@@ -54,15 +56,17 @@ class Base<A extends client_types.AtomName> {
 			}
 		}
 		return async (args:Hook.Arguments<A,R>) => {
-			const dock_def = dock_book[this.atom_name];
+			// const dock_def = dock_book[this.atom_name];
+			const dock_def = urn_api_client.book.dock.get_definition(this.atom_name);
 			if(!urn_util.object.has_key(dock_def, 'dock')){
 				throw urn_exc.create(
 					`INVALID_DOCK_DEF`,
 					`Invalid dock book for \`${this.atom_name}\`. Cannot find dock definition.`
 				);
 			}
-			const atom_api_url = dock_def.dock?.url || `/${this.atom_name}s`;
-			const atom_def = atom_book[this.atom_name] as client_types.Book.Definition;
+			const atom_api_url = dock_def.url || `/${this.atom_name}s`;
+			// const atom_def = atom_book[this.atom_name] as client_types.Book.Definition;
+			const atom_def = urn_api_client.book.atom.get_definition(this.atom_name);
 			const connection_url = (atom_def.connection && atom_def.connection === 'log') ? `/logs` : '';
 			let url = `${connection_url}${atom_api_url}${route.url}`;
 			for(const param of params){
@@ -91,7 +95,7 @@ class Base<A extends client_types.AtomName> {
 
 function _check_atom_name(atom_name:client_types.AtomName)
 		:true{
-	if(urn_util.object.has_key(atom_book, atom_name)){
+	if(urn_api_client.book.atom.validate_name(atom_name)){
 		return true;
 	}
 	throw urn_exc.create_not_found(
