@@ -12,7 +12,7 @@ import * as base from '../base/';
 
 import {hooks} from '../hooks/';
 
-import * as book from '../book';
+import * as book from '../book/client';
 
 import * as types from './types';
 
