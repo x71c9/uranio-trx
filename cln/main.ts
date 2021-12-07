@@ -12,6 +12,8 @@ import * as base from '../base/';
 
 import {hooks} from '../hooks/';
 
+import * as book from '../book';
+
 import * as types from './types';
 
 export {
@@ -19,5 +21,6 @@ export {
 	api,
 	base,
 	hooks,
+	book,
 	types
 };
