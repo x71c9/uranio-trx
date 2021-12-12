@@ -10,7 +10,7 @@ import api from 'uranio-api/client';
 
 import * as base from '../base/';
 
-import {hooks} from '../hooks/';
+import * as hooks from '../hooks/';
 
 import * as book from '../book/client';
 

@@ -12,17 +12,17 @@ import {dock_book} from 'uranio-books/dock';
 
 export namespace Hook {
 
-	export type Arguments<A extends client_types.AtomName, R extends client_types.RouteName<A>> = {
+	export type Arguments<A extends client_types.AtomName, R extends client_types.RouteName<A>, D extends client_types.Depth> = {
 		params?: Params<A,R>
-		query?: Query<A,R>
+		query?: Query<A,R,D>
 		body?: any
 	}
 
 	export type Params<A extends client_types.AtomName, R extends client_types.RouteName<A>> =
 		client_types.Api.Request.Params<A,R>;
 
-	export type Query<A extends client_types.AtomName, R extends client_types.RouteName<A>> =
-		client_types.Api.Request.Query<A,R>;
+	export type Query<A extends client_types.AtomName, R extends client_types.RouteName<A>, D extends client_types.Depth> =
+		client_types.Api.Request.Query<A,R,D>;
 		
 	export type DefaultResponse<A extends client_types.AtomName, R extends client_types.RouteDefaultName, D extends client_types.Depth> =
 		R extends 'count' ? urn_response.General<number, any> :
