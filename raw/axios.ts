@@ -106,7 +106,8 @@ async function _handle_axios_call(handler:() => Promise<AxiosResponse>)
 				);
 			}
 		}
-	}catch(ex){
+	}catch(e){
+		const ex = e as any;
 		if(!ex.response) {
 			return urn_ret.return_error(
 				400,
