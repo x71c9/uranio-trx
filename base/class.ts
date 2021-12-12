@@ -39,7 +39,7 @@ class Base<A extends client_types.AtomName> {
 	}
 	
 	public hook<R extends client_types.RouteName<A>, D extends client_types.Depth = 0>(route_name:R)
-			:(args:Hook.Arguments<A,R>) => Promise<client_types.Hook.Response<A,R,D>>{
+			:(args:Hook.Arguments<A,R,D>) => Promise<client_types.Hook.Response<A,R,D>>{
 		_check_atom_name(this.atom_name);
 		const route = _get_route(this.atom_name, route_name as client_types.RouteName<A>);
 		const splitted_url = route.url.split('/');
@@ -57,7 +57,7 @@ class Base<A extends client_types.AtomName> {
 				params.push(param_name);
 			}
 		}
-		return async (args:Hook.Arguments<A,R>) => {
+		return async (args:Hook.Arguments<A,R,D>) => {
 			// const dock_def = dock_book[this.atom_name];
 			const dock_def = book.dock.get_definition(this.atom_name);
 			// if(!urn_util.object.has_key(dock_def, 'dock')){

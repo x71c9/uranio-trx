@@ -1,7 +1,7 @@
 /**
- *
  * Export module for TRXRaw
  *
+ * @packageDocumentation
  */
 
 export * from './types';
