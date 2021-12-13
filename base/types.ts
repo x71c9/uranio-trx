@@ -12,7 +12,7 @@ import {dock_book} from 'uranio-books/dock';
 
 export namespace Hook {
 
-	export type Arguments<A extends client_types.AtomName, R extends client_types.RouteName<A>, D extends client_types.Depth> = {
+	export type Arguments<A extends client_types.AtomName, R extends client_types.RouteName<A>, D extends client_types.Depth = 0> = {
 		params?: Params<A,R>
 		query?: Query<A,R,D>
 		body?: any
@@ -21,10 +21,10 @@ export namespace Hook {
 	export type Params<A extends client_types.AtomName, R extends client_types.RouteName<A>> =
 		client_types.Api.Request.Params<A,R>;
 
-	export type Query<A extends client_types.AtomName, R extends client_types.RouteName<A>, D extends client_types.Depth> =
+	export type Query<A extends client_types.AtomName, R extends client_types.RouteName<A>, D extends client_types.Depth = 0> =
 		client_types.Api.Request.Query<A,R,D>;
 		
-	export type DefaultResponse<A extends client_types.AtomName, R extends client_types.RouteDefaultName, D extends client_types.Depth> =
+	export type DefaultResponse<A extends client_types.AtomName, R extends client_types.RouteDefaultName, D extends client_types.Depth = 0> =
 		R extends 'count' ? urn_response.General<number, any> :
 		R extends 'find_id' ? urn_response.General<client_types.Molecule<A,D>, any> :
 		R extends 'find' ? urn_response.General<client_types.Molecule<A,D>[], any> :
@@ -44,8 +44,8 @@ export namespace Hook {
 		any :
 		any :
 		any;
-
-	export type Response<A extends client_types.AtomName, R extends client_types.RouteName<A>, D extends client_types.Depth> =
+	
+	export type Response<A extends client_types.AtomName, R extends client_types.RouteName<A>, D extends client_types.Depth = 0> =
 		R extends client_types.RouteDefaultName ? DefaultResponse<A, R, D> :
 		'dock' extends keyof typeof dock_book[A] ?
 		'routes' extends keyof typeof dock_book[A]['dock'] ?
