@@ -13,7 +13,9 @@ export const superusers = {
 		const args: uranio.types.Hook.Arguments<"superuser", "count", D> = {
 			...options,
 		};
-		return await uranio.base.create("superuser").hook("count")(args);
+		return await uranio.base.create("superuser").hook<"count", D>("count")(
+			args
+		);
 	},
 	find: async <D extends uranio.types.Depth>(
 		options?: uranio.types.Hook.Arguments<"superuser", "find", D>
@@ -21,7 +23,7 @@ export const superusers = {
 		const args: uranio.types.Hook.Arguments<"superuser", "find", D> = {
 			...options,
 		};
-		return await uranio.base.create("superuser").hook<'find', D>("find")(args);
+		return await uranio.base.create("superuser").hook<"find", D>("find")(args);
 	},
 	find_id: async <D extends uranio.types.Depth>(
 		id: string,
@@ -33,7 +35,9 @@ export const superusers = {
 			},
 			...options,
 		};
-		return await uranio.base.create("superuser").hook("find_id")(args);
+		return await uranio.base.create("superuser").hook<"find_id", D>("find_id")(
+			args
+		);
 	},
 	find_one: async <D extends uranio.types.Depth>(
 		options?: uranio.types.Hook.Arguments<"superuser", "find_one", D>
@@ -41,7 +45,9 @@ export const superusers = {
 		const args: uranio.types.Hook.Arguments<"superuser", "find_one", D> = {
 			...options,
 		};
-		return await uranio.base.create("superuser").hook("find_one")(args);
+		return await uranio.base
+			.create("superuser")
+			.hook<"find_one", D>("find_one")(args);
 	},
 	insert: async <D extends uranio.types.Depth>(
 		options?: uranio.types.Hook.Arguments<"superuser", "insert", D>
@@ -49,7 +55,9 @@ export const superusers = {
 		const args: uranio.types.Hook.Arguments<"superuser", "insert", D> = {
 			...options,
 		};
-		return await uranio.base.create("superuser").hook("insert")(args);
+		return await uranio.base.create("superuser").hook<"insert", D>("insert")(
+			args
+		);
 	},
 	update: async <D extends uranio.types.Depth>(
 		id: string,
@@ -61,7 +69,9 @@ export const superusers = {
 			},
 			...options,
 		};
-		return await uranio.base.create("superuser").hook("update")(args);
+		return await uranio.base.create("superuser").hook<"update", D>("update")(
+			args
+		);
 	},
 	delete: async <D extends uranio.types.Depth>(
 		id: string,
@@ -73,7 +83,9 @@ export const superusers = {
 			},
 			...options,
 		};
-		return await uranio.base.create("superuser").hook("delete")(args);
+		return await uranio.base.create("superuser").hook<"delete", D>("delete")(
+			args
+		);
 	},
 };
 export const users = {
@@ -83,7 +95,7 @@ export const users = {
 		const args: uranio.types.Hook.Arguments<"user", "count", D> = {
 			...options,
 		};
-		return await uranio.base.create("user").hook("count")(args);
+		return await uranio.base.create("user").hook<"count", D>("count")(args);
 	},
 	find: async <D extends uranio.types.Depth>(
 		options?: uranio.types.Hook.Arguments<"user", "find", D>
@@ -91,7 +103,7 @@ export const users = {
 		const args: uranio.types.Hook.Arguments<"user", "find", D> = {
 			...options,
 		};
-		return await uranio.base.create("user").hook("find")(args);
+		return await uranio.base.create("user").hook<"find", D>("find")(args);
 	},
 	find_id: async <D extends uranio.types.Depth>(
 		id: string,
@@ -103,7 +115,7 @@ export const users = {
 			},
 			...options,
 		};
-		return await uranio.base.create("user").hook("find_id")(args);
+		return await uranio.base.create("user").hook<"find_id", D>("find_id")(args);
 	},
 	find_one: async <D extends uranio.types.Depth>(
 		options?: uranio.types.Hook.Arguments<"user", "find_one", D>
@@ -111,7 +123,9 @@ export const users = {
 		const args: uranio.types.Hook.Arguments<"user", "find_one", D> = {
 			...options,
 		};
-		return await uranio.base.create("user").hook("find_one")(args);
+		return await uranio.base.create("user").hook<"find_one", D>("find_one")(
+			args
+		);
 	},
 	insert: async <D extends uranio.types.Depth>(
 		options?: uranio.types.Hook.Arguments<"user", "insert", D>
@@ -119,7 +133,7 @@ export const users = {
 		const args: uranio.types.Hook.Arguments<"user", "insert", D> = {
 			...options,
 		};
-		return await uranio.base.create("user").hook("insert")(args);
+		return await uranio.base.create("user").hook<"insert", D>("insert")(args);
 	},
 	update: async <D extends uranio.types.Depth>(
 		id: string,
@@ -131,7 +145,7 @@ export const users = {
 			},
 			...options,
 		};
-		return await uranio.base.create("user").hook("update")(args);
+		return await uranio.base.create("user").hook<"update", D>("update")(args);
 	},
 	delete: async <D extends uranio.types.Depth>(
 		id: string,
@@ -143,7 +157,7 @@ export const users = {
 			},
 			...options,
 		};
-		return await uranio.base.create("user").hook("delete")(args);
+		return await uranio.base.create("user").hook<"delete", D>("delete")(args);
 	},
 };
 export const groups = {
@@ -153,7 +167,7 @@ export const groups = {
 		const args: uranio.types.Hook.Arguments<"group", "count", D> = {
 			...options,
 		};
-		return await uranio.base.create("group").hook("count")(args);
+		return await uranio.base.create("group").hook<"count", D>("count")(args);
 	},
 	find: async <D extends uranio.types.Depth>(
 		options?: uranio.types.Hook.Arguments<"group", "find", D>
@@ -161,7 +175,7 @@ export const groups = {
 		const args: uranio.types.Hook.Arguments<"group", "find", D> = {
 			...options,
 		};
-		return await uranio.base.create("group").hook("find")(args);
+		return await uranio.base.create("group").hook<"find", D>("find")(args);
 	},
 	find_id: async <D extends uranio.types.Depth>(
 		id: string,
@@ -173,7 +187,9 @@ export const groups = {
 			},
 			...options,
 		};
-		return await uranio.base.create("group").hook("find_id")(args);
+		return await uranio.base.create("group").hook<"find_id", D>("find_id")(
+			args
+		);
 	},
 	find_one: async <D extends uranio.types.Depth>(
 		options?: uranio.types.Hook.Arguments<"group", "find_one", D>
@@ -181,7 +197,9 @@ export const groups = {
 		const args: uranio.types.Hook.Arguments<"group", "find_one", D> = {
 			...options,
 		};
-		return await uranio.base.create("group").hook("find_one")(args);
+		return await uranio.base.create("group").hook<"find_one", D>("find_one")(
+			args
+		);
 	},
 	insert: async <D extends uranio.types.Depth>(
 		options?: uranio.types.Hook.Arguments<"group", "insert", D>
@@ -189,7 +207,7 @@ export const groups = {
 		const args: uranio.types.Hook.Arguments<"group", "insert", D> = {
 			...options,
 		};
-		return await uranio.base.create("group").hook("insert")(args);
+		return await uranio.base.create("group").hook<"insert", D>("insert")(args);
 	},
 	update: async <D extends uranio.types.Depth>(
 		id: string,
@@ -201,7 +219,7 @@ export const groups = {
 			},
 			...options,
 		};
-		return await uranio.base.create("group").hook("update")(args);
+		return await uranio.base.create("group").hook<"update", D>("update")(args);
 	},
 	delete: async <D extends uranio.types.Depth>(
 		id: string,
@@ -213,7 +231,7 @@ export const groups = {
 			},
 			...options,
 		};
-		return await uranio.base.create("group").hook("delete")(args);
+		return await uranio.base.create("group").hook<"delete", D>("delete")(args);
 	},
 };
 export const errors = {
@@ -223,7 +241,7 @@ export const errors = {
 		const args: uranio.types.Hook.Arguments<"error", "count", D> = {
 			...options,
 		};
-		return await uranio.base.create("error").hook("count")(args);
+		return await uranio.base.create("error").hook<"count", D>("count")(args);
 	},
 	find: async <D extends uranio.types.Depth>(
 		options?: uranio.types.Hook.Arguments<"error", "find", D>
@@ -231,7 +249,7 @@ export const errors = {
 		const args: uranio.types.Hook.Arguments<"error", "find", D> = {
 			...options,
 		};
-		return await uranio.base.create("error").hook("find")(args);
+		return await uranio.base.create("error").hook<"find", D>("find")(args);
 	},
 	find_id: async <D extends uranio.types.Depth>(
 		id: string,
@@ -243,7 +261,9 @@ export const errors = {
 			},
 			...options,
 		};
-		return await uranio.base.create("error").hook("find_id")(args);
+		return await uranio.base.create("error").hook<"find_id", D>("find_id")(
+			args
+		);
 	},
 	find_one: async <D extends uranio.types.Depth>(
 		options?: uranio.types.Hook.Arguments<"error", "find_one", D>
@@ -251,7 +271,9 @@ export const errors = {
 		const args: uranio.types.Hook.Arguments<"error", "find_one", D> = {
 			...options,
 		};
-		return await uranio.base.create("error").hook("find_one")(args);
+		return await uranio.base.create("error").hook<"find_one", D>("find_one")(
+			args
+		);
 	},
 	insert: async <D extends uranio.types.Depth>(
 		options?: uranio.types.Hook.Arguments<"error", "insert", D>
@@ -259,7 +281,7 @@ export const errors = {
 		const args: uranio.types.Hook.Arguments<"error", "insert", D> = {
 			...options,
 		};
-		return await uranio.base.create("error").hook("insert")(args);
+		return await uranio.base.create("error").hook<"insert", D>("insert")(args);
 	},
 	update: async <D extends uranio.types.Depth>(
 		id: string,
@@ -271,7 +293,7 @@ export const errors = {
 			},
 			...options,
 		};
-		return await uranio.base.create("error").hook("update")(args);
+		return await uranio.base.create("error").hook<"update", D>("update")(args);
 	},
 	delete: async <D extends uranio.types.Depth>(
 		id: string,
@@ -283,7 +305,7 @@ export const errors = {
 			},
 			...options,
 		};
-		return await uranio.base.create("error").hook("delete")(args);
+		return await uranio.base.create("error").hook<"delete", D>("delete")(args);
 	},
 };
 export const requests = {
@@ -293,7 +315,7 @@ export const requests = {
 		const args: uranio.types.Hook.Arguments<"request", "count", D> = {
 			...options,
 		};
-		return await uranio.base.create("request").hook("count")(args);
+		return await uranio.base.create("request").hook<"count", D>("count")(args);
 	},
 	find: async <D extends uranio.types.Depth>(
 		options?: uranio.types.Hook.Arguments<"request", "find", D>
@@ -301,7 +323,7 @@ export const requests = {
 		const args: uranio.types.Hook.Arguments<"request", "find", D> = {
 			...options,
 		};
-		return await uranio.base.create("request").hook("find")(args);
+		return await uranio.base.create("request").hook<"find", D>("find")(args);
 	},
 	find_id: async <D extends uranio.types.Depth>(
 		id: string,
@@ -313,7 +335,9 @@ export const requests = {
 			},
 			...options,
 		};
-		return await uranio.base.create("request").hook("find_id")(args);
+		return await uranio.base.create("request").hook<"find_id", D>("find_id")(
+			args
+		);
 	},
 	find_one: async <D extends uranio.types.Depth>(
 		options?: uranio.types.Hook.Arguments<"request", "find_one", D>
@@ -321,7 +345,9 @@ export const requests = {
 		const args: uranio.types.Hook.Arguments<"request", "find_one", D> = {
 			...options,
 		};
-		return await uranio.base.create("request").hook("find_one")(args);
+		return await uranio.base.create("request").hook<"find_one", D>("find_one")(
+			args
+		);
 	},
 	insert: async <D extends uranio.types.Depth>(
 		options?: uranio.types.Hook.Arguments<"request", "insert", D>
@@ -329,7 +355,9 @@ export const requests = {
 		const args: uranio.types.Hook.Arguments<"request", "insert", D> = {
 			...options,
 		};
-		return await uranio.base.create("request").hook("insert")(args);
+		return await uranio.base.create("request").hook<"insert", D>("insert")(
+			args
+		);
 	},
 	update: async <D extends uranio.types.Depth>(
 		id: string,
@@ -341,7 +369,9 @@ export const requests = {
 			},
 			...options,
 		};
-		return await uranio.base.create("request").hook("update")(args);
+		return await uranio.base.create("request").hook<"update", D>("update")(
+			args
+		);
 	},
 	delete: async <D extends uranio.types.Depth>(
 		id: string,
@@ -353,7 +383,9 @@ export const requests = {
 			},
 			...options,
 		};
-		return await uranio.base.create("request").hook("delete")(args);
+		return await uranio.base.create("request").hook<"delete", D>("delete")(
+			args
+		);
 	},
 };
 export const customers = {
@@ -363,7 +395,7 @@ export const customers = {
 		const args: uranio.types.Hook.Arguments<"customer", "count", D> = {
 			...options,
 		};
-		return await uranio.base.create("customer").hook("count")(args);
+		return await uranio.base.create("customer").hook<"count", D>("count")(args);
 	},
 	find: async <D extends uranio.types.Depth>(
 		options?: uranio.types.Hook.Arguments<"customer", "find", D>
@@ -371,7 +403,7 @@ export const customers = {
 		const args: uranio.types.Hook.Arguments<"customer", "find", D> = {
 			...options,
 		};
-		return await uranio.base.create("customer").hook("find")(args);
+		return await uranio.base.create("customer").hook<"find", D>("find")(args);
 	},
 	find_id: async <D extends uranio.types.Depth>(
 		id: string,
@@ -383,7 +415,9 @@ export const customers = {
 			},
 			...options,
 		};
-		return await uranio.base.create("customer").hook("find_id")(args);
+		return await uranio.base.create("customer").hook<"find_id", D>("find_id")(
+			args
+		);
 	},
 	find_one: async <D extends uranio.types.Depth>(
 		options?: uranio.types.Hook.Arguments<"customer", "find_one", D>
@@ -391,7 +425,9 @@ export const customers = {
 		const args: uranio.types.Hook.Arguments<"customer", "find_one", D> = {
 			...options,
 		};
-		return await uranio.base.create("customer").hook("find_one")(args);
+		return await uranio.base.create("customer").hook<"find_one", D>("find_one")(
+			args
+		);
 	},
 	insert: async <D extends uranio.types.Depth>(
 		options?: uranio.types.Hook.Arguments<"customer", "insert", D>
@@ -399,7 +435,9 @@ export const customers = {
 		const args: uranio.types.Hook.Arguments<"customer", "insert", D> = {
 			...options,
 		};
-		return await uranio.base.create("customer").hook("insert")(args);
+		return await uranio.base.create("customer").hook<"insert", D>("insert")(
+			args
+		);
 	},
 	update: async <D extends uranio.types.Depth>(
 		id: string,
@@ -411,7 +449,9 @@ export const customers = {
 			},
 			...options,
 		};
-		return await uranio.base.create("customer").hook("update")(args);
+		return await uranio.base.create("customer").hook<"update", D>("update")(
+			args
+		);
 	},
 	delete: async <D extends uranio.types.Depth>(
 		id: string,
@@ -423,7 +463,9 @@ export const customers = {
 			},
 			...options,
 		};
-		return await uranio.base.create("customer").hook("delete")(args);
+		return await uranio.base.create("customer").hook<"delete", D>("delete")(
+			args
+		);
 	},
 };
 export const mykarts = {
@@ -433,7 +475,7 @@ export const mykarts = {
 		const args: uranio.types.Hook.Arguments<"mykart", "count", D> = {
 			...options,
 		};
-		return await uranio.base.create("mykart").hook("count")(args);
+		return await uranio.base.create("mykart").hook<"count", D>("count")(args);
 	},
 	find: async <D extends uranio.types.Depth>(
 		options?: uranio.types.Hook.Arguments<"mykart", "find", D>
@@ -441,7 +483,7 @@ export const mykarts = {
 		const args: uranio.types.Hook.Arguments<"mykart", "find", D> = {
 			...options,
 		};
-		return await uranio.base.create("mykart").hook("find")(args);
+		return await uranio.base.create("mykart").hook<"find", D>("find")(args);
 	},
 	find_id: async <D extends uranio.types.Depth>(
 		id: string,
@@ -453,7 +495,9 @@ export const mykarts = {
 			},
 			...options,
 		};
-		return await uranio.base.create("mykart").hook("find_id")(args);
+		return await uranio.base.create("mykart").hook<"find_id", D>("find_id")(
+			args
+		);
 	},
 	find_one: async <D extends uranio.types.Depth>(
 		options?: uranio.types.Hook.Arguments<"mykart", "find_one", D>
@@ -461,7 +505,9 @@ export const mykarts = {
 		const args: uranio.types.Hook.Arguments<"mykart", "find_one", D> = {
 			...options,
 		};
-		return await uranio.base.create("mykart").hook("find_one")(args);
+		return await uranio.base.create("mykart").hook<"find_one", D>("find_one")(
+			args
+		);
 	},
 	insert: async <D extends uranio.types.Depth>(
 		options?: uranio.types.Hook.Arguments<"mykart", "insert", D>
@@ -469,7 +515,7 @@ export const mykarts = {
 		const args: uranio.types.Hook.Arguments<"mykart", "insert", D> = {
 			...options,
 		};
-		return await uranio.base.create("mykart").hook("insert")(args);
+		return await uranio.base.create("mykart").hook<"insert", D>("insert")(args);
 	},
 	update: async <D extends uranio.types.Depth>(
 		id: string,
@@ -481,7 +527,7 @@ export const mykarts = {
 			},
 			...options,
 		};
-		return await uranio.base.create("mykart").hook("update")(args);
+		return await uranio.base.create("mykart").hook<"update", D>("update")(args);
 	},
 	delete: async <D extends uranio.types.Depth>(
 		id: string,
@@ -493,7 +539,7 @@ export const mykarts = {
 			},
 			...options,
 		};
-		return await uranio.base.create("mykart").hook("delete")(args);
+		return await uranio.base.create("mykart").hook<"delete", D>("delete")(args);
 	},
 };
 export const products = {
@@ -503,7 +549,7 @@ export const products = {
 		const args: uranio.types.Hook.Arguments<"product", "count", D> = {
 			...options,
 		};
-		return await uranio.base.create("product").hook("count")(args);
+		return await uranio.base.create("product").hook<"count", D>("count")(args);
 	},
 	find: async <D extends uranio.types.Depth>(
 		options?: uranio.types.Hook.Arguments<"product", "find", D>
@@ -511,7 +557,7 @@ export const products = {
 		const args: uranio.types.Hook.Arguments<"product", "find", D> = {
 			...options,
 		};
-		return await uranio.base.create("product").hook("find")(args);
+		return await uranio.base.create("product").hook<"find", D>("find")(args);
 	},
 	find_id: async <D extends uranio.types.Depth>(
 		id: string,
@@ -523,7 +569,9 @@ export const products = {
 			},
 			...options,
 		};
-		return await uranio.base.create("product").hook("find_id")(args);
+		return await uranio.base.create("product").hook<"find_id", D>("find_id")(
+			args
+		);
 	},
 	find_one: async <D extends uranio.types.Depth>(
 		options?: uranio.types.Hook.Arguments<"product", "find_one", D>
@@ -531,7 +579,9 @@ export const products = {
 		const args: uranio.types.Hook.Arguments<"product", "find_one", D> = {
 			...options,
 		};
-		return await uranio.base.create("product").hook("find_one")(args);
+		return await uranio.base.create("product").hook<"find_one", D>("find_one")(
+			args
+		);
 	},
 	insert: async <D extends uranio.types.Depth>(
 		options?: uranio.types.Hook.Arguments<"product", "insert", D>
@@ -539,7 +589,9 @@ export const products = {
 		const args: uranio.types.Hook.Arguments<"product", "insert", D> = {
 			...options,
 		};
-		return await uranio.base.create("product").hook("insert")(args);
+		return await uranio.base.create("product").hook<"insert", D>("insert")(
+			args
+		);
 	},
 	update: async <D extends uranio.types.Depth>(
 		id: string,
@@ -551,7 +603,9 @@ export const products = {
 			},
 			...options,
 		};
-		return await uranio.base.create("product").hook("update")(args);
+		return await uranio.base.create("product").hook<"update", D>("update")(
+			args
+		);
 	},
 	delete: async <D extends uranio.types.Depth>(
 		id: string,
@@ -563,6 +617,8 @@ export const products = {
 			},
 			...options,
 		};
-		return await uranio.base.create("product").hook("delete")(args);
+		return await uranio.base.create("product").hook<"delete", D>("delete")(
+			args
+		);
 	},
 };
