@@ -4,7 +4,10 @@
  * @packageDocumentation
  */
 
-import {FullConfiguration as ApiFullConfiguration} from 'uranio-api/types';
+import {
+	Configuration as ApiConfiguration,
+	FullConfiguration as ApiFullConfiguration,
+} from 'uranio-api/types';
 
 type RequiredConfigParams = {
 }
@@ -13,7 +16,7 @@ type OptionalConfigParam = {
 }
 
 export type Configuration =
-	ApiFullConfiguration &
+	ApiConfiguration &
 	RequiredConfigParams &
 	Partial<OptionalConfigParam>;
 
