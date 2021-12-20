@@ -18,6 +18,14 @@ import * as conf from '../conf/client';
 
 import * as types from './types';
 
+/*
+ * First level methods.
+ * If other methods are added, urn-cli must be updated.
+ * Go to urn-cli/src/cmd/transpose.ts and
+ * add the new method names.
+ */
+export * from '../init/client';
+
 export {
 	core,
 	api,
