@@ -14,6 +14,8 @@ import * as hooks from '../hooks/';
 
 import * as book from '../book/client';
 
+import * as conf from '../conf/client';
+
 import * as types from './types';
 
 export {
@@ -22,5 +24,6 @@ export {
 	base,
 	hooks,
 	book,
+	conf,
 	types
 };
