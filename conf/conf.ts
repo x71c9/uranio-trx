@@ -6,7 +6,7 @@
 
 import {urn_util, urn_exception} from 'urn-lib';
 
-const urn_exc = urn_exception.init('CONF_API_MODULE', `Api configuration module`);
+const urn_exc = urn_exception.init('CONF_TRX_MODULE', `TRX configuration module`);
 
 import urn_api from 'uranio-api';
 
