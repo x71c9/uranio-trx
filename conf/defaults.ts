@@ -6,7 +6,7 @@
 
 import {FullConfiguration} from '../types';
 
-import {api_config} from 'uranio-api/cnf/defaults';
+import {api_config} from 'uranio-api/conf/defaults';
 
 export const trx_config:FullConfiguration = {
 	
