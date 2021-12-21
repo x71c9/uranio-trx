@@ -10,10 +10,12 @@ import * as types from '../cln/types';
 
 import * as conf from '../conf/client';
 
-export function init(config:types.ClientConfiguration)
+export function init(config?:types.ClientConfiguration)
 		:void{
 	
-	conf.set(trx_client_config, config);
+	if(config){
+		conf.set(trx_client_config, config);
+	}
 	
 	conf.set_initialize(true);
 }

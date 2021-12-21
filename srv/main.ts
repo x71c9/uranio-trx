@@ -10,6 +10,8 @@ import api from 'uranio-api';
 
 import * as base from '../base/';
 
+import * as auth from '../auth/';
+
 import * as hooks from '../hooks/';
 
 import * as book from '../book/';
@@ -30,6 +32,7 @@ export {
 	api,
 	core,
 	base,
+	auth,
 	hooks,
 	book,
 	conf,
