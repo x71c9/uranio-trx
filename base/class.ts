@@ -4,19 +4,9 @@
  * @packageDocumentation
  */
 
-// import {urn_util, urn_log, urn_return, urn_response, urn_exception} from 'urn-lib';
-// import {urn_util, urn_log, urn_response, urn_exception} from 'urn-lib';
 import {urn_util, urn_log, urn_exception} from 'urn-lib';
 
-// const urn_ret = urn_return.create(urn_log.util.return_injector);
-
 const urn_exc = urn_exception.init(`Base`, `Base module.`);
-
-// import {atom_book} from 'uranio-books/atom';
-
-// import {dock_book} from 'uranio-books/dock';
-
-// import urn_core_client from 'uranio-core/client';
 
 import urn_api_client from 'uranio-api/client';
 

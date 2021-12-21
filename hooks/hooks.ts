@@ -4,9 +4,17 @@
  * @packageDocumentation
  */
 
+import { urn_response } from "urn-lib";
+
 import * as uranio from "../cln/main";
 
 export const superusers = {
+	authenticate: async (
+		email: string,
+		password: string
+	): Promise<urn_response.General<string>> => {
+		return await uranio.auth.create("superuser").authenticate(email, password);
+	},
 	count: async <D extends uranio.types.Depth>(
 		options?: uranio.types.Hook.Arguments<"superuser", "count", D>
 	): Promise<uranio.types.Hook.Response<"superuser", "count", D>> => {
@@ -89,6 +97,12 @@ export const superusers = {
 	},
 };
 export const users = {
+	authenticate: async (
+		email: string,
+		password: string
+	): Promise<urn_response.General<string>> => {
+		return await uranio.auth.create("user").authenticate(email, password);
+	},
 	count: async <D extends uranio.types.Depth>(
 		options?: uranio.types.Hook.Arguments<"user", "count", D>
 	): Promise<uranio.types.Hook.Response<"user", "count", D>> => {
@@ -232,6 +246,160 @@ export const groups = {
 			...options,
 		};
 		return await uranio.base.create("group").hook<"delete", D>("delete")(args);
+	},
+};
+export const media = {
+	count: async <D extends uranio.types.Depth>(
+		options?: uranio.types.Hook.Arguments<"media", "count", D>
+	): Promise<uranio.types.Hook.Response<"media", "count", D>> => {
+		const args: uranio.types.Hook.Arguments<"media", "count", D> = {
+			...options,
+		};
+		return await uranio.base.create("media").hook<"count", D>("count")(args);
+	},
+	find: async <D extends uranio.types.Depth>(
+		options?: uranio.types.Hook.Arguments<"media", "find", D>
+	): Promise<uranio.types.Hook.Response<"media", "find", D>> => {
+		const args: uranio.types.Hook.Arguments<"media", "find", D> = {
+			...options,
+		};
+		return await uranio.base.create("media").hook<"find", D>("find")(args);
+	},
+	find_id: async <D extends uranio.types.Depth>(
+		id: string,
+		options?: uranio.types.Hook.Arguments<"media", "find_id", D>
+	): Promise<uranio.types.Hook.Response<"media", "find_id", D>> => {
+		const args: uranio.types.Hook.Arguments<"media", "find_id", D> = {
+			params: {
+				id: id,
+			},
+			...options,
+		};
+		return await uranio.base.create("media").hook<"find_id", D>("find_id")(
+			args
+		);
+	},
+	find_one: async <D extends uranio.types.Depth>(
+		options?: uranio.types.Hook.Arguments<"media", "find_one", D>
+	): Promise<uranio.types.Hook.Response<"media", "find_one", D>> => {
+		const args: uranio.types.Hook.Arguments<"media", "find_one", D> = {
+			...options,
+		};
+		return await uranio.base.create("media").hook<"find_one", D>("find_one")(
+			args
+		);
+	},
+	insert: async <D extends uranio.types.Depth>(
+		options?: uranio.types.Hook.Arguments<"media", "insert", D>
+	): Promise<uranio.types.Hook.Response<"media", "insert", D>> => {
+		const args: uranio.types.Hook.Arguments<"media", "insert", D> = {
+			...options,
+		};
+		return await uranio.base.create("media").hook<"insert", D>("insert")(args);
+	},
+	update: async <D extends uranio.types.Depth>(
+		id: string,
+		options?: uranio.types.Hook.Arguments<"media", "update", D>
+	): Promise<uranio.types.Hook.Response<"media", "update", D>> => {
+		const args: uranio.types.Hook.Arguments<"media", "update", D> = {
+			params: {
+				id: id,
+			},
+			...options,
+		};
+		return await uranio.base.create("media").hook<"update", D>("update")(args);
+	},
+	delete: async <D extends uranio.types.Depth>(
+		id: string,
+		options?: uranio.types.Hook.Arguments<"media", "delete", D>
+	): Promise<uranio.types.Hook.Response<"media", "delete", D>> => {
+		const args: uranio.types.Hook.Arguments<"media", "delete", D> = {
+			params: {
+				id: id,
+			},
+			...options,
+		};
+		return await uranio.base.create("media").hook<"delete", D>("delete")(args);
+	},
+};
+export const settings = {
+	count: async <D extends uranio.types.Depth>(
+		options?: uranio.types.Hook.Arguments<"setting", "count", D>
+	): Promise<uranio.types.Hook.Response<"setting", "count", D>> => {
+		const args: uranio.types.Hook.Arguments<"setting", "count", D> = {
+			...options,
+		};
+		return await uranio.base.create("setting").hook<"count", D>("count")(args);
+	},
+	find: async <D extends uranio.types.Depth>(
+		options?: uranio.types.Hook.Arguments<"setting", "find", D>
+	): Promise<uranio.types.Hook.Response<"setting", "find", D>> => {
+		const args: uranio.types.Hook.Arguments<"setting", "find", D> = {
+			...options,
+		};
+		return await uranio.base.create("setting").hook<"find", D>("find")(args);
+	},
+	find_id: async <D extends uranio.types.Depth>(
+		id: string,
+		options?: uranio.types.Hook.Arguments<"setting", "find_id", D>
+	): Promise<uranio.types.Hook.Response<"setting", "find_id", D>> => {
+		const args: uranio.types.Hook.Arguments<"setting", "find_id", D> = {
+			params: {
+				id: id,
+			},
+			...options,
+		};
+		return await uranio.base.create("setting").hook<"find_id", D>("find_id")(
+			args
+		);
+	},
+	find_one: async <D extends uranio.types.Depth>(
+		options?: uranio.types.Hook.Arguments<"setting", "find_one", D>
+	): Promise<uranio.types.Hook.Response<"setting", "find_one", D>> => {
+		const args: uranio.types.Hook.Arguments<"setting", "find_one", D> = {
+			...options,
+		};
+		return await uranio.base.create("setting").hook<"find_one", D>("find_one")(
+			args
+		);
+	},
+	insert: async <D extends uranio.types.Depth>(
+		options?: uranio.types.Hook.Arguments<"setting", "insert", D>
+	): Promise<uranio.types.Hook.Response<"setting", "insert", D>> => {
+		const args: uranio.types.Hook.Arguments<"setting", "insert", D> = {
+			...options,
+		};
+		return await uranio.base.create("setting").hook<"insert", D>("insert")(
+			args
+		);
+	},
+	update: async <D extends uranio.types.Depth>(
+		id: string,
+		options?: uranio.types.Hook.Arguments<"setting", "update", D>
+	): Promise<uranio.types.Hook.Response<"setting", "update", D>> => {
+		const args: uranio.types.Hook.Arguments<"setting", "update", D> = {
+			params: {
+				id: id,
+			},
+			...options,
+		};
+		return await uranio.base.create("setting").hook<"update", D>("update")(
+			args
+		);
+	},
+	delete: async <D extends uranio.types.Depth>(
+		id: string,
+		options?: uranio.types.Hook.Arguments<"setting", "delete", D>
+	): Promise<uranio.types.Hook.Response<"setting", "delete", D>> => {
+		const args: uranio.types.Hook.Arguments<"setting", "delete", D> = {
+			params: {
+				id: id,
+			},
+			...options,
+		};
+		return await uranio.base.create("setting").hook<"delete", D>("delete")(
+			args
+		);
 	},
 };
 export const errors = {
@@ -397,6 +565,14 @@ export const customers = {
 		};
 		return await uranio.base.create("customer").hook<"count", D>("count")(args);
 	},
+	pippi: async <D extends uranio.types.Depth>(
+		options?: uranio.types.Hook.Arguments<"customer", "pippi", D>
+	): Promise<uranio.types.Hook.Response<"customer", "pippi", D>> => {
+		const args: uranio.types.Hook.Arguments<"customer", "pippi", D> = {
+			...options,
+		};
+		return await uranio.base.create("customer").hook<"pippi", D>("pippi")(args);
+	},
 	find: async <D extends uranio.types.Depth>(
 		options?: uranio.types.Hook.Arguments<"customer", "find", D>
 	): Promise<uranio.types.Hook.Response<"customer", "find", D>> => {
@@ -550,6 +726,16 @@ export const products = {
 			...options,
 		};
 		return await uranio.base.create("product").hook<"count", D>("count")(args);
+	},
+	myroute: async <D extends uranio.types.Depth>(
+		options?: uranio.types.Hook.Arguments<"product", "myroute", D>
+	): Promise<uranio.types.Hook.Response<"product", "myroute", D>> => {
+		const args: uranio.types.Hook.Arguments<"product", "myroute", D> = {
+			...options,
+		};
+		return await uranio.base.create("product").hook<"myroute", D>("myroute")(
+			args
+		);
 	},
 	find: async <D extends uranio.types.Depth>(
 		options?: uranio.types.Hook.Arguments<"product", "find", D>
