@@ -20,7 +20,7 @@ import {RAW} from './types';
 
 const axios_config = {
 	// headers: {'user-agent': 'Uranio TRX 0.0.1'}
-};
+} as AxiosRequestConfig;
 
 @urn_log.util.decorators.debug_constructor
 @urn_log.util.decorators.debug_methods
@@ -28,22 +28,31 @@ class AxiosRaw<A extends client_types.AtomName> implements RAW<A>{
 	
 	constructor(private _axios_instance:AxiosInstance){}
 	
-	public async get<R extends client_types.RouteName<A>, D extends client_types.Depth>(url:string, query?:client_types.Hook.Query<A,R,D>)
+	public async get<R extends client_types.RouteName<A>, D extends client_types.Depth>(url:string, query?:client_types.Hook.Query<A,R,D>, headers?:client_types.Hook.Headers)
 			:Promise<urn_response.General<any,any>>{
+		if(headers){
+			axios_config.headers = headers;
+		}
 		return await _handle_axios_call(async () => {
 			return await this._axios_instance.get(_url_with_query(url, query), axios_config);
 		});
 	}
 	
-	public async post<R extends client_types.RouteName<A>, D extends client_types.Depth>(url:string, body:any, query?:client_types.Hook.Query<A,R,D>)
+	public async post<R extends client_types.RouteName<A>, D extends client_types.Depth>(url:string, body:any, query?:client_types.Hook.Query<A,R,D>, headers?:client_types.Hook.Headers)
 			:Promise<urn_response.General<any,any>>{
+		if(headers){
+			axios_config.headers = headers;
+		}
 		return await _handle_axios_call(async () => {
 			return await this._axios_instance.post(_url_with_query(url, query), body, axios_config);
 		});
 	}
 	
-	public async delete<R extends client_types.RouteName<A>, D extends client_types.Depth>(url:string, query?:client_types.Hook.Query<A,R,D>)
+	public async delete<R extends client_types.RouteName<A>, D extends client_types.Depth>(url:string, query?:client_types.Hook.Query<A,R,D>, headers?:client_types.Hook.Headers)
 			:Promise<urn_response.General<any,any>>{
+		if(headers){
+			axios_config.headers = headers;
+		}
 		return await _handle_axios_call(async () => {
 			return await this._axios_instance.delete(_url_with_query(url, query), axios_config);
 		});

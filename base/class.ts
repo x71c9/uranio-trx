@@ -24,7 +24,7 @@ class Base<A extends client_types.AtomName> {
 	
 	private raw:client_types.RAW<A>;
 	
-	constructor(public atom_name:A){
+	constructor(public atom_name:A, public token?:string){
 		this.raw = create_raw();
 	}
 	
@@ -47,7 +47,7 @@ class Base<A extends client_types.AtomName> {
 				params.push(param_name);
 			}
 		}
-		return async (args:Hook.Arguments<A,R,D>) => {
+		return async (args:Hook.Arguments<A,R,D>, token?:string) => {
 			const dock_def = book.dock.get_definition(this.atom_name);
 			const atom_api_url = dock_def.url || `/${this.atom_name}s`;
 			const atom_def = book.atom.get_definition(this.atom_name);
@@ -61,15 +61,22 @@ class Base<A extends client_types.AtomName> {
 					url = url.replace(`:${param}`, args.params[param as client_types.RouteParam<A,R>] as string);
 				}
 			}
+			const headers = {} as client_types.Hook.Headers;
+			if(typeof this.token === 'string'){
+				headers['x-auth-token'] = this.token;
+			}
+			if(typeof token === 'string'){
+				headers['x-auth-token'] = token;
+			}
 			switch(route.method){
 				case client_types.RouteMethod.GET:{
-					return await this.raw.get(url, args.query) as client_types.Hook.Response<A, R, D>;
+					return await this.raw.get(url, args.query, headers) as client_types.Hook.Response<A, R, D>;
 				}
 				case client_types.RouteMethod.POST:{
-					return await this.raw.post(url, args.body, args.query) as client_types.Hook.Response<A, R, D>;
+					return await this.raw.post(url, args.body, args.query, headers) as client_types.Hook.Response<A, R, D>;
 				}
 				case client_types.RouteMethod.DELETE:{
-					return await this.raw.delete(url, args.query) as client_types.Hook.Response<A, R, D>;
+					return await this.raw.delete(url, args.query, headers) as client_types.Hook.Response<A, R, D>;
 				}
 			}
 		};
@@ -109,9 +116,9 @@ function _get_route<A extends client_types.AtomName>(
 
 export type BaseInstance = InstanceType<typeof Base>;
 
-export function create<A extends client_types.AtomName>(atom_name:A)
+export function create<A extends client_types.AtomName>(atom_name:A, token?:string)
 		:Base<A>{
 	urn_log.fn_debug(`Create Base [${atom_name}]`);
-	return new Base(atom_name);
+	return new Base(atom_name, token);
 }
 

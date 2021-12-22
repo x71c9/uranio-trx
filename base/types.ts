@@ -17,6 +17,10 @@ export namespace Hook {
 		query?: Query<A,R,D>
 		body?: any
 	}
+	
+	export type Headers = {
+		[k:string]: string
+	}
 
 	export type Params<A extends client_types.AtomName, R extends client_types.RouteName<A>> =
 		client_types.Api.Request.Params<A,R>;
