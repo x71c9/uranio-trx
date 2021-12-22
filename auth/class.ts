@@ -26,7 +26,7 @@ class AuthBase<A extends client_types.AuthName> {
 	}
 	
 	public async authenticate(email:string, password:string)
-			:Promise<urn_response.General<string>>{
+			:Promise<urn_response.General<client_types.Api.AuthResponse>>{
 		const auth_url = _get_auth_url(this.auth_name);
 		return await this.raw.post(auth_url, {email, password});
 	}

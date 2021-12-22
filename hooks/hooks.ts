@@ -8,34 +8,58 @@ import { urn_response } from "urn-lib";
 
 import * as uranio from "../cln/main";
 
+let hook_token: string | undefined;
+export function set_token(token: string): void {
+	hook_token = token;
+}
+
 export const superusers = {
 	authenticate: async (
 		email: string,
 		password: string
-	): Promise<urn_response.General<string>> => {
+	): Promise<urn_response.General<uranio.types.Api.AuthResponse>> => {
 		return await uranio.auth.create("superuser").authenticate(email, password);
 	},
 	count: async <D extends uranio.types.Depth>(
-		options?: uranio.types.Hook.Arguments<"superuser", "count", D>
+		options?: uranio.types.Hook.Arguments<"superuser", "count", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"superuser", "count", D>> => {
 		const args: uranio.types.Hook.Arguments<"superuser", "count", D> = {
 			...options,
 		};
-		return await uranio.base.create("superuser").hook<"count", D>("count")(
-			args
-		);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("superuser", current_token)
+			.hook<"count", D>("count")(args);
 	},
 	find: async <D extends uranio.types.Depth>(
-		options?: uranio.types.Hook.Arguments<"superuser", "find", D>
+		options?: uranio.types.Hook.Arguments<"superuser", "find", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"superuser", "find", D>> => {
 		const args: uranio.types.Hook.Arguments<"superuser", "find", D> = {
 			...options,
 		};
-		return await uranio.base.create("superuser").hook<"find", D>("find")(args);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("superuser", current_token)
+			.hook<"find", D>("find")(args);
 	},
 	find_id: async <D extends uranio.types.Depth>(
 		id: string,
-		options?: uranio.types.Hook.Arguments<"superuser", "find_id", D>
+		options?: uranio.types.Hook.Arguments<"superuser", "find_id", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"superuser", "find_id", D>> => {
 		const args: uranio.types.Hook.Arguments<"superuser", "find_id", D> = {
 			params: {
@@ -43,33 +67,57 @@ export const superusers = {
 			},
 			...options,
 		};
-		return await uranio.base.create("superuser").hook<"find_id", D>("find_id")(
-			args
-		);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("superuser", current_token)
+			.hook<"find_id", D>("find_id")(args);
 	},
 	find_one: async <D extends uranio.types.Depth>(
-		options?: uranio.types.Hook.Arguments<"superuser", "find_one", D>
+		options?: uranio.types.Hook.Arguments<"superuser", "find_one", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"superuser", "find_one", D>> => {
 		const args: uranio.types.Hook.Arguments<"superuser", "find_one", D> = {
 			...options,
 		};
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
 		return await uranio.base
-			.create("superuser")
+			.create("superuser", current_token)
 			.hook<"find_one", D>("find_one")(args);
 	},
 	insert: async <D extends uranio.types.Depth>(
-		options?: uranio.types.Hook.Arguments<"superuser", "insert", D>
+		options?: uranio.types.Hook.Arguments<"superuser", "insert", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"superuser", "insert", D>> => {
 		const args: uranio.types.Hook.Arguments<"superuser", "insert", D> = {
 			...options,
 		};
-		return await uranio.base.create("superuser").hook<"insert", D>("insert")(
-			args
-		);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("superuser", current_token)
+			.hook<"insert", D>("insert")(args);
 	},
 	update: async <D extends uranio.types.Depth>(
 		id: string,
-		options?: uranio.types.Hook.Arguments<"superuser", "update", D>
+		options?: uranio.types.Hook.Arguments<"superuser", "update", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"superuser", "update", D>> => {
 		const args: uranio.types.Hook.Arguments<"superuser", "update", D> = {
 			params: {
@@ -77,13 +125,21 @@ export const superusers = {
 			},
 			...options,
 		};
-		return await uranio.base.create("superuser").hook<"update", D>("update")(
-			args
-		);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("superuser", current_token)
+			.hook<"update", D>("update")(args);
 	},
 	delete: async <D extends uranio.types.Depth>(
 		id: string,
-		options?: uranio.types.Hook.Arguments<"superuser", "delete", D>
+		options?: uranio.types.Hook.Arguments<"superuser", "delete", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"superuser", "delete", D>> => {
 		const args: uranio.types.Hook.Arguments<"superuser", "delete", D> = {
 			params: {
@@ -91,37 +147,65 @@ export const superusers = {
 			},
 			...options,
 		};
-		return await uranio.base.create("superuser").hook<"delete", D>("delete")(
-			args
-		);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("superuser", current_token)
+			.hook<"delete", D>("delete")(args);
 	},
 };
 export const users = {
 	authenticate: async (
 		email: string,
 		password: string
-	): Promise<urn_response.General<string>> => {
+	): Promise<urn_response.General<uranio.types.Api.AuthResponse>> => {
 		return await uranio.auth.create("user").authenticate(email, password);
 	},
 	count: async <D extends uranio.types.Depth>(
-		options?: uranio.types.Hook.Arguments<"user", "count", D>
+		options?: uranio.types.Hook.Arguments<"user", "count", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"user", "count", D>> => {
 		const args: uranio.types.Hook.Arguments<"user", "count", D> = {
 			...options,
 		};
-		return await uranio.base.create("user").hook<"count", D>("count")(args);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("user", current_token)
+			.hook<"count", D>("count")(args);
 	},
 	find: async <D extends uranio.types.Depth>(
-		options?: uranio.types.Hook.Arguments<"user", "find", D>
+		options?: uranio.types.Hook.Arguments<"user", "find", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"user", "find", D>> => {
 		const args: uranio.types.Hook.Arguments<"user", "find", D> = {
 			...options,
 		};
-		return await uranio.base.create("user").hook<"find", D>("find")(args);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("user", current_token)
+			.hook<"find", D>("find")(args);
 	},
 	find_id: async <D extends uranio.types.Depth>(
 		id: string,
-		options?: uranio.types.Hook.Arguments<"user", "find_id", D>
+		options?: uranio.types.Hook.Arguments<"user", "find_id", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"user", "find_id", D>> => {
 		const args: uranio.types.Hook.Arguments<"user", "find_id", D> = {
 			params: {
@@ -129,29 +213,57 @@ export const users = {
 			},
 			...options,
 		};
-		return await uranio.base.create("user").hook<"find_id", D>("find_id")(args);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("user", current_token)
+			.hook<"find_id", D>("find_id")(args);
 	},
 	find_one: async <D extends uranio.types.Depth>(
-		options?: uranio.types.Hook.Arguments<"user", "find_one", D>
+		options?: uranio.types.Hook.Arguments<"user", "find_one", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"user", "find_one", D>> => {
 		const args: uranio.types.Hook.Arguments<"user", "find_one", D> = {
 			...options,
 		};
-		return await uranio.base.create("user").hook<"find_one", D>("find_one")(
-			args
-		);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("user", current_token)
+			.hook<"find_one", D>("find_one")(args);
 	},
 	insert: async <D extends uranio.types.Depth>(
-		options?: uranio.types.Hook.Arguments<"user", "insert", D>
+		options?: uranio.types.Hook.Arguments<"user", "insert", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"user", "insert", D>> => {
 		const args: uranio.types.Hook.Arguments<"user", "insert", D> = {
 			...options,
 		};
-		return await uranio.base.create("user").hook<"insert", D>("insert")(args);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("user", current_token)
+			.hook<"insert", D>("insert")(args);
 	},
 	update: async <D extends uranio.types.Depth>(
 		id: string,
-		options?: uranio.types.Hook.Arguments<"user", "update", D>
+		options?: uranio.types.Hook.Arguments<"user", "update", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"user", "update", D>> => {
 		const args: uranio.types.Hook.Arguments<"user", "update", D> = {
 			params: {
@@ -159,11 +271,21 @@ export const users = {
 			},
 			...options,
 		};
-		return await uranio.base.create("user").hook<"update", D>("update")(args);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("user", current_token)
+			.hook<"update", D>("update")(args);
 	},
 	delete: async <D extends uranio.types.Depth>(
 		id: string,
-		options?: uranio.types.Hook.Arguments<"user", "delete", D>
+		options?: uranio.types.Hook.Arguments<"user", "delete", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"user", "delete", D>> => {
 		const args: uranio.types.Hook.Arguments<"user", "delete", D> = {
 			params: {
@@ -171,29 +293,59 @@ export const users = {
 			},
 			...options,
 		};
-		return await uranio.base.create("user").hook<"delete", D>("delete")(args);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("user", current_token)
+			.hook<"delete", D>("delete")(args);
 	},
 };
 export const groups = {
 	count: async <D extends uranio.types.Depth>(
-		options?: uranio.types.Hook.Arguments<"group", "count", D>
+		options?: uranio.types.Hook.Arguments<"group", "count", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"group", "count", D>> => {
 		const args: uranio.types.Hook.Arguments<"group", "count", D> = {
 			...options,
 		};
-		return await uranio.base.create("group").hook<"count", D>("count")(args);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("group", current_token)
+			.hook<"count", D>("count")(args);
 	},
 	find: async <D extends uranio.types.Depth>(
-		options?: uranio.types.Hook.Arguments<"group", "find", D>
+		options?: uranio.types.Hook.Arguments<"group", "find", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"group", "find", D>> => {
 		const args: uranio.types.Hook.Arguments<"group", "find", D> = {
 			...options,
 		};
-		return await uranio.base.create("group").hook<"find", D>("find")(args);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("group", current_token)
+			.hook<"find", D>("find")(args);
 	},
 	find_id: async <D extends uranio.types.Depth>(
 		id: string,
-		options?: uranio.types.Hook.Arguments<"group", "find_id", D>
+		options?: uranio.types.Hook.Arguments<"group", "find_id", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"group", "find_id", D>> => {
 		const args: uranio.types.Hook.Arguments<"group", "find_id", D> = {
 			params: {
@@ -201,31 +353,57 @@ export const groups = {
 			},
 			...options,
 		};
-		return await uranio.base.create("group").hook<"find_id", D>("find_id")(
-			args
-		);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("group", current_token)
+			.hook<"find_id", D>("find_id")(args);
 	},
 	find_one: async <D extends uranio.types.Depth>(
-		options?: uranio.types.Hook.Arguments<"group", "find_one", D>
+		options?: uranio.types.Hook.Arguments<"group", "find_one", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"group", "find_one", D>> => {
 		const args: uranio.types.Hook.Arguments<"group", "find_one", D> = {
 			...options,
 		};
-		return await uranio.base.create("group").hook<"find_one", D>("find_one")(
-			args
-		);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("group", current_token)
+			.hook<"find_one", D>("find_one")(args);
 	},
 	insert: async <D extends uranio.types.Depth>(
-		options?: uranio.types.Hook.Arguments<"group", "insert", D>
+		options?: uranio.types.Hook.Arguments<"group", "insert", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"group", "insert", D>> => {
 		const args: uranio.types.Hook.Arguments<"group", "insert", D> = {
 			...options,
 		};
-		return await uranio.base.create("group").hook<"insert", D>("insert")(args);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("group", current_token)
+			.hook<"insert", D>("insert")(args);
 	},
 	update: async <D extends uranio.types.Depth>(
 		id: string,
-		options?: uranio.types.Hook.Arguments<"group", "update", D>
+		options?: uranio.types.Hook.Arguments<"group", "update", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"group", "update", D>> => {
 		const args: uranio.types.Hook.Arguments<"group", "update", D> = {
 			params: {
@@ -233,11 +411,21 @@ export const groups = {
 			},
 			...options,
 		};
-		return await uranio.base.create("group").hook<"update", D>("update")(args);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("group", current_token)
+			.hook<"update", D>("update")(args);
 	},
 	delete: async <D extends uranio.types.Depth>(
 		id: string,
-		options?: uranio.types.Hook.Arguments<"group", "delete", D>
+		options?: uranio.types.Hook.Arguments<"group", "delete", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"group", "delete", D>> => {
 		const args: uranio.types.Hook.Arguments<"group", "delete", D> = {
 			params: {
@@ -245,29 +433,59 @@ export const groups = {
 			},
 			...options,
 		};
-		return await uranio.base.create("group").hook<"delete", D>("delete")(args);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("group", current_token)
+			.hook<"delete", D>("delete")(args);
 	},
 };
 export const media = {
 	count: async <D extends uranio.types.Depth>(
-		options?: uranio.types.Hook.Arguments<"media", "count", D>
+		options?: uranio.types.Hook.Arguments<"media", "count", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"media", "count", D>> => {
 		const args: uranio.types.Hook.Arguments<"media", "count", D> = {
 			...options,
 		};
-		return await uranio.base.create("media").hook<"count", D>("count")(args);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("media", current_token)
+			.hook<"count", D>("count")(args);
 	},
 	find: async <D extends uranio.types.Depth>(
-		options?: uranio.types.Hook.Arguments<"media", "find", D>
+		options?: uranio.types.Hook.Arguments<"media", "find", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"media", "find", D>> => {
 		const args: uranio.types.Hook.Arguments<"media", "find", D> = {
 			...options,
 		};
-		return await uranio.base.create("media").hook<"find", D>("find")(args);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("media", current_token)
+			.hook<"find", D>("find")(args);
 	},
 	find_id: async <D extends uranio.types.Depth>(
 		id: string,
-		options?: uranio.types.Hook.Arguments<"media", "find_id", D>
+		options?: uranio.types.Hook.Arguments<"media", "find_id", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"media", "find_id", D>> => {
 		const args: uranio.types.Hook.Arguments<"media", "find_id", D> = {
 			params: {
@@ -275,31 +493,57 @@ export const media = {
 			},
 			...options,
 		};
-		return await uranio.base.create("media").hook<"find_id", D>("find_id")(
-			args
-		);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("media", current_token)
+			.hook<"find_id", D>("find_id")(args);
 	},
 	find_one: async <D extends uranio.types.Depth>(
-		options?: uranio.types.Hook.Arguments<"media", "find_one", D>
+		options?: uranio.types.Hook.Arguments<"media", "find_one", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"media", "find_one", D>> => {
 		const args: uranio.types.Hook.Arguments<"media", "find_one", D> = {
 			...options,
 		};
-		return await uranio.base.create("media").hook<"find_one", D>("find_one")(
-			args
-		);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("media", current_token)
+			.hook<"find_one", D>("find_one")(args);
 	},
 	insert: async <D extends uranio.types.Depth>(
-		options?: uranio.types.Hook.Arguments<"media", "insert", D>
+		options?: uranio.types.Hook.Arguments<"media", "insert", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"media", "insert", D>> => {
 		const args: uranio.types.Hook.Arguments<"media", "insert", D> = {
 			...options,
 		};
-		return await uranio.base.create("media").hook<"insert", D>("insert")(args);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("media", current_token)
+			.hook<"insert", D>("insert")(args);
 	},
 	update: async <D extends uranio.types.Depth>(
 		id: string,
-		options?: uranio.types.Hook.Arguments<"media", "update", D>
+		options?: uranio.types.Hook.Arguments<"media", "update", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"media", "update", D>> => {
 		const args: uranio.types.Hook.Arguments<"media", "update", D> = {
 			params: {
@@ -307,11 +551,21 @@ export const media = {
 			},
 			...options,
 		};
-		return await uranio.base.create("media").hook<"update", D>("update")(args);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("media", current_token)
+			.hook<"update", D>("update")(args);
 	},
 	delete: async <D extends uranio.types.Depth>(
 		id: string,
-		options?: uranio.types.Hook.Arguments<"media", "delete", D>
+		options?: uranio.types.Hook.Arguments<"media", "delete", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"media", "delete", D>> => {
 		const args: uranio.types.Hook.Arguments<"media", "delete", D> = {
 			params: {
@@ -319,29 +573,59 @@ export const media = {
 			},
 			...options,
 		};
-		return await uranio.base.create("media").hook<"delete", D>("delete")(args);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("media", current_token)
+			.hook<"delete", D>("delete")(args);
 	},
 };
 export const settings = {
 	count: async <D extends uranio.types.Depth>(
-		options?: uranio.types.Hook.Arguments<"setting", "count", D>
+		options?: uranio.types.Hook.Arguments<"setting", "count", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"setting", "count", D>> => {
 		const args: uranio.types.Hook.Arguments<"setting", "count", D> = {
 			...options,
 		};
-		return await uranio.base.create("setting").hook<"count", D>("count")(args);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("setting", current_token)
+			.hook<"count", D>("count")(args);
 	},
 	find: async <D extends uranio.types.Depth>(
-		options?: uranio.types.Hook.Arguments<"setting", "find", D>
+		options?: uranio.types.Hook.Arguments<"setting", "find", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"setting", "find", D>> => {
 		const args: uranio.types.Hook.Arguments<"setting", "find", D> = {
 			...options,
 		};
-		return await uranio.base.create("setting").hook<"find", D>("find")(args);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("setting", current_token)
+			.hook<"find", D>("find")(args);
 	},
 	find_id: async <D extends uranio.types.Depth>(
 		id: string,
-		options?: uranio.types.Hook.Arguments<"setting", "find_id", D>
+		options?: uranio.types.Hook.Arguments<"setting", "find_id", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"setting", "find_id", D>> => {
 		const args: uranio.types.Hook.Arguments<"setting", "find_id", D> = {
 			params: {
@@ -349,33 +633,57 @@ export const settings = {
 			},
 			...options,
 		};
-		return await uranio.base.create("setting").hook<"find_id", D>("find_id")(
-			args
-		);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("setting", current_token)
+			.hook<"find_id", D>("find_id")(args);
 	},
 	find_one: async <D extends uranio.types.Depth>(
-		options?: uranio.types.Hook.Arguments<"setting", "find_one", D>
+		options?: uranio.types.Hook.Arguments<"setting", "find_one", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"setting", "find_one", D>> => {
 		const args: uranio.types.Hook.Arguments<"setting", "find_one", D> = {
 			...options,
 		};
-		return await uranio.base.create("setting").hook<"find_one", D>("find_one")(
-			args
-		);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("setting", current_token)
+			.hook<"find_one", D>("find_one")(args);
 	},
 	insert: async <D extends uranio.types.Depth>(
-		options?: uranio.types.Hook.Arguments<"setting", "insert", D>
+		options?: uranio.types.Hook.Arguments<"setting", "insert", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"setting", "insert", D>> => {
 		const args: uranio.types.Hook.Arguments<"setting", "insert", D> = {
 			...options,
 		};
-		return await uranio.base.create("setting").hook<"insert", D>("insert")(
-			args
-		);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("setting", current_token)
+			.hook<"insert", D>("insert")(args);
 	},
 	update: async <D extends uranio.types.Depth>(
 		id: string,
-		options?: uranio.types.Hook.Arguments<"setting", "update", D>
+		options?: uranio.types.Hook.Arguments<"setting", "update", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"setting", "update", D>> => {
 		const args: uranio.types.Hook.Arguments<"setting", "update", D> = {
 			params: {
@@ -383,13 +691,21 @@ export const settings = {
 			},
 			...options,
 		};
-		return await uranio.base.create("setting").hook<"update", D>("update")(
-			args
-		);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("setting", current_token)
+			.hook<"update", D>("update")(args);
 	},
 	delete: async <D extends uranio.types.Depth>(
 		id: string,
-		options?: uranio.types.Hook.Arguments<"setting", "delete", D>
+		options?: uranio.types.Hook.Arguments<"setting", "delete", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"setting", "delete", D>> => {
 		const args: uranio.types.Hook.Arguments<"setting", "delete", D> = {
 			params: {
@@ -397,31 +713,59 @@ export const settings = {
 			},
 			...options,
 		};
-		return await uranio.base.create("setting").hook<"delete", D>("delete")(
-			args
-		);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("setting", current_token)
+			.hook<"delete", D>("delete")(args);
 	},
 };
 export const errors = {
 	count: async <D extends uranio.types.Depth>(
-		options?: uranio.types.Hook.Arguments<"error", "count", D>
+		options?: uranio.types.Hook.Arguments<"error", "count", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"error", "count", D>> => {
 		const args: uranio.types.Hook.Arguments<"error", "count", D> = {
 			...options,
 		};
-		return await uranio.base.create("error").hook<"count", D>("count")(args);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("error", current_token)
+			.hook<"count", D>("count")(args);
 	},
 	find: async <D extends uranio.types.Depth>(
-		options?: uranio.types.Hook.Arguments<"error", "find", D>
+		options?: uranio.types.Hook.Arguments<"error", "find", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"error", "find", D>> => {
 		const args: uranio.types.Hook.Arguments<"error", "find", D> = {
 			...options,
 		};
-		return await uranio.base.create("error").hook<"find", D>("find")(args);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("error", current_token)
+			.hook<"find", D>("find")(args);
 	},
 	find_id: async <D extends uranio.types.Depth>(
 		id: string,
-		options?: uranio.types.Hook.Arguments<"error", "find_id", D>
+		options?: uranio.types.Hook.Arguments<"error", "find_id", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"error", "find_id", D>> => {
 		const args: uranio.types.Hook.Arguments<"error", "find_id", D> = {
 			params: {
@@ -429,31 +773,57 @@ export const errors = {
 			},
 			...options,
 		};
-		return await uranio.base.create("error").hook<"find_id", D>("find_id")(
-			args
-		);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("error", current_token)
+			.hook<"find_id", D>("find_id")(args);
 	},
 	find_one: async <D extends uranio.types.Depth>(
-		options?: uranio.types.Hook.Arguments<"error", "find_one", D>
+		options?: uranio.types.Hook.Arguments<"error", "find_one", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"error", "find_one", D>> => {
 		const args: uranio.types.Hook.Arguments<"error", "find_one", D> = {
 			...options,
 		};
-		return await uranio.base.create("error").hook<"find_one", D>("find_one")(
-			args
-		);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("error", current_token)
+			.hook<"find_one", D>("find_one")(args);
 	},
 	insert: async <D extends uranio.types.Depth>(
-		options?: uranio.types.Hook.Arguments<"error", "insert", D>
+		options?: uranio.types.Hook.Arguments<"error", "insert", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"error", "insert", D>> => {
 		const args: uranio.types.Hook.Arguments<"error", "insert", D> = {
 			...options,
 		};
-		return await uranio.base.create("error").hook<"insert", D>("insert")(args);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("error", current_token)
+			.hook<"insert", D>("insert")(args);
 	},
 	update: async <D extends uranio.types.Depth>(
 		id: string,
-		options?: uranio.types.Hook.Arguments<"error", "update", D>
+		options?: uranio.types.Hook.Arguments<"error", "update", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"error", "update", D>> => {
 		const args: uranio.types.Hook.Arguments<"error", "update", D> = {
 			params: {
@@ -461,11 +831,21 @@ export const errors = {
 			},
 			...options,
 		};
-		return await uranio.base.create("error").hook<"update", D>("update")(args);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("error", current_token)
+			.hook<"update", D>("update")(args);
 	},
 	delete: async <D extends uranio.types.Depth>(
 		id: string,
-		options?: uranio.types.Hook.Arguments<"error", "delete", D>
+		options?: uranio.types.Hook.Arguments<"error", "delete", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"error", "delete", D>> => {
 		const args: uranio.types.Hook.Arguments<"error", "delete", D> = {
 			params: {
@@ -473,29 +853,59 @@ export const errors = {
 			},
 			...options,
 		};
-		return await uranio.base.create("error").hook<"delete", D>("delete")(args);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("error", current_token)
+			.hook<"delete", D>("delete")(args);
 	},
 };
 export const requests = {
 	count: async <D extends uranio.types.Depth>(
-		options?: uranio.types.Hook.Arguments<"request", "count", D>
+		options?: uranio.types.Hook.Arguments<"request", "count", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"request", "count", D>> => {
 		const args: uranio.types.Hook.Arguments<"request", "count", D> = {
 			...options,
 		};
-		return await uranio.base.create("request").hook<"count", D>("count")(args);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("request", current_token)
+			.hook<"count", D>("count")(args);
 	},
 	find: async <D extends uranio.types.Depth>(
-		options?: uranio.types.Hook.Arguments<"request", "find", D>
+		options?: uranio.types.Hook.Arguments<"request", "find", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"request", "find", D>> => {
 		const args: uranio.types.Hook.Arguments<"request", "find", D> = {
 			...options,
 		};
-		return await uranio.base.create("request").hook<"find", D>("find")(args);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("request", current_token)
+			.hook<"find", D>("find")(args);
 	},
 	find_id: async <D extends uranio.types.Depth>(
 		id: string,
-		options?: uranio.types.Hook.Arguments<"request", "find_id", D>
+		options?: uranio.types.Hook.Arguments<"request", "find_id", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"request", "find_id", D>> => {
 		const args: uranio.types.Hook.Arguments<"request", "find_id", D> = {
 			params: {
@@ -503,33 +913,57 @@ export const requests = {
 			},
 			...options,
 		};
-		return await uranio.base.create("request").hook<"find_id", D>("find_id")(
-			args
-		);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("request", current_token)
+			.hook<"find_id", D>("find_id")(args);
 	},
 	find_one: async <D extends uranio.types.Depth>(
-		options?: uranio.types.Hook.Arguments<"request", "find_one", D>
+		options?: uranio.types.Hook.Arguments<"request", "find_one", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"request", "find_one", D>> => {
 		const args: uranio.types.Hook.Arguments<"request", "find_one", D> = {
 			...options,
 		};
-		return await uranio.base.create("request").hook<"find_one", D>("find_one")(
-			args
-		);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("request", current_token)
+			.hook<"find_one", D>("find_one")(args);
 	},
 	insert: async <D extends uranio.types.Depth>(
-		options?: uranio.types.Hook.Arguments<"request", "insert", D>
+		options?: uranio.types.Hook.Arguments<"request", "insert", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"request", "insert", D>> => {
 		const args: uranio.types.Hook.Arguments<"request", "insert", D> = {
 			...options,
 		};
-		return await uranio.base.create("request").hook<"insert", D>("insert")(
-			args
-		);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("request", current_token)
+			.hook<"insert", D>("insert")(args);
 	},
 	update: async <D extends uranio.types.Depth>(
 		id: string,
-		options?: uranio.types.Hook.Arguments<"request", "update", D>
+		options?: uranio.types.Hook.Arguments<"request", "update", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"request", "update", D>> => {
 		const args: uranio.types.Hook.Arguments<"request", "update", D> = {
 			params: {
@@ -537,13 +971,21 @@ export const requests = {
 			},
 			...options,
 		};
-		return await uranio.base.create("request").hook<"update", D>("update")(
-			args
-		);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("request", current_token)
+			.hook<"update", D>("update")(args);
 	},
 	delete: async <D extends uranio.types.Depth>(
 		id: string,
-		options?: uranio.types.Hook.Arguments<"request", "delete", D>
+		options?: uranio.types.Hook.Arguments<"request", "delete", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"request", "delete", D>> => {
 		const args: uranio.types.Hook.Arguments<"request", "delete", D> = {
 			params: {
@@ -551,39 +993,77 @@ export const requests = {
 			},
 			...options,
 		};
-		return await uranio.base.create("request").hook<"delete", D>("delete")(
-			args
-		);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("request", current_token)
+			.hook<"delete", D>("delete")(args);
 	},
 };
 export const customers = {
 	count: async <D extends uranio.types.Depth>(
-		options?: uranio.types.Hook.Arguments<"customer", "count", D>
+		options?: uranio.types.Hook.Arguments<"customer", "count", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"customer", "count", D>> => {
 		const args: uranio.types.Hook.Arguments<"customer", "count", D> = {
 			...options,
 		};
-		return await uranio.base.create("customer").hook<"count", D>("count")(args);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("customer", current_token)
+			.hook<"count", D>("count")(args);
 	},
 	pippi: async <D extends uranio.types.Depth>(
-		options?: uranio.types.Hook.Arguments<"customer", "pippi", D>
+		options?: uranio.types.Hook.Arguments<"customer", "pippi", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"customer", "pippi", D>> => {
 		const args: uranio.types.Hook.Arguments<"customer", "pippi", D> = {
 			...options,
 		};
-		return await uranio.base.create("customer").hook<"pippi", D>("pippi")(args);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("customer", current_token)
+			.hook<"pippi", D>("pippi")(args);
 	},
 	find: async <D extends uranio.types.Depth>(
-		options?: uranio.types.Hook.Arguments<"customer", "find", D>
+		options?: uranio.types.Hook.Arguments<"customer", "find", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"customer", "find", D>> => {
 		const args: uranio.types.Hook.Arguments<"customer", "find", D> = {
 			...options,
 		};
-		return await uranio.base.create("customer").hook<"find", D>("find")(args);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("customer", current_token)
+			.hook<"find", D>("find")(args);
 	},
 	find_id: async <D extends uranio.types.Depth>(
 		id: string,
-		options?: uranio.types.Hook.Arguments<"customer", "find_id", D>
+		options?: uranio.types.Hook.Arguments<"customer", "find_id", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"customer", "find_id", D>> => {
 		const args: uranio.types.Hook.Arguments<"customer", "find_id", D> = {
 			params: {
@@ -591,33 +1071,57 @@ export const customers = {
 			},
 			...options,
 		};
-		return await uranio.base.create("customer").hook<"find_id", D>("find_id")(
-			args
-		);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("customer", current_token)
+			.hook<"find_id", D>("find_id")(args);
 	},
 	find_one: async <D extends uranio.types.Depth>(
-		options?: uranio.types.Hook.Arguments<"customer", "find_one", D>
+		options?: uranio.types.Hook.Arguments<"customer", "find_one", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"customer", "find_one", D>> => {
 		const args: uranio.types.Hook.Arguments<"customer", "find_one", D> = {
 			...options,
 		};
-		return await uranio.base.create("customer").hook<"find_one", D>("find_one")(
-			args
-		);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("customer", current_token)
+			.hook<"find_one", D>("find_one")(args);
 	},
 	insert: async <D extends uranio.types.Depth>(
-		options?: uranio.types.Hook.Arguments<"customer", "insert", D>
+		options?: uranio.types.Hook.Arguments<"customer", "insert", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"customer", "insert", D>> => {
 		const args: uranio.types.Hook.Arguments<"customer", "insert", D> = {
 			...options,
 		};
-		return await uranio.base.create("customer").hook<"insert", D>("insert")(
-			args
-		);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("customer", current_token)
+			.hook<"insert", D>("insert")(args);
 	},
 	update: async <D extends uranio.types.Depth>(
 		id: string,
-		options?: uranio.types.Hook.Arguments<"customer", "update", D>
+		options?: uranio.types.Hook.Arguments<"customer", "update", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"customer", "update", D>> => {
 		const args: uranio.types.Hook.Arguments<"customer", "update", D> = {
 			params: {
@@ -625,13 +1129,21 @@ export const customers = {
 			},
 			...options,
 		};
-		return await uranio.base.create("customer").hook<"update", D>("update")(
-			args
-		);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("customer", current_token)
+			.hook<"update", D>("update")(args);
 	},
 	delete: async <D extends uranio.types.Depth>(
 		id: string,
-		options?: uranio.types.Hook.Arguments<"customer", "delete", D>
+		options?: uranio.types.Hook.Arguments<"customer", "delete", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"customer", "delete", D>> => {
 		const args: uranio.types.Hook.Arguments<"customer", "delete", D> = {
 			params: {
@@ -639,31 +1151,59 @@ export const customers = {
 			},
 			...options,
 		};
-		return await uranio.base.create("customer").hook<"delete", D>("delete")(
-			args
-		);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("customer", current_token)
+			.hook<"delete", D>("delete")(args);
 	},
 };
 export const mykarts = {
 	count: async <D extends uranio.types.Depth>(
-		options?: uranio.types.Hook.Arguments<"mykart", "count", D>
+		options?: uranio.types.Hook.Arguments<"mykart", "count", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"mykart", "count", D>> => {
 		const args: uranio.types.Hook.Arguments<"mykart", "count", D> = {
 			...options,
 		};
-		return await uranio.base.create("mykart").hook<"count", D>("count")(args);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("mykart", current_token)
+			.hook<"count", D>("count")(args);
 	},
 	find: async <D extends uranio.types.Depth>(
-		options?: uranio.types.Hook.Arguments<"mykart", "find", D>
+		options?: uranio.types.Hook.Arguments<"mykart", "find", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"mykart", "find", D>> => {
 		const args: uranio.types.Hook.Arguments<"mykart", "find", D> = {
 			...options,
 		};
-		return await uranio.base.create("mykart").hook<"find", D>("find")(args);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("mykart", current_token)
+			.hook<"find", D>("find")(args);
 	},
 	find_id: async <D extends uranio.types.Depth>(
 		id: string,
-		options?: uranio.types.Hook.Arguments<"mykart", "find_id", D>
+		options?: uranio.types.Hook.Arguments<"mykart", "find_id", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"mykart", "find_id", D>> => {
 		const args: uranio.types.Hook.Arguments<"mykart", "find_id", D> = {
 			params: {
@@ -671,31 +1211,57 @@ export const mykarts = {
 			},
 			...options,
 		};
-		return await uranio.base.create("mykart").hook<"find_id", D>("find_id")(
-			args
-		);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("mykart", current_token)
+			.hook<"find_id", D>("find_id")(args);
 	},
 	find_one: async <D extends uranio.types.Depth>(
-		options?: uranio.types.Hook.Arguments<"mykart", "find_one", D>
+		options?: uranio.types.Hook.Arguments<"mykart", "find_one", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"mykart", "find_one", D>> => {
 		const args: uranio.types.Hook.Arguments<"mykart", "find_one", D> = {
 			...options,
 		};
-		return await uranio.base.create("mykart").hook<"find_one", D>("find_one")(
-			args
-		);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("mykart", current_token)
+			.hook<"find_one", D>("find_one")(args);
 	},
 	insert: async <D extends uranio.types.Depth>(
-		options?: uranio.types.Hook.Arguments<"mykart", "insert", D>
+		options?: uranio.types.Hook.Arguments<"mykart", "insert", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"mykart", "insert", D>> => {
 		const args: uranio.types.Hook.Arguments<"mykart", "insert", D> = {
 			...options,
 		};
-		return await uranio.base.create("mykart").hook<"insert", D>("insert")(args);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("mykart", current_token)
+			.hook<"insert", D>("insert")(args);
 	},
 	update: async <D extends uranio.types.Depth>(
 		id: string,
-		options?: uranio.types.Hook.Arguments<"mykart", "update", D>
+		options?: uranio.types.Hook.Arguments<"mykart", "update", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"mykart", "update", D>> => {
 		const args: uranio.types.Hook.Arguments<"mykart", "update", D> = {
 			params: {
@@ -703,11 +1269,21 @@ export const mykarts = {
 			},
 			...options,
 		};
-		return await uranio.base.create("mykart").hook<"update", D>("update")(args);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("mykart", current_token)
+			.hook<"update", D>("update")(args);
 	},
 	delete: async <D extends uranio.types.Depth>(
 		id: string,
-		options?: uranio.types.Hook.Arguments<"mykart", "delete", D>
+		options?: uranio.types.Hook.Arguments<"mykart", "delete", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"mykart", "delete", D>> => {
 		const args: uranio.types.Hook.Arguments<"mykart", "delete", D> = {
 			params: {
@@ -715,39 +1291,77 @@ export const mykarts = {
 			},
 			...options,
 		};
-		return await uranio.base.create("mykart").hook<"delete", D>("delete")(args);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("mykart", current_token)
+			.hook<"delete", D>("delete")(args);
 	},
 };
 export const products = {
 	count: async <D extends uranio.types.Depth>(
-		options?: uranio.types.Hook.Arguments<"product", "count", D>
+		options?: uranio.types.Hook.Arguments<"product", "count", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"product", "count", D>> => {
 		const args: uranio.types.Hook.Arguments<"product", "count", D> = {
 			...options,
 		};
-		return await uranio.base.create("product").hook<"count", D>("count")(args);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("product", current_token)
+			.hook<"count", D>("count")(args);
 	},
 	myroute: async <D extends uranio.types.Depth>(
-		options?: uranio.types.Hook.Arguments<"product", "myroute", D>
+		options?: uranio.types.Hook.Arguments<"product", "myroute", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"product", "myroute", D>> => {
 		const args: uranio.types.Hook.Arguments<"product", "myroute", D> = {
 			...options,
 		};
-		return await uranio.base.create("product").hook<"myroute", D>("myroute")(
-			args
-		);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("product", current_token)
+			.hook<"myroute", D>("myroute")(args);
 	},
 	find: async <D extends uranio.types.Depth>(
-		options?: uranio.types.Hook.Arguments<"product", "find", D>
+		options?: uranio.types.Hook.Arguments<"product", "find", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"product", "find", D>> => {
 		const args: uranio.types.Hook.Arguments<"product", "find", D> = {
 			...options,
 		};
-		return await uranio.base.create("product").hook<"find", D>("find")(args);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("product", current_token)
+			.hook<"find", D>("find")(args);
 	},
 	find_id: async <D extends uranio.types.Depth>(
 		id: string,
-		options?: uranio.types.Hook.Arguments<"product", "find_id", D>
+		options?: uranio.types.Hook.Arguments<"product", "find_id", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"product", "find_id", D>> => {
 		const args: uranio.types.Hook.Arguments<"product", "find_id", D> = {
 			params: {
@@ -755,33 +1369,57 @@ export const products = {
 			},
 			...options,
 		};
-		return await uranio.base.create("product").hook<"find_id", D>("find_id")(
-			args
-		);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("product", current_token)
+			.hook<"find_id", D>("find_id")(args);
 	},
 	find_one: async <D extends uranio.types.Depth>(
-		options?: uranio.types.Hook.Arguments<"product", "find_one", D>
+		options?: uranio.types.Hook.Arguments<"product", "find_one", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"product", "find_one", D>> => {
 		const args: uranio.types.Hook.Arguments<"product", "find_one", D> = {
 			...options,
 		};
-		return await uranio.base.create("product").hook<"find_one", D>("find_one")(
-			args
-		);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("product", current_token)
+			.hook<"find_one", D>("find_one")(args);
 	},
 	insert: async <D extends uranio.types.Depth>(
-		options?: uranio.types.Hook.Arguments<"product", "insert", D>
+		options?: uranio.types.Hook.Arguments<"product", "insert", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"product", "insert", D>> => {
 		const args: uranio.types.Hook.Arguments<"product", "insert", D> = {
 			...options,
 		};
-		return await uranio.base.create("product").hook<"insert", D>("insert")(
-			args
-		);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("product", current_token)
+			.hook<"insert", D>("insert")(args);
 	},
 	update: async <D extends uranio.types.Depth>(
 		id: string,
-		options?: uranio.types.Hook.Arguments<"product", "update", D>
+		options?: uranio.types.Hook.Arguments<"product", "update", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"product", "update", D>> => {
 		const args: uranio.types.Hook.Arguments<"product", "update", D> = {
 			params: {
@@ -789,13 +1427,21 @@ export const products = {
 			},
 			...options,
 		};
-		return await uranio.base.create("product").hook<"update", D>("update")(
-			args
-		);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("product", current_token)
+			.hook<"update", D>("update")(args);
 	},
 	delete: async <D extends uranio.types.Depth>(
 		id: string,
-		options?: uranio.types.Hook.Arguments<"product", "delete", D>
+		options?: uranio.types.Hook.Arguments<"product", "delete", D>,
+		token?: string
 	): Promise<uranio.types.Hook.Response<"product", "delete", D>> => {
 		const args: uranio.types.Hook.Arguments<"product", "delete", D> = {
 			params: {
@@ -803,8 +1449,15 @@ export const products = {
 			},
 			...options,
 		};
-		return await uranio.base.create("product").hook<"delete", D>("delete")(
-			args
-		);
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.base
+			.create("product", current_token)
+			.hook<"delete", D>("delete")(args);
 	},
 };
