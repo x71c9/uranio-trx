@@ -12,6 +12,8 @@ import * as base from '../base/';
 
 import * as auth from '../auth/';
 
+import * as media from '../media/';
+
 import * as hooks from '../hooks/';
 
 import * as book from '../book/client';
@@ -33,6 +35,7 @@ export {
 	api,
 	base,
 	auth,
+	media,
 	hooks,
 	book,
 	conf,
