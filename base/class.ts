@@ -20,9 +20,9 @@ import {Hook} from './types';
 
 @urn_log.util.decorators.debug_constructor
 @urn_log.util.decorators.debug_methods
-class Base<A extends client_types.AtomName> {
+export class Base<A extends client_types.AtomName> {
 	
-	private raw:client_types.RAW<A>;
+	protected raw:client_types.RAW<A>;
 	
 	constructor(public atom_name:A, public token?:string){
 		this.raw = create_raw();

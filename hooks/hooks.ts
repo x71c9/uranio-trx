@@ -445,7 +445,27 @@ export const groups = {
 			.hook<"delete", D>("delete")(args);
 	},
 };
+// type MediaOptions = {
+//   body?: any
+// }
 export const media = {
+	upload: async<D extends uranio.types.Depth>(
+		file: Buffer | ArrayBuffer | Blob,
+		// options?: MediaOptions,
+		token?: string
+	): Promise<urn_response.General<uranio.types.Atom<'media'>>> => {
+		// const args: MediaOptions = {
+		//   ...options,
+		// };
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.media.create(current_token).upload<D>(file, current_token);
+	},
 	count: async <D extends uranio.types.Depth>(
 		options?: uranio.types.Hook.Arguments<"media", "count", D>,
 		token?: string
