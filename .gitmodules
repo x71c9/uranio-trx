@@ -1,0 +1,5 @@
+[submodule "api"]
+	path = api
+	url = git+ssh://git@github.com/nbl7/uranio-api.git
+	branch = master
+	update = rebase
