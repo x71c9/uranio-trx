@@ -10,6 +10,6 @@ export const trx_client_config:FullClientConfiguration = {
 	
 	raw: 'axios',
 	
-	base_url: 'http://localhost:8888/uranio/api'
+	base_url: 'http://localhost:7777/uranio/api'
 	
 };
