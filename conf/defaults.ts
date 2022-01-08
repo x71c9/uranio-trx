@@ -17,6 +17,4 @@ export const trx_config:FullConfiguration = {
 	// so the server conf should have all the client conf as well
 	base_url: '',
 	
-	client_port: 3333
-	
 };
