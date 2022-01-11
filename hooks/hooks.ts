@@ -445,18 +445,11 @@ export const groups = {
 			.hook<"delete", D>("delete")(args);
 	},
 };
-// type MediaOptions = {
-//   body?: any
-// }
 export const media = {
-	upload: async<D extends uranio.types.Depth>(
+	upload: async <D extends uranio.types.Depth>(
 		file: Buffer | ArrayBuffer | Blob,
-		// options?: MediaOptions,
 		token?: string
-	): Promise<urn_response.General<uranio.types.Atom<'media'>>> => {
-		// const args: MediaOptions = {
-		//   ...options,
-		// };
+	): Promise<urn_response.General<uranio.types.Atom<"media">>> => {
 		let current_token: string | undefined;
 		if (typeof hook_token === "string" && hook_token !== "") {
 			current_token = hook_token;
@@ -464,7 +457,9 @@ export const media = {
 		if (typeof token === "string" && token !== "") {
 			current_token = token;
 		}
-		return await uranio.media.create(current_token).upload<D>(file, current_token);
+		return await uranio.media
+			.create(current_token)
+			.upload<D>(file, current_token);
 	},
 	count: async <D extends uranio.types.Depth>(
 		options?: uranio.types.Hook.Arguments<"media", "count", D>,
@@ -1044,11 +1039,11 @@ export const customers = {
 			.create("customer", current_token)
 			.hook<"count", D>("count")(args);
 	},
-	pippi: async <D extends uranio.types.Depth>(
-		options?: uranio.types.Hook.Arguments<"customer", "pippi", D>,
+	hello: async <D extends uranio.types.Depth>(
+		options?: uranio.types.Hook.Arguments<"customer", "hello", D>,
 		token?: string
-	): Promise<uranio.types.Hook.Response<"customer", "pippi", D>> => {
-		const args: uranio.types.Hook.Arguments<"customer", "pippi", D> = {
+	): Promise<uranio.types.Hook.Response<"customer", "hello", D>> => {
+		const args: uranio.types.Hook.Arguments<"customer", "hello", D> = {
 			...options,
 		};
 		let current_token: string | undefined;
@@ -1060,7 +1055,7 @@ export const customers = {
 		}
 		return await uranio.base
 			.create("customer", current_token)
-			.hook<"pippi", D>("pippi")(args);
+			.hook<"hello", D>("hello")(args);
 	},
 	find: async <D extends uranio.types.Depth>(
 		options?: uranio.types.Hook.Arguments<"customer", "find", D>,
