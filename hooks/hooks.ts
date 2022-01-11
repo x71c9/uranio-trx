@@ -1039,11 +1039,11 @@ export const customers = {
 			.create("customer", current_token)
 			.hook<"count", D>("count")(args);
 	},
-	hello: async <D extends uranio.types.Depth>(
-		options?: uranio.types.Hook.Arguments<"customer", "hello", D>,
+	hello2: async <D extends uranio.types.Depth>(
+		options?: uranio.types.Hook.Arguments<"customer", "hello2", D>,
 		token?: string
-	): Promise<uranio.types.Hook.Response<"customer", "hello", D>> => {
-		const args: uranio.types.Hook.Arguments<"customer", "hello", D> = {
+	): Promise<uranio.types.Hook.Response<"customer", "hello2", D>> => {
+		const args: uranio.types.Hook.Arguments<"customer", "hello2", D> = {
 			...options,
 		};
 		let current_token: string | undefined;
@@ -1055,7 +1055,7 @@ export const customers = {
 		}
 		return await uranio.base
 			.create("customer", current_token)
-			.hook<"hello", D>("hello")(args);
+			.hook<"hello2", D>("hello2")(args);
 	},
 	find: async <D extends uranio.types.Depth>(
 		options?: uranio.types.Hook.Arguments<"customer", "find", D>,
