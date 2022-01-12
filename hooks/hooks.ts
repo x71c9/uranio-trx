@@ -566,14 +566,14 @@ export const customers = {
 		};
 		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('customer',current_token).hook<'count',D>('count')(args);
 	},
-	hello2: async <D extends uranio.types.Depth>(
-		options?:uranio.types.Hook.Arguments<'customer', 'hello2', D>,
+	hello: async <D extends uranio.types.Depth>(
+		options?:uranio.types.Hook.Arguments<'customer', 'hello', D>,
 		token?:string
-	):Promise<uranio.types.Hook.Response<'customer', 'hello2', D>>  => {
-		const args:uranio.types.Hook.Arguments<'customer', 'hello2', D> = {
+	):Promise<uranio.types.Hook.Response<'customer', 'hello', D>>  => {
+		const args:uranio.types.Hook.Arguments<'customer', 'hello', D> = {
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('customer',current_token).hook<'hello2',D>('hello2')(args);
+		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('customer',current_token).hook<'hello',D>('hello')(args);
 	},
 	find: async <D extends uranio.types.Depth>(
 		options?:uranio.types.Hook.Arguments<'customer', 'find', D>,
