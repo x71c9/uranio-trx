@@ -27,7 +27,14 @@ export const superusers = {
 		const args:uranio.types.Hook.Arguments<'superuser', 'count', D> = {
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('superuser',current_token).hook<'count',D>('count')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('superuser',current_token).hook<'count',D>('count')(args);
 	},
 	find: async <D extends uranio.types.Depth>(
 		options?:uranio.types.Hook.Arguments<'superuser', 'find', D>,
@@ -36,7 +43,14 @@ export const superusers = {
 		const args:uranio.types.Hook.Arguments<'superuser', 'find', D> = {
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('superuser',current_token).hook<'find',D>('find')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('superuser',current_token).hook<'find',D>('find')(args);
 	},
 	find_id: async <D extends uranio.types.Depth>(
 		id:string, options?:uranio.types.Hook.Arguments<'superuser', 'find_id', D>,
@@ -48,7 +62,14 @@ export const superusers = {
 			},
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('superuser',current_token).hook<'find_id',D>('find_id')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('superuser',current_token).hook<'find_id',D>('find_id')(args);
 	},
 	find_one: async <D extends uranio.types.Depth>(
 		options?:uranio.types.Hook.Arguments<'superuser', 'find_one', D>,
@@ -57,7 +78,14 @@ export const superusers = {
 		const args:uranio.types.Hook.Arguments<'superuser', 'find_one', D> = {
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('superuser',current_token).hook<'find_one',D>('find_one')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('superuser',current_token).hook<'find_one',D>('find_one')(args);
 	},
 	insert: async <D extends uranio.types.Depth>(
 		options?:uranio.types.Hook.Arguments<'superuser', 'insert', D>,
@@ -66,7 +94,14 @@ export const superusers = {
 		const args:uranio.types.Hook.Arguments<'superuser', 'insert', D> = {
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('superuser',current_token).hook<'insert',D>('insert')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('superuser',current_token).hook<'insert',D>('insert')(args);
 	},
 	update: async <D extends uranio.types.Depth>(
 		id:string, options?:uranio.types.Hook.Arguments<'superuser', 'update', D>,
@@ -78,7 +113,14 @@ export const superusers = {
 			},
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('superuser',current_token).hook<'update',D>('update')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('superuser',current_token).hook<'update',D>('update')(args);
 	},
 	delete: async <D extends uranio.types.Depth>(
 		id:string, options?:uranio.types.Hook.Arguments<'superuser', 'delete', D>,
@@ -90,7 +132,14 @@ export const superusers = {
 			},
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('superuser',current_token).hook<'delete',D>('delete')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('superuser',current_token).hook<'delete',D>('delete')(args);
 	},
 };
 export const users = {
@@ -107,7 +156,14 @@ export const users = {
 		const args:uranio.types.Hook.Arguments<'user', 'count', D> = {
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('user',current_token).hook<'count',D>('count')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('user',current_token).hook<'count',D>('count')(args);
 	},
 	find: async <D extends uranio.types.Depth>(
 		options?:uranio.types.Hook.Arguments<'user', 'find', D>,
@@ -116,7 +172,14 @@ export const users = {
 		const args:uranio.types.Hook.Arguments<'user', 'find', D> = {
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('user',current_token).hook<'find',D>('find')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('user',current_token).hook<'find',D>('find')(args);
 	},
 	find_id: async <D extends uranio.types.Depth>(
 		id:string, options?:uranio.types.Hook.Arguments<'user', 'find_id', D>,
@@ -128,7 +191,14 @@ export const users = {
 			},
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('user',current_token).hook<'find_id',D>('find_id')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('user',current_token).hook<'find_id',D>('find_id')(args);
 	},
 	find_one: async <D extends uranio.types.Depth>(
 		options?:uranio.types.Hook.Arguments<'user', 'find_one', D>,
@@ -137,7 +207,14 @@ export const users = {
 		const args:uranio.types.Hook.Arguments<'user', 'find_one', D> = {
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('user',current_token).hook<'find_one',D>('find_one')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('user',current_token).hook<'find_one',D>('find_one')(args);
 	},
 	insert: async <D extends uranio.types.Depth>(
 		options?:uranio.types.Hook.Arguments<'user', 'insert', D>,
@@ -146,7 +223,14 @@ export const users = {
 		const args:uranio.types.Hook.Arguments<'user', 'insert', D> = {
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('user',current_token).hook<'insert',D>('insert')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('user',current_token).hook<'insert',D>('insert')(args);
 	},
 	update: async <D extends uranio.types.Depth>(
 		id:string, options?:uranio.types.Hook.Arguments<'user', 'update', D>,
@@ -158,7 +242,14 @@ export const users = {
 			},
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('user',current_token).hook<'update',D>('update')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('user',current_token).hook<'update',D>('update')(args);
 	},
 	delete: async <D extends uranio.types.Depth>(
 		id:string, options?:uranio.types.Hook.Arguments<'user', 'delete', D>,
@@ -170,7 +261,14 @@ export const users = {
 			},
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('user',current_token).hook<'delete',D>('delete')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('user',current_token).hook<'delete',D>('delete')(args);
 	},
 };
 export const groups = {
@@ -181,7 +279,14 @@ export const groups = {
 		const args:uranio.types.Hook.Arguments<'group', 'count', D> = {
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('group',current_token).hook<'count',D>('count')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('group',current_token).hook<'count',D>('count')(args);
 	},
 	find: async <D extends uranio.types.Depth>(
 		options?:uranio.types.Hook.Arguments<'group', 'find', D>,
@@ -190,7 +295,14 @@ export const groups = {
 		const args:uranio.types.Hook.Arguments<'group', 'find', D> = {
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('group',current_token).hook<'find',D>('find')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('group',current_token).hook<'find',D>('find')(args);
 	},
 	find_id: async <D extends uranio.types.Depth>(
 		id:string, options?:uranio.types.Hook.Arguments<'group', 'find_id', D>,
@@ -202,7 +314,14 @@ export const groups = {
 			},
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('group',current_token).hook<'find_id',D>('find_id')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('group',current_token).hook<'find_id',D>('find_id')(args);
 	},
 	find_one: async <D extends uranio.types.Depth>(
 		options?:uranio.types.Hook.Arguments<'group', 'find_one', D>,
@@ -211,7 +330,14 @@ export const groups = {
 		const args:uranio.types.Hook.Arguments<'group', 'find_one', D> = {
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('group',current_token).hook<'find_one',D>('find_one')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('group',current_token).hook<'find_one',D>('find_one')(args);
 	},
 	insert: async <D extends uranio.types.Depth>(
 		options?:uranio.types.Hook.Arguments<'group', 'insert', D>,
@@ -220,7 +346,14 @@ export const groups = {
 		const args:uranio.types.Hook.Arguments<'group', 'insert', D> = {
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('group',current_token).hook<'insert',D>('insert')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('group',current_token).hook<'insert',D>('insert')(args);
 	},
 	update: async <D extends uranio.types.Depth>(
 		id:string, options?:uranio.types.Hook.Arguments<'group', 'update', D>,
@@ -232,7 +365,14 @@ export const groups = {
 			},
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('group',current_token).hook<'update',D>('update')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('group',current_token).hook<'update',D>('update')(args);
 	},
 	delete: async <D extends uranio.types.Depth>(
 		id:string, options?:uranio.types.Hook.Arguments<'group', 'delete', D>,
@@ -244,7 +384,14 @@ export const groups = {
 			},
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('group',current_token).hook<'delete',D>('delete')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('group',current_token).hook<'delete',D>('delete')(args);
 	},
 };
 export const media = {
@@ -268,7 +415,14 @@ export const media = {
 		const args:uranio.types.Hook.Arguments<'media', 'count', D> = {
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('media',current_token).hook<'count',D>('count')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('media',current_token).hook<'count',D>('count')(args);
 	},
 	find: async <D extends uranio.types.Depth>(
 		options?:uranio.types.Hook.Arguments<'media', 'find', D>,
@@ -277,7 +431,14 @@ export const media = {
 		const args:uranio.types.Hook.Arguments<'media', 'find', D> = {
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('media',current_token).hook<'find',D>('find')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('media',current_token).hook<'find',D>('find')(args);
 	},
 	find_id: async <D extends uranio.types.Depth>(
 		id:string, options?:uranio.types.Hook.Arguments<'media', 'find_id', D>,
@@ -289,7 +450,14 @@ export const media = {
 			},
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('media',current_token).hook<'find_id',D>('find_id')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('media',current_token).hook<'find_id',D>('find_id')(args);
 	},
 	find_one: async <D extends uranio.types.Depth>(
 		options?:uranio.types.Hook.Arguments<'media', 'find_one', D>,
@@ -298,7 +466,14 @@ export const media = {
 		const args:uranio.types.Hook.Arguments<'media', 'find_one', D> = {
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('media',current_token).hook<'find_one',D>('find_one')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('media',current_token).hook<'find_one',D>('find_one')(args);
 	},
 	insert: async <D extends uranio.types.Depth>(
 		options?:uranio.types.Hook.Arguments<'media', 'insert', D>,
@@ -307,7 +482,14 @@ export const media = {
 		const args:uranio.types.Hook.Arguments<'media', 'insert', D> = {
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('media',current_token).hook<'insert',D>('insert')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('media',current_token).hook<'insert',D>('insert')(args);
 	},
 	update: async <D extends uranio.types.Depth>(
 		id:string, options?:uranio.types.Hook.Arguments<'media', 'update', D>,
@@ -319,7 +501,14 @@ export const media = {
 			},
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('media',current_token).hook<'update',D>('update')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('media',current_token).hook<'update',D>('update')(args);
 	},
 	delete: async <D extends uranio.types.Depth>(
 		id:string, options?:uranio.types.Hook.Arguments<'media', 'delete', D>,
@@ -331,7 +520,14 @@ export const media = {
 			},
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('media',current_token).hook<'delete',D>('delete')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('media',current_token).hook<'delete',D>('delete')(args);
 	},
 };
 export const settings = {
@@ -342,7 +538,14 @@ export const settings = {
 		const args:uranio.types.Hook.Arguments<'setting', 'count', D> = {
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('setting',current_token).hook<'count',D>('count')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('setting',current_token).hook<'count',D>('count')(args);
 	},
 	find: async <D extends uranio.types.Depth>(
 		options?:uranio.types.Hook.Arguments<'setting', 'find', D>,
@@ -351,7 +554,14 @@ export const settings = {
 		const args:uranio.types.Hook.Arguments<'setting', 'find', D> = {
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('setting',current_token).hook<'find',D>('find')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('setting',current_token).hook<'find',D>('find')(args);
 	},
 	find_id: async <D extends uranio.types.Depth>(
 		id:string, options?:uranio.types.Hook.Arguments<'setting', 'find_id', D>,
@@ -363,7 +573,14 @@ export const settings = {
 			},
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('setting',current_token).hook<'find_id',D>('find_id')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('setting',current_token).hook<'find_id',D>('find_id')(args);
 	},
 	find_one: async <D extends uranio.types.Depth>(
 		options?:uranio.types.Hook.Arguments<'setting', 'find_one', D>,
@@ -372,7 +589,14 @@ export const settings = {
 		const args:uranio.types.Hook.Arguments<'setting', 'find_one', D> = {
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('setting',current_token).hook<'find_one',D>('find_one')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('setting',current_token).hook<'find_one',D>('find_one')(args);
 	},
 	insert: async <D extends uranio.types.Depth>(
 		options?:uranio.types.Hook.Arguments<'setting', 'insert', D>,
@@ -381,7 +605,14 @@ export const settings = {
 		const args:uranio.types.Hook.Arguments<'setting', 'insert', D> = {
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('setting',current_token).hook<'insert',D>('insert')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('setting',current_token).hook<'insert',D>('insert')(args);
 	},
 	update: async <D extends uranio.types.Depth>(
 		id:string, options?:uranio.types.Hook.Arguments<'setting', 'update', D>,
@@ -393,7 +624,14 @@ export const settings = {
 			},
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('setting',current_token).hook<'update',D>('update')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('setting',current_token).hook<'update',D>('update')(args);
 	},
 	delete: async <D extends uranio.types.Depth>(
 		id:string, options?:uranio.types.Hook.Arguments<'setting', 'delete', D>,
@@ -405,7 +643,14 @@ export const settings = {
 			},
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('setting',current_token).hook<'delete',D>('delete')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('setting',current_token).hook<'delete',D>('delete')(args);
 	},
 };
 export const errors = {
@@ -416,7 +661,14 @@ export const errors = {
 		const args:uranio.types.Hook.Arguments<'error', 'count', D> = {
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('error',current_token).hook<'count',D>('count')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('error',current_token).hook<'count',D>('count')(args);
 	},
 	find: async <D extends uranio.types.Depth>(
 		options?:uranio.types.Hook.Arguments<'error', 'find', D>,
@@ -425,7 +677,14 @@ export const errors = {
 		const args:uranio.types.Hook.Arguments<'error', 'find', D> = {
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('error',current_token).hook<'find',D>('find')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('error',current_token).hook<'find',D>('find')(args);
 	},
 	find_id: async <D extends uranio.types.Depth>(
 		id:string, options?:uranio.types.Hook.Arguments<'error', 'find_id', D>,
@@ -437,7 +696,14 @@ export const errors = {
 			},
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('error',current_token).hook<'find_id',D>('find_id')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('error',current_token).hook<'find_id',D>('find_id')(args);
 	},
 	find_one: async <D extends uranio.types.Depth>(
 		options?:uranio.types.Hook.Arguments<'error', 'find_one', D>,
@@ -446,7 +712,14 @@ export const errors = {
 		const args:uranio.types.Hook.Arguments<'error', 'find_one', D> = {
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('error',current_token).hook<'find_one',D>('find_one')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('error',current_token).hook<'find_one',D>('find_one')(args);
 	},
 	insert: async <D extends uranio.types.Depth>(
 		options?:uranio.types.Hook.Arguments<'error', 'insert', D>,
@@ -455,7 +728,14 @@ export const errors = {
 		const args:uranio.types.Hook.Arguments<'error', 'insert', D> = {
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('error',current_token).hook<'insert',D>('insert')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('error',current_token).hook<'insert',D>('insert')(args);
 	},
 	update: async <D extends uranio.types.Depth>(
 		id:string, options?:uranio.types.Hook.Arguments<'error', 'update', D>,
@@ -467,7 +747,14 @@ export const errors = {
 			},
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('error',current_token).hook<'update',D>('update')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('error',current_token).hook<'update',D>('update')(args);
 	},
 	delete: async <D extends uranio.types.Depth>(
 		id:string, options?:uranio.types.Hook.Arguments<'error', 'delete', D>,
@@ -479,7 +766,14 @@ export const errors = {
 			},
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('error',current_token).hook<'delete',D>('delete')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('error',current_token).hook<'delete',D>('delete')(args);
 	},
 };
 export const requests = {
@@ -490,7 +784,14 @@ export const requests = {
 		const args:uranio.types.Hook.Arguments<'request', 'count', D> = {
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('request',current_token).hook<'count',D>('count')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('request',current_token).hook<'count',D>('count')(args);
 	},
 	find: async <D extends uranio.types.Depth>(
 		options?:uranio.types.Hook.Arguments<'request', 'find', D>,
@@ -499,7 +800,14 @@ export const requests = {
 		const args:uranio.types.Hook.Arguments<'request', 'find', D> = {
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('request',current_token).hook<'find',D>('find')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('request',current_token).hook<'find',D>('find')(args);
 	},
 	find_id: async <D extends uranio.types.Depth>(
 		id:string, options?:uranio.types.Hook.Arguments<'request', 'find_id', D>,
@@ -511,7 +819,14 @@ export const requests = {
 			},
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('request',current_token).hook<'find_id',D>('find_id')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('request',current_token).hook<'find_id',D>('find_id')(args);
 	},
 	find_one: async <D extends uranio.types.Depth>(
 		options?:uranio.types.Hook.Arguments<'request', 'find_one', D>,
@@ -520,7 +835,14 @@ export const requests = {
 		const args:uranio.types.Hook.Arguments<'request', 'find_one', D> = {
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('request',current_token).hook<'find_one',D>('find_one')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('request',current_token).hook<'find_one',D>('find_one')(args);
 	},
 	insert: async <D extends uranio.types.Depth>(
 		options?:uranio.types.Hook.Arguments<'request', 'insert', D>,
@@ -529,7 +851,14 @@ export const requests = {
 		const args:uranio.types.Hook.Arguments<'request', 'insert', D> = {
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('request',current_token).hook<'insert',D>('insert')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('request',current_token).hook<'insert',D>('insert')(args);
 	},
 	update: async <D extends uranio.types.Depth>(
 		id:string, options?:uranio.types.Hook.Arguments<'request', 'update', D>,
@@ -541,7 +870,14 @@ export const requests = {
 			},
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('request',current_token).hook<'update',D>('update')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('request',current_token).hook<'update',D>('update')(args);
 	},
 	delete: async <D extends uranio.types.Depth>(
 		id:string, options?:uranio.types.Hook.Arguments<'request', 'delete', D>,
@@ -553,7 +889,14 @@ export const requests = {
 			},
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('request',current_token).hook<'delete',D>('delete')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('request',current_token).hook<'delete',D>('delete')(args);
 	},
 };
 export const customers = {
@@ -564,16 +907,33 @@ export const customers = {
 		const args:uranio.types.Hook.Arguments<'customer', 'count', D> = {
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('customer',current_token).hook<'count',D>('count')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('customer',current_token).hook<'count',D>('count')(args);
 	},
 	hello: async <D extends uranio.types.Depth>(
-		options?:uranio.types.Hook.Arguments<'customer', 'hello', D>,
+		stocazzo:string, options?:uranio.types.Hook.Arguments<'customer', 'hello', D>,
 		token?:string
 	):Promise<uranio.types.Hook.Response<'customer', 'hello', D>>  => {
 		const args:uranio.types.Hook.Arguments<'customer', 'hello', D> = {
+			params: {
+				stocazzo: stocazzo,
+			},
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('customer',current_token).hook<'hello',D>('hello')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('customer',current_token).hook<'hello',D>('hello')(args);
 	},
 	find: async <D extends uranio.types.Depth>(
 		options?:uranio.types.Hook.Arguments<'customer', 'find', D>,
@@ -582,7 +942,14 @@ export const customers = {
 		const args:uranio.types.Hook.Arguments<'customer', 'find', D> = {
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('customer',current_token).hook<'find',D>('find')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('customer',current_token).hook<'find',D>('find')(args);
 	},
 	find_id: async <D extends uranio.types.Depth>(
 		id:string, options?:uranio.types.Hook.Arguments<'customer', 'find_id', D>,
@@ -594,7 +961,14 @@ export const customers = {
 			},
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('customer',current_token).hook<'find_id',D>('find_id')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('customer',current_token).hook<'find_id',D>('find_id')(args);
 	},
 	find_one: async <D extends uranio.types.Depth>(
 		options?:uranio.types.Hook.Arguments<'customer', 'find_one', D>,
@@ -603,7 +977,14 @@ export const customers = {
 		const args:uranio.types.Hook.Arguments<'customer', 'find_one', D> = {
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('customer',current_token).hook<'find_one',D>('find_one')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('customer',current_token).hook<'find_one',D>('find_one')(args);
 	},
 	insert: async <D extends uranio.types.Depth>(
 		options?:uranio.types.Hook.Arguments<'customer', 'insert', D>,
@@ -612,7 +993,14 @@ export const customers = {
 		const args:uranio.types.Hook.Arguments<'customer', 'insert', D> = {
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('customer',current_token).hook<'insert',D>('insert')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('customer',current_token).hook<'insert',D>('insert')(args);
 	},
 	update: async <D extends uranio.types.Depth>(
 		id:string, options?:uranio.types.Hook.Arguments<'customer', 'update', D>,
@@ -624,7 +1012,14 @@ export const customers = {
 			},
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('customer',current_token).hook<'update',D>('update')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('customer',current_token).hook<'update',D>('update')(args);
 	},
 	delete: async <D extends uranio.types.Depth>(
 		id:string, options?:uranio.types.Hook.Arguments<'customer', 'delete', D>,
@@ -636,7 +1031,14 @@ export const customers = {
 			},
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('customer',current_token).hook<'delete',D>('delete')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('customer',current_token).hook<'delete',D>('delete')(args);
 	},
 };
 export const mykarts = {
@@ -647,7 +1049,14 @@ export const mykarts = {
 		const args:uranio.types.Hook.Arguments<'mykart', 'count', D> = {
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('mykart',current_token).hook<'count',D>('count')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('mykart',current_token).hook<'count',D>('count')(args);
 	},
 	find: async <D extends uranio.types.Depth>(
 		options?:uranio.types.Hook.Arguments<'mykart', 'find', D>,
@@ -656,7 +1065,14 @@ export const mykarts = {
 		const args:uranio.types.Hook.Arguments<'mykart', 'find', D> = {
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('mykart',current_token).hook<'find',D>('find')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('mykart',current_token).hook<'find',D>('find')(args);
 	},
 	find_id: async <D extends uranio.types.Depth>(
 		id:string, options?:uranio.types.Hook.Arguments<'mykart', 'find_id', D>,
@@ -668,7 +1084,14 @@ export const mykarts = {
 			},
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('mykart',current_token).hook<'find_id',D>('find_id')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('mykart',current_token).hook<'find_id',D>('find_id')(args);
 	},
 	find_one: async <D extends uranio.types.Depth>(
 		options?:uranio.types.Hook.Arguments<'mykart', 'find_one', D>,
@@ -677,7 +1100,14 @@ export const mykarts = {
 		const args:uranio.types.Hook.Arguments<'mykart', 'find_one', D> = {
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('mykart',current_token).hook<'find_one',D>('find_one')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('mykart',current_token).hook<'find_one',D>('find_one')(args);
 	},
 	insert: async <D extends uranio.types.Depth>(
 		options?:uranio.types.Hook.Arguments<'mykart', 'insert', D>,
@@ -686,7 +1116,14 @@ export const mykarts = {
 		const args:uranio.types.Hook.Arguments<'mykart', 'insert', D> = {
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('mykart',current_token).hook<'insert',D>('insert')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('mykart',current_token).hook<'insert',D>('insert')(args);
 	},
 	update: async <D extends uranio.types.Depth>(
 		id:string, options?:uranio.types.Hook.Arguments<'mykart', 'update', D>,
@@ -698,7 +1135,14 @@ export const mykarts = {
 			},
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('mykart',current_token).hook<'update',D>('update')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('mykart',current_token).hook<'update',D>('update')(args);
 	},
 	delete: async <D extends uranio.types.Depth>(
 		id:string, options?:uranio.types.Hook.Arguments<'mykart', 'delete', D>,
@@ -710,7 +1154,14 @@ export const mykarts = {
 			},
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('mykart',current_token).hook<'delete',D>('delete')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('mykart',current_token).hook<'delete',D>('delete')(args);
 	},
 };
 export const products = {
@@ -721,7 +1172,14 @@ export const products = {
 		const args:uranio.types.Hook.Arguments<'product', 'count', D> = {
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('product',current_token).hook<'count',D>('count')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('product',current_token).hook<'count',D>('count')(args);
 	},
 	myroute: async <D extends uranio.types.Depth>(
 		options?:uranio.types.Hook.Arguments<'product', 'myroute', D>,
@@ -730,7 +1188,14 @@ export const products = {
 		const args:uranio.types.Hook.Arguments<'product', 'myroute', D> = {
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('product',current_token).hook<'myroute',D>('myroute')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('product',current_token).hook<'myroute',D>('myroute')(args);
 	},
 	find: async <D extends uranio.types.Depth>(
 		options?:uranio.types.Hook.Arguments<'product', 'find', D>,
@@ -739,7 +1204,14 @@ export const products = {
 		const args:uranio.types.Hook.Arguments<'product', 'find', D> = {
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('product',current_token).hook<'find',D>('find')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('product',current_token).hook<'find',D>('find')(args);
 	},
 	find_id: async <D extends uranio.types.Depth>(
 		id:string, options?:uranio.types.Hook.Arguments<'product', 'find_id', D>,
@@ -751,7 +1223,14 @@ export const products = {
 			},
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('product',current_token).hook<'find_id',D>('find_id')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('product',current_token).hook<'find_id',D>('find_id')(args);
 	},
 	find_one: async <D extends uranio.types.Depth>(
 		options?:uranio.types.Hook.Arguments<'product', 'find_one', D>,
@@ -760,7 +1239,14 @@ export const products = {
 		const args:uranio.types.Hook.Arguments<'product', 'find_one', D> = {
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('product',current_token).hook<'find_one',D>('find_one')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('product',current_token).hook<'find_one',D>('find_one')(args);
 	},
 	insert: async <D extends uranio.types.Depth>(
 		options?:uranio.types.Hook.Arguments<'product', 'insert', D>,
@@ -769,7 +1255,14 @@ export const products = {
 		const args:uranio.types.Hook.Arguments<'product', 'insert', D> = {
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('product',current_token).hook<'insert',D>('insert')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('product',current_token).hook<'insert',D>('insert')(args);
 	},
 	update: async <D extends uranio.types.Depth>(
 		id:string, options?:uranio.types.Hook.Arguments<'product', 'update', D>,
@@ -781,7 +1274,14 @@ export const products = {
 			},
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('product',current_token).hook<'update',D>('update')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('product',current_token).hook<'update',D>('update')(args);
 	},
 	delete: async <D extends uranio.types.Depth>(
 		id:string, options?:uranio.types.Hook.Arguments<'product', 'delete', D>,
@@ -793,6 +1293,13 @@ export const products = {
 			},
 			...options
 		};
-		let current_token:string|undefined;		if(typeof hook_token === 'string' && hook_token !== ''){			current_token = hook_token;		}		if(typeof token === 'string' && token !== ''){			current_token = token;		}		return await uranio.base.create('product',current_token).hook<'delete',D>('delete')(args);
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('product',current_token).hook<'delete',D>('delete')(args);
 	},
 };

@@ -28,7 +28,7 @@ export namespace Hook {
 	export type Query<A extends client_types.AtomName, R extends client_types.RouteName<A>, D extends client_types.Depth = 0> =
 		client_types.Api.Request.Query<A,R,D>;
 		
-	export type DefaultResponse<A extends client_types.AtomName, R extends client_types.RouteDefaultName, D extends client_types.Depth = 0> =
+	type DefaultResponse<A extends client_types.AtomName, R extends client_types.RouteDefaultName, D extends client_types.Depth = 0> =
 		R extends 'count' ? urn_response.General<number, any> :
 		R extends 'find_id' ? urn_response.General<client_types.Molecule<A,D>, any> :
 		R extends 'find' ? urn_response.General<client_types.Molecule<A,D>[], any> :
@@ -38,18 +38,88 @@ export namespace Hook {
 		R extends 'delete' ? urn_response.General<client_types.Molecule<A,D>,any> :
 		// R extends 'upload' ? urn_response.General<client_types.Molecule<A,D>,any> :
 		never;
-
-	export type CustomResponse<A extends client_types.AtomName, R extends client_types.RouteName<A>> =
+	
+	type CustomResponse<A extends client_types.AtomName, R extends client_types.RouteName<A>> =
 		'dock' extends keyof typeof dock_book[A] ?
 		'routes' extends keyof typeof dock_book[A]['dock'] ?
 		R extends keyof typeof dock_book[A]['dock']['routes'] ?
 		'return' extends keyof typeof dock_book[A]['dock']['routes'][R] ?
-		typeof dock_book[A]['dock']['routes'][R]['return'] :
+		urn_response.General<MapCustomResponse<typeof dock_book[A]['dock']['routes'][R]['return']>> :
 		any :
 		any :
 		any :
 		any;
 	
+	type MapCustomResponse<T> =
+		T extends typeof String ? string :
+		T extends typeof String[] ? string[] :
+		T extends typeof Number ? number :
+		T extends typeof Number[] ? number[] :
+		T extends typeof Boolean ? boolean :
+		T extends typeof Boolean[] ? boolean[] :
+		InferMoleculeOrAtom<T>;
+	
+	type InferMoleculeOrAtom<T> =
+		InferMolecule<T> extends never ?
+		InferAtom<T> extends never ?
+		never :
+		InferAtom<T> :
+		InferMolecule<T>;
+	
+	type InferMolecule<T> =
+		T extends `Molecule<${infer AN},${infer D}>` ?
+		AN extends client_types.AtomName ?
+		DepthValue<D> extends client_types.Depth ?
+		client_types.Molecule<AN, DepthValue<D>> :
+		never:
+		never:
+		never;
+	
+	type DepthValue<S> =
+		S extends '0' ? 0 :
+		S extends '1' ? 1 :
+		S extends '2' ? 2 :
+		S extends '3' ? 3 :
+		never;
+	
+	type InferAtom<T> =
+		T extends `Atom<${infer AN}>` ?
+		AN extends client_types.AtomName ?
+		client_types.Atom<AN> :
+		never :
+		never
+	
+	// export const c:client_types.Molecule<'error',1> = {
+	//   _id: '',
+	//   _date: new Date(),
+	//   msg: '',
+	//   error_code: '',
+	//   error_msg: '',
+	//   status: 200,
+	//   request: {
+	//     _id:'',
+	//     _date: new Date(),
+	//     full_path: ''
+	//   }
+	// };
+	
+	// export const a:InferMoleculeOrAtom<"Molecule<error,1>"> = {
+	//   _id: '',
+	//   _date: new Date(),
+	//   msg: '',
+	//   error_code: '',
+	//   error_msg: '',
+	//   status: 200,
+	//   request: {
+	//     _id:'',
+	//     _date: new Date(),
+	//     full_path: ''
+	//   }
+	// };
+	
+	// export const d:InferMoleculeOrAtom<"Molecule<error,2>"> = {_id: '', _date: new Date(), msg: '', error_code: '', error_msg: '', status: 200};
+	// export const b:InferMoleculeOrAtom<"Atom<error>"> = {_id: '', _date: new Date(), msg: '', error_code: '', error_msg: '', status: 200};
+		
 	export type Response<A extends client_types.AtomName, R extends client_types.RouteName<A>, D extends client_types.Depth = 0> =
 		R extends client_types.RouteDefaultName ? DefaultResponse<A, R, D> :
 		'dock' extends keyof typeof dock_book[A] ?
