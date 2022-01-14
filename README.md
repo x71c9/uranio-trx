@@ -1,4 +1,4 @@
-## URANIO-TRX: Uranio transreciever
+## URANIO TRX: Uranio transreciever
 
 Uranio TRX extends [Uranio API](https://github.com/nbl7/uranio-api) with methods
 that can be called from the client, the same sever or another server.
