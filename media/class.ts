@@ -34,10 +34,10 @@ class MediaBase extends Base<'media'>{
 	):Promise<urn_response.General<urn_api_client.types.Molecule<'media',D>>>{
 		const headers = {} as client_types.Hook.Headers;
 		if(typeof this.token === 'string'){
-			headers['x-auth-token'] = this.token;
+			headers['urn-auth-token'] = this.token;
 		}
 		if(typeof token === 'string'){
-			headers['x-auth-token'] = token;
+			headers['urn-auth-token'] = token;
 		}
 		const url = `/media/upload`;
 		return await this.raw.post<any, D>(url, file, undefined, headers);
