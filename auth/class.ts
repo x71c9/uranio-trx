@@ -22,7 +22,7 @@ class AuthBase<A extends client_types.AuthName> {
 	
 	constructor(public auth_name:A){
 		_check_auth_name(auth_name);
-		this.raw = create_raw();
+		this.raw = create_raw(undefined, true);
 	}
 	
 	public async authenticate(email:string, password:string)
