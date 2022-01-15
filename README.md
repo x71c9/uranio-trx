@@ -45,6 +45,13 @@ if(trx_response.success){
 	const token = trx_response.payload.token;
 }
 ```
+> `auth_hook.authenticate` will responde with a `Set-Cookie` Header.
+> The cookie is `HttpOnly; SameSite=Strict; Secure;`. Therefore the browser
+> will send the `token` for each request without JS needed.
+>
+> However if the application is calling the API from another server the token is
+> needed in order to make a call.
+
 
 Each hook has a parameter for using the `token`:
 
@@ -59,7 +66,6 @@ if(trx_response.success){
 However it is also possible to set the token for all the hooks by using:
 
 ```typescript
-
 uranio.hooks.set_token(token);
 
 const trx_response = await uranio.hooks.products.find_id('61dc3434a99090002c28cb4b');

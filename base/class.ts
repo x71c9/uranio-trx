@@ -63,10 +63,10 @@ export class Base<A extends client_types.AtomName> {
 			}
 			const headers = {} as client_types.Hook.Headers;
 			if(typeof this.token === 'string'){
-				headers['x-auth-token'] = this.token;
+				headers['urn-auth-token'] = this.token;
 			}
 			if(typeof token === 'string'){
-				headers['x-auth-token'] = token;
+				headers['urn-auth-token'] = token;
 			}
 			switch(route.method){
 				case client_types.RouteMethod.GET:{

@@ -20,6 +20,7 @@ import {RAW} from './types';
 
 const axios_config = {
 	// headers: {'user-agent': 'Uranio TRX 0.0.1'}
+	// withCredentials: true
 } as AxiosRequestConfig;
 
 @urn_log.util.decorators.debug_constructor
