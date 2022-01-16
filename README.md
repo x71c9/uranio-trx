@@ -15,7 +15,6 @@ all its routes.
 
 ```typescript
 // src/books.ts
-
 export const atom_book:uranio.types.Book = {
 	product:{
 		...
@@ -27,7 +26,6 @@ Then it is possible to call:
 import uranio from 'uranio';
 
 const trx_response = await uranio.hooks.products.find_id('61dc3434a99090002c28cb4b');
-
 if(trx_response.success){
 	const product = trx_response.payload;
 }
@@ -35,45 +33,53 @@ if(trx_response.success){
 
 #### Authentication
 
-Uranio TRX provides a method for authenitcation:
+Uranio TRX provides an authentication method for each **AuthAtom**.
+
+> See what is an [AuthAtom](https://github.com/nbl7/uranio-core#authatoms)
+
 ```typescript
-const auth_hook = uranio.auth.create('user');
-
-const trx_response = auth_hook.authenticate('email@email.com', '[PASSWORD]');
-
+const auth_base = uranio.auth.create('user');
+const trx_response = auth_base.authenticate('email@email.com', '[PASSWORD]');
 if(trx_response.success){
 	const token = trx_response.payload.token;
 }
 ```
-> `auth_hook.authenticate` will responde with a `Set-Cookie` Header.
-> The cookie is `HttpOnly; SameSite=Strict; Secure;`. Therefore the browser
-> will send the `token` for each request without JS needed.
->
-> However if the application is calling the API from another server the token is
-> needed in order to make a call.
+If the authentication succeed, the server respond with a `payload` containing a
+JWT `token`.
 
-
-Each hook has a parameter for using the `token`:
+The JWT `token` can be used in the other methods that need to be authenticated:
 
 ```typescript
 const trx_response = await uranio.hooks.products.find_id('61dc3434a99090002c28cb4b', {}, token)
-
 if(trx_response.success){
 	const product = trx_response.payload;
 }
 ```
 
-However it is also possible to set the token for all the hooks by using:
+It is also possible to set the token for all the hooks by using:
 
 ```typescript
 uranio.hooks.set_token(token);
-
 const trx_response = await uranio.hooks.products.find_id('61dc3434a99090002c28cb4b');
-
 if(trx_response.success){
 	const product = trx_response.payload;
 }
 ```
+
+#### Authenticate with `HttpOnly` cookie
+
+If the authentication succeed the server will also send back a `Set-Cookie` Header
+with the JWT `token`.
+
+The cookie is `HttpOnly; SameSite=Strict; Secure;`. Therefore the browser
+will send back the `token` for each request without JS needed.
+
+But it will do only if the server is the same.
+
+> See [HttpOnly](https://owasp.org/www-community/HttpOnly) flag
+>
+> See [SameSite](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite) flag
+
 
 #### Custom hooks
 
