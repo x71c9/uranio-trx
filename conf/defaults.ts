@@ -20,4 +20,10 @@ export const trx_config:FullConfiguration = {
 	domain: 'localhost',
 	
 	port: 4444,
+	
+	client_protocol: 'http',
+	
+	client_domain: 'localhost',
+	
+	client_port: 4444
 };

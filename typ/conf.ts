@@ -19,6 +19,9 @@ type OptionalConfigParam = {
 	protocol: string
 	domain: string,
 	port: number,
+	client_protocol: string,
+	client_domain: string,
+	client_port: number
 }
 
 export type Configuration =

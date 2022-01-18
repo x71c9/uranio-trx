@@ -4,9 +4,9 @@
  * @packageDocumentation
  */
 
-// import {urn_exception} from 'urn-lib';
+import {urn_exception} from 'urn-lib';
 
-// const urn_exc = urn_exception.init('INIT_TRX_MODULE', `TRX init module`);
+const urn_exc = urn_exception.init('INIT_TRX_MODULE', `TRX init module`);
 
 import urn_api from 'uranio-api';
 
@@ -28,7 +28,9 @@ export function init(config?:types.Configuration)
 	}else{
 		urn_api.conf.set(trx_config, config);
 	}
-	// _validate_trx_variables();
+	
+	_validate_trx_variables();
+	
 	// _validate_trx_book();
 	
 	conf.set_initialize(true);
@@ -41,5 +43,16 @@ export function init(config?:types.Configuration)
 // function _validate_trx_book(){
 // }
 
-// function _validate_trx_variables(){
-// }
+function _validate_trx_variables(){
+	const service_domain = trx_config.service_domain;
+	const service_port = trx_config.service_port;
+	const client_domain = trx_config.client_domain;
+	const client_port = trx_config.client_port;
+	if(service_domain === client_domain && service_port === client_port){
+		throw urn_exc.create_not_initialized(
+			`INVALID DOMAINS AND PORTS`,
+			`Cannot use same domain and port for server and client.`
+		);
+	}
+}
+
