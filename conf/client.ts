@@ -12,6 +12,8 @@ import {trx_client_config} from '../cln/defaults';
 
 import * as types from '../cln/types';
 
+import {RawName} from '../raw/types';
+
 let _is_client_trx_initialized = false;
 
 export function get<k extends keyof types.FullClientConfiguration>(param_name:k)
@@ -27,6 +29,11 @@ export function is_initialized():boolean{
 
 export function set_initialize(is_initialized:boolean):void{
 	_is_client_trx_initialized = is_initialized;
+}
+
+export function set_from_env(repo_config:types.FullClientConfiguration):void{
+	const config = _get_env_vars(repo_config);
+	set(repo_config, config);
 }
 
 export function set(repo_config:types.FullClientConfiguration, config:types.ClientConfiguration)
@@ -64,3 +71,64 @@ function _validate_config_types(
 		}
 	}
 }
+
+function _get_env_vars(repo_config:types.ClientConfiguration):types.ClientConfiguration{
+	if(typeof process.env.URN_CLIENT_FETCH === 'string' && process.env.URN_CLIENT_FETCH !== ''){
+		repo_config.fetch = process.env.URN_CLIENT_FETCH as RawName;
+	}
+	if(typeof process.env.URN_CLIENT_PROTOCOL === 'string' && process.env.URN_CLIENT_PROTOCOL !== ''){
+		repo_config.protocol = process.env.URN_CLIENT_PROTOCOL;
+	}
+	if(typeof process.env.URN_CLIENT_DOMAIN === 'string' && process.env.URN_CLIENT_DOMAIN !== ''){
+		repo_config.domain = process.env.URN_CLIENT_DOMAIN;
+	}
+	if(typeof process.env.URN_CLIENT_PORT === 'number' || typeof process.env.URN_CLIENT_PORT === 'string' && process.env.URN_CLIENT_PORT !== ''){
+		repo_config.port = Number(process.env.URN_CLIENT_PORT);
+	}
+	if(typeof process.env.URN_CLIENT_SERVICE_URL === 'string' && process.env.URN_CLIENT_SERVICE_URL !== ''){
+		repo_config.service_url = process.env.URN_CLIENT_SERVICE_URL;
+	}
+	return repo_config;
+}
+
+// function _get_env_vars(repo_config:types.ClientConfiguration):types.ClientConfiguration{
+//   const config:types.ClientConfiguration = {} as types.ClientConfiguration;
+//   for(const [conf_key, conf_value] of Object.entries(repo_config)){
+//     const env_var_name = `URN_CLIENT_${conf_key.toUpperCase()}`;
+//     switch(typeof conf_value){
+//       case 'number':{
+//         if(
+//           typeof process.env[env_var_name] === 'number'
+//           || typeof process.env[env_var_name] === 'string'
+//           && process.env[env_var_name] !== ''
+//         ){
+//           (config as any)[conf_key] = Number(process.env[env_var_name]);
+//         }
+//         break;
+//       }
+//       case 'boolean':{
+//         if(
+//           typeof process.env[env_var_name] === 'boolean'
+//           || typeof process.env[env_var_name] === 'string'
+//           && process.env[env_var_name] !== ''
+//         ){
+//           (config as any)[conf_key] =
+//             (process.env[env_var_name] === 'true') || (process.env[env_var_name] as any === true);
+//         }
+//         break;
+//       }
+//       case 'string':{
+//         console.log('typeof', typeof process.env[env_var_name]);
+//         console.log('value', process.env[env_var_name]);
+//         if(
+//           typeof process.env[env_var_name] === 'string'
+//           && process.env[env_var_name] !== ''
+//         ){
+//           (config as any)[conf_key] = process.env[env_var_name];
+//         }
+//         break;
+//       }
+//     }
+//   }
+//   return config;
+// }
