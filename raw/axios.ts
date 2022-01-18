@@ -188,10 +188,11 @@ export function create(config?: client_types.ClientConfiguration, is_auth=false)
 	
 	urn_log.fn_debug('Create URNTRXRaw');
 	
-	const base_url = config?.base_url || trx_client_config.base_url;
+	const service_url = config?.service_url || trx_client_config.service_url;
+	console.log(service_url);
 	
 	const axios_config:AxiosRequestConfig = {
-		baseURL: base_url
+		baseURL: service_url
 	};
 	const axios_instance = axios.create(axios_config);
 	// axios_instance.interceptors.request.use(request => {

@@ -12,9 +12,12 @@ export const trx_config:FullConfiguration = {
 	
 	...api_config,
 	
-	// This is needed because when developing the client
+	// These are needed because when developing the client
 	// ts linter for uranio is pointing on the server
 	// so the server conf should have all the client conf as well
-	base_url: '',
+	protocol: 'http',
 	
+	domain: 'localhost',
+	
+	port: 4444,
 };

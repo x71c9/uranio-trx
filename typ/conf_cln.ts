@@ -7,8 +7,11 @@
 import {RawName} from '../raw/types';
 
 type RequiredClientConfigParams = {
-	raw: RawName
-	base_url: string
+	fetch: RawName
+	protocol: string
+	domain: string
+	port: number
+	service_url: string
 }
 
 type OptionalClientConfigParam = {
