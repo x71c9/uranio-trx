@@ -189,7 +189,6 @@ export function create(config?: client_types.ClientConfiguration, is_auth=false)
 	urn_log.fn_debug('Create URNTRXRaw');
 	
 	const service_url = config?.service_url || trx_client_config.service_url;
-	console.log(service_url);
 	
 	const axios_config:AxiosRequestConfig = {
 		baseURL: service_url
