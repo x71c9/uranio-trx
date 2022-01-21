@@ -25,5 +25,8 @@ export const trx_config:FullConfiguration = {
 	
 	client_domain: 'localhost',
 	
-	client_port: 4444
+	client_port: 4444,
+	
+	service_url: 'http://localhost:7777/uranio/api'
+	
 };
