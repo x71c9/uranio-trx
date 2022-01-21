@@ -22,6 +22,7 @@ type OptionalConfigParam = {
 	client_protocol: string,
 	client_domain: string,
 	client_port: number
+	service_url: string
 }
 
 export type Configuration =
