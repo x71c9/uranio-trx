@@ -37,6 +37,7 @@ export namespace Hook {
 		R extends 'update' ? urn_response.General<client_types.Molecule<A,D>,any> :
 		R extends 'delete' ? urn_response.General<client_types.Molecule<A,D>,any> :
 		// R extends 'upload' ? urn_response.General<client_types.Molecule<A,D>,any> :
+		// R extends 'presigned' ? urn_response.General<string,any> :
 		never;
 	
 	type CustomResponse<A extends client_types.AtomName, R extends client_types.RouteName<A>> =
