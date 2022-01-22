@@ -408,6 +408,21 @@ export const media = {
 		}
 		return await uranio.media.create(current_token).upload<D>(file, current_token);
 	},
+	presigned: async(
+		filename: string,
+		size: number,
+		type: string,
+		token?: string
+	): Promise<urn_response.General<string>> => {
+		let current_token: string | undefined;
+		if (typeof hook_token === "string" && hook_token !== "") {
+			current_token = hook_token;
+		}
+		if (typeof token === "string" && token !== "") {
+			current_token = token;
+		}
+		return await uranio.media.create(current_token).presigned(filename, size, type, current_token);
+	},
 	count: async <D extends uranio.types.Depth>(
 		options?:uranio.types.Hook.Arguments<'media', 'count', D>,
 		token?:string
