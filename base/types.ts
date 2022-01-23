@@ -15,18 +15,23 @@ export namespace Hook {
 	export type Arguments<A extends client_types.AtomName, R extends client_types.RouteName<A>, D extends client_types.Depth = 0> = {
 		params?: Params<A,R>
 		query?: Query<A,R,D>
-		body?: any
+		body?: Body<A,R>
 	}
 	
 	export type Headers = {
 		[k:string]: string
 	}
-
+	
 	export type Params<A extends client_types.AtomName, R extends client_types.RouteName<A>> =
 		client_types.Api.Request.Params<A,R>;
-
+	
 	export type Query<A extends client_types.AtomName, R extends client_types.RouteName<A>, D extends client_types.Depth = 0> =
 		client_types.Api.Request.Query<A,R,D>;
+		
+	export type Body<A extends client_types.AtomName, R extends client_types.RouteName<A>> =
+		R extends 'insert' ? client_types.AtomShape<A> :
+		R extends 'update' ? client_types.AtomShape<A> :
+		any;
 		
 	type DefaultResponse<A extends client_types.AtomName, R extends client_types.RouteDefaultName, D extends client_types.Depth = 0> =
 		R extends 'count' ? urn_response.General<number, any> :
