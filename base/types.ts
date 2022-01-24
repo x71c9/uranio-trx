@@ -31,16 +31,21 @@ export namespace Hook {
 	export type Body<A extends client_types.AtomName, R extends client_types.RouteName<A>> =
 		R extends 'insert' ? client_types.AtomShape<A> :
 		R extends 'update' ? client_types.AtomShape<A> :
+		R extends 'insert_multiple' ? client_types.AtomShape<A>[] :
+		R extends 'update_multiple' ? client_types.AtomShape<A> :
 		any;
 		
 	type DefaultResponse<A extends client_types.AtomName, R extends client_types.RouteDefaultName, D extends client_types.Depth = 0> =
 		R extends 'count' ? urn_response.General<number, any> :
-		R extends 'find_id' ? urn_response.General<client_types.Molecule<A,D>, any> :
-		R extends 'find' ? urn_response.General<client_types.Molecule<A,D>[], any> :
-		R extends 'find_one' ? urn_response.General<client_types.Molecule<A,D>, any> :
-		R extends 'insert' ? urn_response.General<client_types.Molecule<A,D>, any> :
+		R extends 'find_id' ? urn_response.General<client_types.Molecule<A,D>,any> :
+		R extends 'find' ? urn_response.General<client_types.Molecule<A,D>[],any> :
+		R extends 'find_one' ? urn_response.General<client_types.Molecule<A,D>,any> :
+		R extends 'insert' ? urn_response.General<client_types.Molecule<A,D>,any> :
 		R extends 'update' ? urn_response.General<client_types.Molecule<A,D>,any> :
 		R extends 'delete' ? urn_response.General<client_types.Molecule<A,D>,any> :
+		R extends 'insert_multiple' ? urn_response.General<client_types.Molecule<A,D>[],any> :
+		R extends 'update_multiple' ? urn_response.General<client_types.Molecule<A,D>[],any> :
+		R extends 'delete_multiple' ? urn_response.General<client_types.Molecule<A,D>[],any> :
 		// R extends 'upload' ? urn_response.General<client_types.Molecule<A,D>,any> :
 		// R extends 'presigned' ? urn_response.General<string,any> :
 		never;

@@ -148,6 +148,66 @@ export const superusers = {
 		}
 		return await uranio.base.create('superuser',current_token).hook<'delete',D>('delete')(args);
 	},
+	insert_multiple: async <D extends uranio.types.Depth>(
+		body:uranio.types.Hook.Body<'superuser', 'insert_multiple'>,
+		options?:uranio.types.Hook.Arguments<'superuser', 'insert_multiple', D>,
+		token?:string
+	):Promise<uranio.types.Hook.Response<'superuser', 'insert_multiple', D>>  => {
+		const args:uranio.types.Hook.Arguments<'superuser', 'insert_multiple', D> = {
+			body: body,
+			...options
+		};
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('superuser',current_token).hook<'insert_multiple',D>('insert_multiple')(args);
+	},
+	update_multiple: async <D extends uranio.types.Depth>(
+		ids:string[],
+		body:uranio.types.Hook.Body<'superuser', 'update_multiple'>,
+		options?:uranio.types.Hook.Arguments<'superuser', 'update_multiple', D>,
+		token?:string
+	):Promise<uranio.types.Hook.Response<'superuser', 'update_multiple', D>>  => {
+		const args:uranio.types.Hook.Arguments<'superuser', 'update_multiple', D> = {
+			params: {
+				ids: ids.join(',')
+			},
+			body: body,
+			...options
+		};
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('superuser',current_token).hook<'update_multiple',D>('update_multiple')(args);
+	},
+	delete_multiple: async <D extends uranio.types.Depth>(
+		ids:string[],
+		options?:uranio.types.Hook.Arguments<'superuser', 'delete_multiple', D>,
+		token?:string
+	):Promise<uranio.types.Hook.Response<'superuser', 'delete_multiple', D>>  => {
+		const args:uranio.types.Hook.Arguments<'superuser', 'delete_multiple', D> = {
+			params: {
+				ids: ids.join(',')
+			},
+			...options
+		};
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('superuser',current_token).hook<'delete_multiple',D>('delete_multiple')(args);
+	},
 };
 export const users = {
 	authenticate: async (
@@ -284,6 +344,66 @@ export const users = {
 		}
 		return await uranio.base.create('user',current_token).hook<'delete',D>('delete')(args);
 	},
+	insert_multiple: async <D extends uranio.types.Depth>(
+		body:uranio.types.Hook.Body<'user', 'insert_multiple'>,
+		options?:uranio.types.Hook.Arguments<'user', 'insert_multiple', D>,
+		token?:string
+	):Promise<uranio.types.Hook.Response<'user', 'insert_multiple', D>>  => {
+		const args:uranio.types.Hook.Arguments<'user', 'insert_multiple', D> = {
+			body: body,
+			...options
+		};
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('user',current_token).hook<'insert_multiple',D>('insert_multiple')(args);
+	},
+	update_multiple: async <D extends uranio.types.Depth>(
+		ids:string[],
+		body:uranio.types.Hook.Body<'user', 'update_multiple'>,
+		options?:uranio.types.Hook.Arguments<'user', 'update_multiple', D>,
+		token?:string
+	):Promise<uranio.types.Hook.Response<'user', 'update_multiple', D>>  => {
+		const args:uranio.types.Hook.Arguments<'user', 'update_multiple', D> = {
+			params: {
+				ids: ids.join(',')
+			},
+			body: body,
+			...options
+		};
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('user',current_token).hook<'update_multiple',D>('update_multiple')(args);
+	},
+	delete_multiple: async <D extends uranio.types.Depth>(
+		ids:string[],
+		options?:uranio.types.Hook.Arguments<'user', 'delete_multiple', D>,
+		token?:string
+	):Promise<uranio.types.Hook.Response<'user', 'delete_multiple', D>>  => {
+		const args:uranio.types.Hook.Arguments<'user', 'delete_multiple', D> = {
+			params: {
+				ids: ids.join(',')
+			},
+			...options
+		};
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('user',current_token).hook<'delete_multiple',D>('delete_multiple')(args);
+	},
 };
 export const groups = {
 	count: async <D extends uranio.types.Depth>(
@@ -413,6 +533,66 @@ export const groups = {
 			current_token = token;
 		}
 		return await uranio.base.create('group',current_token).hook<'delete',D>('delete')(args);
+	},
+	insert_multiple: async <D extends uranio.types.Depth>(
+		body:uranio.types.Hook.Body<'group', 'insert_multiple'>,
+		options?:uranio.types.Hook.Arguments<'group', 'insert_multiple', D>,
+		token?:string
+	):Promise<uranio.types.Hook.Response<'group', 'insert_multiple', D>>  => {
+		const args:uranio.types.Hook.Arguments<'group', 'insert_multiple', D> = {
+			body: body,
+			...options
+		};
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('group',current_token).hook<'insert_multiple',D>('insert_multiple')(args);
+	},
+	update_multiple: async <D extends uranio.types.Depth>(
+		ids:string[],
+		body:uranio.types.Hook.Body<'group', 'update_multiple'>,
+		options?:uranio.types.Hook.Arguments<'group', 'update_multiple', D>,
+		token?:string
+	):Promise<uranio.types.Hook.Response<'group', 'update_multiple', D>>  => {
+		const args:uranio.types.Hook.Arguments<'group', 'update_multiple', D> = {
+			params: {
+				ids: ids.join(',')
+			},
+			body: body,
+			...options
+		};
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('group',current_token).hook<'update_multiple',D>('update_multiple')(args);
+	},
+	delete_multiple: async <D extends uranio.types.Depth>(
+		ids:string[],
+		options?:uranio.types.Hook.Arguments<'group', 'delete_multiple', D>,
+		token?:string
+	):Promise<uranio.types.Hook.Response<'group', 'delete_multiple', D>>  => {
+		const args:uranio.types.Hook.Arguments<'group', 'delete_multiple', D> = {
+			params: {
+				ids: ids.join(',')
+			},
+			...options
+		};
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('group',current_token).hook<'delete_multiple',D>('delete_multiple')(args);
 	},
 };
 export const media = {
@@ -572,6 +752,66 @@ export const media = {
 		}
 		return await uranio.base.create('media',current_token).hook<'delete',D>('delete')(args);
 	},
+	insert_multiple: async <D extends uranio.types.Depth>(
+		body:uranio.types.Hook.Body<'media', 'insert_multiple'>,
+		options?:uranio.types.Hook.Arguments<'media', 'insert_multiple', D>,
+		token?:string
+	):Promise<uranio.types.Hook.Response<'media', 'insert_multiple', D>>  => {
+		const args:uranio.types.Hook.Arguments<'media', 'insert_multiple', D> = {
+			body: body,
+			...options
+		};
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('media',current_token).hook<'insert_multiple',D>('insert_multiple')(args);
+	},
+	update_multiple: async <D extends uranio.types.Depth>(
+		ids:string[],
+		body:uranio.types.Hook.Body<'media', 'update_multiple'>,
+		options?:uranio.types.Hook.Arguments<'media', 'update_multiple', D>,
+		token?:string
+	):Promise<uranio.types.Hook.Response<'media', 'update_multiple', D>>  => {
+		const args:uranio.types.Hook.Arguments<'media', 'update_multiple', D> = {
+			params: {
+				ids: ids.join(',')
+			},
+			body: body,
+			...options
+		};
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('media',current_token).hook<'update_multiple',D>('update_multiple')(args);
+	},
+	delete_multiple: async <D extends uranio.types.Depth>(
+		ids:string[],
+		options?:uranio.types.Hook.Arguments<'media', 'delete_multiple', D>,
+		token?:string
+	):Promise<uranio.types.Hook.Response<'media', 'delete_multiple', D>>  => {
+		const args:uranio.types.Hook.Arguments<'media', 'delete_multiple', D> = {
+			params: {
+				ids: ids.join(',')
+			},
+			...options
+		};
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('media',current_token).hook<'delete_multiple',D>('delete_multiple')(args);
+	},
 };
 export const settings = {
 	count: async <D extends uranio.types.Depth>(
@@ -701,6 +941,66 @@ export const settings = {
 			current_token = token;
 		}
 		return await uranio.base.create('setting',current_token).hook<'delete',D>('delete')(args);
+	},
+	insert_multiple: async <D extends uranio.types.Depth>(
+		body:uranio.types.Hook.Body<'setting', 'insert_multiple'>,
+		options?:uranio.types.Hook.Arguments<'setting', 'insert_multiple', D>,
+		token?:string
+	):Promise<uranio.types.Hook.Response<'setting', 'insert_multiple', D>>  => {
+		const args:uranio.types.Hook.Arguments<'setting', 'insert_multiple', D> = {
+			body: body,
+			...options
+		};
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('setting',current_token).hook<'insert_multiple',D>('insert_multiple')(args);
+	},
+	update_multiple: async <D extends uranio.types.Depth>(
+		ids:string[],
+		body:uranio.types.Hook.Body<'setting', 'update_multiple'>,
+		options?:uranio.types.Hook.Arguments<'setting', 'update_multiple', D>,
+		token?:string
+	):Promise<uranio.types.Hook.Response<'setting', 'update_multiple', D>>  => {
+		const args:uranio.types.Hook.Arguments<'setting', 'update_multiple', D> = {
+			params: {
+				ids: ids.join(',')
+			},
+			body: body,
+			...options
+		};
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('setting',current_token).hook<'update_multiple',D>('update_multiple')(args);
+	},
+	delete_multiple: async <D extends uranio.types.Depth>(
+		ids:string[],
+		options?:uranio.types.Hook.Arguments<'setting', 'delete_multiple', D>,
+		token?:string
+	):Promise<uranio.types.Hook.Response<'setting', 'delete_multiple', D>>  => {
+		const args:uranio.types.Hook.Arguments<'setting', 'delete_multiple', D> = {
+			params: {
+				ids: ids.join(',')
+			},
+			...options
+		};
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('setting',current_token).hook<'delete_multiple',D>('delete_multiple')(args);
 	},
 };
 export const errors = {
@@ -832,6 +1132,66 @@ export const errors = {
 		}
 		return await uranio.base.create('error',current_token).hook<'delete',D>('delete')(args);
 	},
+	insert_multiple: async <D extends uranio.types.Depth>(
+		body:uranio.types.Hook.Body<'error', 'insert_multiple'>,
+		options?:uranio.types.Hook.Arguments<'error', 'insert_multiple', D>,
+		token?:string
+	):Promise<uranio.types.Hook.Response<'error', 'insert_multiple', D>>  => {
+		const args:uranio.types.Hook.Arguments<'error', 'insert_multiple', D> = {
+			body: body,
+			...options
+		};
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('error',current_token).hook<'insert_multiple',D>('insert_multiple')(args);
+	},
+	update_multiple: async <D extends uranio.types.Depth>(
+		ids:string[],
+		body:uranio.types.Hook.Body<'error', 'update_multiple'>,
+		options?:uranio.types.Hook.Arguments<'error', 'update_multiple', D>,
+		token?:string
+	):Promise<uranio.types.Hook.Response<'error', 'update_multiple', D>>  => {
+		const args:uranio.types.Hook.Arguments<'error', 'update_multiple', D> = {
+			params: {
+				ids: ids.join(',')
+			},
+			body: body,
+			...options
+		};
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('error',current_token).hook<'update_multiple',D>('update_multiple')(args);
+	},
+	delete_multiple: async <D extends uranio.types.Depth>(
+		ids:string[],
+		options?:uranio.types.Hook.Arguments<'error', 'delete_multiple', D>,
+		token?:string
+	):Promise<uranio.types.Hook.Response<'error', 'delete_multiple', D>>  => {
+		const args:uranio.types.Hook.Arguments<'error', 'delete_multiple', D> = {
+			params: {
+				ids: ids.join(',')
+			},
+			...options
+		};
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('error',current_token).hook<'delete_multiple',D>('delete_multiple')(args);
+	},
 };
 export const requests = {
 	count: async <D extends uranio.types.Depth>(
@@ -961,6 +1321,66 @@ export const requests = {
 			current_token = token;
 		}
 		return await uranio.base.create('request',current_token).hook<'delete',D>('delete')(args);
+	},
+	insert_multiple: async <D extends uranio.types.Depth>(
+		body:uranio.types.Hook.Body<'request', 'insert_multiple'>,
+		options?:uranio.types.Hook.Arguments<'request', 'insert_multiple', D>,
+		token?:string
+	):Promise<uranio.types.Hook.Response<'request', 'insert_multiple', D>>  => {
+		const args:uranio.types.Hook.Arguments<'request', 'insert_multiple', D> = {
+			body: body,
+			...options
+		};
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('request',current_token).hook<'insert_multiple',D>('insert_multiple')(args);
+	},
+	update_multiple: async <D extends uranio.types.Depth>(
+		ids:string[],
+		body:uranio.types.Hook.Body<'request', 'update_multiple'>,
+		options?:uranio.types.Hook.Arguments<'request', 'update_multiple', D>,
+		token?:string
+	):Promise<uranio.types.Hook.Response<'request', 'update_multiple', D>>  => {
+		const args:uranio.types.Hook.Arguments<'request', 'update_multiple', D> = {
+			params: {
+				ids: ids.join(',')
+			},
+			body: body,
+			...options
+		};
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('request',current_token).hook<'update_multiple',D>('update_multiple')(args);
+	},
+	delete_multiple: async <D extends uranio.types.Depth>(
+		ids:string[],
+		options?:uranio.types.Hook.Arguments<'request', 'delete_multiple', D>,
+		token?:string
+	):Promise<uranio.types.Hook.Response<'request', 'delete_multiple', D>>  => {
+		const args:uranio.types.Hook.Arguments<'request', 'delete_multiple', D> = {
+			params: {
+				ids: ids.join(',')
+			},
+			...options
+		};
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('request',current_token).hook<'delete_multiple',D>('delete_multiple')(args);
 	},
 };
 export const customers = {
@@ -1112,6 +1532,66 @@ export const customers = {
 		}
 		return await uranio.base.create('customer',current_token).hook<'delete',D>('delete')(args);
 	},
+	insert_multiple: async <D extends uranio.types.Depth>(
+		body:uranio.types.Hook.Body<'customer', 'insert_multiple'>,
+		options?:uranio.types.Hook.Arguments<'customer', 'insert_multiple', D>,
+		token?:string
+	):Promise<uranio.types.Hook.Response<'customer', 'insert_multiple', D>>  => {
+		const args:uranio.types.Hook.Arguments<'customer', 'insert_multiple', D> = {
+			body: body,
+			...options
+		};
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('customer',current_token).hook<'insert_multiple',D>('insert_multiple')(args);
+	},
+	update_multiple: async <D extends uranio.types.Depth>(
+		ids:string[],
+		body:uranio.types.Hook.Body<'customer', 'update_multiple'>,
+		options?:uranio.types.Hook.Arguments<'customer', 'update_multiple', D>,
+		token?:string
+	):Promise<uranio.types.Hook.Response<'customer', 'update_multiple', D>>  => {
+		const args:uranio.types.Hook.Arguments<'customer', 'update_multiple', D> = {
+			params: {
+				ids: ids.join(',')
+			},
+			body: body,
+			...options
+		};
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('customer',current_token).hook<'update_multiple',D>('update_multiple')(args);
+	},
+	delete_multiple: async <D extends uranio.types.Depth>(
+		ids:string[],
+		options?:uranio.types.Hook.Arguments<'customer', 'delete_multiple', D>,
+		token?:string
+	):Promise<uranio.types.Hook.Response<'customer', 'delete_multiple', D>>  => {
+		const args:uranio.types.Hook.Arguments<'customer', 'delete_multiple', D> = {
+			params: {
+				ids: ids.join(',')
+			},
+			...options
+		};
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('customer',current_token).hook<'delete_multiple',D>('delete_multiple')(args);
+	},
 };
 export const mykarts = {
 	count: async <D extends uranio.types.Depth>(
@@ -1241,6 +1721,66 @@ export const mykarts = {
 			current_token = token;
 		}
 		return await uranio.base.create('mykart',current_token).hook<'delete',D>('delete')(args);
+	},
+	insert_multiple: async <D extends uranio.types.Depth>(
+		body:uranio.types.Hook.Body<'mykart', 'insert_multiple'>,
+		options?:uranio.types.Hook.Arguments<'mykart', 'insert_multiple', D>,
+		token?:string
+	):Promise<uranio.types.Hook.Response<'mykart', 'insert_multiple', D>>  => {
+		const args:uranio.types.Hook.Arguments<'mykart', 'insert_multiple', D> = {
+			body: body,
+			...options
+		};
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('mykart',current_token).hook<'insert_multiple',D>('insert_multiple')(args);
+	},
+	update_multiple: async <D extends uranio.types.Depth>(
+		ids:string[],
+		body:uranio.types.Hook.Body<'mykart', 'update_multiple'>,
+		options?:uranio.types.Hook.Arguments<'mykart', 'update_multiple', D>,
+		token?:string
+	):Promise<uranio.types.Hook.Response<'mykart', 'update_multiple', D>>  => {
+		const args:uranio.types.Hook.Arguments<'mykart', 'update_multiple', D> = {
+			params: {
+				ids: ids.join(',')
+			},
+			body: body,
+			...options
+		};
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('mykart',current_token).hook<'update_multiple',D>('update_multiple')(args);
+	},
+	delete_multiple: async <D extends uranio.types.Depth>(
+		ids:string[],
+		options?:uranio.types.Hook.Arguments<'mykart', 'delete_multiple', D>,
+		token?:string
+	):Promise<uranio.types.Hook.Response<'mykart', 'delete_multiple', D>>  => {
+		const args:uranio.types.Hook.Arguments<'mykart', 'delete_multiple', D> = {
+			params: {
+				ids: ids.join(',')
+			},
+			...options
+		};
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('mykart',current_token).hook<'delete_multiple',D>('delete_multiple')(args);
 	},
 };
 export const products = {
@@ -1387,5 +1927,65 @@ export const products = {
 			current_token = token;
 		}
 		return await uranio.base.create('product',current_token).hook<'delete',D>('delete')(args);
+	},
+	insert_multiple: async <D extends uranio.types.Depth>(
+		body:uranio.types.Hook.Body<'product', 'insert_multiple'>,
+		options?:uranio.types.Hook.Arguments<'product', 'insert_multiple', D>,
+		token?:string
+	):Promise<uranio.types.Hook.Response<'product', 'insert_multiple', D>>  => {
+		const args:uranio.types.Hook.Arguments<'product', 'insert_multiple', D> = {
+			body: body,
+			...options
+		};
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('product',current_token).hook<'insert_multiple',D>('insert_multiple')(args);
+	},
+	update_multiple: async <D extends uranio.types.Depth>(
+		ids:string[],
+		body:uranio.types.Hook.Body<'product', 'update_multiple'>,
+		options?:uranio.types.Hook.Arguments<'product', 'update_multiple', D>,
+		token?:string
+	):Promise<uranio.types.Hook.Response<'product', 'update_multiple', D>>  => {
+		const args:uranio.types.Hook.Arguments<'product', 'update_multiple', D> = {
+			params: {
+				ids: ids.join(',')
+			},
+			body: body,
+			...options
+		};
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('product',current_token).hook<'update_multiple',D>('update_multiple')(args);
+	},
+	delete_multiple: async <D extends uranio.types.Depth>(
+		ids:string[],
+		options?:uranio.types.Hook.Arguments<'product', 'delete_multiple', D>,
+		token?:string
+	):Promise<uranio.types.Hook.Response<'product', 'delete_multiple', D>>  => {
+		const args:uranio.types.Hook.Arguments<'product', 'delete_multiple', D> = {
+			params: {
+				ids: ids.join(',')
+			},
+			...options
+		};
+		let current_token:string|undefined;
+		if(typeof hook_token === 'string' && hook_token !== ''){
+			current_token = hook_token;
+		}
+		if(typeof token === 'string' && token !== ''){
+			current_token = token;
+		}
+		return await uranio.base.create('product',current_token).hook<'delete_multiple',D>('delete_multiple')(args);
 	},
 };

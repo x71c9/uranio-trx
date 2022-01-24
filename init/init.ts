@@ -16,7 +16,7 @@ import * as types from '../types';
 
 import * as conf from '../conf/';
 
-// import * as book from '../book/';
+import {raw_config} from '../raw/defaults';
 
 export function init(config?:types.Configuration)
 		:void{
@@ -29,11 +29,19 @@ export function init(config?:types.Configuration)
 		urn_api.conf.set(trx_config, config);
 	}
 	
-	_validate_trx_variables();
+	_set_raw();
 	
+	_validate_trx_variables();
 	// _validate_trx_book();
 	
 	conf.set_initialize(true);
+}
+
+function _set_raw(){
+	raw_config.service_url = ``;
+	raw_config.service_url += `${trx_config.service_protocol}://`;
+	raw_config.service_url += `${trx_config.service_domain}:`;
+	raw_config.service_url += `${trx_config.service_port}/uranio/api`;
 }
 
 /**
