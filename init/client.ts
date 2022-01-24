@@ -10,6 +10,8 @@ import * as types from '../cln/types';
 
 import * as conf from '../conf/client';
 
+import {raw_config} from '../raw/defaults';
+
 export function init(config?:types.ClientConfiguration)
 		:void{
 	
@@ -19,10 +21,19 @@ export function init(config?:types.ClientConfiguration)
 		conf.set(trx_client_config, config);
 	}
 	
+	_set_raw();
+	
 	_validate_trx_client_variables();
 	_validate_trx_client_book();
 	
 	conf.set_initialize(true);
+}
+
+function _set_raw(){
+	raw_config.service_url = ``;
+	raw_config.service_url += `${trx_client_config.protocol}://`;
+	raw_config.service_url += `${trx_client_config.domain}:`;
+	raw_config.service_url += `${trx_client_config.port}/uranio/api`;
 }
 
 /**

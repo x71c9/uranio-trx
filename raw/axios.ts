@@ -12,11 +12,15 @@ import {urn_util, urn_log, urn_return, urn_response} from 'urn-lib';
 
 const urn_ret = urn_return.create();
 
-import {trx_client_config} from '../cln/defaults';
+// import {trx_client_config} from '../cln/defaults';
+
+// import * as conf from '../conf/client';
 
 import * as client_types from '../cln/types';
 
 import {RAW} from './types';
+
+import {raw_config} from './defaults';
 
 const axios_config = {
 	// headers: {'user-agent': 'Uranio TRX 0.0.1'}
@@ -188,7 +192,7 @@ export function create(config?: client_types.ClientConfiguration, is_auth=false)
 	
 	urn_log.fn_debug('Create URNTRXRaw');
 	
-	const service_url = config?.service_url || trx_client_config.service_url;
+	const service_url = config?.service_url || raw_config.service_url;
 	
 	const axios_config:AxiosRequestConfig = {
 		baseURL: service_url
