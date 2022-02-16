@@ -108,7 +108,8 @@ function _get_route<A extends schema.AtomName>(
 	route_name:schema.RouteName<A>
 ):client_types.Book.Definition.Dock.Routes.Route{
 	
-	return api_client.routes.route_def(atom_name, route_name as any);
+	// return api_client.routes.route_def(atom_name, route_name as any);
+	return api_client.book.get_route_def(atom_name, route_name);
 	
 	// if(urn_util.object.has_key(api_client.routes.default_routes, route_name)){
 	//   return api_client.routes.default_routes[route_name];

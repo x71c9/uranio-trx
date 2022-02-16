@@ -109,7 +109,8 @@ function _check_atom_name(atom_name) {
     throw urn_exc.create_not_found(`BASEATOM_UNDEFINED`, `Base Atom not found for atom \`${atom_name}\`.`);
 }
 function _get_route(atom_name, route_name) {
-    return client_1.default.routes.route_def(atom_name, route_name);
+    // return api_client.routes.route_def(atom_name, route_name as any);
+    return client_1.default.book.get_route_def(atom_name, route_name);
     // if(urn_util.object.has_key(api_client.routes.default_routes, route_name)){
     //   return api_client.routes.default_routes[route_name];
     // }
