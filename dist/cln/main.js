@@ -30,7 +30,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.types = exports.conf = exports.book = exports.media = exports.auth = exports.base = exports.api = void 0;
+exports.types = exports.schema = exports.conf = exports.book = exports.hooks = exports.media = exports.auth = exports.base = exports.api = void 0;
 // import core from 'uranio-core/client';
 const client_1 = __importDefault(require("uranio-api/client"));
 exports.api = client_1.default;
@@ -40,13 +40,16 @@ const auth = __importStar(require("../auth/index"));
 exports.auth = auth;
 const media = __importStar(require("../media/index"));
 exports.media = media;
-// import * as hooks from '../hooks/index';
+const index_1 = require("../hooks/index");
+Object.defineProperty(exports, "hooks", { enumerable: true, get: function () { return index_1.hooks; } });
 const book = __importStar(require("../book/client"));
 exports.book = book;
 const conf = __importStar(require("../conf/client"));
 exports.conf = conf;
 const types = __importStar(require("./types"));
 exports.types = types;
+const index_2 = require("../sch/index");
+Object.defineProperty(exports, "schema", { enumerable: true, get: function () { return index_2.schema; } });
 /*
  * First level methods.
  * If other methods are added, urn-cli must be updated.

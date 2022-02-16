@@ -14,13 +14,15 @@ import * as auth from '../auth/index';
 
 import * as media from '../media/index';
 
-// import * as hooks from '../hooks/index';
+import {hooks} from '../hooks/index';
 
 import * as book from '../book/client';
 
 import * as conf from '../conf/client';
 
 import * as types from './types';
+
+import {schema} from '../sch/index';
 
 /*
  * First level methods.
@@ -36,8 +38,9 @@ export {
 	base,
 	auth,
 	media,
-	// hooks,
+	hooks,
 	book,
 	conf,
+	schema,
 	types
 };
