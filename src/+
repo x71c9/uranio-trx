@@ -1,0 +1,1 @@
+	return api.book.get_route_def(atom_name);

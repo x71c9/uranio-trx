@@ -1,0 +1,22 @@
+{
+	"name": "uranio-trx",
+	"version": "0.0.1",
+	"description": "Uranio TRX - Uranio transreceiver",
+	"main": "dist/index.js",
+	"repository": "git@github.com:nbl7/uranio-trx.git",
+	"author": "Andrea Reni <mail@nbl7.net>",
+	"scripts": {
+		"watch": "npx tsc-watch --onSuccess \"node -r source-map-support/register -r dotenv/config ./dist/run.js\"",
+		"schema:reset": "yarn upgrade uranio-schema && npx npm-dts generate -L debug -r node_modules/uranio-schema -o ../../schema/index.d.ts",
+		"types": "yarn schema:reset && uranio types:uranio"
+	},
+	"devDependencies": {
+		"uranio-dev": "git+ssh://git@github.com/nbl7/uranio-dev.git"
+	},
+	"dependencies": {
+		"axios": "^0.26.0",
+		"dotenv": "^16.0.0",
+		"uranio-schema": "ssh://git@github.com/nbl7/uranio-schema.git",
+		"urn-lib": "ssh://git@github.com/nbl7/uranio-lib.git"
+	}
+}
