@@ -3,6 +3,7 @@
  *
  * @packageDocumentation
  */
+/// <reference types="node" />
 import { urn_response } from 'urn-lib';
 import * as types from '../cln/types';
 import { schema } from '../sch/index';

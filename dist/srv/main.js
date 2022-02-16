@@ -30,7 +30,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.types = exports.util = exports.conf = exports.book = exports.hooks = exports.auth = exports.base = exports.api = void 0;
+exports.types = exports.schema = exports.util = exports.conf = exports.book = exports.hooks = exports.media = exports.auth = exports.base = exports.api = void 0;
 // import core from 'uranio-core';
 const uranio_api_1 = __importDefault(require("uranio-api"));
 exports.api = uranio_api_1.default;
@@ -38,6 +38,8 @@ const base = __importStar(require("../base/index"));
 exports.base = base;
 const auth = __importStar(require("../auth/index"));
 exports.auth = auth;
+const media = __importStar(require("../media/index"));
+exports.media = media;
 const index_1 = require("../hooks/index");
 Object.defineProperty(exports, "hooks", { enumerable: true, get: function () { return index_1.hooks; } });
 const book = __importStar(require("../book/index"));
@@ -46,6 +48,8 @@ const conf = __importStar(require("../conf/index"));
 exports.conf = conf;
 const types = __importStar(require("./types"));
 exports.types = types;
+const index_2 = require("../sch/index");
+Object.defineProperty(exports, "schema", { enumerable: true, get: function () { return index_2.schema; } });
 const util = __importStar(require("../util/index"));
 exports.util = util;
 /*
