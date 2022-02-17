@@ -42,6 +42,7 @@ const media = __importStar(require("../media/index"));
 exports.media = media;
 const index_1 = require("../hooks/index");
 Object.defineProperty(exports, "hooks", { enumerable: true, get: function () { return index_1.hooks; } });
+// import * as hooks from '../hooks/index';
 const book = __importStar(require("../book/client"));
 exports.book = book;
 const conf = __importStar(require("../conf/client"));

@@ -63,3 +63,13 @@
 [32m[38;2;102;136;153mnode __root/dist/generate.js urn_generate_base_schema=__root/schema/index.d.ts urn_generate_output=__root/schema/index.d.ts [39m[32m[39m 
 [32m[38;2;133;153;0m✔ Generated types for uranio repo.[39m[32m[39m 
 [32m[38;2;133;153;0m[33m✔ Generating types for uranio repo completed.[39m[32m[38;2;133;153;0m[39m[32m[39m 
+[32m[38;2;85;118;133mExists sync [__root/.urnlog] [true][39m[32m[39m 
+[32m[38;2;85;118;133m{"force":false,"verbose":false,"debug":false,"hide":false,"blank":false,"fullwidth":false,"native":false,"inside_ntl":false,"time":false,"context":false,"prefix_color":false,"docker":false,"docker_db":false,"filelog":true,"spin":true,"color_uranio":true,"prefix":"","branch":"master","repo":"adm","pacman":"yarn","deploy":"netlify","db":"mongo","color_log":"#859900","color_verbose":"#668899","color_debug":"#557685","root":"__root"}[39m[32m[39m 
+[32m[38;2;102;136;153mProject root [/home/nbl7/repos/new/uranio-trx][39m[32m[39m 
+[32m[38;2;102;136;153mStarted generating types for uranio repo.[39m[32m[39m 
+[32m[38;2;102;136;153mStarted transpiling generate script for uranio repo.[39m[32m[39m 
+[32m[38;2;133;153;0m✔ Transpiled generate script for uranio repo.[39m[32m[39m 
+[32m[38;2;85;118;133mnode __root/dist/generate.js urn_generate_base_schema=__root/schema/index.d.ts urn_generate_output=__root/schema/index.d.ts [39m[32m[39m 
+[32m[38;2;102;136;153mnode __root/dist/generate.js urn_generate_base_schema=__root/schema/index.d.ts urn_generate_output=__root/schema/index.d.ts [39m[32m[39m 
+[32m[38;2;133;153;0m✔ Generated types for uranio repo.[39m[32m[39m 
+[32m[38;2;133;153;0m[33m✔ Generating types for uranio repo completed.[39m[32m[38;2;133;153;0m[39m[32m[39m 
