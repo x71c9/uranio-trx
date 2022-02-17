@@ -4,10 +4,10 @@
  * @packageDocumentation
  */
 
-import api from 'uranio-api';
+import {register} from './reg/index';
 
 import {atom_book} from './atoms';
 
 for(const [atom_name, atom_def] of Object.entries(atom_book)){
-	api.register(atom_def as any, atom_name);
+	register(atom_def as any, atom_name as any);
 }

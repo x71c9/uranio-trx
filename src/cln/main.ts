@@ -15,6 +15,7 @@ import * as auth from '../auth/index';
 import * as media from '../media/index';
 
 import {hooks} from '../hooks/index';
+// import * as hooks from '../hooks/index';
 
 import * as book from '../book/client';
 

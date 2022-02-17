@@ -3,7 +3,7 @@
 		"alwaysStrict": true,
 		"allowJs": true,
 		"baseUrl": ".",
-		"declaration": true,
+		"declaration": false,
 		"esModuleInterop": true,
 		"experimentalDecorators": true,
 		"incremental": false,
