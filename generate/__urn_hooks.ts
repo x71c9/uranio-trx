@@ -6,7 +6,7 @@
 
 import {urn_response} from 'urn-lib';
 
-import uranio from '../src/index';
+import uranio from 'uranio/client';
 
 uranio.hooks['superusers'] = {
 	authenticate: async (

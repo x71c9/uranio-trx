@@ -202,8 +202,8 @@ function _generate_hooks_text(){
 	text += `\n`;
 	text += `import {urn_response} from 'urn-lib';\n`;
 	text += `\n`;
-	// text += `import uranio from 'uranio/client';\n`;
-	text += `import uranio from '../src/index';\n`;
+	text += `import uranio from 'uranio/client';\n`;
+	// text += `import uranio from '../src/index';\n`;
 	text += `\n`;
 	const atom_book = book.get_all_definitions();
 	for(const [atom_name, atom_def] of Object.entries(atom_book)){
