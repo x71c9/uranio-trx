@@ -18,15 +18,15 @@ import * as types_types from '../types';
 
 export const process_params = {
 	urn_command: `schema`,
-	urn_base_schema: `./types/schema.d.ts`,
-	urn_base_types: `./types/uranio.d.ts`,
+	urn_base_schema: `./.uranio/generate/base/schema.d.ts`,
+	urn_base_types: `./.uranio/generate/base/uranio.d.ts`,
 	urn_output_dir: `.`,
-	urn_repo: 'uranio-adm'
+	urn_repo: 'adm'
 };
 
 export function schema():string{
 	urn_log.debug('Started generating uranio trx schema...');
-	_init_generate();
+	init();
 	const api_schema = api.util.generate.schema();
 	const text = _generate_uranio_schema_text(api_schema);
 	urn_log.debug(`TRX Schema generated.`);
@@ -45,7 +45,7 @@ export function save_schema(text:string):void{
 
 export function hooks():string{
 	urn_log.debug('Started generating uranio trx hooks...');
-	_init_generate();
+	init();
 	const text = _generate_hooks_text();
 	urn_log.debug(`TRX Hooks generated.`);
 	return text;
@@ -66,7 +66,7 @@ export function save_hooks(text:string):void{
 
 export function types():string{
 	urn_log.debug('Started generating uranio trx types...');
-	_init_generate();
+	init();
 	const text = _generate_uranio_types_text();
 	urn_log.debug(`TRX Types generated.`);
 	return text;
@@ -85,7 +85,8 @@ export function save_types(text:string):void{
 	);
 }
 
-function _init_generate(){
+export function init():void{
+	api.util.generate.init();
 	process_params.urn_base_schema = api.util.generate.process_params.urn_base_schema;
 	process_params.urn_command = api.util.generate.process_params.urn_command;
 	process_params.urn_output_dir = api.util.generate.process_params.urn_output_dir;
@@ -179,8 +180,9 @@ function _generate_types_text(){
 			text += `):Promise<Hook.Response<'${atom_name}', `;
 			text += `'${route_name}', D>>;\n`;
 		}
-		text += `\t};\n`;
+		text += `\t\t};\n`;
 	}
+	text += `\t};\n`;
 	
 	return text;
 }

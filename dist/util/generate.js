@@ -27,21 +27,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.save_types = exports.types_and_save = exports.types = exports.save_hooks = exports.hooks_and_save = exports.hooks = exports.save_schema = exports.schema_and_save = exports.schema = exports.process_params = void 0;
+exports.init = exports.save_types = exports.types_and_save = exports.types = exports.save_hooks = exports.hooks_and_save = exports.hooks = exports.save_schema = exports.schema_and_save = exports.schema = exports.process_params = void 0;
 const fs_1 = __importDefault(require("fs"));
 const uranio_api_1 = __importDefault(require("uranio-api"));
 const urn_lib_1 = require("urn-lib");
 const book = __importStar(require("../book/index"));
 exports.process_params = {
     urn_command: `schema`,
-    urn_base_schema: `./types/schema.d.ts`,
-    urn_base_types: `./types/uranio.d.ts`,
+    urn_base_schema: `./.uranio/generate/base/schema.d.ts`,
+    urn_base_types: `./.uranio/generate/base/uranio.d.ts`,
     urn_output_dir: `.`,
-    urn_repo: 'uranio-adm'
+    urn_repo: 'adm'
 };
 function schema() {
     urn_lib_1.urn_log.debug('Started generating uranio trx schema...');
-    _init_generate();
+    init();
     const api_schema = uranio_api_1.default.util.generate.schema();
     const text = _generate_uranio_schema_text(api_schema);
     urn_lib_1.urn_log.debug(`TRX Schema generated.`);
@@ -60,7 +60,7 @@ function save_schema(text) {
 exports.save_schema = save_schema;
 function hooks() {
     urn_lib_1.urn_log.debug('Started generating uranio trx hooks...');
-    _init_generate();
+    init();
     const text = _generate_hooks_text();
     urn_lib_1.urn_log.debug(`TRX Hooks generated.`);
     return text;
@@ -78,7 +78,7 @@ function save_hooks(text) {
 exports.save_hooks = save_hooks;
 function types() {
     urn_lib_1.urn_log.debug('Started generating uranio trx types...');
-    _init_generate();
+    init();
     const text = _generate_uranio_types_text();
     urn_lib_1.urn_log.debug(`TRX Types generated.`);
     return text;
@@ -94,12 +94,14 @@ function save_types(text) {
     fs_1.default.writeFileSync(`${exports.process_params.urn_output_dir}/uranio.d.ts`, text);
 }
 exports.save_types = save_types;
-function _init_generate() {
+function init() {
+    uranio_api_1.default.util.generate.init();
     exports.process_params.urn_base_schema = uranio_api_1.default.util.generate.process_params.urn_base_schema;
     exports.process_params.urn_command = uranio_api_1.default.util.generate.process_params.urn_command;
     exports.process_params.urn_output_dir = uranio_api_1.default.util.generate.process_params.urn_output_dir;
     _init_trx_generate();
 }
+exports.init = init;
 function _init_trx_generate() {
     for (const argv of process.argv) {
         const splitted = argv.split('=');
@@ -181,8 +183,9 @@ function _generate_types_text() {
             text += `):Promise<Hook.Response<'${atom_name}', `;
             text += `'${route_name}', D>>;\n`;
         }
-        text += `\t};\n`;
+        text += `\t\t};\n`;
     }
+    text += `\t};\n`;
     return text;
 }
 function _generate_uranio_schema_text(api_schema) {

@@ -357,7 +357,7 @@ declare module 'uranio/hooks/types' {
 			insert_multiple<D extends schema.Depth>(body:Hook.Body<'superuser', 'insert_multiple'>,options?:Hook.Arguments<'superuser', 'insert_multiple', D>,token?:string):Promise<Hook.Response<'superuser', 'insert_multiple', D>>;
 			update_multiple<D extends schema.Depth>(ids:string,body:Hook.Body<'superuser', 'update_multiple'>,options?:Hook.Arguments<'superuser', 'update_multiple', D>,token?:string):Promise<Hook.Response<'superuser', 'update_multiple', D>>;
 			delete_multiple<D extends schema.Depth>(ids:string,options?:Hook.Arguments<'superuser', 'delete_multiple', D>,token?:string):Promise<Hook.Response<'superuser', 'delete_multiple', D>>;
-	};
+		};
 		users: {
 			authenticate(email: string, password: string):Promise<urn_response.General<Api.AuthResponse>>;
 			count<D extends schema.Depth>(options?:Hook.Arguments<'user', 'count', D>,token?:string):Promise<Hook.Response<'user', 'count', D>>;
@@ -370,7 +370,7 @@ declare module 'uranio/hooks/types' {
 			insert_multiple<D extends schema.Depth>(body:Hook.Body<'user', 'insert_multiple'>,options?:Hook.Arguments<'user', 'insert_multiple', D>,token?:string):Promise<Hook.Response<'user', 'insert_multiple', D>>;
 			update_multiple<D extends schema.Depth>(ids:string,body:Hook.Body<'user', 'update_multiple'>,options?:Hook.Arguments<'user', 'update_multiple', D>,token?:string):Promise<Hook.Response<'user', 'update_multiple', D>>;
 			delete_multiple<D extends schema.Depth>(ids:string,options?:Hook.Arguments<'user', 'delete_multiple', D>,token?:string):Promise<Hook.Response<'user', 'delete_multiple', D>>;
-	};
+		};
 		groups: {
 			count<D extends schema.Depth>(options?:Hook.Arguments<'group', 'count', D>,token?:string):Promise<Hook.Response<'group', 'count', D>>;
 			find_one<D extends schema.Depth>(options?:Hook.Arguments<'group', 'find_one', D>,token?:string):Promise<Hook.Response<'group', 'find_one', D>>;
@@ -382,7 +382,7 @@ declare module 'uranio/hooks/types' {
 			insert_multiple<D extends schema.Depth>(body:Hook.Body<'group', 'insert_multiple'>,options?:Hook.Arguments<'group', 'insert_multiple', D>,token?:string):Promise<Hook.Response<'group', 'insert_multiple', D>>;
 			update_multiple<D extends schema.Depth>(ids:string,body:Hook.Body<'group', 'update_multiple'>,options?:Hook.Arguments<'group', 'update_multiple', D>,token?:string):Promise<Hook.Response<'group', 'update_multiple', D>>;
 			delete_multiple<D extends schema.Depth>(ids:string,options?:Hook.Arguments<'group', 'delete_multiple', D>,token?:string):Promise<Hook.Response<'group', 'delete_multiple', D>>;
-	};
+		};
 		media: {
 			upload<D extends schema.Depth>(file: Buffer | ArrayBuffer | Blob, token?: string):Promise<urn_response.General<schema.Atom<'media'>>>;
 			presigned(filename: string, size?: number, type?: string, token?: string): Promise<urn_response.General<string>>;
@@ -396,7 +396,7 @@ declare module 'uranio/hooks/types' {
 			insert_multiple<D extends schema.Depth>(body:Hook.Body<'media', 'insert_multiple'>,options?:Hook.Arguments<'media', 'insert_multiple', D>,token?:string):Promise<Hook.Response<'media', 'insert_multiple', D>>;
 			update_multiple<D extends schema.Depth>(ids:string,body:Hook.Body<'media', 'update_multiple'>,options?:Hook.Arguments<'media', 'update_multiple', D>,token?:string):Promise<Hook.Response<'media', 'update_multiple', D>>;
 			delete_multiple<D extends schema.Depth>(ids:string,options?:Hook.Arguments<'media', 'delete_multiple', D>,token?:string):Promise<Hook.Response<'media', 'delete_multiple', D>>;
-	};
+		};
 		errors: {
 			count<D extends schema.Depth>(options?:Hook.Arguments<'error', 'count', D>,token?:string):Promise<Hook.Response<'error', 'count', D>>;
 			find_one<D extends schema.Depth>(options?:Hook.Arguments<'error', 'find_one', D>,token?:string):Promise<Hook.Response<'error', 'find_one', D>>;
@@ -408,7 +408,7 @@ declare module 'uranio/hooks/types' {
 			insert_multiple<D extends schema.Depth>(body:Hook.Body<'error', 'insert_multiple'>,options?:Hook.Arguments<'error', 'insert_multiple', D>,token?:string):Promise<Hook.Response<'error', 'insert_multiple', D>>;
 			update_multiple<D extends schema.Depth>(ids:string,body:Hook.Body<'error', 'update_multiple'>,options?:Hook.Arguments<'error', 'update_multiple', D>,token?:string):Promise<Hook.Response<'error', 'update_multiple', D>>;
 			delete_multiple<D extends schema.Depth>(ids:string,options?:Hook.Arguments<'error', 'delete_multiple', D>,token?:string):Promise<Hook.Response<'error', 'delete_multiple', D>>;
-	};
+		};
 		requests: {
 			count<D extends schema.Depth>(options?:Hook.Arguments<'request', 'count', D>,token?:string):Promise<Hook.Response<'request', 'count', D>>;
 			find_one<D extends schema.Depth>(options?:Hook.Arguments<'request', 'find_one', D>,token?:string):Promise<Hook.Response<'request', 'find_one', D>>;
@@ -420,6 +420,7 @@ declare module 'uranio/hooks/types' {
 			insert_multiple<D extends schema.Depth>(body:Hook.Body<'request', 'insert_multiple'>,options?:Hook.Arguments<'request', 'insert_multiple', D>,token?:string):Promise<Hook.Response<'request', 'insert_multiple', D>>;
 			update_multiple<D extends schema.Depth>(ids:string,body:Hook.Body<'request', 'update_multiple'>,options?:Hook.Arguments<'request', 'update_multiple', D>,token?:string):Promise<Hook.Response<'request', 'update_multiple', D>>;
 			delete_multiple<D extends schema.Depth>(ids:string,options?:Hook.Arguments<'request', 'delete_multiple', D>,token?:string):Promise<Hook.Response<'request', 'delete_multiple', D>>;
+		};
 	};
 /** --uranio-generate-types-end */
 
