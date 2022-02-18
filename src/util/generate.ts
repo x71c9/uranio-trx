@@ -58,10 +58,12 @@ export function hooks_and_save():void{
 }
 
 export function save_hooks(text:string):void{
+	const output = `${process_params.urn_output_dir}/__urn_hooks.ts`;
 	fs.writeFileSync(
-		`${process_params.urn_output_dir}/__urn_hooks.ts`,
+		output,
 		text
 	);
+	urn_log.debug(`Hooks saved in [${output}.`);
 }
 
 export function types():string{
@@ -79,10 +81,12 @@ export function types_and_save():void{
 }
 
 export function save_types(text:string):void{
+	const output = `${process_params.urn_output_dir}/uranio.d.ts`;
 	fs.writeFileSync(
-		`${process_params.urn_output_dir}/uranio.d.ts`,
+		output,
 		text
 	);
+	urn_log.debug(`Types saved in [${output}].`);
 }
 
 export function init():void{
@@ -151,7 +155,7 @@ function _generate_types_text(){
 			text += `Promise<urn_response.General<Api.AuthResponse>>;\n`;
 		}
 		if(atom_name === 'media'){
-			text += `\t\t\tupload<D extends schema.Depth>(`;
+			text += `\t\t\tupload(`;
 			text += `file: Buffer | ArrayBuffer | Blob, `;
 			text += `token?: string`;
 			text += `):Promise<urn_response.General<schema.Atom<'media'>>>;\n`;

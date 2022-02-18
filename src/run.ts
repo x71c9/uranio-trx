@@ -16,36 +16,39 @@ uranio.init();
 
 // urn_log.fn_debug(`aaaaaaaaaaaaa`);
 
-// const service = uranio.api.service.create();
-// service.listen(() => {
+const service = uranio.api.service.create();
+service.listen(() => {
 	
-//   console.log(uranio.conf.get(`service_port`));
+	console.log(uranio.conf.get(`service_port`));
 	
-//   // const pro_bll = uranio.core.bll.basic.create('product');
-//   // pro_bll.count({}).then(c => console.log(c));
+	// const pro_bll = uranio.api.core.bll.basic.create('superuser');
+	// pro_bll.count({}).then(c => console.log(c));
 
-//   // setTimeout(async () => {
-//   //   // const karts = uranio.base.create('kart');
-//   //   // const mycustom = karts.hook('mycustom');
-//   //   // const args:uranio.types.HookArguments<'kart', 'mycustom'> = {
-//   //   //   params: {
-//   //   //     id: '611bedc525e7b32c3f6415d8',
-//   //   //     date: 'kajflkdsa'
-//   //   //   },
-//   //   //   query: {
-//   //   //     sick: {
-//   //   //       email: '',
-//   //   //       email2: 'SS'
-//   //   //     }
-//   //   //   }
-//   //   // };
-//   //   // mycustom(args).then(r => console.log(r)).catch(e => console.error(e));
-//   //   // const a = await uranio.hooks.karts.mycustom('611bedc525e7b32c3f6415d8', 'djkhd');
-//   //   // console.log(a);
-//   //   uranio.hooks.products.delete('6128faa891988267692430a7').then(e => console.log(e)).catch(e => console.error(e));
-//   // }, 3000);
+	setTimeout(async () => {
+		// uranio.hooks.media.find({}).then((resp) => {
+		//   console.log(resp);
+		// });
+		// const karts = uranio.base.create('kart');
+		// const mycustom = karts.hook('mycustom');
+		// const args:uranio.types.HookArguments<'kart', 'mycustom'> = {
+		//   params: {
+		//     id: '611bedc525e7b32c3f6415d8',
+		//     date: 'kajflkdsa'
+		//   },
+		//   query: {
+		//     sick: {
+		//       email: '',
+		//       email2: 'SS'
+		//     }
+		//   }
+		// };
+		// mycustom(args).then(r => console.log(r)).catch(e => console.error(e));
+		// const a = await uranio.hooks.karts.mycustom('611bedc525e7b32c3f6415d8', 'djkhd');
+		// console.log(a);
+		// uranio.hooks.products.delete('6128faa891988267692430a7').then(e => console.log(e)).catch(e => console.error(e));
+	}, 3000);
 	
-// });
+});
 
 
 

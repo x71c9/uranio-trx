@@ -73,7 +73,9 @@ function hooks_and_save() {
 }
 exports.hooks_and_save = hooks_and_save;
 function save_hooks(text) {
-    fs_1.default.writeFileSync(`${exports.process_params.urn_output_dir}/__urn_hooks.ts`, text);
+    const output = `${exports.process_params.urn_output_dir}/__urn_hooks.ts`;
+    fs_1.default.writeFileSync(output, text);
+    urn_lib_1.urn_log.debug(`Hooks saved in [${output}.`);
 }
 exports.save_hooks = save_hooks;
 function types() {
@@ -91,7 +93,9 @@ function types_and_save() {
 }
 exports.types_and_save = types_and_save;
 function save_types(text) {
-    fs_1.default.writeFileSync(`${exports.process_params.urn_output_dir}/uranio.d.ts`, text);
+    const output = `${exports.process_params.urn_output_dir}/uranio.d.ts`;
+    fs_1.default.writeFileSync(output, text);
+    urn_lib_1.urn_log.debug(`Types saved in [${output}].`);
 }
 exports.save_types = save_types;
 function init() {
@@ -155,7 +159,7 @@ function _generate_types_text() {
             text += `Promise<urn_response.General<Api.AuthResponse>>;\n`;
         }
         if (atom_name === 'media') {
-            text += `\t\t\tupload<D extends schema.Depth>(`;
+            text += `\t\t\tupload(`;
             text += `file: Buffer | ArrayBuffer | Blob, `;
             text += `token?: string`;
             text += `):Promise<urn_response.General<schema.Atom<'media'>>>;\n`;
