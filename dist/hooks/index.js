@@ -1,10 +1,4 @@
 "use strict";
-/**
- * Export module for Hook
- *
- * @packageDocumentation
- */
-// export * from './hooks';
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.hooks = void 0;
 let hook_token;
@@ -14,6 +8,6 @@ exports.hooks = {
     },
     get_token: () => {
         return hook_token;
-    }
+    },
 };
 //# sourceMappingURL=index.js.map

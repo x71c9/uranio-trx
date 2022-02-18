@@ -1,4 +1,4 @@
-declare module 'uranio-trx/atoms' {
+declare module 'uranio/atoms' {
   /**
    * Required TRX books
    *
@@ -7,15 +7,15 @@ declare module 'uranio-trx/atoms' {
   export const atom_book: {};
 
 }
-declare module 'uranio-trx/auth/class' {
+declare module 'uranio/auth/class' {
   /**
    * Module for Auth
    *
    * @packageDocumentation
    */
   import { urn_response } from 'urn-lib';
-  import * as client_types from 'uranio-trx/cln/types';
-  import { schema } from 'uranio-trx/sch/index';
+  import * as client_types from 'uranio/cln/types';
+  import { schema } from 'uranio/sch/index';
   class AuthBase<A extends schema.AuthName> {
       auth_name: A;
       private raw;
@@ -27,24 +27,24 @@ declare module 'uranio-trx/auth/class' {
   export {};
 
 }
-declare module 'uranio-trx/auth/index' {
+declare module 'uranio/auth/index' {
   /**
    * Auth index module
    *
    * @packageDocumentation
    */
-  export * from 'uranio-trx/auth/class';
+  export * from 'uranio/auth/class';
 
 }
-declare module 'uranio-trx/base/class' {
+declare module 'uranio/base/class' {
   /**
    * Module for Base
    *
    * @packageDocumentation
    */
-  import * as client_types from 'uranio-trx/cln/types';
-  import { schema } from 'uranio-trx/sch/index';
-  import { Hook } from 'uranio-trx/base/types';
+  import * as client_types from 'uranio/cln/types';
+  import { schema } from 'uranio/sch/index';
+  import { Hook } from 'uranio/base/types';
   export class Base<A extends schema.AtomName> {
       atom_name: A;
       token?: string | undefined;
@@ -56,24 +56,24 @@ declare module 'uranio-trx/base/class' {
   export function create<A extends schema.AtomName>(atom_name: A, token?: string): Base<A>;
 
 }
-declare module 'uranio-trx/base/index' {
+declare module 'uranio/base/index' {
   /**
    * Base index module
    *
    * @packageDocumentation
    */
-  export * from 'uranio-trx/base/class';
-  export * from 'uranio-trx/base/types';
+  export * from 'uranio/base/class';
+  export * from 'uranio/base/types';
 
 }
-declare module 'uranio-trx/base/types' {
+declare module 'uranio/base/types' {
   /**
    * TRX client_types module
    *
    * @packageDocumentation
    */
-  import * as client_types from 'uranio-trx/cln/types';
-  import { schema } from 'uranio-trx/sch/index';
+  import * as client_types from 'uranio/cln/types';
+  import { schema } from 'uranio/sch/index';
   export namespace Hook {
       type Arguments<A extends schema.AtomName, R extends schema.RouteName<A>, D extends schema.Depth = 0> = {
           params?: Params<A, R>;
@@ -90,7 +90,7 @@ declare module 'uranio-trx/base/types' {
   }
 
 }
-declare module 'uranio-trx/book/_dock/client' {
+declare module 'uranio/book/_dock/client' {
   /**
    * Module for Client Dock Book Methods
    *
@@ -98,7 +98,7 @@ declare module 'uranio-trx/book/_dock/client' {
    */
 
 }
-declare module 'uranio-trx/book/_dock/index' {
+declare module 'uranio/book/_dock/index' {
   /**
    * Index module for Dock Book methods
    *
@@ -106,7 +106,7 @@ declare module 'uranio-trx/book/_dock/index' {
    */
 
 }
-declare module 'uranio-trx/book/_dock/server' {
+declare module 'uranio/book/_dock/server' {
   /**
    * Module for Server Dock Book Methods
    *
@@ -114,7 +114,7 @@ declare module 'uranio-trx/book/_dock/server' {
    */
 
 }
-declare module 'uranio-trx/book/atom/client' {
+declare module 'uranio/book/atom/client' {
   /**
    * Module for Client Book Methods
    *
@@ -122,7 +122,7 @@ declare module 'uranio-trx/book/atom/client' {
    */
 
 }
-declare module 'uranio-trx/book/atom/index' {
+declare module 'uranio/book/atom/index' {
   /**
    * Index module for Atom Book methods
    *
@@ -130,7 +130,7 @@ declare module 'uranio-trx/book/atom/index' {
    */
 
 }
-declare module 'uranio-trx/book/atom/server' {
+declare module 'uranio/book/atom/server' {
   /**
    * Module for Server Atom Book Methods
    *
@@ -138,14 +138,14 @@ declare module 'uranio-trx/book/atom/server' {
    */
 
 }
-declare module 'uranio-trx/book/client' {
+declare module 'uranio/book/client' {
   /**
    * Module for Client Book Methods
    *
    * @packageDocumentation
    */
-  import { Book } from 'uranio-trx/typ/book_cln';
-  import { schema } from 'uranio-trx/sch/index';
+  import { Book } from 'uranio/typ/book_cln';
+  import { schema } from 'uranio/sch/index';
   export function get_route_def<A extends schema.AtomName, R extends schema.RouteName<A>>(atom_name: A, route_name: R): Book.Definition.Dock.Routes.Route;
   export function get_routes_definition<A extends schema.AtomName>(atom_name: A): Book.Definition.Dock.Routes;
   export function get_routes_definition_with_defaults(atom_name: schema.AtomName): Book.Definition.Dock.Routes;
@@ -162,23 +162,23 @@ declare module 'uranio-trx/book/client' {
   export function get_names(): schema.AtomName[];
 
 }
-declare module 'uranio-trx/book/index' {
+declare module 'uranio/book/index' {
   /**
    * Index module for Book methods
    *
    * @packageDocumentation
    */
-  export * from 'uranio-trx/book/server';
+  export * from 'uranio/book/server';
 
 }
-declare module 'uranio-trx/book/server' {
+declare module 'uranio/book/server' {
   /**
    * Module for Server Atom Book Methods
    *
    * @packageDocumentation
    */
-  import { Book } from 'uranio-trx/typ/book_srv';
-  import { schema } from 'uranio-trx/sch/index';
+  import { Book } from 'uranio/typ/book_srv';
+  import { schema } from 'uranio/sch/index';
   export function get_route_def<A extends schema.AtomName, R extends schema.RouteName<A>>(atom_name: A, route_name: R): Book.Definition.Dock.Routes.Route<A, R>;
   export function get_routes_definition<A extends schema.AtomName>(atom_name: A): Book.Definition.Dock.Routes<A>;
   export function get_routes_definition_with_defaults<A extends schema.AtomName>(atom_name: A): Book.Definition.Dock.Routes<A>;
@@ -195,26 +195,26 @@ declare module 'uranio-trx/book/server' {
   export function has_property<A extends schema.AtomName>(atom_name: A, key: string): boolean;
 
 }
-declare module 'uranio-trx/client' {
+declare module 'uranio/client' {
   /**
    * Index module for URANIO Client
    *
    * @packageDocumentation
    */
-  import * as urn_trx_client from 'uranio-trx/cln/main';
+  import * as urn_trx_client from 'uranio/cln/main';
   export default urn_trx_client;
 
 }
-declare module 'uranio-trx/cln/defaults' {
+declare module 'uranio/cln/defaults' {
   /**
    * Module for default client configuration object
    *
    * @packageDocumentation
    */
-  import { ClientConfiguration } from 'uranio-trx/cln/types';
+  import { ClientConfiguration } from 'uranio/cln/types';
   /**
    * IMPORTANT: if new variable are added here they must be added on
-   * uranio-trx/conf/client.ts
+   * uranio/conf/client.ts
    *
    * Unfortunately the browser doesn't allow to dynamically access process.env
    * variable, like process.env[var_name] where `var_name` is a variable.
@@ -222,46 +222,46 @@ declare module 'uranio-trx/cln/defaults' {
   export const trx_client_config: Required<ClientConfiguration>;
 
 }
-declare module 'uranio-trx/cln/main' {
+declare module 'uranio/cln/main' {
   /**
    * Main module for client
    *
    * @packageDocumentation
    */
   import api from 'uranio-api/client';
-  import * as base from 'uranio-trx/base/index';
-  import * as auth from 'uranio-trx/auth/index';
-  import * as media from 'uranio-trx/media/index';
-  import { hooks } from 'uranio-trx/hooks/index';
-  import * as book from 'uranio-trx/book/client';
-  import * as conf from 'uranio-trx/conf/client';
-  import * as types from 'uranio-trx/cln/types';
-  import { schema } from 'uranio-trx/sch/index';
-  export * from 'uranio-trx/init/client';
+  import * as base from 'uranio/base/index';
+  import * as auth from 'uranio/auth/index';
+  import * as media from 'uranio/media/index';
+  import { hooks } from 'uranio/hooks/index';
+  import * as book from 'uranio/book/client';
+  import * as conf from 'uranio/conf/client';
+  import * as types from 'uranio/cln/types';
+  import { schema } from 'uranio/sch/index';
+  export * from 'uranio/init/client';
   export { api, base, auth, media, hooks, book, conf, schema, types };
 
 }
-declare module 'uranio-trx/cln/types' {
+declare module 'uranio/cln/types' {
   /**
    * Exported type module for client
    *
    * @packageDocumentation
    */
-  export * from 'uranio-trx/typ/api';
-  export * from 'uranio-trx/typ/book_cln';
-  export * from 'uranio-trx/typ/conf_cln';
-  export * from 'uranio-trx/raw/types';
-  export * from 'uranio-trx/base/types';
+  export * from 'uranio/typ/api';
+  export * from 'uranio/typ/book_cln';
+  export * from 'uranio/typ/conf_cln';
+  export * from 'uranio/raw/types';
+  export * from 'uranio/base/types';
 
 }
-declare module 'uranio-trx/conf/client' {
+declare module 'uranio/conf/client' {
   /**
    * Conf module
    *
    * @packageDocumentation
    */
-  import { trx_client_config } from 'uranio-trx/cln/defaults';
-  import * as types from 'uranio-trx/cln/types';
+  import { trx_client_config } from 'uranio/cln/defaults';
+  import * as types from 'uranio/cln/types';
   export function get<k extends keyof Required<types.ClientConfiguration>>(param_name: k): typeof trx_client_config[k];
   export function is_initialized(): boolean;
   export function set_initialize(is_initialized: boolean): void;
@@ -269,14 +269,14 @@ declare module 'uranio-trx/conf/client' {
   export function set(repo_config: Required<types.ClientConfiguration>, config: types.ClientConfiguration): void;
 
 }
-declare module 'uranio-trx/conf/conf' {
+declare module 'uranio/conf/conf' {
   /**
    * Conf module
    *
    * @packageDocumentation
    */
-  import { trx_config } from 'uranio-trx/conf/defaults';
-  import * as types from 'uranio-trx/types';
+  import { trx_config } from 'uranio/conf/defaults';
+  import * as types from 'uranio/types';
   export function get<k extends keyof Required<types.Configuration>>(param_name: k): typeof trx_config[k];
   export function is_initialized(): boolean;
   export function set_initialize(is_initialized: boolean): void;
@@ -284,35 +284,35 @@ declare module 'uranio-trx/conf/conf' {
   export function set(repo_config: Required<types.Configuration>, config: types.Configuration): void;
 
 }
-declare module 'uranio-trx/conf/defaults' {
+declare module 'uranio/conf/defaults' {
   /**
    * Module for default configuration object
    *
    * @packageDocumentation
    */
-  import { Configuration } from 'uranio-trx/types';
+  import { Configuration } from 'uranio/types';
   export const trx_config: Required<Configuration>;
 
 }
-declare module 'uranio-trx/conf/index' {
+declare module 'uranio/conf/index' {
   /**
    * Index module for conf
    *
    * @packageDocumentation
    */
-  export * from 'uranio-trx/conf/conf';
+  export * from 'uranio/conf/conf';
 
 }
-declare module 'uranio-trx/generate' {
+declare module 'uranio/generate' {
   /**
    * Api generate module
    *
    * @packageDocumentation
    */
-  export * from 'uranio-trx/register';
+  export * from 'uranio/register';
 
 }
-declare module 'uranio-trx/hooks/hooks' {
+declare module 'uranio/hooks/hooks' {
   /**
    * Autogenerated TRX Hooks module from urn-cli
    *
@@ -320,70 +320,151 @@ declare module 'uranio-trx/hooks/hooks' {
    */
 
 }
-declare module 'uranio-trx/hooks/index' {
+declare module 'uranio/hooks/index' {
   /**
    * Export module for Hook
    *
    * @packageDocumentation
    */
-  import { Hooks } from 'uranio-trx/hooks/types';
+  import { Hooks } from 'uranio/hooks/types';
   export const hooks: Hooks;
 
 }
-declare module 'uranio-trx/hooks/types' {
+declare module 'uranio/hooks/types' {
   /**
    * Export module for Hook
    *
    * @packageDocumentation
    */
   /** --uranio-generate-types-start */
-  export type Hooks = {
-      set_token: (token: string) => void;
-      get_token: () => string | undefined;
-  };
-  /** --uranio-generate-types-end */
+
+	import {urn_response} from 'urn-lib';
+	import {Api} from 'uranio/typ/api';
+	import {schema} from 'uranio/sch/index';
+	import {Hook} from 'uranio/base/types';
+	export type Hooks = {
+		set_token: (token: string) => void;
+		get_token: () => string | undefined;
+		superusers: {
+			authenticate(email: string, password: string):Promise<urn_response.General<Api.AuthResponse>>;
+			count<D extends schema.Depth>(options?:Hook.Arguments<'superuser', 'count', D>,token?:string):Promise<Hook.Response<'superuser', 'count', D>>;
+			find_one<D extends schema.Depth>(options?:Hook.Arguments<'superuser', 'find_one', D>,token?:string):Promise<Hook.Response<'superuser', 'find_one', D>>;
+			find<D extends schema.Depth>(options?:Hook.Arguments<'superuser', 'find', D>,token?:string):Promise<Hook.Response<'superuser', 'find', D>>;
+			find_id<D extends schema.Depth>(id:string,options?:Hook.Arguments<'superuser', 'find_id', D>,token?:string):Promise<Hook.Response<'superuser', 'find_id', D>>;
+			insert<D extends schema.Depth>(body:Hook.Body<'superuser', 'insert'>,options?:Hook.Arguments<'superuser', 'insert', D>,token?:string):Promise<Hook.Response<'superuser', 'insert', D>>;
+			update<D extends schema.Depth>(id:string,body:Hook.Body<'superuser', 'update'>,options?:Hook.Arguments<'superuser', 'update', D>,token?:string):Promise<Hook.Response<'superuser', 'update', D>>;
+			delete<D extends schema.Depth>(id:string,options?:Hook.Arguments<'superuser', 'delete', D>,token?:string):Promise<Hook.Response<'superuser', 'delete', D>>;
+			insert_multiple<D extends schema.Depth>(body:Hook.Body<'superuser', 'insert_multiple'>,options?:Hook.Arguments<'superuser', 'insert_multiple', D>,token?:string):Promise<Hook.Response<'superuser', 'insert_multiple', D>>;
+			update_multiple<D extends schema.Depth>(ids:string,body:Hook.Body<'superuser', 'update_multiple'>,options?:Hook.Arguments<'superuser', 'update_multiple', D>,token?:string):Promise<Hook.Response<'superuser', 'update_multiple', D>>;
+			delete_multiple<D extends schema.Depth>(ids:string,options?:Hook.Arguments<'superuser', 'delete_multiple', D>,token?:string):Promise<Hook.Response<'superuser', 'delete_multiple', D>>;
+		};
+		users: {
+			authenticate(email: string, password: string):Promise<urn_response.General<Api.AuthResponse>>;
+			count<D extends schema.Depth>(options?:Hook.Arguments<'user', 'count', D>,token?:string):Promise<Hook.Response<'user', 'count', D>>;
+			find_one<D extends schema.Depth>(options?:Hook.Arguments<'user', 'find_one', D>,token?:string):Promise<Hook.Response<'user', 'find_one', D>>;
+			find<D extends schema.Depth>(options?:Hook.Arguments<'user', 'find', D>,token?:string):Promise<Hook.Response<'user', 'find', D>>;
+			find_id<D extends schema.Depth>(id:string,options?:Hook.Arguments<'user', 'find_id', D>,token?:string):Promise<Hook.Response<'user', 'find_id', D>>;
+			insert<D extends schema.Depth>(body:Hook.Body<'user', 'insert'>,options?:Hook.Arguments<'user', 'insert', D>,token?:string):Promise<Hook.Response<'user', 'insert', D>>;
+			update<D extends schema.Depth>(id:string,body:Hook.Body<'user', 'update'>,options?:Hook.Arguments<'user', 'update', D>,token?:string):Promise<Hook.Response<'user', 'update', D>>;
+			delete<D extends schema.Depth>(id:string,options?:Hook.Arguments<'user', 'delete', D>,token?:string):Promise<Hook.Response<'user', 'delete', D>>;
+			insert_multiple<D extends schema.Depth>(body:Hook.Body<'user', 'insert_multiple'>,options?:Hook.Arguments<'user', 'insert_multiple', D>,token?:string):Promise<Hook.Response<'user', 'insert_multiple', D>>;
+			update_multiple<D extends schema.Depth>(ids:string,body:Hook.Body<'user', 'update_multiple'>,options?:Hook.Arguments<'user', 'update_multiple', D>,token?:string):Promise<Hook.Response<'user', 'update_multiple', D>>;
+			delete_multiple<D extends schema.Depth>(ids:string,options?:Hook.Arguments<'user', 'delete_multiple', D>,token?:string):Promise<Hook.Response<'user', 'delete_multiple', D>>;
+		};
+		groups: {
+			count<D extends schema.Depth>(options?:Hook.Arguments<'group', 'count', D>,token?:string):Promise<Hook.Response<'group', 'count', D>>;
+			find_one<D extends schema.Depth>(options?:Hook.Arguments<'group', 'find_one', D>,token?:string):Promise<Hook.Response<'group', 'find_one', D>>;
+			find<D extends schema.Depth>(options?:Hook.Arguments<'group', 'find', D>,token?:string):Promise<Hook.Response<'group', 'find', D>>;
+			find_id<D extends schema.Depth>(id:string,options?:Hook.Arguments<'group', 'find_id', D>,token?:string):Promise<Hook.Response<'group', 'find_id', D>>;
+			insert<D extends schema.Depth>(body:Hook.Body<'group', 'insert'>,options?:Hook.Arguments<'group', 'insert', D>,token?:string):Promise<Hook.Response<'group', 'insert', D>>;
+			update<D extends schema.Depth>(id:string,body:Hook.Body<'group', 'update'>,options?:Hook.Arguments<'group', 'update', D>,token?:string):Promise<Hook.Response<'group', 'update', D>>;
+			delete<D extends schema.Depth>(id:string,options?:Hook.Arguments<'group', 'delete', D>,token?:string):Promise<Hook.Response<'group', 'delete', D>>;
+			insert_multiple<D extends schema.Depth>(body:Hook.Body<'group', 'insert_multiple'>,options?:Hook.Arguments<'group', 'insert_multiple', D>,token?:string):Promise<Hook.Response<'group', 'insert_multiple', D>>;
+			update_multiple<D extends schema.Depth>(ids:string,body:Hook.Body<'group', 'update_multiple'>,options?:Hook.Arguments<'group', 'update_multiple', D>,token?:string):Promise<Hook.Response<'group', 'update_multiple', D>>;
+			delete_multiple<D extends schema.Depth>(ids:string,options?:Hook.Arguments<'group', 'delete_multiple', D>,token?:string):Promise<Hook.Response<'group', 'delete_multiple', D>>;
+		};
+		media: {
+			upload<D extends schema.Depth>(file: Buffer | ArrayBuffer | Blob, token?: string):Promise<urn_response.General<schema.Atom<'media'>>>;
+			presigned(filename: string, size?: number, type?: string, token?: string): Promise<urn_response.General<string>>;
+			count<D extends schema.Depth>(options?:Hook.Arguments<'media', 'count', D>,token?:string):Promise<Hook.Response<'media', 'count', D>>;
+			find_one<D extends schema.Depth>(options?:Hook.Arguments<'media', 'find_one', D>,token?:string):Promise<Hook.Response<'media', 'find_one', D>>;
+			find<D extends schema.Depth>(options?:Hook.Arguments<'media', 'find', D>,token?:string):Promise<Hook.Response<'media', 'find', D>>;
+			find_id<D extends schema.Depth>(id:string,options?:Hook.Arguments<'media', 'find_id', D>,token?:string):Promise<Hook.Response<'media', 'find_id', D>>;
+			insert<D extends schema.Depth>(body:Hook.Body<'media', 'insert'>,options?:Hook.Arguments<'media', 'insert', D>,token?:string):Promise<Hook.Response<'media', 'insert', D>>;
+			update<D extends schema.Depth>(id:string,body:Hook.Body<'media', 'update'>,options?:Hook.Arguments<'media', 'update', D>,token?:string):Promise<Hook.Response<'media', 'update', D>>;
+			delete<D extends schema.Depth>(id:string,options?:Hook.Arguments<'media', 'delete', D>,token?:string):Promise<Hook.Response<'media', 'delete', D>>;
+			insert_multiple<D extends schema.Depth>(body:Hook.Body<'media', 'insert_multiple'>,options?:Hook.Arguments<'media', 'insert_multiple', D>,token?:string):Promise<Hook.Response<'media', 'insert_multiple', D>>;
+			update_multiple<D extends schema.Depth>(ids:string,body:Hook.Body<'media', 'update_multiple'>,options?:Hook.Arguments<'media', 'update_multiple', D>,token?:string):Promise<Hook.Response<'media', 'update_multiple', D>>;
+			delete_multiple<D extends schema.Depth>(ids:string,options?:Hook.Arguments<'media', 'delete_multiple', D>,token?:string):Promise<Hook.Response<'media', 'delete_multiple', D>>;
+		};
+		errors: {
+			count<D extends schema.Depth>(options?:Hook.Arguments<'error', 'count', D>,token?:string):Promise<Hook.Response<'error', 'count', D>>;
+			find_one<D extends schema.Depth>(options?:Hook.Arguments<'error', 'find_one', D>,token?:string):Promise<Hook.Response<'error', 'find_one', D>>;
+			find<D extends schema.Depth>(options?:Hook.Arguments<'error', 'find', D>,token?:string):Promise<Hook.Response<'error', 'find', D>>;
+			find_id<D extends schema.Depth>(id:string,options?:Hook.Arguments<'error', 'find_id', D>,token?:string):Promise<Hook.Response<'error', 'find_id', D>>;
+			insert<D extends schema.Depth>(body:Hook.Body<'error', 'insert'>,options?:Hook.Arguments<'error', 'insert', D>,token?:string):Promise<Hook.Response<'error', 'insert', D>>;
+			update<D extends schema.Depth>(id:string,body:Hook.Body<'error', 'update'>,options?:Hook.Arguments<'error', 'update', D>,token?:string):Promise<Hook.Response<'error', 'update', D>>;
+			delete<D extends schema.Depth>(id:string,options?:Hook.Arguments<'error', 'delete', D>,token?:string):Promise<Hook.Response<'error', 'delete', D>>;
+			insert_multiple<D extends schema.Depth>(body:Hook.Body<'error', 'insert_multiple'>,options?:Hook.Arguments<'error', 'insert_multiple', D>,token?:string):Promise<Hook.Response<'error', 'insert_multiple', D>>;
+			update_multiple<D extends schema.Depth>(ids:string,body:Hook.Body<'error', 'update_multiple'>,options?:Hook.Arguments<'error', 'update_multiple', D>,token?:string):Promise<Hook.Response<'error', 'update_multiple', D>>;
+			delete_multiple<D extends schema.Depth>(ids:string,options?:Hook.Arguments<'error', 'delete_multiple', D>,token?:string):Promise<Hook.Response<'error', 'delete_multiple', D>>;
+		};
+		requests: {
+			count<D extends schema.Depth>(options?:Hook.Arguments<'request', 'count', D>,token?:string):Promise<Hook.Response<'request', 'count', D>>;
+			find_one<D extends schema.Depth>(options?:Hook.Arguments<'request', 'find_one', D>,token?:string):Promise<Hook.Response<'request', 'find_one', D>>;
+			find<D extends schema.Depth>(options?:Hook.Arguments<'request', 'find', D>,token?:string):Promise<Hook.Response<'request', 'find', D>>;
+			find_id<D extends schema.Depth>(id:string,options?:Hook.Arguments<'request', 'find_id', D>,token?:string):Promise<Hook.Response<'request', 'find_id', D>>;
+			insert<D extends schema.Depth>(body:Hook.Body<'request', 'insert'>,options?:Hook.Arguments<'request', 'insert', D>,token?:string):Promise<Hook.Response<'request', 'insert', D>>;
+			update<D extends schema.Depth>(id:string,body:Hook.Body<'request', 'update'>,options?:Hook.Arguments<'request', 'update', D>,token?:string):Promise<Hook.Response<'request', 'update', D>>;
+			delete<D extends schema.Depth>(id:string,options?:Hook.Arguments<'request', 'delete', D>,token?:string):Promise<Hook.Response<'request', 'delete', D>>;
+			insert_multiple<D extends schema.Depth>(body:Hook.Body<'request', 'insert_multiple'>,options?:Hook.Arguments<'request', 'insert_multiple', D>,token?:string):Promise<Hook.Response<'request', 'insert_multiple', D>>;
+			update_multiple<D extends schema.Depth>(ids:string,body:Hook.Body<'request', 'update_multiple'>,options?:Hook.Arguments<'request', 'update_multiple', D>,token?:string):Promise<Hook.Response<'request', 'update_multiple', D>>;
+			delete_multiple<D extends schema.Depth>(ids:string,options?:Hook.Arguments<'request', 'delete_multiple', D>,token?:string):Promise<Hook.Response<'request', 'delete_multiple', D>>;
+		};
+	};
+/** --uranio-generate-types-end */
 
 }
-declare module 'uranio-trx/index' {
+declare module 'uranio/index' {
   /**
    * Index module
    *
    * @packageDocumentation
    */
-  import * as urn_trx from 'uranio-trx/srv/main';
+  import * as urn_trx from 'uranio/srv/main';
   export default urn_trx;
 
 }
-declare module 'uranio-trx/init/client' {
+declare module 'uranio/init/client' {
   /**
    * Init module
    *
    * @packageDocumentation
    */
-  import * as types from 'uranio-trx/cln/types';
+  import * as types from 'uranio/cln/types';
   export function init(config?: types.ClientConfiguration): void;
 
 }
-declare module 'uranio-trx/init/index' {
+declare module 'uranio/init/index' {
   /**
    * Index module for init
    *
    * @packageDocumentation
    */
-  export * from 'uranio-trx/init/init';
+  export * from 'uranio/init/init';
 
 }
-declare module 'uranio-trx/init/init' {
+declare module 'uranio/init/init' {
   /**
    * Init module
    *
    * @packageDocumentation
    */
-  import * as types from 'uranio-trx/types';
+  import * as types from 'uranio/types';
   export function init(config?: types.Configuration): void;
 
 }
-declare module 'uranio-trx/media/class' {
+declare module 'uranio/media/class' {
   /**
    * Module for Media
    *
@@ -391,8 +472,8 @@ declare module 'uranio-trx/media/class' {
    */
   /// <reference types="node" />
   import { urn_response } from 'urn-lib';
-  import { schema } from 'uranio-trx/sch/index';
-  import { Base } from 'uranio-trx/base/index';
+  import { schema } from 'uranio/sch/index';
+  import { Base } from 'uranio/base/index';
   class MediaBase extends Base<'media'> {
       token?: string | undefined;
       constructor(token?: string | undefined);
@@ -404,16 +485,16 @@ declare module 'uranio-trx/media/class' {
   export {};
 
 }
-declare module 'uranio-trx/media/index' {
+declare module 'uranio/media/index' {
   /**
    * Media index module
    *
    * @packageDocumentation
    */
-  export * from 'uranio-trx/media/class';
+  export * from 'uranio/media/class';
 
 }
-declare module 'uranio-trx/raw/axios' {
+declare module 'uranio/raw/axios' {
   /**
    * Module for AxiosRaw
    *
@@ -421,9 +502,9 @@ declare module 'uranio-trx/raw/axios' {
    */
   import { AxiosInstance } from 'axios';
   import { urn_response } from 'urn-lib';
-  import * as client_types from 'uranio-trx/cln/types';
-  import { schema } from 'uranio-trx/sch/index';
-  import { RAW } from 'uranio-trx/raw/types';
+  import * as client_types from 'uranio/cln/types';
+  import { schema } from 'uranio/sch/index';
+  import { RAW } from 'uranio/raw/types';
   class AxiosRaw<A extends schema.AtomName> implements RAW<A> {
       private _axios_instance;
       private is_auth;
@@ -441,7 +522,7 @@ declare module 'uranio-trx/raw/axios' {
   export {};
 
 }
-declare module 'uranio-trx/raw/defaults' {
+declare module 'uranio/raw/defaults' {
   /**
    * Module for default raw config
    *
@@ -452,18 +533,18 @@ declare module 'uranio-trx/raw/defaults' {
   };
 
 }
-declare module 'uranio-trx/raw/index' {
+declare module 'uranio/raw/index' {
   /**
    * Export module for TRXRaw
    *
    * @packageDocumentation
    */
-  export * from 'uranio-trx/raw/types';
-  import { create } from 'uranio-trx/raw/axios';
+  export * from 'uranio/raw/types';
+  import { create } from 'uranio/raw/axios';
   export { create };
 
 }
-declare module 'uranio-trx/raw/types' {
+declare module 'uranio/raw/types' {
   /**
    * Type module for raw
    *
@@ -471,8 +552,8 @@ declare module 'uranio-trx/raw/types' {
    */
   import { urn_response } from 'urn-lib';
   export type RawName = 'axios';
-  import * as cln_types from 'uranio-trx/cln/types';
-  import { schema } from 'uranio-trx/sch/index';
+  import * as cln_types from 'uranio/cln/types';
+  import { schema } from 'uranio/sch/index';
   export interface RAW<A extends schema.AtomName> {
       get<R extends schema.RouteName<A>, D extends schema.Depth>(url: string, query?: cln_types.Hook.Query<A, R, D>, headers?: cln_types.Hook.Headers): Promise<urn_response.General<any, any>>;
       post<R extends schema.RouteName<A>, D extends schema.Depth>(url: string, body: any, query?: cln_types.Hook.Query<A, R, D>, headers?: cln_types.Hook.Headers): Promise<urn_response.General<any, any>>;
@@ -480,27 +561,27 @@ declare module 'uranio-trx/raw/types' {
   }
 
 }
-declare module 'uranio-trx/reg/index' {
+declare module 'uranio/reg/index' {
   /**
    * Index module for register
    *
    * @packageDocumentation
    */
-  export * from 'uranio-trx/reg/register';
+  export * from 'uranio/reg/register';
 
 }
-declare module 'uranio-trx/reg/register' {
+declare module 'uranio/reg/register' {
   /**
    * Register module
    *
    * @packageDocumentation
    */
-  import * as types from 'uranio-trx/types';
-  import { schema } from 'uranio-trx/sch/index';
+  import * as types from 'uranio/types';
+  import { schema } from 'uranio/sch/index';
   export function register<A extends schema.AtomName>(atom_definition: types.Book.Definition<A>, atom_name?: A): string;
 
 }
-declare module 'uranio-trx/register' {
+declare module 'uranio/register' {
   /**
    * Register module for URANIO Api
    *
@@ -509,7 +590,7 @@ declare module 'uranio-trx/register' {
   export {};
 
 }
-declare module 'uranio-trx/run' {
+declare module 'uranio/run' {
   /**
    * TRX run module
    *
@@ -518,16 +599,16 @@ declare module 'uranio-trx/run' {
   export {};
 
 }
-declare module 'uranio-trx/sch/index' {
+declare module 'uranio/sch/index' {
   /**
    * Index module for Schema
    *
    * @packageDocumentation
    */
-  export * from 'uranio-trx/sch/schema';
+  export * from 'uranio/sch/schema';
 
 }
-declare module 'uranio-trx/sch/schema' {
+declare module 'uranio/sch/schema' {
   /**
    * Schema types module
    *
@@ -537,48 +618,48 @@ declare module 'uranio-trx/sch/schema' {
   export { schema };
 
 }
-declare module 'uranio-trx/srv/main' {
+declare module 'uranio/srv/main' {
   /**
    * Main module for server
    *
    * @packageDocumentation
    */
   import api from 'uranio-api';
-  import * as base from 'uranio-trx/base/index';
-  import * as auth from 'uranio-trx/auth/index';
-  import * as media from 'uranio-trx/media/index';
-  import { hooks } from 'uranio-trx/hooks/index';
-  import * as book from 'uranio-trx/book/index';
-  import * as conf from 'uranio-trx/conf/index';
-  import * as types from 'uranio-trx/srv/types';
-  import { schema } from 'uranio-trx/sch/index';
-  import * as util from 'uranio-trx/util/index';
-  export * from 'uranio-trx/init/index';
-  export * from 'uranio-trx/reg/index';
+  import * as base from 'uranio/base/index';
+  import * as auth from 'uranio/auth/index';
+  import * as media from 'uranio/media/index';
+  import { hooks } from 'uranio/hooks/index';
+  import * as book from 'uranio/book/index';
+  import * as conf from 'uranio/conf/index';
+  import * as types from 'uranio/srv/types';
+  import { schema } from 'uranio/sch/index';
+  import * as util from 'uranio/util/index';
+  export * from 'uranio/init/index';
+  export * from 'uranio/reg/index';
   export { api, base, auth, media, hooks, book, conf, util, schema, types, };
 
 }
-declare module 'uranio-trx/srv/types' {
+declare module 'uranio/srv/types' {
   /**
    * Exported type module for server
    *
    * @packageDocumentation
    */
-  export * from 'uranio-trx/typ/api';
-  export * from 'uranio-trx/typ/book_srv';
-  export * from 'uranio-trx/typ/conf';
-  export * from 'uranio-trx/raw/types';
-  export * from 'uranio-trx/base/types';
+  export * from 'uranio/typ/api';
+  export * from 'uranio/typ/book_srv';
+  export * from 'uranio/typ/conf';
+  export * from 'uranio/raw/types';
+  export * from 'uranio/base/types';
 
 }
-declare module 'uranio-trx/typ/api' {
+declare module 'uranio/typ/api' {
   /**
    * Re-export API types module
    *
    * @packageDocumentation
    */
   import api from 'uranio-api';
-  import { schema } from 'uranio-trx/sch/index';
+  import { schema } from 'uranio/sch/index';
   export namespace Api {
       type AuthResponse = api.types.Api.AuthResponse;
       type Request<A extends schema.AtomName, R extends schema.RouteName<A>, D extends schema.Depth = 0> = api.types.Api.Request<A, R, D>;
@@ -594,7 +675,7 @@ declare module 'uranio-trx/typ/api' {
   export type RouteParam<A extends schema.AtomName, R extends schema.RouteName<A>> = api.types.RouteParam<A, R>;
 
 }
-declare module 'uranio-trx/typ/book_cln' {
+declare module 'uranio/typ/book_cln' {
   /**
    * Client Book types module
    *
@@ -608,7 +689,7 @@ declare module 'uranio-trx/typ/book_cln' {
    * @packageDocumentation
    */
   import api_client from 'uranio-api/client';
-  import { schema } from 'uranio-trx/sch/index';
+  import { schema } from 'uranio/sch/index';
   export type Book = {
       [k in schema.AtomName]?: Book.Definition;
   };
@@ -669,7 +750,7 @@ declare module 'uranio-trx/typ/book_cln' {
   }
 
 }
-declare module 'uranio-trx/typ/book_srv' {
+declare module 'uranio/typ/book_srv' {
   /**
    * Server book type module
    *
@@ -684,8 +765,8 @@ declare module 'uranio-trx/typ/book_srv' {
    * @packageDocumentation
    */
   import api from 'uranio-api';
-  import * as book_cln from 'uranio-trx/typ/book_cln';
-  import { schema } from 'uranio-trx/sch/index';
+  import * as book_cln from 'uranio/typ/book_cln';
+  import { schema } from 'uranio/sch/index';
   export type Book = {
       [k in schema.AtomName]?: Book.Definition<k>;
   };
@@ -747,7 +828,7 @@ declare module 'uranio-trx/typ/book_srv' {
   }
 
 }
-declare module 'uranio-trx/typ/conf' {
+declare module 'uranio/typ/conf' {
   /**
    * Conf type module
    *
@@ -768,13 +849,13 @@ declare module 'uranio-trx/typ/conf' {
   export {};
 
 }
-declare module 'uranio-trx/typ/conf_cln' {
+declare module 'uranio/typ/conf_cln' {
   /**
    * Client Conf type module
    *
    * @packageDocumentation
    */
-  import { RawName } from 'uranio-trx/raw/types';
+  import { RawName } from 'uranio/raw/types';
   type RequiredClientConfigParams = {
       fetch: RawName;
       protocol: string;
@@ -787,16 +868,16 @@ declare module 'uranio-trx/typ/conf_cln' {
   export {};
 
 }
-declare module 'uranio-trx/types' {
+declare module 'uranio/types' {
   /**
    * Main types module
    *
    * @packageDocumentation
    */
-  export * from 'uranio-trx/srv/types';
+  export * from 'uranio/srv/types';
 
 }
-declare module 'uranio-trx/util/generate' {
+declare module 'uranio/util/generate' {
   /**
    * Generate module
    *
@@ -820,17 +901,17 @@ declare module 'uranio-trx/util/generate' {
   export function save_types(text: string): void;
 
 }
-declare module 'uranio-trx/util/index' {
+declare module 'uranio/util/index' {
   /**
    * Index module for utils
    *
    * @packageDocumentation
    */
-  import * as generate from 'uranio-trx/util/generate';
+  import * as generate from 'uranio/util/generate';
   export { generate };
 
 }
-declare module 'uranio-trx' {
-  import main = require('uranio-trx/index');
+declare module 'uranio' {
+  import main = require('uranio/index');
   export = main;
 }
