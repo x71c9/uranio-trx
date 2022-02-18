@@ -27,40 +27,124 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.generate = void 0;
+exports.save_types = exports.types_and_save = exports.types = exports.save_hooks = exports.hooks_and_save = exports.hooks = exports.save_schema = exports.schema_and_save = exports.schema = exports.process_params = void 0;
 const fs_1 = __importDefault(require("fs"));
 const uranio_api_1 = __importDefault(require("uranio-api"));
-// import {urn_util, urn_exception, urn_log} from 'urn-lib';
 const urn_lib_1 = require("urn-lib");
 const book = __importStar(require("../book/index"));
-let urn_generate_base_schema = `./types/schema.d.ts`;
-let urn_generate_output_dir = `.`;
-// import {default_routes} from '../routes/client';
-function generate() {
-    _generate_trx_schema();
-    _generate_hooks();
-    _generate_uranio_types();
+exports.process_params = {
+    urn_command: `schema`,
+    urn_base_schema: `./types/schema.d.ts`,
+    urn_base_types: `./types/uranio.d.ts`,
+    urn_output_dir: `.`
+};
+function schema() {
+    urn_lib_1.urn_log.debug('Started generating uranio trx schema...');
+    _init_generate();
+    const api_schema = uranio_api_1.default.util.generate.schema();
+    const text = _generate_uranio_schema_text(api_schema);
+    urn_lib_1.urn_log.debug(`TRX Schema generated.`);
+    return text;
 }
-exports.generate = generate;
-function _generate_uranio_types() {
-    // TODO
+exports.schema = schema;
+function schema_and_save() {
+    const text = schema();
+    save_schema(text);
+    urn_lib_1.urn_log.debug(`Schema generated and saved.`);
 }
-function _generate_hooks() {
-    urn_lib_1.urn_log.debug('Generating uranio trx hooks...');
+exports.schema_and_save = schema_and_save;
+function save_schema(text) {
+    return uranio_api_1.default.util.generate.save_schema(text);
+}
+exports.save_schema = save_schema;
+function hooks() {
+    urn_lib_1.urn_log.debug('Started generating uranio trx hooks...');
+    _init_generate();
     const text = _generate_hooks_text();
-    _save_hooks_file(text);
     urn_lib_1.urn_log.debug(`TRX Hooks generated.`);
+    return text;
 }
-function _save_hooks_file(text) {
+exports.hooks = hooks;
+function hooks_and_save() {
+    const text = hooks();
+    save_hooks(text);
+    urn_lib_1.urn_log.debug(`Hooks generated and saved.`);
+}
+exports.hooks_and_save = hooks_and_save;
+function save_hooks(text) {
+    fs_1.default.writeFileSync(`${exports.process_params.urn_output_dir}/__urn_hooks.ts`, text);
+}
+exports.save_hooks = save_hooks;
+function types() {
+    urn_lib_1.urn_log.debug('Started generating uranio trx types...');
+    _init_generate();
+    const text = _generate_uranio_types_text();
+    urn_lib_1.urn_log.debug(`TRX Types generated.`);
+    return text;
+}
+exports.types = types;
+function types_and_save() {
+    const text = types();
+    save_types(text);
+    urn_lib_1.urn_log.debug(`Types generated and saved.`);
+}
+exports.types_and_save = types_and_save;
+function save_types(text) {
+    fs_1.default.writeFileSync(`${exports.process_params.urn_output_dir}/uranio.d.ts`, text);
+}
+exports.save_types = save_types;
+function _init_generate() {
+    exports.process_params.urn_base_schema = uranio_api_1.default.util.generate.process_params.urn_base_schema;
+    exports.process_params.urn_command = uranio_api_1.default.util.generate.process_params.urn_command;
+    exports.process_params.urn_output_dir = uranio_api_1.default.util.generate.process_params.urn_output_dir;
+    _init_trx_generate();
+}
+function _init_trx_generate() {
     for (const argv of process.argv) {
         const splitted = argv.split('=');
-        if (splitted[0] === 'urn_generate_output_dir'
+        if (splitted[0] === 'urn_base_types'
             && typeof splitted[1] === 'string'
             && splitted[1] !== '') {
-            urn_generate_output_dir = splitted[1];
+            exports.process_params.urn_base_types = splitted[1];
         }
     }
-    fs_1.default.writeFileSync(`${urn_generate_output_dir}/__urn_hooks.ts`, text);
+}
+function _generate_uranio_types_text() {
+    const txt = _generate_types_text();
+    const data = fs_1.default.readFileSync(exports.process_params.urn_base_types, { encoding: 'utf8' });
+    const data_start = data.split('/** --uranio-generate-types-start */');
+    const data_end = data_start[1].split('/** --uranio-generate-types-end */');
+    let new_data = '';
+    new_data += data_start[0];
+    new_data += `/** --uranio-generate-types-start */\n\n`;
+    new_data += txt;
+    +'\n\n';
+    new_data += `/** --uranio-generate-types-end */`;
+    new_data += data_end[1];
+    return new_data;
+}
+function _generate_types_text() {
+    //TODO
+}
+function _generate_uranio_schema_text(api_schema) {
+    const txt = _generate_trx_schema_text();
+    const split_text = '\texport {};/** --uranio-generate-end */';
+    const data_splitted = api_schema.split(split_text);
+    let new_data = '';
+    new_data += data_splitted[0];
+    new_data += txt;
+    +'\n\n\t';
+    new_data += split_text;
+    new_data += data_splitted[1];
+    return new_data;
+}
+function _generate_trx_schema_text() {
+    const atom_book = book.get_all_definitions();
+    let txt = '';
+    txt += _generate_default_response();
+    txt += _generate_custom_response(atom_book);
+    txt += _generate_response();
+    return txt;
 }
 function _generate_hooks_text() {
     let text = '';
@@ -215,37 +299,6 @@ function _presigned_hooks() {
     text += `\t},\n`;
     return text;
 }
-function _generate_trx_schema() {
-    urn_lib_1.urn_log.debug('Generating uranio trx schema...');
-    uranio_api_1.default.util.generate();
-    const text = _generate_schema_text();
-    _save_schema_declaration_file(text);
-    urn_lib_1.urn_log.debug(`TRX Schema generated.`);
-}
-function _save_schema_declaration_file(text) {
-    for (const argv of process.argv) {
-        const splitted = argv.split('=');
-        if (splitted[0] === 'urn_generate_base_schema'
-            && typeof splitted[1] === 'string'
-            && splitted[1] !== '') {
-            urn_generate_base_schema = splitted[1];
-        }
-        else if (splitted[0] === 'urn_generate_output_dir'
-            && typeof splitted[1] === 'string'
-            && splitted[1] !== '') {
-            urn_generate_output_dir = splitted[1];
-        }
-    }
-    _replace_text(urn_generate_base_schema, urn_generate_output_dir, text);
-}
-function _generate_schema_text() {
-    const atom_book = book.get_all_definitions();
-    let txt = '';
-    txt += _generate_default_response();
-    txt += _generate_custom_response(atom_book);
-    txt += _generate_response();
-    return txt;
-}
 function _generate_response() {
     let text = '';
     text += `\texport type Response<A extends schema.AtomName, R extends schema.RouteName<A>, D extends schema.Depth = 0> =\n`;
@@ -295,17 +348,5 @@ function _generate_default_response() {
     text += `\t\tnever;\n`;
     text += `\n`;
     return text;
-}
-function _replace_text(base_schema_path, output_dir_path, txt) {
-    const data = fs_1.default.readFileSync(base_schema_path, { encoding: 'utf8' });
-    const split_text = '\texport {};/** --uranio-generate-end */';
-    const data_splitted = data.split(split_text);
-    let new_data = '';
-    new_data += data_splitted[0];
-    new_data += txt;
-    +'\n\n\t';
-    new_data += split_text;
-    new_data += data_splitted[1];
-    fs_1.default.writeFileSync(`${output_dir_path}/schema.d.ts`, new_data);
 }
 //# sourceMappingURL=generate.js.map

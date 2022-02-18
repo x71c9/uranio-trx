@@ -8,63 +8,206 @@ import fs from 'fs';
 
 import api from 'uranio-api';
 
-// import {urn_util, urn_exception, urn_log} from 'urn-lib';
 import {urn_log} from 'urn-lib';
 
-// const urn_exc = urn_exception.init(`REGISTER_MODULE`, `Register module.`);
-
-import {schema} from '../sch/index';
+import {schema as schema_types} from '../sch/index';
 
 import * as book from '../book/index';
 
-import * as types from '../types';
+import * as types_types from '../types';
 
-let urn_generate_base_schema = `./types/schema.d.ts`;
-let urn_generate_output_dir = `.`;
+export const process_params = {
+	urn_command: `schema`,
+	urn_base_schema: `./types/schema.d.ts`,
+	urn_base_types: `./types/uranio.d.ts`,
+	urn_output_dir: `.`
+};
 
-// import {default_routes} from '../routes/client';
-export function generate():void{
-	
-	_generate_trx_schema();
-	
-	_generate_hooks();
-	
-	_generate_uranio_types();
-	
+export function schema():string{
+	urn_log.debug('Started generating uranio trx schema...');
+	_init_generate();
+	const api_schema = api.util.generate.schema();
+	const text = _generate_uranio_schema_text(api_schema);
+	urn_log.debug(`TRX Schema generated.`);
+	return text;
 }
 
-function _generate_uranio_types(){
-	// TODO
+export function schema_and_save():void{
+	const text = schema();
+	save_schema(text);
+	urn_log.debug(`Schema generated and saved.`);
 }
 
-function _generate_hooks(){
-	urn_log.debug('Generating uranio trx hooks...');
+export function save_schema(text:string):void{
+	return api.util.generate.save_schema(text);
+}
+
+export function hooks():string{
+	urn_log.debug('Started generating uranio trx hooks...');
+	_init_generate();
 	const text = _generate_hooks_text();
-	_save_hooks_file(text);
 	urn_log.debug(`TRX Hooks generated.`);
+	return text;
 }
 
-function _save_hooks_file(text:string){
+export function hooks_and_save():void{
+	const text = hooks();
+	save_hooks(text);
+	urn_log.debug(`Hooks generated and saved.`);
+}
+
+export function save_hooks(text:string):void{
+	fs.writeFileSync(
+		`${process_params.urn_output_dir}/__urn_hooks.ts`,
+		text
+	);
+}
+
+export function types():string{
+	urn_log.debug('Started generating uranio trx types...');
+	_init_generate();
+	const text = _generate_uranio_types_text();
+	urn_log.debug(`TRX Types generated.`);
+	return text;
+}
+
+export function types_and_save():void{
+	const text = types();
+	save_types(text);
+	urn_log.debug(`Types generated and saved.`);
+}
+
+export function save_types(text:string):void{
+	fs.writeFileSync(
+		`${process_params.urn_output_dir}/uranio.d.ts`,
+		text
+	);
+}
+
+function _init_generate(){
+	process_params.urn_base_schema = api.util.generate.process_params.urn_base_schema;
+	process_params.urn_command = api.util.generate.process_params.urn_command;
+	process_params.urn_output_dir = api.util.generate.process_params.urn_output_dir;
+	_init_trx_generate();
+}
+
+function _init_trx_generate(){
 	for(const argv of process.argv){
 		const splitted = argv.split('=');
 		if(
-			splitted[0] === 'urn_generate_output_dir'
+			splitted[0] === 'urn_base_types'
 			&& typeof splitted[1] === 'string'
 			&& splitted[1] !== ''
 		){
-			urn_generate_output_dir = splitted[1];
+			process_params.urn_base_types = splitted[1];
 		}
 	}
-	fs.writeFileSync(`${urn_generate_output_dir}/__urn_hooks.ts`, text);
+}
+
+function _generate_uranio_types_text(){
+	const txt = _generate_types_text();
+	const data = fs.readFileSync(process_params.urn_base_types, {encoding: 'utf8'});
+	const data_start = data.split('/** --uranio-generate-types-start */');
+	const data_end = data_start[1].split('/** --uranio-generate-types-end */');
+	let new_data = '';
+	new_data += data_start[0];
+	new_data += `/** --uranio-generate-types-start */\n\n`;
+	new_data += txt; + '\n\n';
+	new_data += `/** --uranio-generate-types-end */`;
+	new_data += data_end[1];
+	return new_data;
+}
+
+function _generate_types_text(){
+	let text = '';
+	text += `\timport {urn_response} from 'urn-lib';\n`;
+	text += `\timport {Api} from 'uranio-trx/typ/api';\n`;
+	text += `\timport {schema} from 'uranio-trx/sch/index';\n`;
+	text += `\timport {Hook} from 'uranio-trx/base/types';\n`;
+	text += `\texport type Hooks = {\n`;
+	text += `\t\tset_token: (token: string) => void;\n`;
+	text += `\t\tget_token: () => string | undefined;\n`;
+	const atom_book = book.get_all_definitions();
+	for(const [atom_name, atom_def] of Object.entries(atom_book)){
+		const plural = book.get_plural(atom_name as schema_types.AtomName);
+		text += `\t\t${plural}: {\n`;
+		if(atom_def.authenticate === true){
+			text += `\t\t\tauthenticate(email: string, password: string):`;
+			text += `Promise<urn_response.General<Api.AuthResponse>>;\n`;
+		}
+		if(atom_name === 'media'){
+			text += `\t\t\tupload<D extends schema.Depth>(`;
+			text += `file: Buffer | ArrayBuffer | Blob, `;
+			text += `token?: string`;
+			text += `):Promise<urn_response.General<schema.Atom<'media'>>>;\n`;
+			text += `\t\t\tpresigned(`;
+			text += `filename: string, `;
+			text += `size?: number, `;
+			text += `type?: string, `;
+			text += `token?: string`;
+			text += `): Promise<urn_response.General<string>>;\n`;
+		}
+		
+		const route_defs = book.get_routes_definition_with_defaults(atom_name as schema_types.AtomName);
+		for(const [route_name, route_def] of Object.entries(route_defs)){
+			if(atom_name === 'media' && route_name === 'upload' || route_name === 'presigned'){
+				continue;
+			}
+			const text_args = _text_args_for_url(route_def.url);
+			text += `\t\t\t${route_name}<D extends schema.Depth>(`;
+			text += `${text_args.replaceAll('\n','').replaceAll('\t','')}`;
+			if(route_def.method === 'POST'){
+				text += `body:Hook.Body<'${atom_name}', '${route_name}'>,`;
+			}
+			text += `options?:Hook.Arguments`;
+			text += `<'${atom_name}', '${route_name}', D>,`;
+			text += `token?:string`;
+			text += `):Promise<Hook.Response<'${atom_name}', `;
+			text += `'${route_name}', D>>;\n`;
+		}
+		text += `\t};\n`;
+	}
+	
+	return text;
+}
+
+function _generate_uranio_schema_text(api_schema:string){
+	const txt = _generate_trx_schema_text();
+	const split_text = '\texport {};/** --uranio-generate-end */';
+	const data_splitted = api_schema.split(split_text);
+	let new_data = '';
+	new_data += data_splitted[0];
+	new_data += txt; + '\n\n\t';
+	new_data += split_text;
+	new_data += data_splitted[1];
+	return new_data;
+}
+
+function _generate_trx_schema_text(){
+	const atom_book = book.get_all_definitions();
+	let txt = '';
+	txt += _generate_default_response();
+	txt += _generate_custom_response(atom_book);
+	txt += _generate_response();
+	return txt;
 }
 
 function _generate_hooks_text(){
 	let text = '';
-	text += `import uranio from 'uranio/client';\n`;
+	text += `/**\n`;
+	text += ` * Auto generate hooks file\n`;
+	text += ` *\n`;
+	text += ` * @packageDocumentation\n`;
+	text += ` */\n`;
+	text += `\n`;
+	text += `import {urn_response} from 'urn-lib';\n`;
+	text += `\n`;
+	// text += `import uranio from 'uranio/client';\n`;
+	text += `import uranio from '../src/index';\n`;
 	text += `\n`;
 	const atom_book = book.get_all_definitions();
 	for(const [atom_name, atom_def] of Object.entries(atom_book)){
-		const plural = book.get_plural(atom_name as schema.AtomName);
+		const plural = book.get_plural(atom_name as schema_types.AtomName);
 		text += `uranio.hooks['${plural}'] = {\n`;
 		if(atom_def.authenticate === true){
 			text += _authenticate_hooks(atom_name);
@@ -73,11 +216,14 @@ function _generate_hooks_text(){
 			text += _upload_hooks();
 			text += _presigned_hooks();
 		}
-		const route_defs = book.get_routes_definition_with_defaults(atom_name as schema.AtomName);
+		const route_defs = book.get_routes_definition_with_defaults(atom_name as schema_types.AtomName);
 		for(const [route_name, route_def] of Object.entries(route_defs)){
+			if(atom_name === 'media' && route_name === 'upload' || route_name === 'presigned'){
+				continue;
+			}
 			const text_args = _text_args_for_url(route_def.url);
 			const body_arg = _body_arg_for_route(route_def.method, atom_name, route_name);
-			text += `\t${route_name}: async <D extends uranio.types.Depth>(\n`;
+			text += `\t${route_name}: async <D extends uranio.schema.Depth>(\n`;
 			text += `\t\t${text_args}${body_arg}options?:uranio.types.Hook.Arguments`;
 			text += `<'${atom_name}', '${route_name}', D>,\n`;
 			text += `\t\ttoken?:string\n`;
@@ -99,6 +245,7 @@ function _generate_hooks_text(){
 			text += `\t\t\t...options\n`;
 			text += `\t\t};\n`;
 			text += `\t\tlet current_token:string|undefined;\n`;
+			text += `\t\tconst hook_token = uranio.hooks.get_token();\n`;
 			text += `\t\tif(typeof hook_token === 'string' && hook_token !== ''){\n`;
 			text += `\t\t\tcurrent_token = hook_token;\n`;
 			text += `\t\t}\n`;
@@ -176,7 +323,7 @@ function _authenticate_hooks(atom_name:string){
 	text += `\tauthenticate: async (\n`;
 	text += `\t\temail: string,\n`;
 	text += `\t\tpassword: string\n`;
-	text += `\t): Promise<urn_response.General<uranio.api.core.types.Api.AuthResponse>> => {\n`;
+	text += `\t): Promise<urn_response.General<uranio.types.Api.AuthResponse>> => {\n`;
 	text += `\t\treturn await uranio.auth.create('${atom_name}').authenticate(email, password);\n`;
 	text += `\t},\n`;
 	return text;
@@ -184,11 +331,12 @@ function _authenticate_hooks(atom_name:string){
 
 function _upload_hooks(){
 	let text = '';
-	text += `\tupload: async<D extends uranio.types.Depth>(\n`;
+	text += `\tupload: async<D extends uranio.schema.Depth>(\n`;
 	text += `\t\tfile: Buffer | ArrayBuffer | Blob,\n`;
 	text += `\t\ttoken?: string\n`;
 	text += `\t): Promise<urn_response.General<uranio.schema.Atom<'media'>>> => {\n`;
 	text += `\t\tlet current_token: string | undefined;\n`;
+	text += `\t\tconst hook_token = uranio.hooks.get_token();\n`;
 	text += `\t\tif (typeof hook_token === "string" && hook_token !== "") {\n`;
 	text += `\t\t\tcurrent_token = hook_token;\n`;
 	text += `\t\t}\n`;
@@ -209,6 +357,7 @@ function _presigned_hooks(){
 	text += `\t\ttoken?: string\n`;
 	text += `\t): Promise<urn_response.General<string>> => {\n`;
 	text += `\t\tlet current_token: string | undefined;\n`;
+	text += `\t\tconst hook_token = uranio.hooks.get_token();\n`;
 	text += `\t\tif (typeof hook_token === "string" && hook_token !== "") {\n`;
 	text += `\t\t\tcurrent_token = hook_token;\n`;
 	text += `\t\t}\n`;
@@ -220,61 +369,24 @@ function _presigned_hooks(){
 	return text;
 }
 
-function _generate_trx_schema(){
-	urn_log.debug('Generating uranio trx schema...');
-	api.util.generate();
-	const text = _generate_schema_text();
-	_save_schema_declaration_file(text);
-	urn_log.debug(`TRX Schema generated.`);
-}
-
-function _save_schema_declaration_file(text:string){
-	for(const argv of process.argv){
-		const splitted = argv.split('=');
-		if(
-			splitted[0] === 'urn_generate_base_schema'
-			&& typeof splitted[1] === 'string'
-			&& splitted[1] !== ''
-		){
-			urn_generate_base_schema = splitted[1];
-		}else if(
-			splitted[0] === 'urn_generate_output_dir'
-			&& typeof splitted[1] === 'string'
-			&& splitted[1] !== ''
-		){
-			urn_generate_output_dir = splitted[1];
-		}
-	}
-	_replace_text(urn_generate_base_schema, urn_generate_output_dir, text);
-}
-
-function _generate_schema_text(){
-	const atom_book = book.get_all_definitions();
-	let txt = '';
-	txt += _generate_default_response();
-	txt += _generate_custom_response(atom_book);
-	txt += _generate_response();
-	return txt;
-}
-
 function _generate_response(){
 	let text = '';
-	text += `\texport type Response<A extends schema.AtomName, R extends schema.RouteName<A>, D extends schema.Depth = 0> =\n`;
+	text += `\texport type Response<A extends AtomName, R extends RouteName<A>, D extends Depth = 0> =\n`;
 	text += `\t\tR extends RouteDefaultName ? DefaultResponse<A,R,D> :\n`;
 	text += `\t\tCustomResponse<A,R,D>\n`;
 	text += `\n`;
 	return text;
 }
 
-function _generate_custom_response(atom_book:types.Book){
+function _generate_custom_response(atom_book:types_types.Book){
 	let text = '';
-	text += `\ttype CustomResponse<A extends schema.AtomName, R extends schema.RouteName<A>, D extends schema.Depth = 0> =\n`;
+	text += `\ttype CustomResponse<A extends AtomName, R extends RouteName<A>, D extends Depth = 0> =\n`;
 	for(const [atom_name, atom_def] of Object.entries(atom_book)){
 		text += `\t\tA extends '${atom_name}' ?\n`;
 		if(!atom_def.dock || !atom_def.dock.routes){
 			text += `\t\t\tnever :\n`;
 		}else{
-			const routes = atom_def.dock.routes as types.Book.Definition.Dock.Routes<'superuser'>;
+			const routes = atom_def.dock.routes as types_types.Book.Definition.Dock.Routes<'superuser'>;
 			for(const [route_name, route_def] of Object.entries(routes)){
 				text += `\t\t\tR extends '${route_name}' ? ${route_def.return} :\n`;
 			}
@@ -288,36 +400,23 @@ function _generate_custom_response(atom_book:types.Book){
 
 function _generate_default_response(){
 	let text = '';
-	text += `\ttype DefaultResponse<A extends schema.AtomName, R extends schema.RouteName<A>, D extends schema.Depth = 0> =\n`;
+	text += `\ttype DefaultResponse<A extends AtomName, R extends RouteName<A>, D extends Depth = 0> =\n`;
 	// for(const [route_name, route_def] of Object.entries(api.routes.default_routes)){
 	//   text += `\tR extends '${route_name}' ? \n`;
 	// }
 	text += `\t\tR extends 'count' ? urn_response.General<number, any> :\n`;
-	text += `\t\tR extends 'find_id' ? urn_response.General<schema.Molecule<A,D>,any> :\n`;
-	text += `\t\tR extends 'find' ? urn_response.General<schema.Molecule<A,D>[],any> :\n`;
-	text += `\t\tR extends 'find_one' ? urn_response.General<schema.Molecule<A,D>,any> :\n`;
-	text += `\t\tR extends 'insert' ? urn_response.General<schema.Molecule<A,D>,any> :\n`;
-	text += `\t\tR extends 'update' ? urn_response.General<schema.Molecule<A,D>,any> :\n`;
-	text += `\t\tR extends 'delete' ? urn_response.General<schema.Molecule<A,D>,any> :\n`;
-	text += `\t\tR extends 'insert_multiple' ? urn_response.General<schema.Molecule<A,D>[],any> :\n`;
-	text += `\t\tR extends 'update_multiple' ? urn_response.General<schema.Molecule<A,D>[],any> :\n`;
-	text += `\t\tR extends 'delete_multiple' ? urn_response.General<schema.Molecule<A,D>[],any> :\n`;
-	text += `\t\t// R extends 'upload' ? urn_response.General<schema.Molecule<A,D>,any> :\n`;
+	text += `\t\tR extends 'find_id' ? urn_response.General<Molecule<A,D>,any> :\n`;
+	text += `\t\tR extends 'find' ? urn_response.General<Molecule<A,D>[],any> :\n`;
+	text += `\t\tR extends 'find_one' ? urn_response.General<Molecule<A,D>,any> :\n`;
+	text += `\t\tR extends 'insert' ? urn_response.General<Molecule<A,D>,any> :\n`;
+	text += `\t\tR extends 'update' ? urn_response.General<Molecule<A,D>,any> :\n`;
+	text += `\t\tR extends 'delete' ? urn_response.General<Molecule<A,D>,any> :\n`;
+	text += `\t\tR extends 'insert_multiple' ? urn_response.General<Molecule<A,D>[],any> :\n`;
+	text += `\t\tR extends 'update_multiple' ? urn_response.General<Molecule<A,D>[],any> :\n`;
+	text += `\t\tR extends 'delete_multiple' ? urn_response.General<Molecule<A,D>[],any> :\n`;
+	text += `\t\t// R extends 'upload' ? urn_response.General<Molecule<A,D>,any> :\n`;
 	text += `\t\t// R extends 'presigned' ? urn_response.General<string,any> :\n`;
 	text += `\t\tnever;\n`;
 	text += `\n`;
 	return text;
 }
-
-function _replace_text(base_schema_path:string, output_dir_path:string, txt:string){
-	const data = fs.readFileSync(base_schema_path, {encoding: 'utf8'});
-	const split_text = '\texport {};/** --uranio-generate-end */';
-	const data_splitted = data.split(split_text);
-	let new_data = '';
-	new_data += data_splitted[0];
-	new_data += txt; + '\n\n\t';
-	new_data += split_text;
-	new_data += data_splitted[1];
-	fs.writeFileSync(`${output_dir_path}/schema.d.ts`, new_data);
-}
-
