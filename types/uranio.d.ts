@@ -807,6 +807,7 @@ declare module 'uranio-trx/util/generate' {
       urn_base_schema: string;
       urn_base_types: string;
       urn_output_dir: string;
+      urn_repo: string;
   };
   export function schema(): string;
   export function schema_and_save(): void;

@@ -20,7 +20,8 @@ export const process_params = {
 	urn_command: `schema`,
 	urn_base_schema: `./types/schema.d.ts`,
 	urn_base_types: `./types/uranio.d.ts`,
-	urn_output_dir: `.`
+	urn_output_dir: `.`,
+	urn_repo: 'uranio-adm'
 };
 
 export function schema():string{
@@ -100,6 +101,12 @@ function _init_trx_generate(){
 			&& splitted[1] !== ''
 		){
 			process_params.urn_base_types = splitted[1];
+		}else if(
+			splitted[0] === 'urn_repo'
+			&& typeof splitted[1] === 'string'
+			&& splitted[1] !== ''
+		){
+			process_params.urn_repo = splitted[1];
 		}
 	}
 }
@@ -115,7 +122,14 @@ function _generate_uranio_types_text(){
 	new_data += txt; + '\n\n';
 	new_data += `/** --uranio-generate-types-end */`;
 	new_data += data_end[1];
-	return new_data;
+	const uranio_data = _replace_repo_with_uranio(new_data);
+	return uranio_data;
+}
+
+function _replace_repo_with_uranio(text:string){
+	// const regex = new RegExp(`\\b${process_params.urn_repo}\\b`);
+	const regex = `uranio-${process_params.urn_repo}`;
+	return text.replaceAll(regex, 'uranio');
 }
 
 function _generate_types_text(){
