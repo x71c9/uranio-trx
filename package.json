@@ -39,8 +39,7 @@
 	"dependencies": {
 		"axios": "^0.26.0",
 		"dotenv": "^16.0.0",
-		"uranio-api": "git+ssh://git@github.com/nbl7/uranio-api.git#new",
 		"uranio-schema": "ssh://git@github.com/nbl7/uranio-schema.git",
-		"urn-lib": "ssh://git@github.com/nbl7/uranio-lib.git"
+		"urn-lib": "git+ssh://git@github.com/nbl7/uranio-lib.git#new"
 	}
 }

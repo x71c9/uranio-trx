@@ -3,6 +3,7 @@
  *
  * @packageDocumentation
  */
+import {urn_log} from 'urn-lib';
 
 import {RawName} from '../raw/types';
 
@@ -15,13 +16,9 @@ type RequiredClientConfigParams = {
 }
 
 type OptionalClientConfigParam = {
+	log_level: urn_log.LogLevel
 }
 
 export type ClientConfiguration =
 	RequiredClientConfigParams &
 	Partial<OptionalClientConfigParam>;
-
-// export type FullClientConfiguration =
-//   RequiredClientConfigParams &
-//   OptionalClientConfigParam;
-

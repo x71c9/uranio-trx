@@ -30,8 +30,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.types = exports.schema = exports.conf = exports.book = exports.hooks = exports.media = exports.auth = exports.base = exports.api = void 0;
-// import core from 'uranio-core/client';
+exports.hooks = exports.schema = exports.types = exports.log = exports.conf = exports.book = exports.media = exports.auth = exports.base = exports.api = void 0;
 const client_1 = __importDefault(require("uranio-api/client"));
 exports.api = client_1.default;
 const base = __importStar(require("../base/index"));
@@ -40,22 +39,17 @@ const auth = __importStar(require("../auth/index"));
 exports.auth = auth;
 const media = __importStar(require("../media/index"));
 exports.media = media;
-const index_1 = require("../hooks/index");
-Object.defineProperty(exports, "hooks", { enumerable: true, get: function () { return index_1.hooks; } });
-// import * as hooks from '../hooks/index';
 const book = __importStar(require("../book/client"));
 exports.book = book;
 const conf = __importStar(require("../conf/client"));
 exports.conf = conf;
+const log = __importStar(require("../log/index"));
+exports.log = log;
 const types = __importStar(require("./types"));
 exports.types = types;
-const index_2 = require("../sch/index");
-Object.defineProperty(exports, "schema", { enumerable: true, get: function () { return index_2.schema; } });
-/*
- * First level methods.
- * If other methods are added, urn-cli must be updated.
- * Go to urn-cli/src/cmd/transpose.ts and
- * add the new method names.
- */
+const index_1 = require("../sch/index");
+Object.defineProperty(exports, "schema", { enumerable: true, get: function () { return index_1.schema; } });
+const index_2 = require("../hooks/index");
+Object.defineProperty(exports, "hooks", { enumerable: true, get: function () { return index_2.hooks; } });
 __exportStar(require("../init/client"), exports);
 //# sourceMappingURL=main.js.map

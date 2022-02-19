@@ -25,6 +25,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.init = void 0;
+const urn_lib_1 = require("urn-lib");
 const defaults_1 = require("../cln/defaults");
 const conf = __importStar(require("../conf/client"));
 const defaults_2 = require("../raw/defaults");
@@ -38,6 +39,9 @@ function init(config) {
     _set_raw();
     _validate_trx_client_variables();
     _validate_trx_client_book();
+    if (config && typeof config.log_level === 'number') {
+        urn_lib_1.urn_log.defaults.log_level = config.log_level;
+    }
     conf.set_initialize(true);
 }
 exports.init = init;
