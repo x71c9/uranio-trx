@@ -4,6 +4,8 @@
  * @packageDocumentation
  */
 
+import {urn_log} from 'urn-lib';
+
 import {trx_client_config} from '../cln/defaults';
 
 import * as types from '../cln/types';
@@ -25,6 +27,10 @@ export function init(config?:types.ClientConfiguration)
 	
 	_validate_trx_client_variables();
 	_validate_trx_client_book();
+	
+	if(config && typeof config.log_level === 'number'){
+		urn_log.defaults.log_level = config.log_level;
+	}
 	
 	conf.set_initialize(true);
 }

@@ -68,6 +68,9 @@ function _get_env_vars(repo_config) {
     if (typeof process.env.URN_CLIENT_SERVICE_URL === 'string' && process.env.URN_CLIENT_SERVICE_URL !== '') {
         repo_config.service_url = process.env.URN_CLIENT_SERVICE_URL;
     }
+    if (typeof process.env.URN_LOG_LEVEL === 'number' || typeof process.env.URN_LOG_LEVEL === 'string' && process.env.URN_LOG_LEVEL !== '') {
+        repo_config.log_level = Number(process.env.URN_LOG_LEVEL);
+    }
     return repo_config;
 }
 // function _get_env_vars(repo_config:types.ClientConfiguration):types.ClientConfiguration{
