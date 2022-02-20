@@ -16,7 +16,7 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 // export * from '../api/cln/types';
-__exportStar(require("../typ/api"), exports);
+__exportStar(require("../typ/api_cln"), exports);
 __exportStar(require("../typ/book_cln"), exports);
 __exportStar(require("../typ/conf_cln"), exports);
 __exportStar(require("../raw/types"), exports);

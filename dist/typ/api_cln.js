@@ -4,6 +4,13 @@
  *
  * @packageDocumentation
  */
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.AuthAction = exports.PermissionType = exports.SecurityType = exports.PropertyType = void 0;
+var types_1 = require("uranio-api/types");
+Object.defineProperty(exports, "PropertyType", { enumerable: true, get: function () { return types_1.PropertyType; } });
+Object.defineProperty(exports, "SecurityType", { enumerable: true, get: function () { return types_1.SecurityType; } });
+Object.defineProperty(exports, "PermissionType", { enumerable: true, get: function () { return types_1.PermissionType; } });
+Object.defineProperty(exports, "AuthAction", { enumerable: true, get: function () { return types_1.AuthAction; } });
 // import api from 'uranio-api';
 // import {schema} from '../sch/index';
 // export namespace Api {
@@ -24,4 +31,4 @@
 // }
 // export type RouteParam<A extends schema.AtomName, R extends schema.RouteName<A>> =
 //   api.types.RouteParam<A,R>;
-//# sourceMappingURL=api.js.map
+//# sourceMappingURL=api_cln.js.map

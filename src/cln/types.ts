@@ -6,7 +6,7 @@
 
 // export * from '../api/cln/types';
 
-export * from '../typ/api';
+export * from '../typ/api_cln';
 
 export * from '../typ/book_cln';
 
