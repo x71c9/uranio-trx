@@ -5,7 +5,12 @@
  */
 
 import {urn_log} from 'urn-lib';
-urn_log.init(urn_log.LogLevel.FUNCTION_DEBUG);
+urn_log.init({
+	log_level: urn_log.LogLevel.FUNCTION_DEBUG,
+	color: true,
+	debug_info: false,
+	prefix_type: false
+});
 
 // import urn_trx from './client';
 
@@ -25,8 +30,8 @@ service.listen(() => {
 	// pro_bll.count({}).then(c => console.log(c));
 	
 	const base_media = uranio.base.create('media');
-	base_media.hook('count')({}).then((resp) => {
-		console.log(resp.sj);
+	base_media.hook('find')({}).then((resp) => {
+		console.log(resp.success);
 	});
 	
 	// setTimeout(async () => {

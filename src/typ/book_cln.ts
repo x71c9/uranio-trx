@@ -3,9 +3,6 @@
  *
  * This module defines the type of the `atom_book` for the Client.
  *
- * In order to copy and reexport namespaces and types we use the syntax
- * `export import`.
- *
  * `type Book` must be re-defined.
  *
  * @packageDocumentation
@@ -25,6 +22,27 @@ export namespace Book {
 		api_client.types.Book.Definition
 	
 	export namespace Definition {
+		
+		export type Dock =
+			api_client.types.Book.Definition.Dock
+		
+		export namespace Dock {
+			
+			export type Routes =
+				api_client.types.Book.Definition.Dock.Routes
+			
+			export namespace Routes {
+				
+				export type Route =
+					api_client.types.Book.Definition.Dock.Routes.Route
+				
+				export type Params =
+					api_client.types.Book.Definition.Dock.Routes.Params
+				
+			}
+			
+		}
+		
 		/**
 		 * ** NOTE **
 		 * For some reason it is not possible to use the following syntax.
@@ -75,26 +93,6 @@ export namespace Book {
 				export type SetNumber = api_client.types.Book.Definition.Property.Validation.SetNumber;
 				export type Atom = api_client.types.Book.Definition.Property.Validation.Atom;
 			}
-		}
-		
-		export type Dock =
-			api_client.types.Book.Definition.Dock
-		
-		export namespace Dock {
-			
-			export type Routes =
-				api_client.types.Book.Definition.Dock.Routes
-			
-			export namespace Routes {
-				
-				export type Route =
-					api_client.types.Book.Definition.Dock.Routes.Route
-				
-				export type Params =
-					api_client.types.Book.Definition.Dock.Routes.Params
-				
-			}
-			
 		}
 		
 	}

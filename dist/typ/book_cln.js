@@ -4,9 +4,6 @@
  *
  * This module defines the type of the `atom_book` for the Client.
  *
- * In order to copy and reexport namespaces and types we use the syntax
- * `export import`.
- *
  * `type Book` must be re-defined.
  *
  * @packageDocumentation

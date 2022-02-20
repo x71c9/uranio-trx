@@ -4,9 +4,6 @@
  * This module defines the type of the `atom_book` for the Server.
  * It extends the defintion of the Client Book type.
  *
- * In order to copy and reexport namespaces and types we use the syntax
- * `export import`.
- *
  * `type Book` must be re-defined.
  *
  * @packageDocumentation
@@ -14,13 +11,7 @@
 
 import api from 'uranio-api';
 
-// import {route_book} from 'uranio-book/routes';
-
 import * as book_cln from './book_cln';
-
-// import {Api as ApiRequest} from './request';
-
-// import {RouteName} from './route';
 
 import {schema} from '../sch/index';
 
@@ -116,10 +107,3 @@ export namespace Book {
 	}
 	
 }
-
-// type RouteOfRoute<A extends schema.AtomName, k extends schema.RouteName<A>> =
-//   book_cln.Book.Definition.Dock.Routes.Route & {
-//     call?: Book.Definition.Dock.Routes.Route.Call<A, k>
-//   }
-
-
