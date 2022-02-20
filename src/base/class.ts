@@ -6,7 +6,7 @@
 
 import {urn_util, urn_log, urn_exception} from 'urn-lib';
 
-const urn_exc = urn_exception.init(`Base`, `Base module.`);
+const urn_exc = urn_exception.init(`BASE`, `Base module`);
 
 import api_client from 'uranio-api/client';
 
@@ -50,13 +50,13 @@ export class Base<A extends schema.AtomName> {
 			}
 		}
 		return async (args:Hook.Arguments<A,R,D>, token?:string) => {
-			const dock_def = book.get_definition(this.atom_name).dock;
-			if(!dock_def){
-				throw urn_exc.create_invalid_book(
-					`INVALID_DOCK_DEF`,
-					`Cannot hook. Invalid docke def for \`${this.atom_name}\``
-				);
-			}
+			const dock_def = book.get_dock_definition(this.atom_name);
+			// if(!dock_def){
+			//   throw urn_exc.create_invalid_book(
+			//     `INVALID_DOCK_DEF`,
+			//     `Cannot hook. Invalid dock_def for \`${this.atom_name}\``
+			//   );
+			// }
 			const atom_api_url = dock_def.url || `/${this.atom_name}s`;
 			const atom_def = book.get_definition(this.atom_name);
 			const connection_url = (atom_def.connection && atom_def.connection === 'log') ? `/logs` : '';
