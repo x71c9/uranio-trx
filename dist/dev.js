@@ -25,10 +25,10 @@ service.listen(() => {
     urn_lib_1.urn_log.debug(`Listening on port ${index_1.default.conf.get(`service_port`)}...`);
     // const pro_bll = uranio.api.core.bll.basic.create('superuser');
     // pro_bll.count({}).then(c => console.log(c));
-    const base_media = index_1.default.base.create('media');
-    base_media.hook('find')({}).then((resp) => {
-        console.log(resp.success);
-    });
+    // const base_media = uranio.base.create('media');
+    // base_media.hook('find')({}).then((resp) => {
+    //   console.log(resp.success);
+    // });
     // setTimeout(async () => {
     // uranio.hooks.media.find({}).then((resp) => {
     //   console.log(resp);

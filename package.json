@@ -30,7 +30,7 @@
 		"generate:schema": "yarn generate:compile && node ./generate/_generate_bundled.js urn_output_dir=./.uranio/generate/types urn_repo=trx urn_command=schema",
 		"generate:hooks": "yarn generate:compile && node ./generate/_generate_bundled.js urn_output_dir=./.uranio/generate/ urn_repo=trx urn_command=hooks",
 		"generate:types": "yarn generate:compile && node ./generate/_generate_bundled.js urn_output_dir=./.uranio/generate/types urn_repo=trx urn_command=types",
-		"dev": "npx tsc-watch --onSuccess \"node -r source-map-support/register -r dotenv/config ./dist/run.js\"",
+		"dev": "npx tsc-watch --onSuccess \"node -r source-map-support/register -r dotenv/config ./dist/dev.js\"",
 		"dev:generate:compile": "yarn generate:compile --watch",
 		"dev:generate:run": "npx nodemon --watch ./generate/_generate_bundled.js -e ts ./generate/_generate_bundled.js urn_output_dir=./generate urn_repo=trx",
 		"dev:generate": "npx concurrently \"yarn dev:generat:compile\" \"yarn dev:generate:run\"",

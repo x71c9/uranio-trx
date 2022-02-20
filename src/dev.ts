@@ -29,10 +29,10 @@ service.listen(() => {
 	// const pro_bll = uranio.api.core.bll.basic.create('superuser');
 	// pro_bll.count({}).then(c => console.log(c));
 	
-	const base_media = uranio.base.create('media');
-	base_media.hook('find')({}).then((resp) => {
-		console.log(resp.success);
-	});
+	// const base_media = uranio.base.create('media');
+	// base_media.hook('find')({}).then((resp) => {
+	//   console.log(resp.success);
+	// });
 	
 	// setTimeout(async () => {
 	// uranio.hooks.media.find({}).then((resp) => {
