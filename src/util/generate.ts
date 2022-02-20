@@ -140,7 +140,7 @@ function _replace_repo_with_uranio(text:string){
 function _generate_types_text(){
 	let text = '';
 	text += `\timport {urn_response} from 'urn-lib';\n`;
-	text += `\timport {Api} from 'uranio-trx/typ/api';\n`;
+	text += `\timport {Api} from 'uranio-trx/typ/api_cln';\n`;
 	text += `\timport {schema} from 'uranio-trx/sch/index';\n`;
 	text += `\timport {Hook} from 'uranio-trx/base/types';\n`;
 	text += `\texport type Hooks = {\n`;
@@ -178,7 +178,7 @@ function _generate_types_text(){
 			if(route_def.method === 'POST'){
 				text += `body:Hook.Body<'${atom_name}', '${route_name}'>,`;
 			}
-			text += `options?:Hook.Arguments`;
+			text += `parameters?:Hook.Arguments`;
 			text += `<'${atom_name}', '${route_name}', D>,`;
 			text += `token?:string`;
 			text += `):Promise<Hook.Response<'${atom_name}', `;
@@ -206,6 +206,8 @@ function _generate_uranio_schema_text(api_schema:string){
 function _generate_trx_schema_text(){
 	const atom_book = book.get_all_definitions();
 	let txt = '';
+	txt += `\n`;
+	txt += `import {urn_response} from 'urn-lib';\n`;
 	txt += _generate_default_response();
 	txt += _generate_custom_response(atom_book);
 	txt += _generate_response();
@@ -244,7 +246,7 @@ function _generate_hooks_text(){
 			const text_args = _text_args_for_url(route_def.url);
 			const body_arg = _body_arg_for_route(route_def.method, atom_name, route_name);
 			text += `\t${route_name}: async <D extends uranio.schema.Depth>(\n`;
-			text += `\t\t${text_args}${body_arg}options?:uranio.types.Hook.Arguments`;
+			text += `\t\t${text_args}${body_arg}parameters?:uranio.types.Hook.Arguments`;
 			text += `<'${atom_name}', '${route_name}', D>,\n`;
 			text += `\t\ttoken?:string\n`;
 			text += `\t):Promise<uranio.types.Hook.Response<'${atom_name}', `;
@@ -262,7 +264,7 @@ function _generate_hooks_text(){
 			if(body_arg !== ''){
 				text += `\t\t\tbody: body,\n`;
 			}
-			text += `\t\t\t...options\n`;
+			text += `\t\t\t...parameters\n`;
 			text += `\t\t};\n`;
 			text += `\t\tlet current_token:string|undefined;\n`;
 			text += `\t\tconst hook_token = uranio.hooks.get_token();\n`;
@@ -393,7 +395,8 @@ function _generate_response(){
 	let text = '';
 	text += `\texport type Response<A extends AtomName, R extends RouteName<A>, D extends Depth = 0> =\n`;
 	text += `\t\tR extends RouteDefaultName ? DefaultResponse<A,R,D> :\n`;
-	text += `\t\tCustomResponse<A,R,D>\n`;
+	text += `\t\tR extends RouteCustomName<A> ? CustomResponse<A,R,D> :\n`;
+	text += `\t\tnever\n`;
 	text += `\n`;
 	return text;
 }
