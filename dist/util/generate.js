@@ -35,7 +35,7 @@ const book = __importStar(require("../book/index"));
 exports.process_params = {
     urn_command: `schema`,
     urn_base_schema: `./.uranio/generate/base/schema.d.ts`,
-    urn_base_types: `./.uranio/generate/base/uranio.d.ts`,
+    urn_base_types: `./.uranio/generate/base/uranio-trx.d.ts`,
     urn_output_dir: `.`,
     urn_repo: 'adm'
 };
@@ -93,7 +93,7 @@ function types_and_save() {
 }
 exports.types_and_save = types_and_save;
 function save_types(text) {
-    const output = `${exports.process_params.urn_output_dir}/uranio.d.ts`;
+    const output = `${exports.process_params.urn_output_dir}/uranio-trx.d.ts`;
     fs_1.default.writeFileSync(output, text);
     urn_lib_1.urn_log.debug(`Types saved in [${output}].`);
 }
@@ -133,11 +133,11 @@ function _generate_uranio_types_text() {
     +'\n\n';
     new_data += `/** --uranio-generate-types-end */`;
     new_data += data_end[1];
-    const uranio_data = _replace_repo_with_uranio(new_data);
+    const uranio_data = (exports.process_params.urn_repo === 'trx') ?
+        _replace_repo_with_uranio(new_data) : new_data;
     return uranio_data;
 }
 function _replace_repo_with_uranio(text) {
-    // const regex = new RegExp(`\\b${process_params.urn_repo}\\b`);
     const regex = `uranio-${exports.process_params.urn_repo}`;
     return text.replaceAll(regex, 'uranio');
 }

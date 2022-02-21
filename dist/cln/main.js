@@ -30,9 +30,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.hooks = exports.schema = exports.types = exports.log = exports.conf = exports.book = exports.media = exports.auth = exports.base = exports.api = void 0;
-const client_1 = __importDefault(require("uranio-api/client"));
-exports.api = client_1.default;
+exports.hooks = exports.schema = exports.types = exports.log = exports.conf = exports.book = exports.media = exports.auth = exports.base = exports.api = exports.core = void 0;
+const client_1 = __importDefault(require("uranio-core/client"));
+exports.core = client_1.default;
+const client_2 = __importDefault(require("uranio-api/client"));
+exports.api = client_2.default;
+// export * from '../api/client';
 const base = __importStar(require("../base/index"));
 exports.base = base;
 const auth = __importStar(require("../auth/index"));
@@ -52,4 +55,5 @@ Object.defineProperty(exports, "schema", { enumerable: true, get: function () { 
 const index_2 = require("../hooks/index");
 Object.defineProperty(exports, "hooks", { enumerable: true, get: function () { return index_2.hooks; } });
 __exportStar(require("../init/client"), exports);
+__exportStar(require("../reg/client"), exports);
 //# sourceMappingURL=main.js.map

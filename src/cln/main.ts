@@ -4,7 +4,11 @@
  * @packageDocumentation
  */
 
+import core from 'uranio-core/client';
+
 import api from 'uranio-api/client';
+
+// export * from '../api/client';
 
 import * as base from '../base/index';
 
@@ -26,7 +30,10 @@ import {hooks} from '../hooks/index';
 
 export * from '../init/client';
 
+export * from '../reg/client';
+
 export {
+	core,
 	api,
 	base,
 	auth,

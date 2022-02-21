@@ -8,11 +8,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.set = exports.set_from_env = exports.set_initialize = exports.is_initialized = exports.get = void 0;
+exports.set = exports.set_from_env = exports.set_initialize = exports.is_initialized = exports.get = exports.defaults = void 0;
 const urn_lib_1 = require("urn-lib");
 const urn_exc = urn_lib_1.urn_exception.init('CONF_TRX_MODULE', `TRX configuration module`);
 const uranio_api_1 = __importDefault(require("uranio-api"));
 const defaults_1 = require("./defaults");
+Object.defineProperty(exports, "defaults", { enumerable: true, get: function () { return defaults_1.trx_config; } });
 let _is_trx_initialized = false;
 function get(param_name) {
     _check_if_uranio_was_initialized();

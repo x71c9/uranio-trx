@@ -19,7 +19,7 @@ import * as types_types from '../types';
 export const process_params = {
 	urn_command: `schema`,
 	urn_base_schema: `./.uranio/generate/base/schema.d.ts`,
-	urn_base_types: `./.uranio/generate/base/uranio.d.ts`,
+	urn_base_types: `./.uranio/generate/base/uranio-trx.d.ts`,
 	urn_output_dir: `.`,
 	urn_repo: 'adm'
 };
@@ -81,7 +81,7 @@ export function types_and_save():void{
 }
 
 export function save_types(text:string):void{
-	const output = `${process_params.urn_output_dir}/uranio.d.ts`;
+	const output = `${process_params.urn_output_dir}/uranio-trx.d.ts`;
 	fs.writeFileSync(
 		output,
 		text
@@ -127,12 +127,12 @@ function _generate_uranio_types_text(){
 	new_data += txt; + '\n\n';
 	new_data += `/** --uranio-generate-types-end */`;
 	new_data += data_end[1];
-	const uranio_data = _replace_repo_with_uranio(new_data);
+	const uranio_data = (process_params.urn_repo === 'trx') ?
+		_replace_repo_with_uranio(new_data) : new_data;
 	return uranio_data;
 }
 
 function _replace_repo_with_uranio(text:string){
-	// const regex = new RegExp(`\\b${process_params.urn_repo}\\b`);
 	const regex = `uranio-${process_params.urn_repo}`;
 	return text.replaceAll(regex, 'uranio');
 }

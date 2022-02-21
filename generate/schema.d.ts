@@ -164,37 +164,37 @@ declare module 'uranio-schema/typ/atom' {
 	type BondShapeDepth1<A extends AtomName> =
 		A extends 'superuser' ? {groups?: Atom<'group'>[]} :
 		A extends 'user' ? {groups?: Atom<'group'>[]} :
-		A extends 'group' ? never :
-		A extends 'media' ? never :
+		A extends 'group' ? Record<never, unknown> :
+		A extends 'media' ? Record<never, unknown> :
 		A extends 'error' ? {request?: Atom<'request'>} :
-		A extends 'request' ? never :
+		A extends 'request' ? Record<never, unknown> :
 		never
 
 	type BondShapeDepth2<A extends AtomName> =
 		A extends 'superuser' ? {groups?: Molecule<'group', 1>[]} :
 		A extends 'user' ? {groups?: Molecule<'group', 1>[]} :
-		A extends 'group' ? never :
-		A extends 'media' ? never :
+		A extends 'group' ? Record<never, unknown> :
+		A extends 'media' ? Record<never, unknown> :
 		A extends 'error' ? {request?: Molecule<'request', 1>} :
-		A extends 'request' ? never :
+		A extends 'request' ? Record<never, unknown> :
 		never
 
 	type BondShapeDepth3<A extends AtomName> =
 		A extends 'superuser' ? {groups?: Molecule<'group', 2>[]} :
 		A extends 'user' ? {groups?: Molecule<'group', 2>[]} :
-		A extends 'group' ? never :
-		A extends 'media' ? never :
+		A extends 'group' ? Record<never, unknown> :
+		A extends 'media' ? Record<never, unknown> :
 		A extends 'error' ? {request?: Molecule<'request', 2>} :
-		A extends 'request' ? never :
+		A extends 'request' ? Record<never, unknown> :
 		never
 
 	type BondShapeDepth4<A extends AtomName> =
 		A extends 'superuser' ? {groups?: Molecule<'group', 3>[]} :
 		A extends 'user' ? {groups?: Molecule<'group', 3>[]} :
-		A extends 'group' ? never :
-		A extends 'media' ? never :
+		A extends 'group' ? Record<never, unknown> :
+		A extends 'media' ? Record<never, unknown> :
 		A extends 'error' ? {request?: Molecule<'request', 3>} :
-		A extends 'request' ? never :
+		A extends 'request' ? Record<never, unknown> :
 		never
 
 	type Superuser = AtomHardProperties & SuperuserShape
@@ -239,10 +239,10 @@ declare module 'uranio-schema/typ/atom' {
 		A extends 'request' ? never :
 	never
 
-	export type RouteName<A extends schema.AtomName> =
+	export type RouteName<A extends AtomName> =
 		RouteCustomName<A> | RouteDefaultName;
 
-	type DefaultRouteURL<A extends schema.AtomName, R extends schema.RouteName<A>> =
+	type DefaultRouteURL<A extends AtomName, R extends RouteName<A>> =
 		R extends 'count' ? '/count' :
 		R extends 'find_one' ? '/first' :
 		R extends 'find' ? '/' :
@@ -264,7 +264,7 @@ declare module 'uranio-schema/typ/atom' {
 		A extends 'request' ? never :
 	never
 
-	export type RouteURL<A extends schema.AtomName, R extends schema.RouteName<A>> =
+	export type RouteURL<A extends AtomName, R extends RouteName<A>> =
 		R extends RouteCustomName<A> ? CustomRouteURL<A,R> :
 		R extends RouteName<A> ? DefaultRouteURL<A,R> :
 		never
@@ -291,11 +291,15 @@ declare module 'uranio-schema/typ/atom' {
 		A extends 'request' ? never :
 	never
 
-	export type RouteQueryParam<A extends schema.AtomName, R extends schema.RouteName<A>> =
+	export type RouteQueryParam<A extends AtomName, R extends RouteName<A>> =
 		R extends RouteDefaultName ? DefaultRouteQueryParam<R> :
+		R extends RouteCustomName<A> ?
 		CustomRouteQueryParam<A,R> extends string ? CustomRouteQueryParam<A,R> :
+		never :
 		never
 
+
+import {urn_response} from 'urn-lib';
 	type DefaultResponse<A extends AtomName, R extends RouteName<A>, D extends Depth = 0> =
 		R extends 'count' ? urn_response.General<number, any> :
 		R extends 'find_id' ? urn_response.General<Molecule<A,D>,any> :
@@ -328,7 +332,8 @@ declare module 'uranio-schema/typ/atom' {
 
 	export type Response<A extends AtomName, R extends RouteName<A>, D extends Depth = 0> =
 		R extends RouteDefaultName ? DefaultResponse<A,R,D> :
-		CustomResponse<A,R,D>
+		R extends RouteCustomName<A> ? CustomResponse<A,R,D> :
+		never
 
 	export {};/** --uranio-generate-end */
 
