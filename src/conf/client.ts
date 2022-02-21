@@ -10,6 +10,8 @@ const urn_exc = urn_exception.init('CONF_TRX_CLIENT_MODULE', `TRX client configu
 
 import {trx_client_config} from '../cln/defaults';
 
+export {trx_client_config as defaults};
+
 import * as types from '../cln/types';
 
 import {RawName} from '../raw/types';

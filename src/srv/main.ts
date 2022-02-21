@@ -4,7 +4,11 @@
  * @packageDocumentation
  */
 
+import core from 'uranio-core';
+
 import api from 'uranio-api';
+
+// export * from '../api/index';
 
 import * as base from '../base/index';
 
@@ -31,6 +35,7 @@ export * from '../init/index';
 export * from '../reg/index';
 
 export {
+	core,
 	api,
 	base,
 	auth,

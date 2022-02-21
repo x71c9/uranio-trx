@@ -30,9 +30,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.hooks = exports.schema = exports.types = exports.log = exports.util = exports.conf = exports.book = exports.media = exports.auth = exports.base = exports.api = void 0;
+exports.hooks = exports.schema = exports.types = exports.log = exports.util = exports.conf = exports.book = exports.media = exports.auth = exports.base = exports.api = exports.core = void 0;
+const uranio_core_1 = __importDefault(require("uranio-core"));
+exports.core = uranio_core_1.default;
 const uranio_api_1 = __importDefault(require("uranio-api"));
 exports.api = uranio_api_1.default;
+// export * from '../api/index';
 const base = __importStar(require("../base/index"));
 exports.base = base;
 const auth = __importStar(require("../auth/index"));
