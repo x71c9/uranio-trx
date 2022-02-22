@@ -27,7 +27,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-__exportStar(require("./register"), exports);
+__exportStar(require("./cln/register"), exports);
 const urn_trx_client = __importStar(require("./cln/main"));
 __exportStar(require("./cln/main"), exports);
 exports.default = urn_trx_client;

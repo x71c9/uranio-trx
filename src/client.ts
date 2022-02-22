@@ -4,7 +4,7 @@
  * @packageDocumentation
  */
 
-export * from './register';
+export * from './cln/register';
 
 import * as urn_trx_client from './cln/main';
 
