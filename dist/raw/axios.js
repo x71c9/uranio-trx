@@ -15,7 +15,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.create = void 0;
-// import querystring from 'querystring';
 const axios_1 = __importDefault(require("axios"));
 const urn_lib_1 = require("urn-lib");
 const urn_ret = urn_lib_1.urn_return.create();

@@ -8,31 +8,29 @@ import core from 'uranio-core';
 
 import api from 'uranio-api';
 
-// export * from '../api/index';
+import * as base from '../base/server';
 
-import * as base from '../base/index';
+import * as auth from '../auth/server';
 
-import * as auth from '../auth/index';
+import * as media from '../media/server';
 
-import * as media from '../media/index';
+import * as book from '../book/server';
 
-import * as book from '../book/index';
+import * as conf from '../conf/server';
 
-import * as conf from '../conf/index';
+import * as util from '../util/server';
 
-import * as util from '../util/index';
-
-import * as log from '../log/index';
+import * as log from '../log/server';
 
 import * as types from './types';
 
-import {schema} from '../sch/index';
+import {schema} from '../sch/server';
 
-import {hooks} from '../hooks/index';
+import {hooks} from '../hooks/server';
 
-export * from '../init/index';
+export * from '../init/server';
 
-export * from '../reg/index';
+export * from '../reg/server';
 
 export {
 	core,

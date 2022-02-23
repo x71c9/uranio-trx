@@ -14,9 +14,9 @@ import * as book from '../book/client';
 
 import * as client_types from '../cln/types';
 
-import {schema} from '../sch/index';
+import {schema} from '../sch/client';
 
-import {create as create_raw} from '../raw/index';
+import {create as create_raw} from '../raw/client';
 
 import {Hook} from './types';
 

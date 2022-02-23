@@ -4,21 +4,15 @@
  * @packageDocumentation
  */
 
-// import querystring from 'querystring';
-
 import axios, {AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios';
 
 import {urn_util, urn_log, urn_return, urn_response} from 'urn-lib';
 
 const urn_ret = urn_return.create();
 
-// import {trx_client_config} from '../cln/defaults';
-
-// import * as conf from '../conf/client';
-
 import * as client_types from '../cln/types';
 
-import {schema} from '../sch/index';
+import {schema} from '../sch/client';
 
 import {RAW} from './types';
 

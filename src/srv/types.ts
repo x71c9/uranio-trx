@@ -4,7 +4,7 @@
  * @packageDocumentation
  */
 
-export * from '../typ/api_srv'
+export * from '../typ/api'
 
 export * from '../typ/book_srv';
 

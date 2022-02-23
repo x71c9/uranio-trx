@@ -9,11 +9,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.get_names = exports.has_property = exports.get_full_properties_definition = exports.get_custom_property_definitions = exports.get_property_definition = exports.get_definition = exports.get_all_definitions = exports.validate_auth_name = exports.validate_name = exports.get_plural = exports.get_dock_definition = exports.get_routes_definition_with_defaults = exports.get_routes_definition = exports.get_route_def = void 0;
-// import * as atom from './atom/client';
-// export {atom};
-// import * as dock from './dock/client';
-// export {dock};
-// import api_client from 'uranio-core/client';
 const client_1 = __importDefault(require("uranio-api/client"));
 function get_route_def(atom_name, route_name) {
     return client_1.default.book.get_route_def(atom_name, route_name);

@@ -10,7 +10,7 @@ export type RawName = 'axios'; // japi, fetch
 
 import * as cln_types from '../cln/types';
 
-import {schema} from '../sch/index';
+import {schema} from '../sch/client';
 
 export interface RAW<A extends schema.AtomName> {
 	

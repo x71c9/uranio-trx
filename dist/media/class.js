@@ -13,9 +13,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.create = void 0;
 const urn_lib_1 = require("urn-lib");
-// import {create as create_raw} from '../raw/index';
-const index_1 = require("../base/index");
-let MediaBase = class MediaBase extends index_1.Base {
+const client_1 = require("../base/client");
+let MediaBase = class MediaBase extends client_1.Base {
     constructor(token) {
         super('media', token);
         this.token = token;

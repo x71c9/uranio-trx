@@ -6,7 +6,7 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthAction = exports.PermissionType = exports.SecurityType = exports.PropertyType = void 0;
-var types_1 = require("uranio-api/cln/types");
+var types_1 = require("uranio-api/client/types");
 Object.defineProperty(exports, "PropertyType", { enumerable: true, get: function () { return types_1.PropertyType; } });
 Object.defineProperty(exports, "SecurityType", { enumerable: true, get: function () { return types_1.SecurityType; } });
 Object.defineProperty(exports, "PermissionType", { enumerable: true, get: function () { return types_1.PermissionType; } });

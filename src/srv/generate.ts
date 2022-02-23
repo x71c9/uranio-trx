@@ -12,7 +12,7 @@ urn_log.init({
 
 export * from './register';
 
-import * as util from './util/index';
+import * as util from '../util/server';
 
 let urn_command = 'all';
 

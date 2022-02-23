@@ -10,11 +10,11 @@ import api from 'uranio-api';
 
 import {urn_log} from 'urn-lib';
 
-import {schema as schema_types} from '../sch/index';
+import {schema as schema_types} from '../sch/server';
 
-import * as book from '../book/index';
+import * as book from '../book/server';
 
-import * as types_types from '../types';
+import * as types_types from '../srv/types';
 
 export const process_params = {
 	urn_command: `schema`,

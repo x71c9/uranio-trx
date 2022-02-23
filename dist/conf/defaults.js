@@ -9,7 +9,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.trx_config = void 0;
-// import {api_config} from 'uranio-api/conf/defaults';
 const uranio_api_1 = __importDefault(require("uranio-api"));
 exports.trx_config = {
     ...uranio_api_1.default.conf.defaults,

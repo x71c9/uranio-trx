@@ -14,7 +14,7 @@ urn_log.init({
 
 // import urn_trx from './client';
 
-import uranio from './index';
+import uranio from './server';
 uranio.init();
 
 // console.log(uranio.types.AuthAction);

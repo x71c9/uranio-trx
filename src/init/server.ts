@@ -12,15 +12,15 @@ import urn_api from 'uranio-api';
 
 import {trx_config} from '../conf/defaults';
 
-import {register} from '../reg/index';
+import {register} from '../reg/server';
 
 import {atom_book} from '../atoms';
 
-import * as types from '../types';
+import * as types from '../srv/types';
 
-import * as conf from '../conf/index';
+import * as conf from '../conf/server';
 
-import * as log from '../log/index';
+import * as log from '../log/server';
 
 import {raw_config} from '../raw/defaults';
 

@@ -38,12 +38,12 @@ const urn_lib_1 = require("urn-lib");
 const urn_exc = urn_lib_1.urn_exception.init(`BASE`, `Base module`);
 const client_1 = __importDefault(require("uranio-api/client"));
 const book = __importStar(require("../book/client"));
-const index_1 = require("../raw/index");
+const client_2 = require("../raw/client");
 let Base = class Base {
     constructor(atom_name, token) {
         this.atom_name = atom_name;
         this.token = token;
-        this.raw = (0, index_1.create)();
+        this.raw = (0, client_2.create)();
     }
     hook(route_name) {
         _check_atom_name(this.atom_name);
