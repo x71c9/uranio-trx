@@ -13,7 +13,7 @@ import api from 'uranio-api';
 
 import * as book_cln from './book_cln';
 
-import {schema} from '../sch/index';
+import {schema} from '../sch/server';
 
 export type Book = {
 	[k in schema.AtomName]?: Book.Definition<k>;

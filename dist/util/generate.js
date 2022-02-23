@@ -31,7 +31,7 @@ exports.init = exports.save_types = exports.types_and_save = exports.types = exp
 const fs_1 = __importDefault(require("fs"));
 const uranio_api_1 = __importDefault(require("uranio-api"));
 const urn_lib_1 = require("urn-lib");
-const book = __importStar(require("../book/index"));
+const book = __importStar(require("../book/server"));
 exports.process_params = {
     urn_command: `schema`,
     urn_base_schema: `./.uranio/generate/base/schema.d.ts`,

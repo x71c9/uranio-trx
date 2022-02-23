@@ -16,13 +16,13 @@ urn_lib_1.urn_log.init({
     prefix_type: false
 });
 // import urn_trx from './client';
-const index_1 = __importDefault(require("./index"));
-index_1.default.init();
+const server_1 = __importDefault(require("./server"));
+server_1.default.init();
 // console.log(uranio.types.AuthAction);
 // urn_log.fn_debug(`aaaaaaaaaaaaa`);
-const service = index_1.default.api.service.create();
+const service = server_1.default.api.service.create();
 service.listen(() => {
-    urn_lib_1.urn_log.debug(`Listening on port ${index_1.default.conf.get(`service_port`)}...`);
+    urn_lib_1.urn_log.debug(`Listening on port ${server_1.default.conf.get(`service_port`)}...`);
     // const pro_bll = uranio.api.core.bll.basic.create('superuser');
     // pro_bll.count({}).then(c => console.log(c));
     // const base_media = uranio.base.create('media');

@@ -14,7 +14,7 @@ import {trx_config} from './defaults';
 
 export {trx_config as defaults};
 
-import * as types from '../types';
+import * as types from '../srv/types';
 
 let _is_trx_initialized = false;
 

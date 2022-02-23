@@ -4,8 +4,6 @@
  * @packageDocumentation
  */
 
-// export * from './register';
-
 import * as urn_trx from './srv/main';
 
 export * from './srv/main';

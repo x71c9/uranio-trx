@@ -4,21 +4,11 @@
  * @packageDocumentation
  */
 
-// import * as atom from './atom/client';
-
-// export {atom};
-
-// import * as dock from './dock/client';
-
-// export {dock};
-
-// import api_client from 'uranio-core/client';
-
 import api_client from 'uranio-api/client';
 
 import {Book} from '../typ/book_cln';
 
-import {schema} from '../sch/index';
+import {schema} from '../sch/client';
 
 export function get_route_def<A extends schema.AtomName, R extends schema.RouteName<A>>(
 	atom_name: A,

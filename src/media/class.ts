@@ -6,21 +6,11 @@
 
 import {urn_log, urn_response} from 'urn-lib';
 
-// import {urn_util, urn_log, urn_exception} from 'urn-lib';
-
-// const urn_exc = urn_exception.init(`TRX_MEDIA`, `TRX Media module.`);
-
-// import urn_api_client from 'uranio-api/client';
-
-import {schema} from '../sch/index';
-
-// import * as book from '../book/client';
+import {schema} from '../sch/client';
 
 import * as client_types from '../cln/types';
 
-// import {create as create_raw} from '../raw/index';
-
-import {Base} from '../base/index';
+import {Base} from '../base/client';
 
 type PresignedQuery = {
 	filename: string

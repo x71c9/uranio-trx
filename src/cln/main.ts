@@ -8,13 +8,11 @@ import core from 'uranio-core/client';
 
 import api from 'uranio-api/client';
 
-// export * from '../api/client';
+import * as base from '../base/client';
 
-import * as base from '../base/index';
+import * as auth from '../auth/client';
 
-import * as auth from '../auth/index';
-
-import * as media from '../media/index';
+import * as media from '../media/client';
 
 import * as book from '../book/client';
 
@@ -24,9 +22,9 @@ import * as log from '../log/client';
 
 import * as types from './types';
 
-import {schema} from '../sch/index';
+import {schema} from '../sch/client';
 
-import {hooks} from '../hooks/index';
+import {hooks} from '../hooks/client';
 
 export * from '../init/client';
 

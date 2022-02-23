@@ -4,15 +4,11 @@
  * @packageDocumentation
  */
 
-// export * from 'uranio-api/book/atom/index';
-
-// import core from 'uranio-core';
-
 import api from 'uranio-api';
 
 import {Book} from '../typ/book_srv';
 
-import {schema} from '../sch/index';
+import {schema} from '../sch/server';
 
 import * as book_client from './client';
 

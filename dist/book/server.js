@@ -28,8 +28,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.has_property = exports.get_full_properties_definition = exports.get_custom_property_definitions = exports.get_property_definition = exports.get_definition = exports.get_all_definitions = exports.get_plural = exports.validate_name = exports.get_names = exports.add_definition = exports.get_dock_definition = exports.get_routes_definition_with_defaults = exports.get_routes_definition = exports.get_route_def = void 0;
-// export * from 'uranio-api/book/atom/index';
-// import core from 'uranio-core';
 const uranio_api_1 = __importDefault(require("uranio-api"));
 const book_client = __importStar(require("./client"));
 function get_route_def(atom_name, route_name) {

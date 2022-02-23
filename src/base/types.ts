@@ -4,13 +4,9 @@
  * @packageDocumentation
  */
 
-// import {urn_response} from 'urn-lib';
-
 import * as client_types from '../cln/types';
 
-// import {dock_book} from 'uranio-books/dock';
-
-import {schema} from '../sch/index';
+import {schema} from '../sch/client';
 
 export namespace Hook {
 
