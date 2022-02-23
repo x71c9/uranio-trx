@@ -43,16 +43,16 @@ export function save_schema(text:string):void{
 	return api.util.generate.save_schema(text);
 }
 
-export function hooks():string{
+export function hooks(repo:string):string{
 	urn_log.debug('Started generating uranio trx hooks...');
 	init();
-	const text = _generate_hooks_text();
+	const text = _generate_hooks_text(repo);
 	urn_log.debug(`TRX Hooks generated.`);
 	return text;
 }
 
-export function hooks_and_save():void{
-	const text = hooks();
+export function hooks_and_save(repo:string):void{
+	const text = hooks(repo);
 	save_hooks(text);
 	urn_log.debug(`Hooks generated and saved.`);
 }
@@ -214,7 +214,15 @@ function _generate_trx_schema_text(){
 	return txt;
 }
 
-function _generate_hooks_text(){
+function _get_submodule(repo:string){
+	if(repo === 'adm'){
+		return '.trx';
+	}
+	return '';
+}
+
+function _generate_hooks_text(repo:string){
+	const submodule = _get_submodule(repo);
 	let text = '';
 	text += `/**\n`;
 	text += ` * Auto generate hooks file\n`;
@@ -230,13 +238,13 @@ function _generate_hooks_text(){
 	const atom_book = book.get_all_definitions();
 	for(const [atom_name, atom_def] of Object.entries(atom_book)){
 		const plural = book.get_plural(atom_name as schema_types.AtomName);
-		text += `uranio.hooks['${plural}'] = {\n`;
+		text += `uranio${submodule}.hooks['${plural}'] = {\n`;
 		if(atom_def.authenticate === true){
-			text += _authenticate_hooks(atom_name);
+			text += _authenticate_hooks(atom_name, submodule);
 		}
 		if(atom_name === 'media'){
-			text += _upload_hooks();
-			text += _presigned_hooks();
+			text += _upload_hooks(submodule);
+			text += _presigned_hooks(submodule);
 		}
 		const route_defs = book.get_routes_definition_with_defaults(atom_name as schema_types.AtomName);
 		for(const [route_name, route_def] of Object.entries(route_defs)){
@@ -267,14 +275,14 @@ function _generate_hooks_text(){
 			text += `\t\t\t...parameters\n`;
 			text += `\t\t};\n`;
 			text += `\t\tlet current_token:string|undefined;\n`;
-			text += `\t\tconst hook_token = uranio.hooks.get_token();\n`;
+			text += `\t\tconst hook_token = uranio${submodule}.hooks.get_token();\n`;
 			text += `\t\tif(typeof hook_token === 'string' && hook_token !== ''){\n`;
 			text += `\t\t\tcurrent_token = hook_token;\n`;
 			text += `\t\t}\n`;
 			text += `\t\tif(typeof token === 'string' && token !== ''){\n`;
 			text += `\t\t\tcurrent_token = token;\n`;
 			text += `\t\t}\n`;
-			text += `\t\treturn await uranio.base.create('${atom_name}',`;
+			text += `\t\treturn await uranio${submodule}.base.create('${atom_name}',`;
 			text += `current_token).hook<'${route_name}',D>('${route_name}')(args);\n`;
 			text += `\t},\n`;
 		}
@@ -340,37 +348,37 @@ function _generate_args(params:string[]){
 	return param_text.join('');
 }
 
-function _authenticate_hooks(atom_name:string){
+function _authenticate_hooks(atom_name:string, submodule:string){
 	let text = '';
 	text += `\tauthenticate: async (\n`;
 	text += `\t\temail: string,\n`;
 	text += `\t\tpassword: string\n`;
 	text += `\t): Promise<urn_response.General<uranio.types.Api.AuthResponse>> => {\n`;
-	text += `\t\treturn await uranio.auth.create('${atom_name}').authenticate(email, password);\n`;
+	text += `\t\treturn await uranio${submodule}.auth.create('${atom_name}').authenticate(email, password);\n`;
 	text += `\t},\n`;
 	return text;
 }
 
-function _upload_hooks(){
+function _upload_hooks(submodule:string){
 	let text = '';
 	text += `\tupload: async<D extends uranio.schema.Depth>(\n`;
 	text += `\t\tfile: Buffer | ArrayBuffer | Blob,\n`;
 	text += `\t\ttoken?: string\n`;
 	text += `\t): Promise<urn_response.General<uranio.schema.Atom<'media'>>> => {\n`;
 	text += `\t\tlet current_token: string | undefined;\n`;
-	text += `\t\tconst hook_token = uranio.hooks.get_token();\n`;
+	text += `\t\tconst hook_token = uranio${submodule}.hooks.get_token();\n`;
 	text += `\t\tif (typeof hook_token === "string" && hook_token !== "") {\n`;
 	text += `\t\t\tcurrent_token = hook_token;\n`;
 	text += `\t\t}\n`;
 	text += `\t\tif (typeof token === "string" && token !== "") {\n`;
 	text += `\t\t\tcurrent_token = token;\n`;
 	text += `\t\t}\n`;
-	text += `\t\treturn await uranio.media.create(current_token).upload<D>(file, current_token);\n`;
+	text += `\t\treturn await uranio${submodule}.media.create(current_token).upload<D>(file, current_token);\n`;
 	text += `\t},\n`;
 	return text;
 }
 
-function _presigned_hooks(){
+function _presigned_hooks(submodule:string){
 	let text = '';
 	text += `\tpresigned: async(\n`;
 	text += `\t\tfilename: string,\n`;
@@ -379,14 +387,14 @@ function _presigned_hooks(){
 	text += `\t\ttoken?: string\n`;
 	text += `\t): Promise<urn_response.General<string>> => {\n`;
 	text += `\t\tlet current_token: string | undefined;\n`;
-	text += `\t\tconst hook_token = uranio.hooks.get_token();\n`;
+	text += `\t\tconst hook_token = uranio${submodule}.hooks.get_token();\n`;
 	text += `\t\tif (typeof hook_token === "string" && hook_token !== "") {\n`;
 	text += `\t\t\tcurrent_token = hook_token;\n`;
 	text += `\t\t}\n`;
 	text += `\t\tif (typeof token === "string" && token !== "") {\n`;
 	text += `\t\t\tcurrent_token = token;\n`;
 	text += `\t\t}\n`;
-	text += `\t\treturn await uranio.media.create(current_token).presigned(filename, size, type, current_token);\n`;
+	text += `\t\treturn await uranio${submodule}.media.create(current_token).presigned(filename, size, type, current_token);\n`;
 	text += `\t},\n`;
 	return text;
 }

@@ -6,16 +6,30 @@
 
 import {urn_log} from 'urn-lib';
 
+import urn_api_client from 'uranio-api/client';
+
 import {trx_client_config} from '../cln/defaults';
+
+import {register} from '../reg/client';
+
+import {atom_book} from '../atoms';
 
 import * as types from '../cln/types';
 
 import * as conf from '../conf/client';
 
+import * as log from '../log/client';
+
 import {raw_config} from '../raw/defaults';
 
 export function init(config?:types.ClientConfiguration)
 		:void{
+	
+	log.init(urn_log.defaults);
+	
+	urn_api_client.init(config);
+	
+	_register_required_atoms();
 	
 	if(!config){
 		conf.set_from_env(trx_client_config);
@@ -33,6 +47,12 @@ export function init(config?:types.ClientConfiguration)
 	}
 	
 	conf.set_initialize(true);
+}
+
+function _register_required_atoms(){
+	for(const [atom_name, atom_def] of Object.entries(atom_book)){
+		register(atom_def as any, atom_name as any);
+	}
 }
 
 function _set_raw(){

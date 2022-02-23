@@ -32,12 +32,15 @@ const urn_lib_1 = require("urn-lib");
 const urn_exc = urn_lib_1.urn_exception.init('INIT_TRX_MODULE', `TRX init module`);
 const uranio_api_1 = __importDefault(require("uranio-api"));
 const defaults_1 = require("../conf/defaults");
+const index_1 = require("../reg/index");
+const atoms_1 = require("../atoms");
 const conf = __importStar(require("../conf/index"));
 const log = __importStar(require("../log/index"));
 const defaults_2 = require("../raw/defaults");
 function init(config) {
     log.init(urn_lib_1.urn_log.defaults);
     uranio_api_1.default.init(config);
+    _register_required_atoms();
     if (typeof config === 'undefined') {
         uranio_api_1.default.conf.set_from_env(defaults_1.trx_config);
     }
@@ -53,6 +56,11 @@ function init(config) {
     conf.set_initialize(true);
 }
 exports.init = init;
+function _register_required_atoms() {
+    for (const [atom_name, atom_def] of Object.entries(atoms_1.atom_book)) {
+        (0, index_1.register)(atom_def, atom_name);
+    }
+}
 function _set_raw() {
     defaults_2.raw_config.service_url = ``;
     defaults_2.raw_config.service_url += `${defaults_1.trx_config.service_protocol}://`;
