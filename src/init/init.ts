@@ -12,6 +12,10 @@ import urn_api from 'uranio-api';
 
 import {trx_config} from '../conf/defaults';
 
+import {register} from '../reg/index';
+
+import {atom_book} from '../atoms';
+
 import * as types from '../types';
 
 import * as conf from '../conf/index';
@@ -26,6 +30,8 @@ export function init(config?:types.Configuration)
 	log.init(urn_log.defaults);
 	
 	urn_api.init(config);
+	
+	_register_required_atoms();
 	
 	if(typeof config === 'undefined'){
 		urn_api.conf.set_from_env(trx_config);
@@ -43,6 +49,12 @@ export function init(config?:types.Configuration)
 	}
 	
 	conf.set_initialize(true);
+}
+
+function _register_required_atoms(){
+	for(const [atom_name, atom_def] of Object.entries(atom_book)){
+		register(atom_def as any, atom_name as any);
+	}
 }
 
 function _set_raw(){

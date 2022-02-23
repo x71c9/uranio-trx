@@ -33,7 +33,7 @@ switch(urn_command){
 		break;
 	}
 	case 'hooks':{
-		util.generate.hooks_and_save();
+		util.generate.hooks_and_save('trx');
 		break;
 	}
 	case 'types':{
@@ -42,7 +42,7 @@ switch(urn_command){
 	}
 	default:{
 		util.generate.schema_and_save();
-		util.generate.hooks_and_save();
+		util.generate.hooks_and_save('trx');
 		util.generate.types_and_save();
 		break;
 	}
