@@ -8,13 +8,13 @@ import {urn_log} from 'urn-lib';
 
 import urn_api_client from 'uranio-api/client';
 
-import {trx_client_config} from '../cln/defaults';
+import {trx_client_config} from '../client/defaults';
 
 import {register} from '../reg/client';
 
 import {atom_book} from '../atoms';
 
-import * as types from '../cln/types';
+import * as types from '../client/types';
 
 import * as conf from '../conf/client';
 

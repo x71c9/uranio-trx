@@ -14,7 +14,7 @@ import {schema as schema_types} from '../sch/server';
 
 import * as book from '../book/server';
 
-import * as types_types from '../srv/types';
+import * as types_types from '../server/types';
 
 export const process_params = {
 	urn_command: `schema`,

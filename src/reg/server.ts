@@ -6,7 +6,7 @@
 
 import api from 'uranio-api';
 
-import * as types from '../srv/types';
+import * as types from '../server/types';
 
 import {schema} from '../sch/server';
 

@@ -1,1 +1,0 @@
-{"version":3,"file":"index.js","sourceRoot":"","sources":["../../src/hooks/index.ts"],"names":[],"mappings":";;;AAOA,IAAI,UAA2B,CAAC;AAEnB,QAAA,KAAK,GAAS;IAC1B,SAAS,EAAE,CAAC,KAAY,EAAO,EAAE;QAChC,UAAU,GAAG,KAAK,CAAC;IACpB,CAAC;IACD,SAAS,EAAE,GAAoB,EAAE;QAChC,OAAO,UAAU,CAAC;IACnB,CAAC;CACD,CAAC"}

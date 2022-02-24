@@ -8,7 +8,7 @@ import {urn_response} from 'urn-lib';
 
 export type RawName = 'axios'; // japi, fetch
 
-import * as cln_types from '../cln/types';
+import * as cln_types from '../client/types';
 
 import {schema} from '../sch/client';
 

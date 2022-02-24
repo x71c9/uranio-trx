@@ -12,7 +12,7 @@ import api_client from 'uranio-api/client';
 
 import * as book from '../book/client';
 
-import * as client_types from '../cln/types';
+import * as client_types from '../client/types';
 
 import {schema} from '../sch/client';
 

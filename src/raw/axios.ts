@@ -10,7 +10,7 @@ import {urn_util, urn_log, urn_return, urn_response} from 'urn-lib';
 
 const urn_ret = urn_return.create();
 
-import * as client_types from '../cln/types';
+import * as client_types from '../client/types';
 
 import {schema} from '../sch/client';
 
