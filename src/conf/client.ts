@@ -8,11 +8,11 @@ import {urn_util, urn_exception} from 'urn-lib';
 
 const urn_exc = urn_exception.init('CONF_TRX_CLIENT_MODULE', `TRX client configuration module`);
 
-import {trx_client_config} from '../cln/defaults';
+import {trx_client_config} from '../client/defaults';
 
 export {trx_client_config as defaults};
 
-import * as types from '../cln/types';
+import * as types from '../client/types';
 
 import {RawName} from '../raw/types';
 

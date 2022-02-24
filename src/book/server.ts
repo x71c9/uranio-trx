@@ -6,7 +6,7 @@
 
 import api from 'uranio-api';
 
-import {Book} from '../typ/book_srv';
+import {Book} from '../typ/book';
 
 import {schema} from '../sch/server';
 

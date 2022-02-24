@@ -4,7 +4,7 @@
  * @packageDocumentation
  */
 
-import {Configuration} from '../srv/types';
+import {Configuration} from '../server/types';
 
 import api from 'uranio-api';
 

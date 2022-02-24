@@ -4,10 +4,10 @@
  * @packageDocumentation
  */
 
-export * from './cln/register';
+export * from './client/register';
 
-import * as urn_trx_client from './cln/main';
+import * as urn_trx_client from './client/main';
 
-export * from './cln/main';
+export * from './client/main';
 
 export default urn_trx_client;
