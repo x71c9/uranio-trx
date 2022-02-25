@@ -10,7 +10,7 @@ import urn_api_client from 'uranio-api/client';
 
 import {trx_client_config} from '../client/defaults';
 
-import {register} from '../reg/client';
+import * as register from '../reg/client';
 
 import {atom_book} from '../atoms';
 
@@ -21,6 +21,8 @@ import * as conf from '../conf/client';
 import * as log from '../log/client';
 
 import {raw_config} from '../raw/defaults';
+
+import {schema} from '../sch/client';
 
 export function init(config?:types.ClientConfiguration)
 		:void{
@@ -51,7 +53,7 @@ export function init(config?:types.ClientConfiguration)
 
 function _register_required_atoms(){
 	for(const [atom_name, atom_def] of Object.entries(atom_book)){
-		register(atom_def as any, atom_name as any);
+		register.atom(atom_def as types.Book.Definition, atom_name as schema.AtomName);
 	}
 }
 

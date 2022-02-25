@@ -32,7 +32,7 @@ const urn_lib_1 = require("urn-lib");
 const urn_exc = urn_lib_1.urn_exception.init('INIT_TRX_MODULE', `TRX init module`);
 const uranio_api_1 = __importDefault(require("uranio-api"));
 const defaults_1 = require("../conf/defaults");
-const server_1 = require("../reg/server");
+const register = __importStar(require("../reg/server"));
 const atoms_1 = require("../atoms");
 const conf = __importStar(require("../conf/server"));
 const log = __importStar(require("../log/server"));
@@ -58,7 +58,7 @@ function init(config) {
 exports.init = init;
 function _register_required_atoms() {
     for (const [atom_name, atom_def] of Object.entries(atoms_1.atom_book)) {
-        (0, server_1.register)(atom_def, atom_name);
+        register.atom(atom_def, atom_name);
     }
 }
 function _set_raw() {
