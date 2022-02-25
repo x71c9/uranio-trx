@@ -1,5 +1,5 @@
 /**
- * Register module for URANIO Api
+ * Register module for URANIO TRX
  *
  * @packageDocumentation
  */

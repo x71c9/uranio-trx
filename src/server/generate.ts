@@ -10,7 +10,8 @@ urn_log.init({
 	debug_info: false
 });
 
-export * from './register';
+import uranio from '../server';
+uranio.init();
 
 import * as util from '../util/server';
 
@@ -36,14 +37,14 @@ switch(urn_command){
 		util.generate.hooks_and_save('trx');
 		break;
 	}
-	case 'types':{
-		util.generate.types_and_save();
+	case 'hook-types':{
+		util.generate.hook_types_and_save();
 		break;
 	}
 	default:{
 		util.generate.schema_and_save();
 		util.generate.hooks_and_save('trx');
-		util.generate.types_and_save();
+		util.generate.hook_types_and_save();
 		break;
 	}
 }

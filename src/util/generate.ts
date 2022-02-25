@@ -6,6 +6,8 @@
 
 import fs from 'fs';
 
+import dateformat from 'dateformat';
+
 import api from 'uranio-api';
 
 import {urn_log} from 'urn-lib';
@@ -18,8 +20,9 @@ import * as types_types from '../server/types';
 
 export const process_params = {
 	urn_command: `schema`,
-	urn_base_schema: `./.uranio/generate/base/schema.d.ts`,
-	urn_base_types: `./.uranio/generate/base/uranio-trx.d.ts`,
+	urn_hook_types_path: `./node_modules/uranio-trx/dist/hooks/types.d.ts`,
+	// urn_base_schema: `./.uranio/generate/base/schema.d.ts`,
+	// urn_base_types: `./.uranio/generate/base/uranio-trx.d.ts`,
 	urn_output_dir: `.`,
 	urn_repo: 'adm'
 };
@@ -66,34 +69,34 @@ export function save_hooks(text:string):void{
 	urn_log.debug(`Hooks saved in [${output}.`);
 }
 
-export function types():string{
+export function hook_types():string{
 	urn_log.debug('Started generating uranio trx types...');
 	init();
-	const text = _generate_uranio_types_text();
+	const text = _generate_uranio_hook_types_text();
 	urn_log.debug(`TRX Types generated.`);
 	return text;
 }
 
-export function types_and_save():void{
-	const text = types();
-	save_types(text);
+export function hook_types_and_save():void{
+	const text = hook_types();
+	save_hook_types(text);
 	urn_log.debug(`Types generated and saved.`);
 }
 
-export function save_types(text:string):void{
-	const output = `${process_params.urn_output_dir}/uranio-trx.d.ts`;
-	fs.writeFileSync(
-		output,
-		text
-	);
-	urn_log.debug(`Types saved in [${output}].`);
+export function save_hook_types(text:string):void{
+	const now = dateformat(new Date(), `yyyymmddHHMMssl`);
+	const backup_path = `${process_params.urn_hook_types_path}.${now}.bkp`;
+	fs.copyFileSync(process_params.urn_hook_types_path, backup_path);
+	urn_log.debug(`Copied backup file for atom schema in [${backup_path}].`);
+	fs.writeFileSync(process_params.urn_hook_types_path, text);
+	urn_log.debug(`Update schema [${process_params.urn_hook_types_path}].`);
 }
 
 export function init():void{
 	api.util.generate.init();
-	process_params.urn_base_schema = api.util.generate.process_params.urn_base_schema;
+	// process_params.urn_base_schema = api.util.generate.process_params.urn_base_schema;
 	process_params.urn_command = api.util.generate.process_params.urn_command;
-	process_params.urn_output_dir = api.util.generate.process_params.urn_output_dir;
+	// process_params.urn_output_dir = api.util.generate.process_params.urn_output_dir;
 	_init_trx_generate();
 }
 
@@ -101,24 +104,42 @@ function _init_trx_generate(){
 	for(const argv of process.argv){
 		const splitted = argv.split('=');
 		if(
-			splitted[0] === 'urn_base_types'
+			splitted[0] === 'urn_output_dir'
 			&& typeof splitted[1] === 'string'
 			&& splitted[1] !== ''
 		){
-			process_params.urn_base_types = splitted[1];
+			process_params.urn_output_dir = splitted[1];
 		}else if(
-			splitted[0] === 'urn_repo'
+			splitted[0] === 'urn_hook_types_path'
 			&& typeof splitted[1] === 'string'
 			&& splitted[1] !== ''
 		){
-			process_params.urn_repo = splitted[1];
+			process_params.urn_hook_types_path = splitted[1];
 		}
+		// if(
+		//   splitted[0] === 'urn_base_types'
+		//   && typeof splitted[1] === 'string'
+		//   && splitted[1] !== ''
+		// ){
+		//   process_params.urn_base_types = splitted[1];
+		// }else if(
+		//   splitted[0] === 'urn_repo'
+		//   && typeof splitted[1] === 'string'
+		//   && splitted[1] !== ''
+		// ){
+		//   process_params.urn_repo = splitted[1];
+		// }
 	}
 }
 
-function _generate_uranio_types_text(){
+function _read_hook_types():string{
+	return fs.readFileSync(process_params.urn_hook_types_path, {encoding: 'utf8'});
+}
+
+function _generate_uranio_hook_types_text(){
 	const txt = _generate_types_text();
-	const data = fs.readFileSync(process_params.urn_base_types, {encoding: 'utf8'});
+	// const data = fs.readFileSync(process_params.urn_base_types, {encoding: 'utf8'});
+	const data = _read_hook_types();
 	const data_start = data.split('/** --uranio-generate-types-start */');
 	const data_end = data_start[1].split('/** --uranio-generate-types-end */');
 	let new_data = '';
@@ -127,39 +148,40 @@ function _generate_uranio_types_text(){
 	new_data += txt; + '\n\n';
 	new_data += `/** --uranio-generate-types-end */`;
 	new_data += data_end[1];
-	const uranio_data = (process_params.urn_repo === 'trx') ?
-		_replace_repo_with_uranio(new_data) : new_data;
-	return uranio_data;
+	// const uranio_data = (process_params.urn_repo === 'trx') ?
+	//   _replace_repo_with_uranio(new_data) : new_data;
+	// return uranio_data;
+	return new_data;
 }
 
-function _replace_repo_with_uranio(text:string){
-	const regex = `uranio-${process_params.urn_repo}`;
-	return text.replaceAll(regex, 'uranio');
-}
+// function _replace_repo_with_uranio(text:string){
+//   const regex = `uranio-${process_params.urn_repo}`;
+//   return text.replaceAll(regex, 'uranio');
+// }
 
 function _generate_types_text(){
 	let text = '';
-	text += `\timport {urn_response} from 'urn-lib';\n`;
-	text += `\timport {Api} from 'uranio-trx/typ/api_cln';\n`;
-	text += `\timport {schema} from 'uranio-trx/sch/index';\n`;
-	text += `\timport {Hook} from 'uranio-trx/base/types';\n`;
-	text += `\texport type Hooks = {\n`;
-	text += `\t\tset_token: (token: string) => void;\n`;
-	text += `\t\tget_token: () => string | undefined;\n`;
+	text += `import {urn_response} from 'urn-lib';\n`;
+	text += `import {Api} from '../typ/api_cln';\n`;
+	text += `import {schema} from '../sch/client';\n`;
+	text += `import {Hook} from '../base/types';\n`;
+	text += `export declare type Hooks = {\n`;
+	text += `\tset_token: (token: string) => void;\n`;
+	text += `\tget_token: () => string | undefined;\n`;
 	const atom_book = book.get_all_definitions();
 	for(const [atom_name, atom_def] of Object.entries(atom_book)){
 		const plural = book.get_plural(atom_name as schema_types.AtomName);
-		text += `\t\t${plural}: {\n`;
+		text += `\t${plural}: {\n`;
 		if(atom_def.authenticate === true){
-			text += `\t\t\tauthenticate(email: string, password: string):`;
+			text += `\t\tauthenticate(email: string, password: string):`;
 			text += `Promise<urn_response.General<Api.AuthResponse>>;\n`;
 		}
 		if(atom_name === 'media'){
-			text += `\t\t\tupload(`;
+			text += `\t\tupload(`;
 			text += `file: Buffer | ArrayBuffer | Blob, `;
 			text += `token?: string`;
 			text += `):Promise<urn_response.General<schema.Atom<'media'>>>;\n`;
-			text += `\t\t\tpresigned(`;
+			text += `\t\tpresigned(`;
 			text += `filename: string, `;
 			text += `size?: number, `;
 			text += `type?: string, `;
@@ -173,7 +195,7 @@ function _generate_types_text(){
 				continue;
 			}
 			const text_args = _text_args_for_url(route_def.url);
-			text += `\t\t\t${route_name}<D extends schema.Depth>(`;
+			text += `\t\t${route_name}<D extends schema.Depth>(`;
 			text += `${text_args.replaceAll('\n','').replaceAll('\t','')}`;
 			if(route_def.method === 'POST'){
 				text += `body:Hook.Body<'${atom_name}', '${route_name}'>,`;
@@ -184,16 +206,16 @@ function _generate_types_text(){
 			text += `):Promise<Hook.Response<'${atom_name}', `;
 			text += `'${route_name}', D>>;\n`;
 		}
-		text += `\t\t};\n`;
+		text += `\t};\n`;
 	}
-	text += `\t};\n`;
+	text += `};\n`;
 	
 	return text;
 }
 
 function _generate_uranio_schema_text(api_schema:string){
 	const txt = _generate_trx_schema_text();
-	const split_text = '\texport {};/** --uranio-generate-end */';
+	const split_text = 'export {};/** --uranio-generate-end */';
 	const data_splitted = api_schema.split(split_text);
 	let new_data = '';
 	new_data += data_splitted[0];
@@ -399,55 +421,56 @@ function _presigned_hooks(submodule:string){
 	return text;
 }
 
+
 function _generate_response(){
 	let text = '';
-	text += `\texport type Response<A extends AtomName, R extends RouteName<A>, D extends Depth = 0> =\n`;
-	text += `\t\tR extends RouteDefaultName ? DefaultResponse<A,R,D> :\n`;
-	text += `\t\tR extends RouteCustomName<A> ? CustomResponse<A,R,D> :\n`;
-	text += `\t\tnever\n`;
+	text += `export declare type Response<A extends AtomName, R extends RouteName<A>, D extends Depth = 0> =\n`;
+	text += `\tR extends RouteDefaultName ? DefaultResponse<A,R,D> :\n`;
+	text += `\tR extends RouteCustomName<A> ? CustomResponse<A,R,D> :\n`;
+	text += `\tnever\n`;
 	text += `\n`;
 	return text;
 }
 
 function _generate_custom_response(atom_book:types_types.Book){
 	let text = '';
-	text += `\ttype CustomResponse<A extends AtomName, R extends RouteName<A>, D extends Depth = 0> =\n`;
+	text += `declare type CustomResponse<A extends AtomName, R extends RouteName<A>, D extends Depth = 0> =\n`;
 	for(const [atom_name, atom_def] of Object.entries(atom_book)){
-		text += `\t\tA extends '${atom_name}' ?\n`;
+		text += `\tA extends '${atom_name}' ?\n`;
 		if(!atom_def.dock || !atom_def.dock.routes){
-			text += `\t\t\tnever :\n`;
+			text += `\t\tnever :\n`;
 		}else{
 			const routes = atom_def.dock.routes as types_types.Book.Definition.Dock.Routes<'superuser'>;
 			for(const [route_name, route_def] of Object.entries(routes)){
-				text += `\t\t\tR extends '${route_name}' ? ${route_def.return} :\n`;
+				text += `\t\tR extends '${route_name}' ? ${route_def.return} :\n`;
 			}
-			text += `\t\t\tnever :\n`;
+			text += `\t\tnever :\n`;
 		}
 	}
-	text += `\t\t\tnever\n`;
+	text += `\t\tnever\n`;
 	text += `\n`;
 	return text;
 }
 
 function _generate_default_response(){
 	let text = '';
-	text += `\ttype DefaultResponse<A extends AtomName, R extends RouteName<A>, D extends Depth = 0> =\n`;
+	text += `declare type DefaultResponse<A extends AtomName, R extends RouteName<A>, D extends Depth = 0> =\n`;
 	// for(const [route_name, route_def] of Object.entries(api.routes.default_routes)){
 	//   text += `\tR extends '${route_name}' ? \n`;
 	// }
-	text += `\t\tR extends 'count' ? urn_response.General<number, any> :\n`;
-	text += `\t\tR extends 'find_id' ? urn_response.General<Molecule<A,D>,any> :\n`;
-	text += `\t\tR extends 'find' ? urn_response.General<Molecule<A,D>[],any> :\n`;
-	text += `\t\tR extends 'find_one' ? urn_response.General<Molecule<A,D>,any> :\n`;
-	text += `\t\tR extends 'insert' ? urn_response.General<Molecule<A,D>,any> :\n`;
-	text += `\t\tR extends 'update' ? urn_response.General<Molecule<A,D>,any> :\n`;
-	text += `\t\tR extends 'delete' ? urn_response.General<Molecule<A,D>,any> :\n`;
-	text += `\t\tR extends 'insert_multiple' ? urn_response.General<Molecule<A,D>[],any> :\n`;
-	text += `\t\tR extends 'update_multiple' ? urn_response.General<Molecule<A,D>[],any> :\n`;
-	text += `\t\tR extends 'delete_multiple' ? urn_response.General<Molecule<A,D>[],any> :\n`;
-	text += `\t\t// R extends 'upload' ? urn_response.General<Molecule<A,D>,any> :\n`;
-	text += `\t\t// R extends 'presigned' ? urn_response.General<string,any> :\n`;
-	text += `\t\tnever;\n`;
+	text += `\tR extends 'count' ? urn_response.General<number, any> :\n`;
+	text += `\tR extends 'find_id' ? urn_response.General<Molecule<A,D>,any> :\n`;
+	text += `\tR extends 'find' ? urn_response.General<Molecule<A,D>[],any> :\n`;
+	text += `\tR extends 'find_one' ? urn_response.General<Molecule<A,D>,any> :\n`;
+	text += `\tR extends 'insert' ? urn_response.General<Molecule<A,D>,any> :\n`;
+	text += `\tR extends 'update' ? urn_response.General<Molecule<A,D>,any> :\n`;
+	text += `\tR extends 'delete' ? urn_response.General<Molecule<A,D>,any> :\n`;
+	text += `\tR extends 'insert_multiple' ? urn_response.General<Molecule<A,D>[],any> :\n`;
+	text += `\tR extends 'update_multiple' ? urn_response.General<Molecule<A,D>[],any> :\n`;
+	text += `\tR extends 'delete_multiple' ? urn_response.General<Molecule<A,D>[],any> :\n`;
+	text += `\t// R extends 'upload' ? urn_response.General<Molecule<A,D>,any> :\n`;
+	text += `\t// R extends 'presigned' ? urn_response.General<string,any> :\n`;
+	text += `\tnever;\n`;
 	text += `\n`;
 	return text;
 }
