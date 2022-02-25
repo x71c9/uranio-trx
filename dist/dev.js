@@ -17,4 +17,11 @@ urn_lib_1.urn_log.init({
 });
 const server_1 = __importDefault(require("./server"));
 server_1.default.init();
+// const service = uranio.api.service.create();
+// service.listen(() => {
+//   const reqs = uranio.base.create('request');
+//   reqs.hook('count')({}).then((r) => {
+//     console.log(r);
+//   });
+// });
 //# sourceMappingURL=dev.js.map

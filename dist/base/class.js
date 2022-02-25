@@ -48,7 +48,6 @@ let Base = class Base {
     }
     hook(route_name) {
         _check_atom_name(this.atom_name);
-        // const route = _get_route(this.atom_name, route_name as schema.RouteName<A>);
         const route = book.get_route_def(this.atom_name, route_name);
         const splitted_url = route.url.split('/');
         const params = [];
@@ -65,12 +64,6 @@ let Base = class Base {
         return async (args, token) => {
             var _a;
             const dock_def = book.get_dock_definition(this.atom_name);
-            // if(!dock_def){
-            //   throw urn_exc.create_invalid_book(
-            //     `INVALID_DOCK_DEF`,
-            //     `Cannot hook. Invalid dock_def for \`${this.atom_name}\``
-            //   );
-            // }
             const atom_api_url = dock_def.url || `/${book.get_plural(this.atom_name)}`;
             const atom_def = book.get_definition(this.atom_name);
             const connection_url = (atom_def.connection && atom_def.connection === 'log') ? this.prefix_log : '';
@@ -113,10 +106,4 @@ function _check_atom_name(atom_name) {
     }
     throw urn_exc.create_not_found(`BASEATOM_UNDEFINED`, `Base Atom not found for atom \`${atom_name}\`.`);
 }
-// export type BaseInstance = InstanceType<typeof Base>;
-// export function create<A extends schema.AtomName>(atom_name:A, token?:string)
-//     :Base<A>{
-//   urn_log.fn_debug(`Create Base [${atom_name}]`);
-//   return new Base(atom_name, token);
-// }
 //# sourceMappingURL=class.js.map
