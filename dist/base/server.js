@@ -1,6 +1,6 @@
 "use strict";
 /**
- * Base index module
+ * Module for Base
  *
  * @packageDocumentation
  */
@@ -11,10 +11,30 @@ var __createBinding = (this && this.__createBinding) || (Object.create ? (functi
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
 }));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-__exportStar(require("./class"), exports);
+exports.create = void 0;
+const urn_lib_1 = require("urn-lib");
+const class_1 = require("./class");
+const conf = __importStar(require("../conf/server"));
 __exportStar(require("./types"), exports);
+function create(atom_name, token) {
+    urn_lib_1.urn_log.fn_debug(`Create Base [${atom_name}]`);
+    return new class_1.Base(atom_name, token, conf.get(`prefix_log`));
+}
+exports.create = create;
 //# sourceMappingURL=server.js.map

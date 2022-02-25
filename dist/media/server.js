@@ -1,6 +1,6 @@
 "use strict";
 /**
- * Media index module
+ * Module for Media
  *
  * @packageDocumentation
  */

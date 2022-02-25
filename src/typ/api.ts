@@ -7,6 +7,7 @@
 export {
 	Api,
 	RouteParam,
+	RouteMethod,
 	PropertyType,
 	SecurityType,
 	PermissionType,

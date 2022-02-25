@@ -10,7 +10,7 @@ import {schema} from '../sch/client';
 
 import * as client_types from '../client/types';
 
-import {Base} from '../base/client';
+import {Base} from '../base/class';
 
 type PresignedQuery = {
 	filename: string

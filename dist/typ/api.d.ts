@@ -3,4 +3,4 @@
  *
  * @packageDocumentation
  */
-export { Api, RouteParam, PropertyType, SecurityType, PermissionType, AuthAction, Database, Passport, Storage } from 'uranio-api/types';
+export { Api, RouteParam, RouteMethod, PropertyType, SecurityType, PermissionType, AuthAction, Database, Passport, Storage } from 'uranio-api/types';

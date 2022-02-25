@@ -79,7 +79,7 @@ function _validate_trx_variables() {
     const client_domain = defaults_1.trx_config.client_domain;
     const client_port = defaults_1.trx_config.client_port;
     if (service_domain === client_domain && service_port === client_port) {
-        throw urn_exc.create_not_initialized(`INVALID DOMAINS AND PORTS`, `Cannot use same domain and port for server and client.`);
+        throw urn_exc.create_not_initialized(`INVALID_DOMAINS_AND_PORTS`, `Cannot use same domain and port for server and client.`);
     }
 }
 //# sourceMappingURL=server.js.map

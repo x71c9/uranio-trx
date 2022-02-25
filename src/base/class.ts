@@ -26,14 +26,15 @@ export class Base<A extends schema.AtomName> {
 	
 	protected raw:client_types.RAW<A>;
 	
-	constructor(public atom_name:A, public token?:string){
+	constructor(public atom_name:A, public token?:string, private prefix_log?:string){
 		this.raw = create_raw();
 	}
 	
 	public hook<R extends schema.RouteName<A>, D extends schema.Depth = 0>(route_name:R)
 			:(args:Hook.Arguments<A,R,D>) => Promise<client_types.Hook.Response<A,R,D>>{
 		_check_atom_name(this.atom_name);
-		const route = _get_route(this.atom_name, route_name as schema.RouteName<A>);
+		// const route = _get_route(this.atom_name, route_name as schema.RouteName<A>);
+		const route = book.get_route_def(this.atom_name, route_name as schema.RouteName<A>);
 		const splitted_url = route.url.split('/');
 		const params:string[] = [];
 		for(const split of splitted_url){
@@ -49,7 +50,7 @@ export class Base<A extends schema.AtomName> {
 				params.push(param_name);
 			}
 		}
-		return async (args:Hook.Arguments<A,R,D>, token?:string) => {
+		return async (args:Hook.Arguments<A,R,D>, token?:string):Promise<client_types.Hook.Response<A,R,D>> => {
 			const dock_def = book.get_dock_definition(this.atom_name);
 			// if(!dock_def){
 			//   throw urn_exc.create_invalid_book(
@@ -57,9 +58,9 @@ export class Base<A extends schema.AtomName> {
 			//     `Cannot hook. Invalid dock_def for \`${this.atom_name}\``
 			//   );
 			// }
-			const atom_api_url = dock_def.url || `/${this.atom_name}s`;
+			const atom_api_url = dock_def.url || `/${book.get_plural(this.atom_name)}`;
 			const atom_def = book.get_definition(this.atom_name);
-			const connection_url = (atom_def.connection && atom_def.connection === 'log') ? `/logs` : '';
+			const connection_url = (atom_def.connection && atom_def.connection === 'log') ? this.prefix_log : '';
 			let url = `${connection_url}${atom_api_url}${route.url}`;
 			for(const param of params){
 				if(
@@ -103,31 +104,11 @@ function _check_atom_name(atom_name:schema.AtomName)
 	);
 }
 
-function _get_route<A extends schema.AtomName>(
-	atom_name:schema.AtomName,
-	route_name:schema.RouteName<A>
-):client_types.Book.Definition.Dock.Routes.Route{
-	
-	// return api_client.routes.route_def(atom_name, route_name as any);
-	return api_client.book.get_route_def(atom_name, route_name);
-	
-	// if(urn_util.object.has_key(api_client.routes.default_routes, route_name)){
-	//   return api_client.routes.default_routes[route_name];
-	// }
-	// if(urn_util.object.has_key(dock_book[atom_name], route_name)){
-	//   return true;
-	// }
-	// throw urn_exc.create_not_found(
-	//   `BASEROUTE_UNDEFINED`,
-	//   `BASE Route not found for atom \`${atom_name}\` route \`${route_name}\`.`
-	// );
-}
+// export type BaseInstance = InstanceType<typeof Base>;
 
-export type BaseInstance = InstanceType<typeof Base>;
-
-export function create<A extends schema.AtomName>(atom_name:A, token?:string)
-		:Base<A>{
-	urn_log.fn_debug(`Create Base [${atom_name}]`);
-	return new Base(atom_name, token);
-}
+// export function create<A extends schema.AtomName>(atom_name:A, token?:string)
+//     :Base<A>{
+//   urn_log.fn_debug(`Create Base [${atom_name}]`);
+//   return new Base(atom_name, token);
+// }
 
