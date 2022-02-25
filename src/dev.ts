@@ -14,11 +14,3 @@ urn_log.init({
 
 import uranio from './server';
 uranio.init();
-
-// const service = uranio.api.service.create();
-// service.listen(() => {
-//   const reqs = uranio.base.create('request');
-//   reqs.hook('count')({}).then((r) => {
-//     console.log(r);
-//   });
-// });

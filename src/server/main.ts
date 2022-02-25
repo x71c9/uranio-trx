@@ -22,6 +22,8 @@ import * as util from '../util/server';
 
 import * as log from '../log/server';
 
+import * as register from '../reg/server';
+
 import * as types from './types';
 
 import {schema} from '../sch/server';
@@ -29,8 +31,6 @@ import {schema} from '../sch/server';
 import {hooks} from '../hooks/server';
 
 export * from '../init/server';
-
-export * from '../reg/server';
 
 export {
 	core,
@@ -43,6 +43,7 @@ export {
 	util,
 	log,
 	types,
+	register,
 	schema,
 	hooks,
 };

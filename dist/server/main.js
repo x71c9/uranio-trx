@@ -30,7 +30,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.hooks = exports.schema = exports.types = exports.log = exports.util = exports.conf = exports.book = exports.media = exports.auth = exports.base = exports.api = exports.core = void 0;
+exports.hooks = exports.schema = exports.register = exports.types = exports.log = exports.util = exports.conf = exports.book = exports.media = exports.auth = exports.base = exports.api = exports.core = void 0;
 const uranio_core_1 = __importDefault(require("uranio-core"));
 exports.core = uranio_core_1.default;
 const uranio_api_1 = __importDefault(require("uranio-api"));
@@ -49,6 +49,8 @@ const util = __importStar(require("../util/server"));
 exports.util = util;
 const log = __importStar(require("../log/server"));
 exports.log = log;
+const register = __importStar(require("../reg/server"));
+exports.register = register;
 const types = __importStar(require("./types"));
 exports.types = types;
 const server_1 = require("../sch/server");
@@ -56,5 +58,4 @@ Object.defineProperty(exports, "schema", { enumerable: true, get: function () { 
 const server_2 = require("../hooks/server");
 Object.defineProperty(exports, "hooks", { enumerable: true, get: function () { return server_2.hooks; } });
 __exportStar(require("../init/server"), exports);
-__exportStar(require("../reg/server"), exports);
 //# sourceMappingURL=main.js.map

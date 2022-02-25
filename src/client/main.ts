@@ -20,6 +20,8 @@ import * as conf from '../conf/client';
 
 import * as log from '../log/client';
 
+import * as register from '../reg/client';
+
 import * as types from './types';
 
 import {schema} from '../sch/client';
@@ -27,8 +29,6 @@ import {schema} from '../sch/client';
 import {hooks} from '../hooks/client';
 
 export * from '../init/client';
-
-export * from '../reg/client';
 
 export {
 	core,
@@ -40,6 +40,7 @@ export {
 	conf,
 	log,
 	types,
+	register,
 	schema,
 	hooks,
 };
