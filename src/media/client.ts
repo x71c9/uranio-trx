@@ -1,5 +1,5 @@
 /**
- * Media index module
+ * Module for Media
  *
  * @packageDocumentation
  */

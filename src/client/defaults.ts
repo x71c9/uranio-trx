@@ -6,6 +6,8 @@
 
 import {urn_log} from 'urn-lib';
 
+import api_client from 'uranio-api/client';
+
 import {ClientConfiguration} from './types';
 
 /**
@@ -16,6 +18,8 @@ import {ClientConfiguration} from './types';
  * variable, like process.env[var_name] where `var_name` is a variable.
  */
 export const trx_client_config:Required<ClientConfiguration> = {
+	
+	...api_client.conf.defaults,
 	
 	log_level: urn_log.defaults.log_level,
 	

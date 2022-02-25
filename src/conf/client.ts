@@ -8,6 +8,8 @@ import {urn_util, urn_exception} from 'urn-lib';
 
 const urn_exc = urn_exception.init('CONF_TRX_CLIENT_MODULE', `TRX client configuration module`);
 
+import api_client from 'uranio-api/client';
+
 import {trx_client_config} from '../client/defaults';
 
 export {trx_client_config as defaults};
@@ -26,7 +28,7 @@ export function get<k extends keyof Required<types.ClientConfiguration>>(param_n
 }
 
 export function is_initialized():boolean{
-	return _is_client_trx_initialized;
+	return api_client.conf.is_initialized() && _is_client_trx_initialized;
 }
 
 export function set_initialize(is_initialized:boolean):void{
@@ -34,14 +36,16 @@ export function set_initialize(is_initialized:boolean):void{
 }
 
 export function set_from_env(repo_config:Required<types.ClientConfiguration>):void{
-	const config = _get_env_vars(repo_config);
-	set(repo_config, config);
+	api_client.conf.set_from_env(repo_config);
+	const conf = _get_env_vars(repo_config);
+	set(repo_config, conf);
 }
 
 export function set(repo_config:Required<types.ClientConfiguration>, config:types.ClientConfiguration)
 		:void{
-	_validate_config_types(repo_config, config);
-	Object.assign(repo_config, config);
+	// _validate_config_types(repo_config, config);
+	// Object.assign(repo_config, config);
+	return api_client.conf.set(repo_config, config);
 }
 
 function _check_if_param_exists(param_name:string){
@@ -57,22 +61,22 @@ function _check_if_uranio_was_initialized(){
 	}
 }
 
-function _validate_config_types(
-	repo_config:Required<types.ClientConfiguration>,
-	config:types.ClientConfiguration
-){
-	for(const [config_key, config_value] of Object.entries(config)){
-		const key = config_key as keyof typeof repo_config;
-		if(typeof config_value !== typeof repo_config[key]){
-			throw urn_exc.create_not_initialized(
-				`INVALID_CLIENT_CONFIG_VALUE`,
-				`Invalid client config value for \`${config_key}\`. \`${config_key}\` value ` +
-				` must be of type \`${typeof repo_config[key]}\`,` +
-				`\`${typeof config_value}\` given.`
-			);
-		}
-	}
-}
+// function _validate_config_types(
+//   repo_config:Required<types.ClientConfiguration>,
+//   config:types.ClientConfiguration
+// ){
+//   for(const [config_key, config_value] of Object.entries(config)){
+//     const key = config_key as keyof typeof repo_config;
+//     if(typeof config_value !== typeof repo_config[key]){
+//       throw urn_exc.create_not_initialized(
+//         `INVALID_CLIENT_CONFIG_VALUE`,
+//         `Invalid client config value for \`${config_key}\`. \`${config_key}\` value ` +
+//         ` must be of type \`${typeof repo_config[key]}\`,` +
+//         `\`${typeof config_value}\` given.`
+//       );
+//     }
+//   }
+// }
 
 function _get_env_vars(repo_config:types.ClientConfiguration):types.ClientConfiguration{
 	if(typeof process.env.URN_CLIENT_FETCH === 'string' && process.env.URN_CLIENT_FETCH !== ''){

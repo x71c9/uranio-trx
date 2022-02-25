@@ -1,7 +1,10 @@
 /**
- * Base index module
+ * Module for Base
  *
  * @packageDocumentation
  */
-export * from './class';
+import { schema } from '../sch/client';
+import { Base } from './class';
 export * from './types';
+export declare type BaseInstance = InstanceType<typeof Base>;
+export declare function create<A extends schema.AtomName>(atom_name: A, token?: string): Base<A>;

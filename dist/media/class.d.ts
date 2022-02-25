@@ -6,7 +6,7 @@
 /// <reference types="node" />
 import { urn_response } from 'urn-lib';
 import { schema } from '../sch/client';
-import { Base } from '../base/client';
+import { Base } from '../base/class';
 declare class MediaBase extends Base<'media'> {
     token?: string | undefined;
     constructor(token?: string | undefined);
