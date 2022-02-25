@@ -8,6 +8,8 @@ import api from 'uranio-api';
 
 import {Book} from '../typ/book';
 
+import {Book as ClientBook} from '../typ/book_cln';
+
 import {schema} from '../sch/server';
 
 import * as book_client from './client';
@@ -34,8 +36,18 @@ export function get_dock_definition<A extends schema.AtomName>(atom_name:A)
 	return book_client.get_dock_definition(atom_name) as Book.Definition.Dock<A>;
 }
 
-export function add_definition<A extends schema.AtomName>(atom_name:A, atom_definition:Book.Definition<A>)
-		:Book{
+export function add_route_definition<A extends schema.AtomName>(
+	atom_name:A,
+	route_name: schema.RouteName<A>,
+	route_definition:ClientBook.Definition.Dock.Routes.Route
+):ClientBook{
+	return api.book.add_route_definition(atom_name, route_name, route_definition);
+}
+
+export function add_definition<A extends schema.AtomName>(
+	atom_name:A,
+	atom_definition:ClientBook.Definition
+):ClientBook{
 	return api.book.add_definition(atom_name, atom_definition);
 }
 
