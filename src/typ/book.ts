@@ -53,7 +53,6 @@ export namespace Book {
 			}
 		}
 		
-		
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		// export import Properties = api.types.Book.Definition.Properties;
 		
