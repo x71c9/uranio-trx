@@ -41,7 +41,7 @@ export function add_route_call<A extends schema.AtomName, R extends schema.Route
 	route_name:R,
 	route_call:Book.Definition.Dock.Routes.Route.Call<A,R,D>
 ):Book{
-	return api.book.add_route_call(atom_name, route_name, route_call);
+	return api.book.add_route_call<A,R,D>(atom_name, route_name, route_call);
 }
 
 // export function add_route_definition<A extends schema.AtomName>(
