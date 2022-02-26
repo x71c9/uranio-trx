@@ -36,13 +36,21 @@ export function get_dock_definition<A extends schema.AtomName>(atom_name:A)
 	return book_client.get_dock_definition(atom_name) as Book.Definition.Dock<A>;
 }
 
-export function add_route_definition<A extends schema.AtomName>(
+export function add_route_call<A extends schema.AtomName, R extends schema.RouteName<A>, D extends schema.Depth>(
 	atom_name:A,
-	route_name: schema.RouteName<A>,
-	route_definition:ClientBook.Definition.Dock.Routes.Route
-):ClientBook{
-	return api.book.add_route_definition(atom_name, route_name, route_definition);
+	route_name:R,
+	route_call:Book.Definition.Dock.Routes.Route.Call<A,R,D>
+):Book{
+	return api.book.add_route_call(atom_name, route_name, route_call);
 }
+
+// export function add_route_definition<A extends schema.AtomName>(
+//   atom_name:A,
+//   route_name: schema.RouteName<A>,
+//   route_definition:ClientBook.Definition.Dock.Routes.Route
+// ):ClientBook{
+//   return api.book.add_route_definition(atom_name, route_name, route_definition);
+// }
 
 export function add_definition<A extends schema.AtomName>(
 	atom_name:A,
