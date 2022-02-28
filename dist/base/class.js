@@ -48,7 +48,7 @@ let Base = class Base {
     }
     hook(route_name) {
         _check_atom_name(this.atom_name);
-        const route = book.get_route_def(this.atom_name, route_name);
+        const route = book.get_route_definition(this.atom_name, route_name);
         const splitted_url = route.url.split('/');
         const params = [];
         for (const split of splitted_url) {

@@ -193,7 +193,7 @@ function _generate_types_text() {
             text += `token?: string`;
             text += `): Promise<urn_response.General<string>>;\n`;
         }
-        const route_defs = book.get_routes_definition_with_defaults(atom_name);
+        const route_defs = book.get_routes_definition(atom_name);
         for (const [route_name, route_def] of Object.entries(route_defs)) {
             if (atom_name === 'media' && route_name === 'upload' || route_name === 'presigned') {
                 continue;
@@ -268,7 +268,7 @@ function _generate_hooks_text(repo) {
             text += _upload_hooks(submodule);
             text += _presigned_hooks(submodule);
         }
-        const route_defs = book.get_routes_definition_with_defaults(atom_name);
+        const route_defs = book.get_routes_definition(atom_name);
         for (const [route_name, route_def] of Object.entries(route_defs)) {
             if (atom_name === 'media' && route_name === 'upload' || route_name === 'presigned') {
                 continue;

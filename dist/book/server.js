@@ -27,21 +27,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.has_property = exports.get_full_properties_definition = exports.get_custom_property_definitions = exports.get_property_definition = exports.get_definition = exports.get_all_definitions = exports.get_plural = exports.validate_name = exports.get_names = exports.add_definition = exports.add_route_call = exports.get_dock_definition = exports.get_routes_definition_with_defaults = exports.get_routes_definition = exports.get_route_def = void 0;
+exports.has_property = exports.get_properties_definition = exports.get_custom_properties_definition = exports.get_property_definition = exports.get_definition = exports.get_all_definitions = exports.get_plural = exports.validate_name = exports.get_names = exports.add_definition = exports.add_route_call = exports.get_dock_definition = exports.get_routes_definition = exports.get_route_definition = void 0;
 const uranio_api_1 = __importDefault(require("uranio-api"));
 const book_client = __importStar(require("./client"));
-function get_route_def(atom_name, route_name) {
-    return uranio_api_1.default.book.get_route_def(atom_name, route_name);
+function get_route_definition(atom_name, route_name) {
+    return uranio_api_1.default.book.get_route_definition(atom_name, route_name);
 }
-exports.get_route_def = get_route_def;
+exports.get_route_definition = get_route_definition;
 function get_routes_definition(atom_name) {
     return uranio_api_1.default.book.get_routes_definition(atom_name);
 }
 exports.get_routes_definition = get_routes_definition;
-function get_routes_definition_with_defaults(atom_name) {
-    return uranio_api_1.default.book.get_routes_definition_with_defaults(atom_name);
-}
-exports.get_routes_definition_with_defaults = get_routes_definition_with_defaults;
 function get_dock_definition(atom_name) {
     return book_client.get_dock_definition(atom_name);
 }
@@ -85,14 +81,14 @@ function get_property_definition(atom_name, property_name) {
     return uranio_api_1.default.book.get_property_definition(atom_name, property_name);
 }
 exports.get_property_definition = get_property_definition;
-function get_custom_property_definitions(atom_name) {
-    return uranio_api_1.default.book.get_custom_property_definitions(atom_name);
+function get_custom_properties_definition(atom_name) {
+    return uranio_api_1.default.book.get_custom_properties_definition(atom_name);
 }
-exports.get_custom_property_definitions = get_custom_property_definitions;
-function get_full_properties_definition(atom_name) {
-    return uranio_api_1.default.book.get_full_properties_definition(atom_name);
+exports.get_custom_properties_definition = get_custom_properties_definition;
+function get_properties_definition(atom_name) {
+    return uranio_api_1.default.book.get_properties_definition(atom_name);
 }
-exports.get_full_properties_definition = get_full_properties_definition;
+exports.get_properties_definition = get_properties_definition;
 function has_property(atom_name, key) {
     return uranio_api_1.default.book.has_property(atom_name, key);
 }

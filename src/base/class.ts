@@ -33,7 +33,7 @@ export class Base<A extends schema.AtomName> {
 	public hook<R extends schema.RouteName<A>, D extends schema.Depth = 0>(route_name:R)
 			:(args:Hook.Arguments<A,R,D>) => Promise<client_types.Hook.Response<A,R,D>>{
 		_check_atom_name(this.atom_name);
-		const route = book.get_route_def(this.atom_name, route_name as schema.RouteName<A>);
+		const route = book.get_route_definition(this.atom_name, route_name as schema.RouteName<A>);
 		const splitted_url = route.url.split('/');
 		const params:string[] = [];
 		for(const split of splitted_url){
