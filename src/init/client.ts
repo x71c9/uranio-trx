@@ -6,7 +6,7 @@
 
 import {urn_log} from 'urn-lib';
 
-import urn_api_client from 'uranio-api/client';
+import api_client from 'uranio-api/client';
 
 import {trx_client_config} from '../client/defaults';
 
@@ -20,6 +20,8 @@ import * as conf from '../conf/client';
 
 import * as log from '../log/client';
 
+import * as book from '../book/client';
+
 import {raw_config} from '../raw/defaults';
 
 import {schema} from '../sch/client';
@@ -29,8 +31,9 @@ export function init(config?:types.ClientConfiguration)
 	
 	log.init(urn_log.defaults);
 	
-	urn_api_client.init(config);
+	api_client.init(config);
 	
+	_add_default_routes();
 	_register_required_atoms();
 	
 	if(!config){
@@ -49,6 +52,21 @@ export function init(config?:types.ClientConfiguration)
 	}
 	
 	conf.set_initialize(true);
+}
+
+function _add_default_routes(){
+	const core_atom_book = book.get_all_definitions();
+	for(const [atom_name, atom_def] of Object.entries(core_atom_book)){
+		if(atom_name === 'media'){
+			(atom_def.dock as any).routes = {
+				...api_client.routes.default_routes,
+				...api_client.routes.media_routes
+			};
+		}else{
+			(atom_def.dock as any).routes = api_client.routes.default_routes;
+		}
+		register.atom(atom_def as any, atom_name as any);
+	}
 }
 
 function _register_required_atoms(){

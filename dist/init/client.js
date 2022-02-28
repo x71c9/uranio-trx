@@ -35,10 +35,12 @@ const register = __importStar(require("../reg/client"));
 const atoms_1 = require("../atoms");
 const conf = __importStar(require("../conf/client"));
 const log = __importStar(require("../log/client"));
+const book = __importStar(require("../book/client"));
 const defaults_2 = require("../raw/defaults");
 function init(config) {
     log.init(urn_lib_1.urn_log.defaults);
     client_1.default.init(config);
+    _add_default_routes();
     _register_required_atoms();
     if (!config) {
         conf.set_from_env(defaults_1.trx_client_config);
@@ -55,6 +57,21 @@ function init(config) {
     conf.set_initialize(true);
 }
 exports.init = init;
+function _add_default_routes() {
+    const core_atom_book = book.get_all_definitions();
+    for (const [atom_name, atom_def] of Object.entries(core_atom_book)) {
+        if (atom_name === 'media') {
+            atom_def.dock.routes = {
+                ...client_1.default.routes.default_routes,
+                ...client_1.default.routes.media_routes
+            };
+        }
+        else {
+            atom_def.dock.routes = client_1.default.routes.default_routes;
+        }
+        register.atom(atom_def, atom_name);
+    }
+}
 function _register_required_atoms() {
     for (const [atom_name, atom_def] of Object.entries(atoms_1.atom_book)) {
         register.atom(atom_def, atom_name);
