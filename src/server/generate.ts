@@ -1,8 +1,17 @@
+#!/usr/bin/env node
+
 /**
  * TRX generate module
  *
  * @packageDocumentation
  */
+
+import dotenv from 'dotenv';
+const result = dotenv.config();
+
+if(result.error){
+	throw result.error;
+}
 
 import {urn_log} from 'urn-lib';
 urn_log.init({
@@ -10,7 +19,9 @@ urn_log.init({
 	debug_info: false
 });
 
-import uranio from '../server';
+export * from './register';
+
+import * as uranio from './main';
 uranio.init();
 
 import * as util from '../util/server';

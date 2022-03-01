@@ -1,17 +1,10 @@
 /**
- * Register module for URANIO TRX
+ * API register required atoms module
  *
  * @packageDocumentation
  */
 
-import * as register from '../reg/server';
-
-import {atom_book} from '../atoms';
-
-import {schema} from '../sch/server';
-
-import * as types from '../client/types';
-
-for(const [atom_name, atom_def] of Object.entries(atom_book)){
-	register.atom(atom_def as types.Book.Definition, atom_name as schema.AtomName);
-}
+// export * from '../atoms/server/[atom_name]/index.ts';
+// export * from '../atoms/server/[atom_name]/bll.ts';
+// export * from '../atoms/server/[atom_name]/routes/[route_name].ts';
+export {};
