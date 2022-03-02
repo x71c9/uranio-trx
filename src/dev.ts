@@ -14,3 +14,7 @@ urn_log.init({
 
 import uranio from './server';
 uranio.init();
+
+// import * as book from './book/server';
+// const atom_book = book.get_all_definitions();
+// console.log(atom_book.request?.dock?.routes);
