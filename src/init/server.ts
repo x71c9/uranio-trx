@@ -24,7 +24,7 @@ import * as conf from '../conf/server';
 
 import * as log from '../log/server';
 
-import * as book from '../book/server';
+// import * as book from '../book/server';
 
 import {raw_config} from '../raw/defaults';
 
@@ -35,10 +35,15 @@ export function init(config?:types.Configuration)
 	
 	log.init(urn_log.defaults);
 	
-	api.init(config);
-	
-	_add_default_routes();
+	// _add_default_routes();
+	/**
+	 * Register required atoms must go before api.init
+	 * so that api.init can add the routes also to trx required
+	 * atoms.
+	 */
 	_register_required_atoms();
+	
+	api.init(config);
 	
 	if(typeof config === 'undefined'){
 		api.conf.set_from_env(trx_config);
@@ -58,12 +63,13 @@ export function init(config?:types.Configuration)
 	conf.set_initialize(true);
 }
 
-function _add_default_routes(){
-	const core_atom_book = book.get_all_definitions();
-	for(const [atom_name, atom_def] of Object.entries(core_atom_book)){
-		(atom_def.dock as any).routes = api.routes.return_default_routes(atom_name as schema.AtomName);
-	}
-}
+// function _add_default_routes(){
+//   const core_atom_book = book.get_all_definitions();
+//   for(const [atom_name, atom_def] of Object.entries(core_atom_book)){
+//     (atom_def.dock as any).routes = api.routes.return_default_routes(atom_name as schema.AtomName);
+//   }
+// }
+
 function _register_required_atoms(){
 	for(const [atom_name, atom_def] of Object.entries(atom_book)){
 		register.atom(atom_def as client_types.Book.Definition, atom_name as schema.AtomName);
