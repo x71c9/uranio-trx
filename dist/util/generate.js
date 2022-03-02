@@ -78,7 +78,7 @@ exports.hooks_and_save = hooks_and_save;
 function save_hooks(text) {
     const output = `${exports.process_params.urn_output_dir}/__urn_hooks.ts`;
     fs_1.default.writeFileSync(output, text);
-    urn_lib_1.urn_log.debug(`Hooks saved in [${output}.`);
+    urn_lib_1.urn_log.debug(`Hooks saved in [${output}].`);
 }
 exports.save_hooks = save_hooks;
 function hook_types() {
@@ -208,8 +208,8 @@ function _generate_types_text() {
             text += `parameters?:Hook.Arguments`;
             text += `<'${atom_name}', '${route_name}', D>,`;
             text += `token?:string`;
-            text += `):Promise<Hook.Response<'${atom_name}', `;
-            text += `'${route_name}', D>>;\n`;
+            text += `):Hook.Response<'${atom_name}', `;
+            text += `'${route_name}', D>;\n`;
         }
         text += `\t};\n`;
     }
@@ -281,8 +281,8 @@ function _generate_hooks_text(repo) {
             text += `\t\t${text_args}${body_arg}parameters?:uranio.types.Hook.Arguments`;
             text += `<'${atom_name}', '${route_name}', D>,\n`;
             text += `\t\ttoken?:string\n`;
-            text += `\t):Promise<uranio.types.Hook.Response<'${atom_name}', `;
-            text += `'${route_name}', D>>  => {\n`;
+            text += `\t):uranio.types.Hook.Response<'${atom_name}', `;
+            text += `'${route_name}', D>  => {\n`;
             text += `\t\tconst args:uranio.types.Hook.Arguments<'${atom_name}', `;
             text += `'${route_name}', D> = {\n`;
             const lines = _text_lines_in_args_params(route_def.url);
