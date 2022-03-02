@@ -4,7 +4,7 @@
  * @packageDocumentation
  */
 
-import {urn_response} from 'urn-lib';
+// import {urn_response} from 'urn-lib';
 
 export type RawName = 'axios'; // japi, fetch
 
@@ -18,20 +18,20 @@ export interface RAW<A extends schema.AtomName> {
 		url:string,
 		query?:cln_types.Hook.Query<A,R,D>,
 		headers?:cln_types.Hook.Headers
-	):Promise<urn_response.General<any,any>>
+	):cln_types.Hook.Response<A,R,D>
 	
 	post<R extends schema.RouteName<A>, D extends schema.Depth>(
 		url:string,
 		body:any,
 		query?:cln_types.Hook.Query<A,R,D>,
 		headers?:cln_types.Hook.Headers
-	):Promise<urn_response.General<any,any>>
+	):cln_types.Hook.Response<A,R,D>
 	
 	delete<R extends schema.RouteName<A>, D extends schema.Depth>(
 		url:string,
 		query?:cln_types.Hook.Query<A,R,D>,
 		headers?:cln_types.Hook.Headers
-	):Promise<urn_response.General<any,any>>
+	):cln_types.Hook.Response<A,R,D>
 	
 }
 

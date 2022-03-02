@@ -36,13 +36,18 @@ const register = __importStar(require("../reg/server"));
 const atoms_1 = require("../atoms");
 const conf = __importStar(require("../conf/server"));
 const log = __importStar(require("../log/server"));
-const book = __importStar(require("../book/server"));
+// import * as book from '../book/server';
 const defaults_2 = require("../raw/defaults");
 function init(config) {
     log.init(urn_lib_1.urn_log.defaults);
-    uranio_api_1.default.init(config);
-    _add_default_routes();
+    // _add_default_routes();
+    /**
+     * Register required atoms must go before api.init
+     * so that api.init can add the routes also to trx required
+     * atoms.
+     */
     _register_required_atoms();
+    uranio_api_1.default.init(config);
     if (typeof config === 'undefined') {
         uranio_api_1.default.conf.set_from_env(defaults_1.trx_config);
     }
@@ -58,12 +63,12 @@ function init(config) {
     conf.set_initialize(true);
 }
 exports.init = init;
-function _add_default_routes() {
-    const core_atom_book = book.get_all_definitions();
-    for (const [atom_name, atom_def] of Object.entries(core_atom_book)) {
-        atom_def.dock.routes = uranio_api_1.default.routes.return_default_routes(atom_name);
-    }
-}
+// function _add_default_routes(){
+//   const core_atom_book = book.get_all_definitions();
+//   for(const [atom_name, atom_def] of Object.entries(core_atom_book)){
+//     (atom_def.dock as any).routes = api.routes.return_default_routes(atom_name as schema.AtomName);
+//   }
+// }
 function _register_required_atoms() {
     for (const [atom_name, atom_def] of Object.entries(atoms_1.atom_book)) {
         register.atom(atom_def, atom_name);

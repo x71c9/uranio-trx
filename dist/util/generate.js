@@ -33,6 +33,7 @@ const dateformat_1 = __importDefault(require("dateformat"));
 const uranio_api_1 = __importDefault(require("uranio-api"));
 const urn_lib_1 = require("urn-lib");
 const book = __importStar(require("../book/server"));
+// import * as types from '../server/types';
 exports.process_params = {
     urn_command: `schema`,
     urn_hook_types_path: `./node_modules/uranio-trx/dist/hooks/types.d.ts`,
@@ -228,13 +229,14 @@ function _generate_uranio_schema_text(api_schema) {
     return new_data;
 }
 function _generate_trx_schema_text() {
-    const atom_book = book.get_all_definitions();
-    let txt = '';
-    txt += `\n`;
-    txt += `import {urn_response} from 'urn-lib';\n`;
-    txt += _generate_default_response();
-    txt += _generate_custom_response(atom_book);
-    txt += _generate_response();
+    // const atom_book = book.get_all_definitions();
+    // let txt = '';
+    // txt += `\n`;
+    // txt += `import {urn_response} from 'urn-lib';\n`;
+    // txt += _generate_default_response();
+    // txt += _generate_custom_response(atom_book);
+    // txt += _generate_response();
+    const txt = '';
     return txt;
 }
 function _get_submodule(repo) {
@@ -412,55 +414,54 @@ function _presigned_hooks(submodule) {
     text += `\t},\n`;
     return text;
 }
-function _generate_response() {
-    let text = '';
-    text += `export declare type Response<A extends AtomName, R extends RouteName<A>, D extends Depth = 0> =\n`;
-    text += `\tR extends RouteDefaultName ? DefaultResponse<A,R,D> :\n`;
-    text += `\tR extends RouteCustomName<A> ? CustomResponse<A,R,D> :\n`;
-    text += `\tnever\n`;
-    text += `\n`;
-    return text;
-}
-function _generate_custom_response(atom_book) {
-    let text = '';
-    text += `declare type CustomResponse<A extends AtomName, R extends RouteName<A>, D extends Depth = 0> =\n`;
-    for (const [atom_name, atom_def] of Object.entries(atom_book)) {
-        text += `\tA extends '${atom_name}' ?\n`;
-        if (!atom_def.dock || !atom_def.dock.routes) {
-            text += `\t\tnever :\n`;
-        }
-        else {
-            const routes = atom_def.dock.routes;
-            for (const [route_name, route_def] of Object.entries(routes)) {
-                text += `\t\tR extends '${route_name}' ? ${route_def.return} :\n`;
-            }
-            text += `\t\tnever :\n`;
-        }
-    }
-    text += `\t\tnever\n`;
-    text += `\n`;
-    return text;
-}
-function _generate_default_response() {
-    let text = '';
-    text += `declare type DefaultResponse<A extends AtomName, R extends RouteName<A>, D extends Depth = 0> =\n`;
-    // for(const [route_name, route_def] of Object.entries(api.routes.default_routes)){
-    //   text += `\tR extends '${route_name}' ? \n`;
-    // }
-    text += `\tR extends 'count' ? urn_response.General<number, any> :\n`;
-    text += `\tR extends 'find_id' ? urn_response.General<Molecule<A,D>,any> :\n`;
-    text += `\tR extends 'find' ? urn_response.General<Molecule<A,D>[],any> :\n`;
-    text += `\tR extends 'find_one' ? urn_response.General<Molecule<A,D>,any> :\n`;
-    text += `\tR extends 'insert' ? urn_response.General<Molecule<A,D>,any> :\n`;
-    text += `\tR extends 'update' ? urn_response.General<Molecule<A,D>,any> :\n`;
-    text += `\tR extends 'delete' ? urn_response.General<Molecule<A,D>,any> :\n`;
-    text += `\tR extends 'insert_multiple' ? urn_response.General<Molecule<A,D>[],any> :\n`;
-    text += `\tR extends 'update_multiple' ? urn_response.General<Molecule<A,D>[],any> :\n`;
-    text += `\tR extends 'delete_multiple' ? urn_response.General<Molecule<A,D>[],any> :\n`;
-    text += `\t// R extends 'upload' ? urn_response.General<Molecule<A,D>,any> :\n`;
-    text += `\t// R extends 'presigned' ? urn_response.General<string,any> :\n`;
-    text += `\tnever;\n`;
-    text += `\n`;
-    return text;
-}
+// function _generate_response(){
+//   let text = '';
+//   text += `export declare type Response<A extends AtomName, R extends RouteName<A>, D extends Depth = 0> =\n`;
+//   text += `\tR extends RouteDefaultName ? DefaultResponse<A,R,D> :\n`;
+//   text += `\tR extends RouteCustomName<A> ? CustomResponse<A,R,D> :\n`;
+//   text += `\tnever\n`;
+//   text += `\n`;
+//   return text;
+// }
+// function _generate_custom_response(atom_book:types.Book){
+//   let text = '';
+//   text += `declare type CustomResponse<A extends AtomName, R extends RouteName<A>, D extends Depth = 0> =\n`;
+//   for(const [atom_name, atom_def] of Object.entries(atom_book)){
+//     text += `\tA extends '${atom_name}' ?\n`;
+//     if(!atom_def.dock || !atom_def.dock.routes){
+//       text += `\t\tnever :\n`;
+//     }else{
+//       const routes = atom_def.dock.routes as types.Book.Definition.Dock.Routes<'superuser'>;
+//       for(const [route_name, route_def] of Object.entries(routes)){
+//         text += `\t\tR extends '${route_name}' ? ${route_def.return} :\n`;
+//       }
+//       text += `\t\tnever :\n`;
+//     }
+//   }
+//   text += `\t\tnever\n`;
+//   text += `\n`;
+//   return text;
+// }
+// function _generate_default_response(){
+//   let text = '';
+//   text += `declare type DefaultResponse<A extends AtomName, R extends RouteName<A>, D extends Depth = 0> =\n`;
+//   // for(const [route_name, route_def] of Object.entries(api.routes.default_routes)){
+//   //   text += `\tR extends '${route_name}' ? \n`;
+//   // }
+//   text += `\tR extends 'count' ? urn_response.General<number, any> :\n`;
+//   text += `\tR extends 'find_id' ? urn_response.General<Molecule<A,D>,any> :\n`;
+//   text += `\tR extends 'find' ? urn_response.General<Molecule<A,D>[],any> :\n`;
+//   text += `\tR extends 'find_one' ? urn_response.General<Molecule<A,D>,any> :\n`;
+//   text += `\tR extends 'insert' ? urn_response.General<Molecule<A,D>,any> :\n`;
+//   text += `\tR extends 'update' ? urn_response.General<Molecule<A,D>,any> :\n`;
+//   text += `\tR extends 'delete' ? urn_response.General<Molecule<A,D>,any> :\n`;
+//   text += `\tR extends 'insert_multiple' ? urn_response.General<Molecule<A,D>[],any> :\n`;
+//   text += `\tR extends 'update_multiple' ? urn_response.General<Molecule<A,D>[],any> :\n`;
+//   text += `\tR extends 'delete_multiple' ? urn_response.General<Molecule<A,D>[],any> :\n`;
+//   text += `\t// R extends 'upload' ? urn_response.General<Molecule<A,D>,any> :\n`;
+//   text += `\t// R extends 'presigned' ? urn_response.General<string,any> :\n`;
+//   text += `\tnever;\n`;
+//   text += `\n`;
+//   return text;
+// }
 //# sourceMappingURL=generate.js.map

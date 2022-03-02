@@ -24,13 +24,13 @@ class AuthBase<A extends schema.AuthName> {
 	
 	constructor(public auth_name:A){
 		_check_auth_name(auth_name);
-		this.raw = create_raw(undefined, true);
+		this.raw = create_raw(undefined, true) as client_types.RAW<A>;
 	}
 	
 	public async authenticate(email:string, password:string)
 			:Promise<urn_response.General<client_types.Api.AuthResponse>>{
 		const auth_url = _get_auth_url(this.auth_name);
-		return await this.raw.post(auth_url, {email, password});
+		return await this.raw.post(auth_url, {email, password}) as any;
 	}
 	
 }

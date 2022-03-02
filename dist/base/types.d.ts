@@ -17,5 +17,5 @@ export declare namespace Hook {
     type Params<A extends schema.AtomName, R extends schema.RouteName<A>> = client_types.Api.Request.Params<A, R>;
     type Query<A extends schema.AtomName, R extends schema.RouteName<A>, D extends schema.Depth = 0> = client_types.Api.Request.Query<A, R, D>;
     type Body<A extends schema.AtomName, R extends schema.RouteName<A>> = R extends 'insert' ? schema.AtomShape<A> : R extends 'update' ? schema.AtomShape<A> : R extends 'insert_multiple' ? schema.AtomShape<A>[] : R extends 'update_multiple' ? schema.AtomShape<A> : any;
-    type Response<A extends schema.AtomName, R extends schema.RouteName<A>, D extends schema.Depth = 0> = schema.Response<A, R, D>;
+    type Response<A extends schema.AtomName, R extends schema.RouteName<A>, D extends schema.Depth = 0> = Promise<schema.ApiResponse<A, R, D>>;
 }

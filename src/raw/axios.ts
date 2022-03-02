@@ -40,7 +40,7 @@ class AxiosRaw<A extends schema.AtomName> implements RAW<A>{
 	
 	public async get<R extends schema.RouteName<A>, D extends schema.Depth>(
 		url:string, query?:client_types.Hook.Query<A,R,D>, headers?:client_types.Hook.Headers
-	):Promise<urn_response.General<any,any>>{
+	):client_types.Hook.Response<A,R,D>{
 		if(headers){
 			axios_config.headers = headers;
 		}
@@ -51,7 +51,7 @@ class AxiosRaw<A extends schema.AtomName> implements RAW<A>{
 	
 	public async post<R extends schema.RouteName<A>, D extends schema.Depth>(
 		url:string, body:any, query?:client_types.Hook.Query<A,R,D>, headers?:client_types.Hook.Headers
-	):Promise<urn_response.General<any,any>>{
+	):client_types.Hook.Response<A,R,D>{
 		if(headers){
 			axios_config.headers = headers;
 		}
@@ -62,7 +62,7 @@ class AxiosRaw<A extends schema.AtomName> implements RAW<A>{
 	
 	public async delete<R extends schema.RouteName<A>, D extends schema.Depth>(
 		url:string, query?:client_types.Hook.Query<A,R,D>, headers?:client_types.Hook.Headers
-	):Promise<urn_response.General<any,any>>{
+	):client_types.Hook.Response<A,R,D>{
 		if(headers){
 			axios_config.headers = headers;
 		}

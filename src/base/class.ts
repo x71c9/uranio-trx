@@ -27,11 +27,11 @@ export class Base<A extends schema.AtomName> {
 	protected raw:client_types.RAW<A>;
 	
 	constructor(public atom_name:A, public token?:string, private prefix_log?:string){
-		this.raw = create_raw();
+		this.raw = create_raw() as client_types.RAW<A>;
 	}
 	
 	public hook<R extends schema.RouteName<A>, D extends schema.Depth = 0>(route_name:R)
-			:(args:Hook.Arguments<A,R,D>) => Promise<client_types.Hook.Response<A,R,D>>{
+			:(args:Hook.Arguments<A,R,D>) => client_types.Hook.Response<A,R,D>{
 		_check_atom_name(this.atom_name);
 		const route = book.get_route_definition(this.atom_name, route_name as schema.RouteName<A>);
 		const splitted_url = route.url.split('/');
@@ -49,7 +49,7 @@ export class Base<A extends schema.AtomName> {
 				params.push(param_name);
 			}
 		}
-		return async (args:Hook.Arguments<A,R,D>, token?:string):Promise<client_types.Hook.Response<A,R,D>> => {
+		return async (args:Hook.Arguments<A,R,D>, token?:string):client_types.Hook.Response<A,R,D> => {
 			const dock_def = book.get_dock_definition(this.atom_name);
 			const atom_api_url = dock_def.url || `/${book.get_plural(this.atom_name)}`;
 			const atom_def = book.get_definition(this.atom_name);
@@ -72,13 +72,13 @@ export class Base<A extends schema.AtomName> {
 			}
 			switch(route.method){
 				case api_client.types.RouteMethod.GET:{
-					return await this.raw.get(url, args.query, headers) as client_types.Hook.Response<A, R, D>;
+					return await this.raw.get(url, args.query, headers);
 				}
 				case api_client.types.RouteMethod.POST:{
-					return await this.raw.post(url, args.body, args.query, headers) as client_types.Hook.Response<A, R, D>;
+					return await this.raw.post(url, args.body, args.query, headers);
 				}
 				case api_client.types.RouteMethod.DELETE:{
-					return await this.raw.delete(url, args.query, headers) as client_types.Hook.Response<A, R, D>;
+					return await this.raw.delete(url, args.query, headers);
 				}
 			}
 		};

@@ -1,5 +1,5 @@
 /**
- * Register module for URANIO TRX
+ * API register required atoms module
  *
  * @packageDocumentation
  */
