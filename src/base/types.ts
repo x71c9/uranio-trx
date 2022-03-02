@@ -34,7 +34,7 @@ export namespace Hook {
 		any;
 		
 	export type Response<A extends schema.AtomName, R extends schema.RouteName<A>, D extends schema.Depth = 0> =
-		schema.Response<A,R,D>
+		Promise<schema.ApiResponse<A,R,D>>
 		
 	// type DefaultResponse<A extends schema.AtomName, R extends schema.RouteName<A>, D extends schema.Depth = 0> =
 	//   R extends 'count' ? urn_response.General<number, any> :

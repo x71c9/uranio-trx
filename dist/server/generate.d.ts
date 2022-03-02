@@ -1,6 +1,7 @@
+#!/usr/bin/env node
 /**
  * TRX generate module
  *
  * @packageDocumentation
  */
-export {};
+export * from './register';
