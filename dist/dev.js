@@ -17,4 +17,7 @@ urn_lib_1.urn_log.init({
 });
 const server_1 = __importDefault(require("./server"));
 server_1.default.init();
+// import * as book from './book/server';
+// const atom_book = book.get_all_definitions();
+// console.log(atom_book.request?.dock?.routes);
 //# sourceMappingURL=dev.js.map
