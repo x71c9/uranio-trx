@@ -22,6 +22,8 @@ import * as log from '../log/client';
 
 import * as register from '../reg/client';
 
+import * as required from '../req/client';
+
 import * as types from './types';
 
 import {schema} from '../sch/client';
@@ -41,6 +43,7 @@ export {
 	log,
 	types,
 	register,
+	required,
 	schema,
 	hooks,
 };
