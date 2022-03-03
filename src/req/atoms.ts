@@ -4,5 +4,5 @@
  * @packageDocumentation
  */
 
-export const atom_book = {
+export const required_atoms = {
 } as const;

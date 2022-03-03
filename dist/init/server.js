@@ -33,34 +33,27 @@ const urn_exc = urn_lib_1.urn_exception.init('INIT_TRX_MODULE', `TRX init module
 const uranio_api_1 = __importDefault(require("uranio-api"));
 const defaults_1 = require("../conf/defaults");
 const register = __importStar(require("../reg/server"));
-const atoms_1 = require("../atoms");
+const required = __importStar(require("../req/server"));
 const conf = __importStar(require("../conf/server"));
 const log = __importStar(require("../log/server"));
-// import * as book from '../book/server';
 const defaults_2 = require("../raw/defaults");
-function init(config) {
+function init(config, register_required = true) {
     log.init(urn_lib_1.urn_log.defaults);
-    // _add_default_routes();
-    /**
-     * Register required atoms must go before api.init
-     * so that api.init can add the routes also to trx required
-     * atoms.
-     */
-    _register_required_atoms();
-    uranio_api_1.default.init(config);
+    uranio_api_1.default.init(config, false);
     if (typeof config === 'undefined') {
         uranio_api_1.default.conf.set_from_env(defaults_1.trx_config);
     }
     else {
         uranio_api_1.default.conf.set(defaults_1.trx_config, config);
     }
+    if (register_required) {
+        _register_required_atoms();
+    }
     _set_raw();
     _validate_trx_variables();
     // _validate_trx_book();
-    if (config && typeof config.log_level === 'number') {
-        urn_lib_1.urn_log.defaults.log_level = config.log_level;
-    }
     conf.set_initialize(true);
+    urn_lib_1.urn_log.defaults.log_level = conf.get(`log_level`);
 }
 exports.init = init;
 // function _add_default_routes(){
@@ -70,7 +63,8 @@ exports.init = init;
 //   }
 // }
 function _register_required_atoms() {
-    for (const [atom_name, atom_def] of Object.entries(atoms_1.atom_book)) {
+    const required_atoms = required.get();
+    for (const [atom_name, atom_def] of Object.entries(required_atoms)) {
         register.atom(atom_def, atom_name);
     }
 }

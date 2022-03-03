@@ -14,7 +14,7 @@ import {trx_config} from '../conf/defaults';
 
 import * as register from '../reg/server';
 
-import {atom_book} from '../atoms';
+import * as required from '../req/server';
 
 import * as types from '../server/types';
 
@@ -24,26 +24,14 @@ import * as conf from '../conf/server';
 
 import * as log from '../log/server';
 
-// import * as book from '../book/server';
-
 import {raw_config} from '../raw/defaults';
 
-import {schema} from '../sch/server';
-
-export function init(config?:types.Configuration)
+export function init(config?:types.Configuration, register_required=true)
 		:void{
 	
 	log.init(urn_log.defaults);
 	
-	// _add_default_routes();
-	/**
-	 * Register required atoms must go before api.init
-	 * so that api.init can add the routes also to trx required
-	 * atoms.
-	 */
-	_register_required_atoms();
-	
-	api.init(config);
+	api.init(config, false);
 	
 	if(typeof config === 'undefined'){
 		api.conf.set_from_env(trx_config);
@@ -51,16 +39,18 @@ export function init(config?:types.Configuration)
 		api.conf.set(trx_config, config);
 	}
 	
+	if(register_required){
+		_register_required_atoms();
+	}
+	
 	_set_raw();
 	
 	_validate_trx_variables();
 	// _validate_trx_book();
 	
-	if(config && typeof config.log_level === 'number'){
-		urn_log.defaults.log_level = config.log_level;
-	}
-	
 	conf.set_initialize(true);
+	
+	urn_log.defaults.log_level = conf.get(`log_level`);
 }
 
 // function _add_default_routes(){
@@ -71,7 +61,8 @@ export function init(config?:types.Configuration)
 // }
 
 function _register_required_atoms(){
-	for(const [atom_name, atom_def] of Object.entries(atom_book)){
+	const required_atoms = required.get();
+	for(const [atom_name, atom_def] of Object.entries(required_atoms)){
 		register.atom(atom_def as client_types.Book.Definition, atom_name);
 	}
 }
