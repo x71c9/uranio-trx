@@ -76,7 +76,7 @@ export function init(config?:types.ClientConfiguration)
 
 function _register_required_atoms(){
 	for(const [atom_name, atom_def] of Object.entries(atom_book)){
-		register.atom(atom_def as types.Book.Definition, atom_name as schema.AtomName);
+		register.atom(atom_def as types.Book.Definition, atom_name);
 	}
 }
 
