@@ -4,7 +4,7 @@
  * @packageDocumentation
  */
 
-export * from './server/register';
+// export * from './server/register';
 
 import * as urn_trx from './server/main';
 
