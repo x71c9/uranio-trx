@@ -64,18 +64,6 @@ export declare type Hooks = {
 		update_multiple<D extends schema.Depth>(ids:string,body:Hook.Body<'media', 'update_multiple'>,parameters?:Hook.Arguments<'media', 'update_multiple', D>,token?:string):Hook.Response<'media', 'update_multiple', D>;
 		delete_multiple<D extends schema.Depth>(ids:string,parameters?:Hook.Arguments<'media', 'delete_multiple', D>,token?:string):Hook.Response<'media', 'delete_multiple', D>;
 	};
-	settings: {
-		count<D extends schema.Depth>(parameters?:Hook.Arguments<'setting', 'count', D>,token?:string):Hook.Response<'setting', 'count', D>;
-		find_one<D extends schema.Depth>(parameters?:Hook.Arguments<'setting', 'find_one', D>,token?:string):Hook.Response<'setting', 'find_one', D>;
-		find<D extends schema.Depth>(parameters?:Hook.Arguments<'setting', 'find', D>,token?:string):Hook.Response<'setting', 'find', D>;
-		find_id<D extends schema.Depth>(id:string,parameters?:Hook.Arguments<'setting', 'find_id', D>,token?:string):Hook.Response<'setting', 'find_id', D>;
-		insert<D extends schema.Depth>(body:Hook.Body<'setting', 'insert'>,parameters?:Hook.Arguments<'setting', 'insert', D>,token?:string):Hook.Response<'setting', 'insert', D>;
-		update<D extends schema.Depth>(id:string,body:Hook.Body<'setting', 'update'>,parameters?:Hook.Arguments<'setting', 'update', D>,token?:string):Hook.Response<'setting', 'update', D>;
-		delete<D extends schema.Depth>(id:string,parameters?:Hook.Arguments<'setting', 'delete', D>,token?:string):Hook.Response<'setting', 'delete', D>;
-		insert_multiple<D extends schema.Depth>(body:Hook.Body<'setting', 'insert_multiple'>,parameters?:Hook.Arguments<'setting', 'insert_multiple', D>,token?:string):Hook.Response<'setting', 'insert_multiple', D>;
-		update_multiple<D extends schema.Depth>(ids:string,body:Hook.Body<'setting', 'update_multiple'>,parameters?:Hook.Arguments<'setting', 'update_multiple', D>,token?:string):Hook.Response<'setting', 'update_multiple', D>;
-		delete_multiple<D extends schema.Depth>(ids:string,parameters?:Hook.Arguments<'setting', 'delete_multiple', D>,token?:string):Hook.Response<'setting', 'delete_multiple', D>;
-	};
 	errors: {
 		count<D extends schema.Depth>(parameters?:Hook.Arguments<'error', 'count', D>,token?:string):Hook.Response<'error', 'count', D>;
 		find_one<D extends schema.Depth>(parameters?:Hook.Arguments<'error', 'find_one', D>,token?:string):Hook.Response<'error', 'find_one', D>;
@@ -99,6 +87,18 @@ export declare type Hooks = {
 		insert_multiple<D extends schema.Depth>(body:Hook.Body<'request', 'insert_multiple'>,parameters?:Hook.Arguments<'request', 'insert_multiple', D>,token?:string):Hook.Response<'request', 'insert_multiple', D>;
 		update_multiple<D extends schema.Depth>(ids:string,body:Hook.Body<'request', 'update_multiple'>,parameters?:Hook.Arguments<'request', 'update_multiple', D>,token?:string):Hook.Response<'request', 'update_multiple', D>;
 		delete_multiple<D extends schema.Depth>(ids:string,parameters?:Hook.Arguments<'request', 'delete_multiple', D>,token?:string):Hook.Response<'request', 'delete_multiple', D>;
+	};
+	settings: {
+		count<D extends schema.Depth>(parameters?:Hook.Arguments<'setting', 'count', D>,token?:string):Hook.Response<'setting', 'count', D>;
+		find_one<D extends schema.Depth>(parameters?:Hook.Arguments<'setting', 'find_one', D>,token?:string):Hook.Response<'setting', 'find_one', D>;
+		find<D extends schema.Depth>(parameters?:Hook.Arguments<'setting', 'find', D>,token?:string):Hook.Response<'setting', 'find', D>;
+		find_id<D extends schema.Depth>(id:string,parameters?:Hook.Arguments<'setting', 'find_id', D>,token?:string):Hook.Response<'setting', 'find_id', D>;
+		insert<D extends schema.Depth>(body:Hook.Body<'setting', 'insert'>,parameters?:Hook.Arguments<'setting', 'insert', D>,token?:string):Hook.Response<'setting', 'insert', D>;
+		update<D extends schema.Depth>(id:string,body:Hook.Body<'setting', 'update'>,parameters?:Hook.Arguments<'setting', 'update', D>,token?:string):Hook.Response<'setting', 'update', D>;
+		delete<D extends schema.Depth>(id:string,parameters?:Hook.Arguments<'setting', 'delete', D>,token?:string):Hook.Response<'setting', 'delete', D>;
+		insert_multiple<D extends schema.Depth>(body:Hook.Body<'setting', 'insert_multiple'>,parameters?:Hook.Arguments<'setting', 'insert_multiple', D>,token?:string):Hook.Response<'setting', 'insert_multiple', D>;
+		update_multiple<D extends schema.Depth>(ids:string,body:Hook.Body<'setting', 'update_multiple'>,parameters?:Hook.Arguments<'setting', 'update_multiple', D>,token?:string):Hook.Response<'setting', 'update_multiple', D>;
+		delete_multiple<D extends schema.Depth>(ids:string,parameters?:Hook.Arguments<'setting', 'delete_multiple', D>,token?:string):Hook.Response<'setting', 'delete_multiple', D>;
 	};
 };
 /** --uranio-generate-types-end */
