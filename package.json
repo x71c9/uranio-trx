@@ -3,7 +3,7 @@
 	"version": "0.0.1",
 	"description": "Uranio TRX - Uranio transreceiver",
 	"main": "dist/server.js",
-	"bin":{
+	"bin": {
 		"uranio-trx-generate": "dist/server/generate.js",
 		"uranio-api": "dist/api.js"
 	},

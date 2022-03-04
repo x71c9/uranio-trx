@@ -43,10 +43,8 @@ const defaults_2 = require("../raw/defaults");
 function init(config, register_required = true) {
     log.init(urn_lib_1.urn_log.defaults);
     client_1.default.init(config, false);
-    if (!config) {
-        conf.set_from_env(defaults_1.trx_client_config);
-    }
-    else {
+    conf.set_from_env(defaults_1.trx_client_config);
+    if (config) {
         conf.set(defaults_1.trx_client_config, config);
     }
     if (register_required) {

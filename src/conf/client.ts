@@ -41,8 +41,10 @@ export function set_from_env(repo_config:Required<types.ClientConfiguration>):vo
 	set(repo_config, conf);
 }
 
-export function set(repo_config:Required<types.ClientConfiguration>, config:types.ClientConfiguration)
-		:void{
+export function set(
+	repo_config: Required<types.ClientConfiguration>,
+	config: Partial<types.ClientConfiguration>
+):void{
 	// _validate_config_types(repo_config, config);
 	// Object.assign(repo_config, config);
 	return api_client.conf.set(repo_config, config);

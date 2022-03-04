@@ -29,9 +29,8 @@ export function init(config?:types.ClientConfiguration, register_required=true)
 	
 	api_client.init(config, false);
 	
-	if(!config){
-		conf.set_from_env(trx_client_config);
-	}else{
+	conf.set_from_env(trx_client_config);
+	if(config){
 		conf.set(trx_client_config, config);
 	}
 	

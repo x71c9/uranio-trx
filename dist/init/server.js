@@ -44,10 +44,8 @@ const defaults_2 = require("../raw/defaults");
 function init(config, register_required = true) {
     log.init(urn_lib_1.urn_log.defaults);
     uranio_api_1.default.init(config, false);
-    if (typeof config === 'undefined') {
-        uranio_api_1.default.conf.set_from_env(defaults_1.trx_config);
-    }
-    else {
+    uranio_api_1.default.conf.set_from_env(defaults_1.trx_config);
+    if (config) {
         uranio_api_1.default.conf.set(defaults_1.trx_config, config);
     }
     if (register_required) {

@@ -33,9 +33,8 @@ export function init(config?:types.Configuration, register_required=true)
 	
 	api.init(config, false);
 	
-	if(typeof config === 'undefined'){
-		api.conf.set_from_env(trx_config);
-	}else{
+	api.conf.set_from_env(trx_config);
+	if(config){
 		api.conf.set(trx_config, config);
 	}
 	
