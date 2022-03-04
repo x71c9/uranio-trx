@@ -35,9 +35,9 @@ export function init(
 	
 	api.init(config, false);
 	
-	api.conf.set_from_env(trx_config);
+	conf.set_from_env(trx_config);
 	if(config){
-		api.conf.set(trx_config, config);
+		conf.set(trx_config, config);
 	}
 	
 	if(register_required){
