@@ -42,15 +42,15 @@
 	},
 	"devDependencies": {
 		"esbuild": "^0.14.22",
-		"uranio-dev": "git+ssh://git@github.com/nbl7/uranio-dev.git"
+		"uranio-dev": "git+ssh://git@github.com/nbl7/uranio-dev.git#master"
 	},
 	"dependencies": {
 		"axios": "^0.26.0",
 		"dateformat": "^3",
 		"dotenv": "^16.0.0",
-		"uranio-api": "git+ssh://git@github.com/nbl7/uranio-api.git#update-modules",
-		"uranio-core": "git+ssh://git@github.com/nbl7/uranio-core.git#update-modules",
-		"uranio-schema": "ssh://git@github.com/nbl7/uranio-schema.git",
-		"urn-lib": "git+ssh://git@github.com/nbl7/uranio-lib.git#update-modules"
+		"uranio-api": "git+ssh://git@github.com/nbl7/uranio-api.git#master",
+		"uranio-core": "git+ssh://git@github.com/nbl7/uranio-core.git#master",
+		"uranio-schema": "ssh://git@github.com/nbl7/uranio-schema.git#master",
+		"urn-lib": "git+ssh://git@github.com/nbl7/uranio-lib.git#master"
 	}
 }
