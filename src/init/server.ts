@@ -26,8 +26,10 @@ import * as log from '../log/server';
 
 import {raw_config} from '../raw/defaults';
 
-export function init(config?:types.Configuration, register_required=true)
-		:void{
+export function init(
+	config?: Partial<types.Configuration>,
+	register_required=true
+):void{
 	
 	log.init(urn_log.defaults);
 	

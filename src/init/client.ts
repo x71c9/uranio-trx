@@ -22,8 +22,10 @@ import * as log from '../log/client';
 
 import {raw_config} from '../raw/defaults';
 
-export function init(config?:types.ClientConfiguration, register_required=true)
-		:void{
+export function init(
+	config?: Partial<types.ClientConfiguration>,
+	register_required=true
+):void{
 	
 	log.init(urn_log.defaults);
 	
