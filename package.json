@@ -41,13 +41,13 @@
 		"generate:hook-types": "yarn generate urn_command=hook-types"
 	},
 	"devDependencies": {
-		"esbuild": "^0.14.22",
 		"uranio-dev": "git+ssh://git@github.com/nbl7/uranio-dev.git#master"
 	},
 	"dependencies": {
 		"axios": "^0.26.0",
 		"dateformat": "^3",
 		"dotenv": "^16.0.0",
+		"esbuild": "^0.14.25",
 		"uranio-api": "git+ssh://git@github.com/nbl7/uranio-api.git#master",
 		"uranio-core": "git+ssh://git@github.com/nbl7/uranio-core.git#master",
 		"uranio-schema": "ssh://git@github.com/nbl7/uranio-schema.git#master",
