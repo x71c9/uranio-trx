@@ -32,13 +32,12 @@
 	"repository": "git@github.com:nbl7/uranio-trx.git",
 	"author": "Andrea Reni <mail@nbl7.net>",
 	"scripts": {
-		"build": "npx tsc -b",
-		"dev": "npx tsc-watch --onSuccess \"node -r source-map-support/register -r dotenv/config ./dist/dev.js\"",
-		"generate:compile": "npx esbuild ./src/server/generate.ts --outfile=./generate/_generate_bundled.js --bundle --platform=node",
-		"generate:run": "yarn generate:compile && node -r dotenv/config ./generate/_generate_bundled.js urn_repo=trx urn_hook_types_path=./dist/hooks/types.d.ts urn_output_dir=./generate",
-		"generate:schema": "yarn generate:compile && node -r dotenv/config ./generate/_generate_bundled.js urn_repo=trx urn_command=schema",
-		"generate:hooks": "yarn generate:compile && node -r dotenv/config ./generate/_generate_bundled.js urn_repo=trx urn_command=hooks urn_output_dir=./generate",
-		"generate:hook-types": "yarn generate:compile && node -r dotenv/config ./generate/_generate_bundled.js urn_repo=trx urn_command=hook-types urn_hook_types_path=./dist/hooks/types.d.ts"
+		"build": "yarn tsc -b",
+		"dev": "yarn tsc-watch --onSuccess \"node -r source-map-support/register -r dotenv/config ./dist/dev.js\"",
+		"generate": "node -r source-map-support/register -r dotenv/config ./dist/server/generate.js urn_hook_types_path=./dist/hooks/types.d.ts urn_hooks_dir_src=./.generate/src urn_hooks_dir_dist=./.generate/dist",
+		"generate:schema": "yarn generate urn_command=schema",
+		"generate:hook-types": "yarn generate urn_command=hook-types",
+		"generate:hooks": "yarn generate urn_command=hooks"
 	},
 	"devDependencies": {
 		"esbuild": "^0.14.22",

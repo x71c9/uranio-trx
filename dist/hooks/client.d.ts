@@ -3,5 +3,4 @@
  *
  * @packageDocumentation
  */
-import { Hooks } from './types';
-export declare const hooks: Hooks;
+export * from './hooks_cln';
