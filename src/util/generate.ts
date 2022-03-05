@@ -122,6 +122,7 @@ function _compile(src:string, dest:string){
 		platform: 'node',
 		format: 'cjs'
 	});
+	urn_log.debug(`TRX Compiled [${src}] to [${dest}].`);
 }
 
 function _compile_hooks_server(){
