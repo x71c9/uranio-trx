@@ -5,10 +5,7 @@
  */
 export declare const process_params: {
     urn_command: string;
-    urn_hook_types_path: string;
-    urn_hooks_dir_src: string;
-    urn_hooks_dir_dist: string;
-    urn_repo: string;
+    urn_trx_repo_path: string;
 };
 export declare function schema(): string;
 export declare function schema_and_save(): void;

@@ -34,10 +34,11 @@
 	"scripts": {
 		"build": "yarn tsc -b",
 		"dev": "yarn tsc-watch --onSuccess \"node -r source-map-support/register -r dotenv/config ./dist/dev.js\"",
-		"generate": "node -r source-map-support/register -r dotenv/config ./dist/server/generate.js urn_hook_types_path=./dist/hooks/types.d.ts urn_hooks_dir_src=./.generate/src urn_hooks_dir_dist=./.generate/dist",
+		"plain:generate": "node -r source-map-support/register -r dotenv/config ./dist/server/generate.js",
+		"generate": "yarn plain:generate urn_schema_repo_path=node_modules/uranio-schema urn_trx_repo_path=.generate",
 		"generate:schema": "yarn generate urn_command=schema",
-		"generate:hook-types": "yarn generate urn_command=hook-types",
-		"generate:hooks": "yarn generate urn_command=hooks"
+		"generate:hooks": "yarn generate urn_command=hooks",
+		"generate:hook-types": "yarn generate urn_command=hook-types"
 	},
 	"devDependencies": {
 		"esbuild": "^0.14.22",

@@ -22,9 +22,10 @@ import * as book from '../book/server';
 
 export const process_params = {
 	urn_command: `schema`,
-	urn_hook_types_path: `./node_modules/uranio-trx/dist/hooks/types.d.ts`,
-	urn_hooks_dir_src: `./node_modules/uranio/src/hooks`,
-	urn_hooks_dir_dist: `./node_modules/uranio/dist/hooks`
+	// urn_hook_types_path: `./node_modules/uranio-trx/dist/hooks/types.d.ts`,
+	// urn_hooks_dir_src: `./node_modules/uranio/src/hooks`,
+	// urn_hooks_dir_dist: `./node_modules/uranio/dist/hooks`
+	urn_trx_repo_path: 'node_modules/uranio-trx'
 };
 
 export function schema():string{
@@ -71,13 +72,13 @@ export function hooks_and_save():void{
 	const text_client = hooks_client();
 	save_hooks_server(text_server);
 	save_hooks_client(text_client);
-	_compule_hooks_server();
-	_compule_hooks_client();
+	_compile_hooks_server();
+	_compile_hooks_client();
 	urn_log.debug(`Hooks generated and saved.`);
 }
 
 export function save_hooks_server(text:string):void{
-	const output = `${process_params.urn_hooks_dir_src}/hooks.ts`;
+	const output = _get_hooks_path_src_server();
 	fs.writeFileSync(
 		output,
 		text
@@ -86,12 +87,32 @@ export function save_hooks_server(text:string):void{
 }
 
 export function save_hooks_client(text:string):void{
-	const output = `${process_params.urn_hooks_dir_src}/hooks_cln.ts`;
+	const output = _get_hooks_path_src_client();
 	fs.writeFileSync(
 		output,
 		text
 	);
 	urn_log.debug(`Client Hooks saved in [${output}].`);
+}
+
+function _get_hooks_path_src_server(){
+	return `${process_params.urn_trx_repo_path}/src/hooks/hooks.ts`;
+}
+
+function _get_hooks_path_src_client(){
+	return `${process_params.urn_trx_repo_path}/src/hooks/hooks_cln.ts`;
+}
+
+function _get_hooks_path_dist_server(){
+	return `${process_params.urn_trx_repo_path}/dist/hooks/hooks.js`;
+}
+
+function _get_hooks_path_dist_client(){
+	return `${process_params.urn_trx_repo_path}/dist/hooks/hooks_cln.js`;
+}
+
+function _get_hook_types_path(){
+	return `${process_params.urn_trx_repo_path}/dist/hooks/types.d.ts`;
 }
 
 function _compile(src:string, dest:string){
@@ -103,16 +124,16 @@ function _compile(src:string, dest:string){
 	});
 }
 
-function _compule_hooks_server(){
+function _compile_hooks_server(){
 	return _compile(
-		`${process_params.urn_hooks_dir_src}/hooks.ts`,
-		`${process_params.urn_hooks_dir_dist}/hooks.js`
+		_get_hooks_path_src_server(),
+		_get_hooks_path_dist_server()
 	);
 }
-function _compule_hooks_client(){
+function _compile_hooks_client(){
 	return _compile(
-		`${process_params.urn_hooks_dir_src}/hooks_cln.ts`,
-		`${process_params.urn_hooks_dir_dist}/hooks_cln.js`
+		_get_hooks_path_src_client(),
+		_get_hooks_path_dist_client()
 	);
 }
 
@@ -132,17 +153,17 @@ export function hook_types_and_save():void{
 
 export function save_hook_types(text:string):void{
 	const now = dateformat(new Date(), `yyyymmddHHMMssl`);
-	const backup_path = `${process_params.urn_hook_types_path}.${now}.bkp`;
-	fs.copyFileSync(process_params.urn_hook_types_path, backup_path);
+	const backup_path = `${_get_hook_types_path()}.${now}.bkp`;
+	fs.copyFileSync(_get_hook_types_path(), backup_path);
 	urn_log.debug(`Copied backup file for atom schema in [${backup_path}].`);
-	fs.writeFileSync(process_params.urn_hook_types_path, text);
-	urn_log.debug(`Update schema [${process_params.urn_hook_types_path}].`);
+	fs.writeFileSync(_get_hook_types_path(), text);
+	urn_log.debug(`Update schema [${_get_hook_types_path()}].`);
 }
 
 export function init():void{
 	api.util.generate.init();
 	// process_params.urn_base_schema = api.util.generate.process_params.urn_base_schema;
-	process_params.urn_command = api.util.generate.process_params.urn_command;
+	// process_params.urn_command = api.util.generate.process_params.urn_command;
 	// process_params.urn_output_dir = api.util.generate.process_params.urn_output_dir;
 	_init_trx_generate();
 }
@@ -151,29 +172,29 @@ function _init_trx_generate(){
 	for(const argv of process.argv){
 		const splitted = argv.split('=');
 		if(
-		//   splitted[0] === 'urn_output_dir'
+			splitted[0] === 'urn_command'
+			&& typeof splitted[1] === 'string'
+			&& splitted[1] !== ''
+		){
+			process_params.urn_command = splitted[1];
+		}else if(
+			splitted[0] === 'urn_trx_repo_path'
+			&& typeof splitted[1] === 'string'
+			&& splitted[1] !== ''
+		){
+			process_params.urn_trx_repo_path = splitted[1];
+		// }else if(
+		//   splitted[0] === 'urn_hooks_dir_src'
 		//   && typeof splitted[1] === 'string'
 		//   && splitted[1] !== ''
 		// ){
-		//   process_params.urn_output_dir = splitted[1];
+		//   process_params.urn_hooks_dir_src = splitted[1];
 		// }else if(
-			splitted[0] === 'urn_hook_types_path'
-			&& typeof splitted[1] === 'string'
-			&& splitted[1] !== ''
-		){
-			process_params.urn_hook_types_path = splitted[1];
-		}else if(
-			splitted[0] === 'urn_hooks_dir_src'
-			&& typeof splitted[1] === 'string'
-			&& splitted[1] !== ''
-		){
-			process_params.urn_hooks_dir_src = splitted[1];
-		}else if(
-			splitted[0] === 'urn_hooks_dir_dist'
-			&& typeof splitted[1] === 'string'
-			&& splitted[1] !== ''
-		){
-			process_params.urn_hooks_dir_dist = splitted[1];
+		//   splitted[0] === 'urn_hooks_dir_dist'
+		//   && typeof splitted[1] === 'string'
+		//   && splitted[1] !== ''
+		// ){
+		//   process_params.urn_hooks_dir_dist = splitted[1];
 		}
 		// if(
 		//   splitted[0] === 'urn_base_types'
@@ -192,7 +213,7 @@ function _init_trx_generate(){
 }
 
 function _read_hook_types():string{
-	return fs.readFileSync(process_params.urn_hook_types_path, {encoding: 'utf8'});
+	return fs.readFileSync(_get_hook_types_path(), {encoding: 'utf8'});
 }
 
 function _generate_uranio_hook_types_text(){
