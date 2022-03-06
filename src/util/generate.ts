@@ -251,6 +251,9 @@ function _generate_hook_types_text(){
 	text += `\tget_token: () => string | undefined;\n`;
 	const atom_book = book.get_all_definitions();
 	for(const [atom_name, atom_def] of Object.entries(atom_book)){
+		if(!atom_def.dock || !atom_def.dock.url){
+			continue;
+		}
 		const plural = book.get_plural(atom_name as schema_types.AtomName);
 		text += `\t${plural}: {\n`;
 		if(atom_def.authenticate === true){
@@ -368,6 +371,9 @@ function _generate_hooks_text(parent:string){
 	
 	const atom_book = book.get_all_definitions();
 	for(const [atom_name, atom_def] of Object.entries(atom_book)){
+		if(!atom_def.dock || !atom_def.dock.url){
+			continue;
+		}
 		const plural = book.get_plural(atom_name as schema_types.AtomName);
 		// text += `uranio${submodule}.hooks['${plural}'] = {\n`;
 		text += `\t${plural}: {\n`;
