@@ -4,8 +4,8 @@
 	"description": "Uranio TRX - Uranio transreceiver",
 	"main": "dist/server.js",
 	"bin": {
-		"uranio-trx-generate": "dist/server/generate.js",
-		"uranio-api": "dist/api.js"
+		"uranio-generate-trx": "dist/server/generate.js",
+		"uranio-webservice-trx": "dist/service/ws.js"
 	},
 	"exports": {
 		".": "./dist/server.js",

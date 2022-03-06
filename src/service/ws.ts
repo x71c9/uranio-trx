@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * TRX binary entrypoint for uranio-api command
+ * TRX binary for uranio-api web service
  *
  * @packageDocumentation
  */
@@ -20,9 +20,9 @@ urn_log.init({
 	color: true
 });
 
-export * from './server/register';
+export * from '../server/register';
 
-import uranio from './server';
+import uranio from '../server';
 uranio.init();
 
 const service = uranio.api.service.create();
