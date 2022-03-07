@@ -4,7 +4,6 @@
  * @packageDocumentation
  */
 import api_client from 'uranio-api/client';
-import { urn_log } from 'urn-lib';
 import { RawName } from '../raw/types';
 declare type RequiredClientConfigParams = {
     fetch: RawName;
@@ -13,8 +12,6 @@ declare type RequiredClientConfigParams = {
     port: number;
     service_url: string;
 };
-declare type OptionalClientConfigParam = {
-    log_level: urn_log.LogLevel;
-};
+declare type OptionalClientConfigParam = {};
 export declare type ClientConfiguration = api_client.types.ClientConfiguration & RequiredClientConfigParams & Partial<OptionalClientConfigParam>;
 export {};

@@ -34,18 +34,22 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.init = void 0;
 const urn_lib_1 = require("urn-lib");
 const client_1 = __importDefault(require("uranio-api/client"));
-const defaults_1 = require("../client/defaults");
+const config_1 = __importDefault(require("../config"));
+const default_conf_1 = require("../client/default_conf");
+const default_env_1 = require("../client/default_env");
 const register = __importStar(require("../reg/client"));
 const required = __importStar(require("../req/client"));
 const conf = __importStar(require("../conf/client"));
+const env = __importStar(require("../env/client"));
 const log = __importStar(require("../log/client"));
-const defaults_2 = require("../raw/defaults");
+const defaults_1 = require("../raw/defaults");
 function init(config, register_required = true) {
     log.init(urn_lib_1.urn_log.defaults);
     client_1.default.init(config, false);
-    conf.set_from_env(defaults_1.trx_client_config);
+    env.set_from_env(default_env_1.trx_client_env);
+    conf.set(default_conf_1.trx_client_config, config_1.default);
     if (config) {
-        conf.set(defaults_1.trx_client_config, config);
+        conf.set(default_conf_1.trx_client_config, config);
     }
     if (register_required) {
         _register_required_atoms();
@@ -54,7 +58,8 @@ function init(config, register_required = true) {
     _validate_trx_client_variables();
     _validate_trx_client_book();
     conf.set_initialize(true);
-    urn_lib_1.urn_log.defaults.log_level = conf.get(`log_level`);
+    env.set_initialize(true);
+    urn_lib_1.urn_log.defaults.log_level = env.get(`log_level`);
 }
 exports.init = init;
 // function _add_default_routes(){
@@ -78,10 +83,10 @@ function _register_required_atoms() {
     }
 }
 function _set_raw() {
-    defaults_2.raw_config.service_url = ``;
-    defaults_2.raw_config.service_url += `${defaults_1.trx_client_config.protocol}://`;
-    defaults_2.raw_config.service_url += `${defaults_1.trx_client_config.domain}:`;
-    defaults_2.raw_config.service_url += `${defaults_1.trx_client_config.port}/uranio/api`;
+    defaults_1.raw_config.service_url = ``;
+    defaults_1.raw_config.service_url += `${default_conf_1.trx_client_config.protocol}://`;
+    defaults_1.raw_config.service_url += `${default_conf_1.trx_client_config.domain}:`;
+    defaults_1.raw_config.service_url += `${default_conf_1.trx_client_config.port}/uranio/api`;
 }
 /**
  * NOTE:

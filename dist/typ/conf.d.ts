@@ -4,8 +4,10 @@
  * @packageDocumentation
  */
 import api from 'uranio-api';
+import { RawName } from '../raw/types';
 declare type RequiredConfigParams = {};
 declare type OptionalConfigParam = {
+    fetch: RawName;
     protocol: string;
     domain: string;
     port: number;

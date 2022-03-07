@@ -1,5 +1,5 @@
 /**
- * Conf module
+ * Env module
  *
  * @packageDocumentation
  */
@@ -10,9 +10,9 @@ const urn_exc = urn_exception.init('CONF_TRX_CLIENT_MODULE', `TRX client configu
 
 import api_client from 'uranio-api/client';
 
-import {trx_client_config} from '../client/default_conf';
+import {trx_client_env} from '../client/default_env';
 
-export {trx_client_config as defaults};
+export {trx_client_env as defaults};
 
 import * as types from '../client/types';
 
@@ -20,38 +20,36 @@ import * as types from '../client/types';
 
 let _is_client_trx_initialized = false;
 
-export function get<k extends keyof Required<types.ClientConfiguration>>(param_name:k)
-		:typeof trx_client_config[k]{
+export function get<k extends keyof Required<types.ClientEnvironment>>(param_name:k)
+		:typeof trx_client_env[k]{
 	_check_if_uranio_was_initialized();
 	_check_if_param_exists(param_name);
-	return trx_client_config[param_name];
+	return trx_client_env[param_name];
 }
 
 export function is_initialized():boolean{
-	return api_client.conf.is_initialized() && _is_client_trx_initialized;
+	return api_client.env.is_initialized() && _is_client_trx_initialized;
 }
 
 export function set_initialize(is_initialized:boolean):void{
 	_is_client_trx_initialized = is_initialized;
 }
 
-// export function set_from_env(repo_config:Required<types.ClientConfiguration>):void{
-//   api_client.conf.set_from_env(repo_config);
-//   const conf = _get_env_vars(repo_config);
-//   set(repo_config, conf);
-// }
+export function set_from_env(repo_config:Required<types.ClientEnvironment>):void{
+	api_client.env.set_from_env(repo_config);
+	const conf = _get_env_vars(repo_config);
+	set(repo_config, conf);
+}
 
 export function set(
-	repo_config: Required<types.ClientConfiguration>,
-	config: Partial<types.ClientConfiguration>
+	repo_config: Required<types.ClientEnvironment>,
+	config: Partial<types.ClientEnvironment>
 ):void{
-	// _validate_config_types(repo_config, config);
-	// Object.assign(repo_config, config);
-	return api_client.conf.set(repo_config, config);
+	return api_client.env.set(repo_config, config);
 }
 
 function _check_if_param_exists(param_name:string){
-	return urn_util.object.has_key(trx_client_config, param_name);
+	return urn_util.object.has_key(trx_client_env, param_name);
 }
 
 function _check_if_uranio_was_initialized(){
@@ -64,8 +62,8 @@ function _check_if_uranio_was_initialized(){
 }
 
 // function _validate_config_types(
-//   repo_config:Required<types.ClientConfiguration>,
-//   config:types.ClientConfiguration
+//   repo_config:Required<types.ClientEnvironment>,
+//   config:types.ClientEnvironment
 // ){
 //   for(const [config_key, config_value] of Object.entries(config)){
 //     const key = config_key as keyof typeof repo_config;
@@ -80,30 +78,30 @@ function _check_if_uranio_was_initialized(){
 //   }
 // }
 
-// function _get_env_vars(repo_config:types.ClientConfiguration):types.ClientConfiguration{
-//   if(typeof process.env.URN_CLIENT_FETCH === 'string' && process.env.URN_CLIENT_FETCH !== ''){
-//     repo_config.fetch = process.env.URN_CLIENT_FETCH as RawName;
-//   }
-//   if(typeof process.env.URN_CLIENT_PROTOCOL === 'string' && process.env.URN_CLIENT_PROTOCOL !== ''){
-//     repo_config.protocol = process.env.URN_CLIENT_PROTOCOL;
-//   }
-//   if(typeof process.env.URN_CLIENT_DOMAIN === 'string' && process.env.URN_CLIENT_DOMAIN !== ''){
-//     repo_config.domain = process.env.URN_CLIENT_DOMAIN;
-//   }
-//   if(typeof process.env.URN_CLIENT_PORT === 'number' || typeof process.env.URN_CLIENT_PORT === 'string' && process.env.URN_CLIENT_PORT !== ''){
-//     repo_config.port = Number(process.env.URN_CLIENT_PORT);
-//   }
-//   if(typeof process.env.URN_CLIENT_SERVICE_URL === 'string' && process.env.URN_CLIENT_SERVICE_URL !== ''){
-//     repo_config.service_url = process.env.URN_CLIENT_SERVICE_URL;
-//   }
-//   if(typeof process.env.URN_LOG_LEVEL === 'number' || typeof process.env.URN_LOG_LEVEL === 'string' && process.env.URN_LOG_LEVEL !== ''){
-//     repo_config.log_level = Number(process.env.URN_LOG_LEVEL);
-//   }
-//   return repo_config;
-// }
+function _get_env_vars(repo_config:types.ClientEnvironment):types.ClientEnvironment{
+	// if(typeof process.env.URN_CLIENT_FETCH === 'string' && process.env.URN_CLIENT_FETCH !== ''){
+	//   repo_config.fetch = process.env.URN_CLIENT_FETCH as RawName;
+	// }
+	// if(typeof process.env.URN_CLIENT_PROTOCOL === 'string' && process.env.URN_CLIENT_PROTOCOL !== ''){
+	//   repo_config.protocol = process.env.URN_CLIENT_PROTOCOL;
+	// }
+	// if(typeof process.env.URN_CLIENT_DOMAIN === 'string' && process.env.URN_CLIENT_DOMAIN !== ''){
+	//   repo_config.domain = process.env.URN_CLIENT_DOMAIN;
+	// }
+	// if(typeof process.env.URN_CLIENT_PORT === 'number' || typeof process.env.URN_CLIENT_PORT === 'string' && process.env.URN_CLIENT_PORT !== ''){
+	//   repo_config.port = Number(process.env.URN_CLIENT_PORT);
+	// }
+	// if(typeof process.env.URN_CLIENT_SERVICE_URL === 'string' && process.env.URN_CLIENT_SERVICE_URL !== ''){
+	//   repo_config.service_url = process.env.URN_CLIENT_SERVICE_URL;
+	// }
+	// if(typeof process.env.URN_LOG_LEVEL === 'number' || typeof process.env.URN_LOG_LEVEL === 'string' && process.env.URN_LOG_LEVEL !== ''){
+	//   repo_config.log_level = Number(process.env.URN_LOG_LEVEL);
+	// }
+	return repo_config;
+}
 
-// function _get_env_vars(repo_config:types.ClientConfiguration):types.ClientConfiguration{
-//   const config:types.ClientConfiguration = {} as types.ClientConfiguration;
+// function _get_env_vars(repo_config:types.ClientEnvironment):types.ClientEnvironment{
+//   const config:types.ClientEnvironment = {} as types.ClientEnvironment;
 //   for(const [conf_key, conf_value] of Object.entries(repo_config)){
 //     const env_var_name = `URN_CLIENT_${conf_key.toUpperCase()}`;
 //     switch(typeof conf_value){

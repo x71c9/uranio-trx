@@ -6,10 +6,13 @@
 
 import api from 'uranio-api';
 
+import {RawName} from '../raw/types';
+
 type RequiredConfigParams = {
 }
 
 type OptionalConfigParam = {
+	fetch: RawName,
 	// These are needed because when developing the client
 	// ts linter for uranio is pointing on the server
 	// so the server conf must have all the client conf as well

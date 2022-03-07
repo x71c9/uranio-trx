@@ -12,6 +12,7 @@ exports.trx_config = void 0;
 const uranio_api_1 = __importDefault(require("uranio-api"));
 exports.trx_config = {
     ...uranio_api_1.default.conf.defaults,
+    fetch: 'axios',
     // These are needed because when developing the client
     // ts linter for uranio is pointing on the server
     // so the server conf should have all the client conf as well

@@ -8,7 +8,11 @@ import {urn_log} from 'urn-lib';
 
 import api_client from 'uranio-api/client';
 
-import {trx_client_config} from '../client/defaults';
+import uranio_config from '../config';
+
+import {trx_client_config} from '../client/default_conf';
+
+import {trx_client_env} from '../client/default_env';
 
 import * as register from '../reg/client';
 
@@ -17,6 +21,8 @@ import * as required from '../req/client';
 import * as types from '../client/types';
 
 import * as conf from '../conf/client';
+
+import * as env from '../env/client';
 
 import * as log from '../log/client';
 
@@ -31,7 +37,10 @@ export function init(
 	
 	api_client.init(config, false);
 	
-	conf.set_from_env(trx_client_config);
+	env.set_from_env(trx_client_env);
+	
+	conf.set(trx_client_config, uranio_config as types.ClientConfiguration);
+	
 	if(config){
 		conf.set(trx_client_config, config);
 	}
@@ -46,8 +55,9 @@ export function init(
 	_validate_trx_client_book();
 	
 	conf.set_initialize(true);
+	env.set_initialize(true);
 	
-	urn_log.defaults.log_level = conf.get(`log_level`);
+	urn_log.defaults.log_level = env.get(`log_level`);
 	
 }
 

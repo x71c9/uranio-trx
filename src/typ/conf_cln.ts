@@ -6,7 +6,7 @@
 
 import api_client from 'uranio-api/client';
 
-import {urn_log} from 'urn-lib';
+// import {urn_log} from 'urn-lib';
 
 import {RawName} from '../raw/types';
 
@@ -19,7 +19,7 @@ type RequiredClientConfigParams = {
 }
 
 type OptionalClientConfigParam = {
-	log_level: urn_log.LogLevel
+	// log_level: urn_log.LogLevel
 }
 
 export type ClientConfiguration =

@@ -10,7 +10,11 @@ const urn_exc = urn_exception.init('INIT_TRX_MODULE', `TRX init module`);
 
 import api from 'uranio-api';
 
+import uranio_config from '../config';
+
 import {trx_config} from '../conf/defaults';
+
+import {trx_env} from '../env/defaults';
 
 import * as register from '../reg/server';
 
@@ -21,6 +25,8 @@ import * as types from '../server/types';
 import * as client_types from '../client/types';
 
 import * as conf from '../conf/server';
+
+import * as env from '../env/server';
 
 import * as log from '../log/server';
 
@@ -35,7 +41,10 @@ export function init(
 	
 	api.init(config, false);
 	
-	conf.set_from_env(trx_config);
+	env.set_from_env(trx_env);
+	
+	conf.set(trx_config, uranio_config as types.Configuration);
+	
 	if(config){
 		conf.set(trx_config, config);
 	}
@@ -50,8 +59,9 @@ export function init(
 	// _validate_trx_book();
 	
 	conf.set_initialize(true);
+	env.set_initialize(true);
 	
-	urn_log.defaults.log_level = conf.get(`log_level`);
+	urn_log.defaults.log_level = env.get(`log_level`);
 }
 
 // function _add_default_routes(){

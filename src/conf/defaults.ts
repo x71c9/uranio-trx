@@ -12,6 +12,8 @@ export const trx_config:Required<Configuration> = {
 	
 	...api.conf.defaults,
 	
+	fetch: 'axios',
+	
 	// These are needed because when developing the client
 	// ts linter for uranio is pointing on the server
 	// so the server conf should have all the client conf as well

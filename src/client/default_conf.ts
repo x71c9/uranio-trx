@@ -4,7 +4,7 @@
  * @packageDocumentation
  */
 
-import {urn_log} from 'urn-lib';
+// import {urn_log} from 'urn-lib';
 
 import api_client from 'uranio-api/client';
 
@@ -21,7 +21,7 @@ export const trx_client_config:Required<ClientConfiguration> = {
 	
 	...api_client.conf.defaults,
 	
-	log_level: urn_log.defaults.log_level,
+	// log_level: urn_log.defaults.log_level,
 	
 	fetch: 'axios',
 	
