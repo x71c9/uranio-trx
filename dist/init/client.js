@@ -34,7 +34,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.init = void 0;
 const urn_lib_1 = require("urn-lib");
 const client_1 = __importDefault(require("uranio-api/client"));
-const config_1 = __importDefault(require("../config"));
 const default_conf_1 = require("../client/default_conf");
 const default_env_1 = require("../client/default_env");
 const register = __importStar(require("../reg/client"));
@@ -47,7 +46,7 @@ function init(config, register_required = true) {
     log.init(urn_lib_1.urn_log.defaults);
     client_1.default.init(config, false);
     env.set_from_env(default_env_1.trx_client_env);
-    conf.set(default_conf_1.trx_client_config, config_1.default);
+    client_1.default.core.conf.set_from_file();
     if (config) {
         conf.set(default_conf_1.trx_client_config, config);
     }

@@ -10,8 +10,6 @@ const urn_exc = urn_exception.init('INIT_TRX_MODULE', `TRX init module`);
 
 import api from 'uranio-api';
 
-import uranio_config from '../config';
-
 import {trx_config} from '../conf/defaults';
 
 import {trx_env} from '../env/defaults';
@@ -43,7 +41,7 @@ export function init(
 	
 	env.set_from_env(trx_env);
 	
-	conf.set(trx_config, uranio_config as types.Configuration);
+	api.core.conf.set_from_file();
 	
 	if(config){
 		conf.set(trx_config, config);
