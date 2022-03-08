@@ -8,28 +8,28 @@ import {urn_util, urn_log, urn_exception} from 'urn-lib';
 
 const urn_exc = urn_exception.init(`BASE`, `Base module`);
 
-import api from 'uranio-api';
+import api_client from 'uranio-api/client';
 
-import * as book from '../book/server';
+import * as book from '../book/client';
 
-import * as types from '../server/types';
+import * as client_types from '../client/types';
 
-import {schema} from '../sch/server';
+import {schema} from '../sch/client';
 
-import {create as create_raw} from '../raw/server';
+import {create as create_raw} from '../raw/client';
 
 @urn_log.util.decorators.debug_constructor
 @urn_log.util.decorators.debug_methods
 export class Base<A extends schema.AtomName> {
 	
-	protected raw:types.RAW<A>;
+	protected raw:client_types.RAW<A>;
 	
 	constructor(public atom_name:A, public token?:string, private prefix_log?:string){
-		this.raw = create_raw() as types.RAW<A>;
+		this.raw = create_raw() as client_types.RAW<A>;
 	}
 	
 	public hook<R extends schema.RouteName<A>, D extends schema.Depth = 0>(route_name:R)
-			:(args:types.Hook.Arguments<A,R,D>) => types.Hook.Response<A,R,D>{
+			:(args:client_types.Hook.Arguments<A,R,D>) => client_types.Hook.Response<A,R,D>{
 		_check_atom_name(this.atom_name);
 		const route = book.get_route_definition(this.atom_name, route_name as schema.RouteName<A>);
 		const splitted_url = route.url.split('/');
@@ -47,7 +47,7 @@ export class Base<A extends schema.AtomName> {
 				params.push(param_name);
 			}
 		}
-		return async (args:types.Hook.Arguments<A,R,D>, token?:string):types.Hook.Response<A,R,D> => {
+		return async (args:client_types.Hook.Arguments<A,R,D>, token?:string):client_types.Hook.Response<A,R,D> => {
 			const dock_def = book.get_dock_definition(this.atom_name);
 			const atom_api_url = dock_def.url || `/${book.get_plural(this.atom_name)}`;
 			const atom_def = book.get_definition(this.atom_name);
@@ -56,12 +56,12 @@ export class Base<A extends schema.AtomName> {
 			for(const param of params){
 				if(
 					urn_util.object.has_key(args, 'params') &&
-					typeof args.params?.[param as types.RouteParam<A,R>] === 'string'
+					typeof args.params?.[param as client_types.RouteParam<A,R>] === 'string'
 				){
-					url = url.replace(`:${param}`, args.params[param as types.RouteParam<A,R>] as string);
+					url = url.replace(`:${param}`, args.params[param as client_types.RouteParam<A,R>] as string);
 				}
 			}
-			const headers = {} as types.Hook.Headers;
+			const headers = {} as client_types.Hook.Headers;
 			if(typeof this.token === 'string'){
 				headers['urn-auth-token'] = this.token;
 			}
@@ -69,17 +69,14 @@ export class Base<A extends schema.AtomName> {
 				headers['urn-auth-token'] = token;
 			}
 			switch(route.method){
-				case api.types.RouteMethod.GET:{
+				case api_client.types.RouteMethod.GET:{
 					return await this.raw.get(url, args.query, headers);
 				}
-				case api.types.RouteMethod.POST:{
+				case api_client.types.RouteMethod.POST:{
 					return await this.raw.post(url, args.body, args.query, headers);
 				}
-				case api.types.RouteMethod.DELETE:{
+				case api_client.types.RouteMethod.DELETE:{
 					return await this.raw.delete(url, args.query, headers);
-				}
-				default: {
-					return await this.raw.get(url, args.query, headers);
 				}
 			}
 		};

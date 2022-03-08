@@ -12,8 +12,6 @@ import {Base} from './class';
 
 import * as conf from '../conf/client';
 
-export * from './types';
-
 export type BaseInstance = InstanceType<typeof Base>;
 
 export function create<A extends schema.AtomName>(atom_name:A, token?:string)

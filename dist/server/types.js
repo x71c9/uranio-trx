@@ -24,5 +24,5 @@ __exportStar(require("../typ/book"), exports);
 __exportStar(require("../typ/conf"), exports);
 __exportStar(require("../typ/env"), exports);
 __exportStar(require("../typ/raw"), exports);
-__exportStar(require("../base/types"), exports);
+__exportStar(require("../typ/base"), exports);
 //# sourceMappingURL=types.js.map

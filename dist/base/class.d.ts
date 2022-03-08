@@ -3,14 +3,13 @@
  *
  * @packageDocumentation
  */
-import * as client_types from '../client/types';
-import { schema } from '../sch/client';
-import { Hook } from './types';
+import * as types from '../server/types';
+import { schema } from '../sch/server';
 export declare class Base<A extends schema.AtomName> {
     atom_name: A;
     token?: string | undefined;
     private prefix_log?;
-    protected raw: client_types.RAW<A>;
+    protected raw: types.RAW<A>;
     constructor(atom_name: A, token?: string | undefined, prefix_log?: string | undefined);
-    hook<R extends schema.RouteName<A>, D extends schema.Depth = 0>(route_name: R): (args: Hook.Arguments<A, R, D>) => client_types.Hook.Response<A, R, D>;
+    hook<R extends schema.RouteName<A>, D extends schema.Depth = 0>(route_name: R): (args: types.Hook.Arguments<A, R, D>) => types.Hook.Response<A, R, D>;
 }

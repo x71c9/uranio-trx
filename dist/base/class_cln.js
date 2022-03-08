@@ -40,15 +40,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Base = void 0;
 const urn_lib_1 = require("urn-lib");
 const urn_exc = urn_lib_1.urn_exception.init(`BASE`, `Base module`);
-const uranio_api_1 = __importDefault(require("uranio-api"));
-const book = __importStar(require("../book/server"));
-const server_1 = require("../raw/server");
+const client_1 = __importDefault(require("uranio-api/client"));
+const book = __importStar(require("../book/client"));
+const client_2 = require("../raw/client");
 let Base = class Base {
     constructor(atom_name, token, prefix_log) {
         this.atom_name = atom_name;
         this.token = token;
         this.prefix_log = prefix_log;
-        this.raw = (0, server_1.create)();
+        this.raw = (0, client_2.create)();
     }
     hook(route_name) {
         _check_atom_name(this.atom_name);
@@ -86,17 +86,14 @@ let Base = class Base {
                 headers['urn-auth-token'] = token;
             }
             switch (route.method) {
-                case uranio_api_1.default.types.RouteMethod.GET: {
+                case client_1.default.types.RouteMethod.GET: {
                     return await this.raw.get(url, args.query, headers);
                 }
-                case uranio_api_1.default.types.RouteMethod.POST: {
+                case client_1.default.types.RouteMethod.POST: {
                     return await this.raw.post(url, args.body, args.query, headers);
                 }
-                case uranio_api_1.default.types.RouteMethod.DELETE: {
+                case client_1.default.types.RouteMethod.DELETE: {
                     return await this.raw.delete(url, args.query, headers);
-                }
-                default: {
-                    return await this.raw.get(url, args.query, headers);
                 }
             }
         };
@@ -113,4 +110,4 @@ function _check_atom_name(atom_name) {
     }
     throw urn_exc.create_not_found(`BASEATOM_UNDEFINED`, `Base Atom not found for atom \`${atom_name}\`.`);
 }
-//# sourceMappingURL=class.js.map
+//# sourceMappingURL=class_cln.js.map

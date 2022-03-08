@@ -14,5 +14,5 @@ export * from '../typ/env';
 
 export * from '../typ/raw';
 
-export * from '../base/types';
+export * from '../typ/base';
 

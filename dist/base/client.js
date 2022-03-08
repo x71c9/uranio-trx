@@ -27,15 +27,11 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __exportStar = (this && this.__exportStar) || function(m, exports) {
-    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.create = void 0;
 const urn_lib_1 = require("urn-lib");
 const class_1 = require("./class");
 const conf = __importStar(require("../conf/client"));
-__exportStar(require("./types"), exports);
 function create(atom_name, token) {
     urn_lib_1.urn_log.fn_debug(`Create Base [${atom_name}]`);
     return new class_1.Base(atom_name, token, conf.get(`prefix_log`));

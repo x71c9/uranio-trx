@@ -8,4 +8,4 @@ export * from '../typ/book';
 export * from '../typ/conf';
 export * from '../typ/env';
 export * from '../typ/raw';
-export * from '../base/types';
+export * from '../typ/base';

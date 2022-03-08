@@ -6,13 +6,11 @@
 
 import {urn_log} from 'urn-lib';
 
-import {schema} from '../sch/client';
+import {schema} from '../sch/server';
 
 import {Base} from './class';
 
 import * as conf from '../conf/server';
-
-export * from './types';
 
 export type BaseInstance = InstanceType<typeof Base>;
 

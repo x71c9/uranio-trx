@@ -25,5 +25,5 @@ __exportStar(require("../typ/book_cln"), exports);
 __exportStar(require("../typ/conf_cln"), exports);
 __exportStar(require("../typ/env_cln"), exports);
 __exportStar(require("../typ/raw_cln"), exports);
-__exportStar(require("../base/types"), exports);
+__exportStar(require("../typ/base_cln"), exports);
 //# sourceMappingURL=types.js.map
