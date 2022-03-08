@@ -45,6 +45,10 @@ export function set(
 	return api.env.set(repo_config, config);
 }
 
+export function is_production():boolean{
+	return api.env.is_production();
+}
+
 function _check_if_param_exists(param_name:string){
 	return urn_util.object.has_key(trx_env, param_name);
 }
