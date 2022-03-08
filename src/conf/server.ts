@@ -25,6 +25,11 @@ export function get<k extends keyof types.Configuration>(param_name:k)
 	return trx_config[param_name];
 }
 
+export function get_current<k extends keyof types.Configuration>(param_name:k)
+		:typeof trx_config[k]{
+	return api.conf.get_current(param_name as keyof api.types.Configuration) as typeof trx_config[k];
+}
+
 export function is_initialized():boolean{
 	return api.conf.is_initialized() && _is_trx_initialized;
 }
@@ -44,6 +49,8 @@ export function set(
 ):void{
 	return api.conf.set(repo_config, config);
 }
+
+
 
 function _check_if_param_exists(param_name:string){
 	return urn_util.object.has_key(trx_config, param_name);
