@@ -32,8 +32,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.init = void 0;
+// import {urn_log, urn_exception} from 'urn-lib';
 const urn_lib_1 = require("urn-lib");
-const urn_exc = urn_lib_1.urn_exception.init('INIT_TRX_MODULE', `TRX init module`);
+// const urn_exc = urn_exception.init('INIT_TRX_MODULE', `TRX init module`);
 const uranio_api_1 = __importDefault(require("uranio-api"));
 const defaults_1 = require("../conf/defaults");
 const defaults_2 = require("../env/defaults");
@@ -42,9 +43,8 @@ const required = __importStar(require("../req/server"));
 const conf = __importStar(require("../conf/server"));
 const env = __importStar(require("../env/server"));
 const log = __importStar(require("../log/server"));
-const defaults_3 = require("../raw/defaults");
+// import {raw_config} from '../raw/defaults';
 function init(config, register_required = true) {
-    log.init(urn_lib_1.urn_log.defaults);
     uranio_api_1.default.init(config, false);
     env.set_from_env(defaults_2.trx_env);
     uranio_api_1.default.core.conf.set_from_file();
@@ -54,12 +54,13 @@ function init(config, register_required = true) {
     if (register_required) {
         _register_required_atoms();
     }
-    _set_raw();
+    // _set_raw();
     _validate_trx_variables();
-    // _validate_trx_book();
+    _validate_trx_book();
     conf.set_initialize(true);
     env.set_initialize(true);
-    urn_lib_1.urn_log.defaults.log_level = env.get(`log_level`);
+    log.init(urn_lib_1.urn_log);
+    urn_lib_1.urn_log.debug(`Uranio trx initialization completed.`);
 }
 exports.init = init;
 // function _add_default_routes(){
@@ -74,25 +75,29 @@ function _register_required_atoms() {
         register.atom(atom_def, atom_name);
     }
 }
-function _set_raw() {
-    defaults_3.raw_config.service_url = ``;
-    defaults_3.raw_config.service_url += `${defaults_1.trx_config.service_protocol}://`;
-    defaults_3.raw_config.service_url += `${defaults_1.trx_config.service_domain}:`;
-    defaults_3.raw_config.service_url += `${defaults_1.trx_config.service_port}/uranio/api`;
-}
+// function _set_raw(){
+//   raw_config.service_url = ``;
+//   raw_config.service_url += `${trx_config.service_protocol}://`;
+//   raw_config.service_url += `${trx_config.service_domain}:`;
+//   raw_config.service_url += `${trx_config.service_port}/uranio/api`;
+// }
 /**
  * NOTE:
  * Maybe this should be before compilation and not at runtime?
  */
-// function _validate_trx_book(){
-// }
+function _validate_trx_book() {
+    // NOTHING TO DO YET
+}
 function _validate_trx_variables() {
-    const service_domain = defaults_1.trx_config.service_domain;
-    const service_port = defaults_1.trx_config.service_port;
-    const client_domain = defaults_1.trx_config.client_domain;
-    const client_port = defaults_1.trx_config.client_port;
-    if (service_domain === client_domain && service_port === client_port) {
-        throw urn_exc.create_not_initialized(`INVALID_DOMAINS_AND_PORTS`, `Cannot use same domain and port for server and client.`);
-    }
+    // const service_domain = trx_config.service_domain;
+    // const service_port = trx_config.service_port;
+    // const client_domain = trx_config.client_domain;
+    // const client_port = trx_config.client_port;
+    // if(service_domain === client_domain && service_port === client_port){
+    //   throw urn_exc.create_not_initialized(
+    //     `INVALID_DOMAINS_AND_PORTS`,
+    //     `Cannot use same domain and port for server and client.`
+    //   );
+    // }
 }
 //# sourceMappingURL=server.js.map

@@ -27,6 +27,11 @@ export function get<k extends keyof Required<types.ClientConfiguration>>(param_n
 	return trx_client_config[param_name];
 }
 
+export function get_current<k extends keyof types.ClientConfiguration>(param_name:k)
+		:typeof trx_client_config[k]{
+	return api_client.conf.get_current(param_name as keyof api_client.types.ClientConfiguration) as typeof trx_client_config[k];
+}
+
 export function is_initialized():boolean{
 	return api_client.conf.is_initialized() && _is_client_trx_initialized;
 }

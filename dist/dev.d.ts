@@ -1,5 +1,5 @@
 /**
- * TRX run module
+ * TRX dev module
  *
  * @packageDocumentation
  */

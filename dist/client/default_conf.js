@@ -22,9 +22,10 @@ exports.trx_client_config = {
     ...client_1.default.conf.defaults,
     // log_level: urn_log.defaults.log_level,
     fetch: 'axios',
-    protocol: 'http',
-    domain: 'localhost',
-    port: 4444,
-    service_url: 'http://localhost:7777/uranio/api'
+    service_url: 'http://localhost:7777/uranio/api',
+    service_dev_url: 'http://localhost:7777/uranio/api'
+    // protocol: 'http',
+    // domain: 'localhost',
+    // port: 4444,
 };
 //# sourceMappingURL=default_conf.js.map

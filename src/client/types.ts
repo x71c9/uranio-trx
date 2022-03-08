@@ -14,6 +14,6 @@ export * from '../typ/conf_cln';
 
 export * from '../typ/env_cln';
 
-export * from '../raw/types';
+export * from '../typ/raw_cln';
 
 export * from '../base/types';

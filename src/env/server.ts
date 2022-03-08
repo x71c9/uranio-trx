@@ -25,6 +25,11 @@ export function get<k extends keyof types.Environment>(param_name:k)
 	return trx_env[param_name];
 }
 
+export function get_current<k extends keyof types.Environment>(param_name:k)
+		:typeof trx_env[k]{
+	return api.env.get_current(param_name);
+}
+
 export function is_initialized():boolean{
 	return api.env.is_initialized() && _is_trx_initialized;
 }

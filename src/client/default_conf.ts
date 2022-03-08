@@ -25,12 +25,14 @@ export const trx_client_config:Required<ClientConfiguration> = {
 	
 	fetch: 'axios',
 	
-	protocol: 'http',
+	service_url: 'http://localhost:7777/uranio/api',
 	
-	domain: 'localhost',
+	service_dev_url: 'http://localhost:7777/uranio/api'
 	
-	port: 4444,
+	// protocol: 'http',
 	
-	service_url: 'http://localhost:7777/uranio/api'
+	// domain: 'localhost',
+	
+	// port: 4444,
 	
 };

@@ -41,9 +41,8 @@ const required = __importStar(require("../req/client"));
 const conf = __importStar(require("../conf/client"));
 const env = __importStar(require("../env/client"));
 const log = __importStar(require("../log/client"));
-const defaults_1 = require("../raw/defaults");
+// import {raw_config} from '../raw/defaults';
 function init(config, register_required = true) {
-    log.init(urn_lib_1.urn_log.defaults);
     client_1.default.init(config, false);
     env.set_from_env(default_env_1.trx_client_env);
     client_1.default.core.conf.set_from_file();
@@ -53,12 +52,13 @@ function init(config, register_required = true) {
     if (register_required) {
         _register_required_atoms();
     }
-    _set_raw();
+    // _set_raw();
     _validate_trx_client_variables();
     _validate_trx_client_book();
     conf.set_initialize(true);
     env.set_initialize(true);
-    urn_lib_1.urn_log.defaults.log_level = env.get(`log_level`);
+    log.init(urn_lib_1.urn_log);
+    urn_lib_1.urn_log.debug(`Uranio trx client initialization completed.`);
 }
 exports.init = init;
 // function _add_default_routes(){
@@ -81,12 +81,12 @@ function _register_required_atoms() {
         register.atom(atom_def, atom_name);
     }
 }
-function _set_raw() {
-    defaults_1.raw_config.service_url = ``;
-    defaults_1.raw_config.service_url += `${default_conf_1.trx_client_config.protocol}://`;
-    defaults_1.raw_config.service_url += `${default_conf_1.trx_client_config.domain}:`;
-    defaults_1.raw_config.service_url += `${default_conf_1.trx_client_config.port}/uranio/api`;
-}
+// function _set_raw(){
+//   raw_config.service_url = ``;
+//   raw_config.service_url += `${trx_client_config.protocol}://`;
+//   raw_config.service_url += `${trx_client_config.domain}:`;
+//   raw_config.service_url += `${trx_client_config.port}/uranio/api`;
+// }
 /**
  * NOTE:
  * Maybe this should be before compilation and not at runtime?

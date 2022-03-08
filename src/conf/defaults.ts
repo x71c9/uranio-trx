@@ -14,6 +14,10 @@ export const trx_config:Required<Configuration> = {
 	
 	fetch: 'axios',
 	
+	service_url: 'http://localhost:7777/uranio/api',
+	
+	service_dev_url: 'http://localhost:7777/uranio/api',
+	
 	// These are needed because when developing the client
 	// ts linter for uranio is pointing on the server
 	// so the server conf should have all the client conf as well
@@ -28,9 +32,5 @@ export const trx_config:Required<Configuration> = {
 	// client_domain: 'localhost',
 	
 	// client_port: 4444,
-	
-	service_url: 'http://localhost:7777/uranio/api',
-	
-	service_dev_url: 'http://localhost:7777/uranio/api',
 	
 };

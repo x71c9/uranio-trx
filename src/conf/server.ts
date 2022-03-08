@@ -50,8 +50,6 @@ export function set(
 	return api.conf.set(repo_config, config);
 }
 
-
-
 function _check_if_param_exists(param_name:string){
 	return urn_util.object.has_key(trx_config, param_name);
 }

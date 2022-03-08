@@ -6,7 +6,7 @@
 
 import api from 'uranio-api';
 
-import {RawName} from '../raw/types';
+import {RawName} from '../typ/raw';
 
 type RequiredConfigParams = {
 }

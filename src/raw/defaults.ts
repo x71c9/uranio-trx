@@ -4,8 +4,8 @@
  * @packageDocumentation
  */
 
-export const raw_config = {
+// export const raw_config = {
 	
-	service_url: 'http://localhost:7777/uranio/api'
+//   service_url: 'http://localhost:7777/uranio/api'
 	
-};
+// };

@@ -24,7 +24,7 @@ class AuthBase<A extends schema.AuthName> {
 	
 	constructor(public auth_name:A){
 		_check_auth_name(auth_name);
-		this.raw = create_raw(undefined, true) as client_types.RAW<A>;
+		this.raw = create_raw(true) as client_types.RAW<A>;
 	}
 	
 	public async authenticate(email:string, password:string)

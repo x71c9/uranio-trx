@@ -12,7 +12,7 @@ export * from '../typ/conf';
 
 export * from '../typ/env';
 
-export * from '../raw/types';
+export * from '../typ/raw';
 
 export * from '../base/types';
 

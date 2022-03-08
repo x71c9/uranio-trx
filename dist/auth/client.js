@@ -43,7 +43,7 @@ let AuthBase = class AuthBase {
     constructor(auth_name) {
         this.auth_name = auth_name;
         _check_auth_name(auth_name);
-        this.raw = (0, client_1.create)(undefined, true);
+        this.raw = (0, client_1.create)(true);
     }
     async authenticate(email, password) {
         const auth_url = _get_auth_url(this.auth_name);
