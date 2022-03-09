@@ -18,13 +18,10 @@ import {schema as schema_types} from '../sch/server';
 
 import * as book from '../book/server';
 
-// import * as types from '../server/types';
+import * as types from '../server/types';
 
 export const process_params = {
 	urn_command: `schema`,
-	// urn_hook_types_path: `./node_modules/uranio-trx/dist/hooks/types.d.ts`,
-	// urn_hooks_dir_src: `./node_modules/uranio/src/hooks`,
-	// urn_hooks_dir_dist: `./node_modules/uranio/dist/hooks`
 	urn_trx_repo_path: 'node_modules/uranio-trx'
 };
 
@@ -93,6 +90,24 @@ export function save_hooks_client(text:string):void{
 		text
 	);
 	urn_log.debug(`Client Hooks saved in [${output}].`);
+}
+
+export function client_config(server_config:types.Configuration):string{
+	urn_log.debug('Started generating uranio core client config...');
+	init();
+	const text = api.util.generate.client_config(server_config);
+	urn_log.debug(`TRX client config generated.`);
+	return text;
+}
+
+export function client_config_and_save(server_config:types.Configuration):void{
+	const text = client_config(server_config);
+	save_client_config(text);
+	urn_log.debug(`TRX Client config generated and saved.`);
+}
+
+export function save_client_config(text:string):void{
+	api.util.generate.save_client_config(text);
 }
 
 function _get_hooks_path_src_server(){
@@ -164,7 +179,7 @@ export function save_hook_types(text:string):void{
 export function init():void{
 	api.util.generate.init();
 	// process_params.urn_base_schema = api.util.generate.process_params.urn_base_schema;
-	// process_params.urn_command = api.util.generate.process_params.urn_command;
+	process_params.urn_command = api.util.generate.process_params.urn_command;
 	// process_params.urn_output_dir = api.util.generate.process_params.urn_output_dir;
 	_init_trx_generate();
 }
@@ -173,12 +188,12 @@ function _init_trx_generate(){
 	for(const argv of process.argv){
 		const splitted = argv.split('=');
 		if(
-			splitted[0] === 'urn_command'
-			&& typeof splitted[1] === 'string'
-			&& splitted[1] !== ''
-		){
-			process_params.urn_command = splitted[1];
-		}else if(
+		//   splitted[0] === 'urn_command'
+		//   && typeof splitted[1] === 'string'
+		//   && splitted[1] !== ''
+		// ){
+		//   process_params.urn_command = splitted[1];
+		// }else if(
 			splitted[0] === 'urn_trx_repo_path'
 			&& typeof splitted[1] === 'string'
 			&& splitted[1] !== ''

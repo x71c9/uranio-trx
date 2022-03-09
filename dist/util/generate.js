@@ -31,19 +31,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.init = exports.save_hook_types = exports.hook_types_and_save = exports.hook_types = exports.save_hooks_client = exports.save_hooks_server = exports.hooks_and_save = exports.hooks_server = exports.hooks_client = exports.save_schema = exports.schema_and_save = exports.schema = exports.process_params = void 0;
+exports.init = exports.save_hook_types = exports.hook_types_and_save = exports.hook_types = exports.save_client_config = exports.client_config_and_save = exports.client_config = exports.save_hooks_client = exports.save_hooks_server = exports.hooks_and_save = exports.hooks_server = exports.hooks_client = exports.save_schema = exports.schema_and_save = exports.schema = exports.process_params = void 0;
 const fs_1 = __importDefault(require("fs"));
 const esbuild = __importStar(require("esbuild"));
 const dateformat_1 = __importDefault(require("dateformat"));
 const uranio_api_1 = __importDefault(require("uranio-api"));
 const urn_lib_1 = require("urn-lib");
 const book = __importStar(require("../book/server"));
-// import * as types from '../server/types';
 exports.process_params = {
     urn_command: `schema`,
-    // urn_hook_types_path: `./node_modules/uranio-trx/dist/hooks/types.d.ts`,
-    // urn_hooks_dir_src: `./node_modules/uranio/src/hooks`,
-    // urn_hooks_dir_dist: `./node_modules/uranio/dist/hooks`
     urn_trx_repo_path: 'node_modules/uranio-trx'
 };
 function schema() {
@@ -107,6 +103,24 @@ function save_hooks_client(text) {
     urn_lib_1.urn_log.debug(`Client Hooks saved in [${output}].`);
 }
 exports.save_hooks_client = save_hooks_client;
+function client_config(server_config) {
+    urn_lib_1.urn_log.debug('Started generating uranio core client config...');
+    init();
+    const text = uranio_api_1.default.util.generate.client_config(server_config);
+    urn_lib_1.urn_log.debug(`TRX client config generated.`);
+    return text;
+}
+exports.client_config = client_config;
+function client_config_and_save(server_config) {
+    const text = client_config(server_config);
+    save_client_config(text);
+    urn_lib_1.urn_log.debug(`TRX Client config generated and saved.`);
+}
+exports.client_config_and_save = client_config_and_save;
+function save_client_config(text) {
+    uranio_api_1.default.util.generate.save_client_config(text);
+}
+exports.save_client_config = save_client_config;
 function _get_hooks_path_src_server() {
     return `${exports.process_params.urn_trx_repo_path}/src/hooks/hooks.ts`;
 }
@@ -163,7 +177,7 @@ exports.save_hook_types = save_hook_types;
 function init() {
     uranio_api_1.default.util.generate.init();
     // process_params.urn_base_schema = api.util.generate.process_params.urn_base_schema;
-    // process_params.urn_command = api.util.generate.process_params.urn_command;
+    exports.process_params.urn_command = uranio_api_1.default.util.generate.process_params.urn_command;
     // process_params.urn_output_dir = api.util.generate.process_params.urn_output_dir;
     _init_trx_generate();
 }
@@ -171,12 +185,14 @@ exports.init = init;
 function _init_trx_generate() {
     for (const argv of process.argv) {
         const splitted = argv.split('=');
-        if (splitted[0] === 'urn_command'
-            && typeof splitted[1] === 'string'
-            && splitted[1] !== '') {
-            exports.process_params.urn_command = splitted[1];
-        }
-        else if (splitted[0] === 'urn_trx_repo_path'
+        if (
+        //   splitted[0] === 'urn_command'
+        //   && typeof splitted[1] === 'string'
+        //   && splitted[1] !== ''
+        // ){
+        //   process_params.urn_command = splitted[1];
+        // }else if(
+        splitted[0] === 'urn_trx_repo_path'
             && typeof splitted[1] === 'string'
             && splitted[1] !== '') {
             exports.process_params.urn_trx_repo_path = splitted[1];

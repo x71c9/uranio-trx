@@ -26,6 +26,8 @@ import * as log from '../log/client';
 
 // import {raw_config} from '../raw/defaults';
 
+import {client_toml} from '../client/toml';
+
 export function init(
 	config?: Partial<types.ClientConfiguration>,
 	register_required=true
@@ -36,6 +38,8 @@ export function init(
 	env.set_from_env(trx_client_env);
 	
 	// api_client.core.conf.set_from_file(trx_client_config);
+	
+	conf.set(trx_client_config, client_toml);
 	
 	if(config){
 		conf.set(trx_client_config, config);

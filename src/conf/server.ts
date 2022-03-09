@@ -30,6 +30,11 @@ export function get_current<k extends keyof types.Configuration>(param_name:k)
 	return api.conf.get_current(param_name as keyof api.types.Configuration) as typeof trx_config[k];
 }
 
+export function object():types.Configuration{
+	_check_if_uranio_was_initialized();
+	return trx_config;
+}
+
 export function is_initialized():boolean{
 	return api.conf.is_initialized() && _is_trx_initialized;
 }
