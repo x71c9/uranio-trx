@@ -4,4 +4,4 @@
  * @packageDocumentation
  */
 
-export * from './class';
+export * from './class_cln';

@@ -37,7 +37,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.create = void 0;
 const urn_lib_1 = require("urn-lib");
 const urn_exc = urn_lib_1.urn_exception.init(`AUTH_MODULE`, `Auth module.`);
-const book = __importStar(require("../book/client"));
+const book = __importStar(require("../book/server"));
 const server_1 = require("../raw/server");
 let AuthBase = class AuthBase {
     constructor(auth_name) {

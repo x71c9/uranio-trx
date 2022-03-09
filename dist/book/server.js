@@ -31,7 +31,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.has_property = exports.get_properties_definition = exports.get_custom_properties_definition = exports.get_property_definition = exports.get_definition = exports.get_all_definitions = exports.get_plural = exports.validate_name = exports.get_names = exports.add_definition = exports.add_route_definition = exports.get_dock_definition = exports.get_routes_definition = exports.get_route_definition = void 0;
+exports.has_property = exports.get_properties_definition = exports.get_custom_properties_definition = exports.get_property_definition = exports.get_definition = exports.get_all_definitions = exports.get_plural = exports.validate_auth_name = exports.validate_name = exports.get_names = exports.add_definition = exports.add_route_definition = exports.get_dock_definition = exports.get_routes_definition = exports.get_route_definition = void 0;
 const uranio_api_1 = __importDefault(require("uranio-api"));
 const book_client = __importStar(require("./client"));
 function get_route_definition(atom_name, route_name) {
@@ -62,6 +62,10 @@ function validate_name(atom_name) {
     return uranio_api_1.default.book.validate_name(atom_name);
 }
 exports.validate_name = validate_name;
+function validate_auth_name(auth_name) {
+    return uranio_api_1.default.book.validate_auth_name(auth_name);
+}
+exports.validate_auth_name = validate_auth_name;
 function get_plural(atom_name) {
     return uranio_api_1.default.book.get_plural(atom_name);
 }

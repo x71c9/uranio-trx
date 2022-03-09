@@ -8,9 +8,9 @@ import {urn_response, urn_log, urn_exception} from 'urn-lib';
 
 const urn_exc = urn_exception.init(`AUTH_MODULE`, `Auth module.`);
 
-import * as book from '../book/client';
+import * as book from '../book/server';
 
-import * as client_types from '../client/types';
+import * as client_types from '../server/types';
 
 import {schema} from '../sch/server';
 

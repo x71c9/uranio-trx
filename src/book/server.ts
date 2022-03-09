@@ -54,6 +54,10 @@ export function validate_name(atom_name:string):boolean{
 	return api.book.validate_name(atom_name);
 }
 
+export function validate_auth_name(auth_name:string):auth_name is schema.AuthName{
+	return api.book.validate_auth_name(auth_name);
+}
+
 export function get_plural(atom_name:schema.AtomName):string{
 	return api.book.get_plural(atom_name);
 }
