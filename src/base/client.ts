@@ -8,7 +8,7 @@ import {urn_log} from 'urn-lib';
 
 import {schema} from '../sch/client';
 
-import {Base} from './class';
+import {Base} from './class_cln';
 
 import * as conf from '../conf/client';
 
