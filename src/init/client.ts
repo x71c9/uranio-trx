@@ -35,7 +35,7 @@ export function init(
 	
 	env.set_from_env(trx_client_env);
 	
-	api_client.core.conf.set_from_file();
+	api_client.core.conf.set_from_file(trx_client_config);
 	
 	if(config){
 		conf.set(trx_client_config, config);

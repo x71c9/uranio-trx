@@ -238,7 +238,7 @@ function _generate_hook_types_text() {
     text += `import {urn_response} from 'urn-lib';\n`;
     text += `import {Api} from '../typ/api_cln';\n`;
     text += `import {schema} from '../sch/client';\n`;
-    text += `import {Hook} from '../base/types';\n`;
+    text += `import {Hook} from '../typ/base_cln';\n`;
     text += `export declare type Hooks = {\n`;
     text += `\tset_token: (token: string) => void;\n`;
     text += `\tget_token: () => string | undefined;\n`;
@@ -342,6 +342,7 @@ function _generate_hooks_text(parent) {
     text += `import * as auth from '../auth/${parent}';\n`;
     text += `import * as base from '../base/${parent}';\n`;
     text += `import * as media from '../media/${parent}';\n`;
+    text += `import {Hooks} from './types';\n`;
     text += `\n`;
     text += `let hook_token:string|undefined;\n`;
     text += `\n`;

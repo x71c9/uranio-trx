@@ -1,10 +1,11 @@
-"use strict";
 /**
  * Export module for Hook
  *
  * @packageDocumentation
  */
 /** --uranio-generate-types-start */
-Object.defineProperty(exports, "__esModule", { value: true });
+export type Hooks = {
+	set_token: (token:string) => void
+	get_token: () => string | undefined
+}
 /** --uranio-generate-types-end */
-//# sourceMappingURL=types.js.map

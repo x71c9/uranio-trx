@@ -1,5 +1,5 @@
 /**
- * Export module for Hook
+ * Auto generate hooks file
  *
  * @packageDocumentation
  */
