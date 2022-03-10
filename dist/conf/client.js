@@ -4,131 +4,47 @@
  *
  * @packageDocumentation
  */
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.set = exports.set_initialize = exports.is_initialized = exports.get_current = exports.get = exports.defaults = void 0;
+exports.get_all = exports.set = exports.get = void 0;
 const urn_lib_1 = require("urn-lib");
-const urn_exc = urn_lib_1.urn_exception.init('CONF_TRX_CLIENT_MODULE', `TRX client configuration module`);
-const client_1 = __importDefault(require("uranio-api/client"));
 const default_conf_1 = require("../client/default_conf");
-Object.defineProperty(exports, "defaults", { enumerable: true, get: function () { return default_conf_1.trx_client_config; } });
-// import {RawName} from '../raw/types';
-let _is_client_trx_initialized = false;
+const env = __importStar(require("../env/client"));
+const toml_1 = require("../client/toml");
+const urn_ctx = urn_lib_1.urn_context.create(default_conf_1.trx_client_config, env.is_production());
+urn_ctx.set(toml_1.client_toml);
 function get(param_name) {
-    _check_if_uranio_was_initialized();
-    _check_if_param_exists(param_name);
-    return default_conf_1.trx_client_config[param_name];
+    return urn_ctx.get(param_name);
 }
 exports.get = get;
-function get_current(param_name) {
-    return client_1.default.conf.get_current(param_name);
-}
-exports.get_current = get_current;
-function is_initialized() {
-    return client_1.default.conf.is_initialized() && _is_client_trx_initialized;
-}
-exports.is_initialized = is_initialized;
-function set_initialize(is_initialized) {
-    _is_client_trx_initialized = is_initialized;
-}
-exports.set_initialize = set_initialize;
-// export function set_from_env(repo_config:Required<types.ClientConfiguration>):void{
-//   api_client.conf.set_from_env(repo_config);
-//   const conf = _get_env_vars(repo_config);
-//   set(repo_config, conf);
-// }
-function set(repo_config, config) {
-    // _validate_config_types(repo_config, config);
-    // Object.assign(repo_config, config);
-    return client_1.default.conf.set(repo_config, config);
+function set(config) {
+    urn_ctx.set(config);
 }
 exports.set = set;
-function _check_if_param_exists(param_name) {
-    return urn_lib_1.urn_util.object.has_key(default_conf_1.trx_client_config, param_name);
+function get_all() {
+    return urn_ctx.get_all();
 }
-function _check_if_uranio_was_initialized() {
-    if (is_initialized() === false) {
-        throw urn_exc.create_not_initialized(`NOT_INITIALIZED`, `Uranio was not initialized. Please run \`uranio.init()\` in your main file.`);
-    }
-}
-// function _validate_config_types(
-//   repo_config:Required<types.ClientConfiguration>,
-//   config:types.ClientConfiguration
-// ){
-//   for(const [config_key, config_value] of Object.entries(config)){
-//     const key = config_key as keyof typeof repo_config;
-//     if(typeof config_value !== typeof repo_config[key]){
-//       throw urn_exc.create_not_initialized(
-//         `INVALID_CLIENT_CONFIG_VALUE`,
-//         `Invalid client config value for \`${config_key}\`. \`${config_key}\` value ` +
-//         ` must be of type \`${typeof repo_config[key]}\`,` +
-//         `\`${typeof config_value}\` given.`
-//       );
-//     }
-//   }
-// }
-// function _get_env_vars(repo_config:types.ClientConfiguration):types.ClientConfiguration{
-//   if(typeof process.env.URN_CLIENT_FETCH === 'string' && process.env.URN_CLIENT_FETCH !== ''){
-//     repo_config.fetch = process.env.URN_CLIENT_FETCH as RawName;
-//   }
-//   if(typeof process.env.URN_CLIENT_PROTOCOL === 'string' && process.env.URN_CLIENT_PROTOCOL !== ''){
-//     repo_config.protocol = process.env.URN_CLIENT_PROTOCOL;
-//   }
-//   if(typeof process.env.URN_CLIENT_DOMAIN === 'string' && process.env.URN_CLIENT_DOMAIN !== ''){
-//     repo_config.domain = process.env.URN_CLIENT_DOMAIN;
-//   }
-//   if(typeof process.env.URN_CLIENT_PORT === 'number' || typeof process.env.URN_CLIENT_PORT === 'string' && process.env.URN_CLIENT_PORT !== ''){
-//     repo_config.port = Number(process.env.URN_CLIENT_PORT);
-//   }
-//   if(typeof process.env.URN_CLIENT_SERVICE_URL === 'string' && process.env.URN_CLIENT_SERVICE_URL !== ''){
-//     repo_config.service_url = process.env.URN_CLIENT_SERVICE_URL;
-//   }
-//   if(typeof process.env.URN_LOG_LEVEL === 'number' || typeof process.env.URN_LOG_LEVEL === 'string' && process.env.URN_LOG_LEVEL !== ''){
-//     repo_config.log_level = Number(process.env.URN_LOG_LEVEL);
-//   }
-//   return repo_config;
-// }
-// function _get_env_vars(repo_config:types.ClientConfiguration):types.ClientConfiguration{
-//   const config:types.ClientConfiguration = {} as types.ClientConfiguration;
-//   for(const [conf_key, conf_value] of Object.entries(repo_config)){
-//     const env_var_name = `URN_CLIENT_${conf_key.toUpperCase()}`;
-//     switch(typeof conf_value){
-//       case 'number':{
-//         if(
-//           typeof process.env[env_var_name] === 'number'
-//           || typeof process.env[env_var_name] === 'string'
-//           && process.env[env_var_name] !== ''
-//         ){
-//           (config as any)[conf_key] = Number(process.env[env_var_name]);
-//         }
-//         break;
-//       }
-//       case 'boolean':{
-//         if(
-//           typeof process.env[env_var_name] === 'boolean'
-//           || typeof process.env[env_var_name] === 'string'
-//           && process.env[env_var_name] !== ''
-//         ){
-//           (config as any)[conf_key] =
-//             (process.env[env_var_name] === 'true') || (process.env[env_var_name] as any === true);
-//         }
-//         break;
-//       }
-//       case 'string':{
-//         console.log('typeof', typeof process.env[env_var_name]);
-//         console.log('value', process.env[env_var_name]);
-//         if(
-//           typeof process.env[env_var_name] === 'string'
-//           && process.env[env_var_name] !== ''
-//         ){
-//           (config as any)[conf_key] = process.env[env_var_name];
-//         }
-//         break;
-//       }
-//     }
-//   }
-//   return config;
-// }
+exports.get_all = get_all;
 //# sourceMappingURL=client.js.map

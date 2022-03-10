@@ -10,6 +10,6 @@ import api from 'uranio-api';
 
 export const trx_env:Required<Environment> = {
 	
-	...api.env.defaults,
+	...api.env.get_all(),
 	
 };

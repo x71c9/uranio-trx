@@ -9,7 +9,7 @@ declare type RequiredConfigParams = {};
 declare type OptionalConfigParam = {
     fetch: RawName;
     service_url: string;
-    service_dev_url: string;
+    dev_service_url: string;
 };
 export declare type Configuration = api.types.Configuration & RequiredConfigParams & Partial<OptionalConfigParam>;
 export {};

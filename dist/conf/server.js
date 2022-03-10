@@ -4,54 +4,50 @@
  *
  * @packageDocumentation
  */
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.set = exports.set_initialize = exports.is_initialized = exports.object = exports.get_current = exports.get = exports.defaults = void 0;
+exports.get_all = exports.set = exports.get = void 0;
 const urn_lib_1 = require("urn-lib");
-const urn_exc = urn_lib_1.urn_exception.init('CONF_TRX_MODULE', `TRX configuration module`);
-const uranio_api_1 = __importDefault(require("uranio-api"));
+const uranio_core_1 = __importDefault(require("uranio-core"));
 const defaults_1 = require("./defaults");
-Object.defineProperty(exports, "defaults", { enumerable: true, get: function () { return defaults_1.trx_config; } });
-let _is_trx_initialized = false;
+const env = __importStar(require("../env/server"));
+const urn_ctx = urn_lib_1.urn_context.create(defaults_1.trx_config, env.is_production());
+urn_ctx.set(uranio_core_1.default.util.toml.read());
 function get(param_name) {
-    _check_if_uranio_was_initialized();
-    _check_if_param_exists(param_name);
-    return defaults_1.trx_config[param_name];
+    return urn_ctx.get(param_name);
 }
 exports.get = get;
-function get_current(param_name) {
-    return uranio_api_1.default.conf.get_current(param_name);
-}
-exports.get_current = get_current;
-function object() {
-    _check_if_uranio_was_initialized();
-    return defaults_1.trx_config;
-}
-exports.object = object;
-function is_initialized() {
-    return uranio_api_1.default.conf.is_initialized() && _is_trx_initialized;
-}
-exports.is_initialized = is_initialized;
-function set_initialize(is_initialized) {
-    _is_trx_initialized = is_initialized;
-}
-exports.set_initialize = set_initialize;
-// export function set_from_env(repo_config:Required<types.Configuration>)
-//     :void{
-//   return api.conf.set_from_env(repo_config);
-// }
-function set(repo_config, config) {
-    return uranio_api_1.default.conf.set(repo_config, config);
+function set(config) {
+    urn_ctx.set(config);
 }
 exports.set = set;
-function _check_if_param_exists(param_name) {
-    return urn_lib_1.urn_util.object.has_key(defaults_1.trx_config, param_name);
+function get_all() {
+    return urn_ctx.get_all();
 }
-function _check_if_uranio_was_initialized() {
-    if (is_initialized() === false) {
-        throw urn_exc.create_not_initialized(`NOT_INITIALIZED`, `Uranio was not initialized. Please run \`uranio.init()\` in your main file.`);
-    }
-}
+exports.get_all = get_all;
 //# sourceMappingURL=server.js.map

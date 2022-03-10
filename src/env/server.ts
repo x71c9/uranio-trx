@@ -1,68 +1,37 @@
 /**
- * env module
+ * Env module
  *
  * @packageDocumentation
  */
 
-import {urn_util, urn_exception} from 'urn-lib';
+import {urn_context} from 'urn-lib';
 
-const urn_exc = urn_exception.init('CONF_TRX_MODULE', `TRX configuration module`);
-
-import api from 'uranio-api';
+import core from 'uranio-core';
 
 import {trx_env} from './defaults';
 
-export {trx_env as defaults};
+import {Environment} from '../typ/env';
 
-import * as types from '../server/types';
-
-let _is_trx_initialized = false;
-
-export function get<k extends keyof types.Environment>(param_name:k)
-		:typeof trx_env[k]{
-	_check_if_uranio_was_initialized();
-	_check_if_param_exists(param_name);
-	return trx_env[param_name];
-}
-
-export function get_current<k extends keyof types.Environment>(param_name:k)
-		:typeof trx_env[k]{
-	return api.env.get_current(param_name);
-}
-
-export function is_initialized():boolean{
-	return api.env.is_initialized() && _is_trx_initialized;
-}
-
-export function set_initialize(is_initialized:boolean):void{
-	_is_trx_initialized = is_initialized;
-}
-
-export function set_from_env(repo_config:Required<types.Environment>)
-		:void{
-	return api.env.set_from_env(repo_config);
-}
-
-export function set(
-	repo_config: Required<types.Environment>,
-	config: Partial<types.Environment>
-):void{
-	return api.env.set(repo_config, config);
-}
+const urn_ctx = urn_context.create<Required<Environment>>(
+	trx_env,
+	is_production()
+);
+urn_ctx.set_env();
 
 export function is_production():boolean{
-	return api.env.is_production();
+	return core.env.is_production();
 }
 
-function _check_if_param_exists(param_name:string){
-	return urn_util.object.has_key(trx_env, param_name);
+export function get<k extends keyof Environment>(
+	param_name:k
+):Required<Environment>[k]{
+	return urn_ctx.get(param_name);
 }
 
-function _check_if_uranio_was_initialized(){
-	if(is_initialized() === false){
-		throw urn_exc.create_not_initialized(
-			`NOT_INITIALIZED`,
-			`Uranio was not initialized. Please run \`uranio.init()\` in your main file.`
-		);
-	}
+export function get_all():Required<Environment>{
+	return urn_ctx.get_all();
+}
+
+export function set(env:Partial<Environment>):void{
+	urn_ctx.set(env);
 }

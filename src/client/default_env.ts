@@ -17,6 +17,6 @@ import {ClientEnvironment} from './types';
  */
 export const trx_client_env:Required<ClientEnvironment> = {
 	
-	...api_client.env.defaults,
+	...api_client.env.get_all(),
 	
 };

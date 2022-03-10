@@ -19,20 +19,12 @@ import {ClientConfiguration} from './types';
  */
 export const trx_client_config:Required<ClientConfiguration> = {
 	
-	...api_client.conf.defaults,
-	
-	// log_level: urn_log.defaults.log_level,
+	...api_client.conf.get_all(),
 	
 	fetch: 'axios',
 	
 	service_url: 'http://localhost:7777/uranio/api',
 	
-	service_dev_url: 'http://localhost:7777/uranio/api'
-	
-	// protocol: 'http',
-	
-	// domain: 'localhost',
-	
-	// port: 4444,
+	dev_service_url: 'http://localhost:7777/uranio/api'
 	
 };

@@ -19,13 +19,9 @@ const client_1 = __importDefault(require("uranio-api/client"));
  * variable, like process.env[var_name] where `var_name` is a variable.
  */
 exports.trx_client_config = {
-    ...client_1.default.conf.defaults,
-    // log_level: urn_log.defaults.log_level,
+    ...client_1.default.conf.get_all(),
     fetch: 'axios',
     service_url: 'http://localhost:7777/uranio/api',
-    service_dev_url: 'http://localhost:7777/uranio/api'
-    // protocol: 'http',
-    // domain: 'localhost',
-    // port: 4444,
+    dev_service_url: 'http://localhost:7777/uranio/api'
 };
 //# sourceMappingURL=default_conf.js.map

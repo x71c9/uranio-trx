@@ -159,7 +159,7 @@ async function _handle_axios_call(handler) {
  */
 function create(is_auth = false) {
     urn_lib_1.urn_log.fn_debug('Create URNTRXRaw');
-    const service_url = conf.get_current(`service_url`);
+    const service_url = conf.get(`service_url`);
     const axios_config = {
         baseURL: service_url
     };

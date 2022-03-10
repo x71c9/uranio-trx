@@ -32,24 +32,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.init = void 0;
-// import {urn_log, urn_exception} from 'urn-lib';
 const urn_lib_1 = require("urn-lib");
-// const urn_exc = urn_exception.init('INIT_TRX_MODULE', `TRX init module`);
 const uranio_api_1 = __importDefault(require("uranio-api"));
-const defaults_1 = require("../conf/defaults");
-const defaults_2 = require("../env/defaults");
 const register = __importStar(require("../reg/server"));
 const required = __importStar(require("../req/server"));
 const conf = __importStar(require("../conf/server"));
-const env = __importStar(require("../env/server"));
 const log = __importStar(require("../log/server"));
 // import {raw_config} from '../raw/defaults';
 function init(config, register_required = true) {
     uranio_api_1.default.init(config, false);
-    env.set_from_env(defaults_2.trx_env);
-    uranio_api_1.default.core.conf.set_from_file(defaults_1.trx_config);
     if (config) {
-        conf.set(defaults_1.trx_config, config);
+        conf.set(config);
     }
     if (register_required) {
         _register_required_atoms();
@@ -57,8 +50,6 @@ function init(config, register_required = true) {
     // _set_raw();
     _validate_trx_variables();
     _validate_trx_book();
-    conf.set_initialize(true);
-    env.set_initialize(true);
     log.init(urn_lib_1.urn_log);
     urn_lib_1.urn_log.debug(`Uranio trx initialization completed.`);
 }

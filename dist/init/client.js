@@ -34,22 +34,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.init = void 0;
 const urn_lib_1 = require("urn-lib");
 const client_1 = __importDefault(require("uranio-api/client"));
-const default_conf_1 = require("../client/default_conf");
-const default_env_1 = require("../client/default_env");
 const register = __importStar(require("../reg/client"));
 const required = __importStar(require("../req/client"));
 const conf = __importStar(require("../conf/client"));
-const env = __importStar(require("../env/client"));
 const log = __importStar(require("../log/client"));
-// import {raw_config} from '../raw/defaults';
-const toml_1 = require("../client/toml");
 function init(config, register_required = true) {
     client_1.default.init(config, false);
-    env.set_from_env(default_env_1.trx_client_env);
-    // api_client.core.conf.set_from_file(trx_client_config);
-    conf.set(default_conf_1.trx_client_config, toml_1.client_toml);
     if (config) {
-        conf.set(default_conf_1.trx_client_config, config);
+        conf.set(config);
     }
     if (register_required) {
         _register_required_atoms();
@@ -57,26 +49,10 @@ function init(config, register_required = true) {
     // _set_raw();
     _validate_trx_client_variables();
     _validate_trx_client_book();
-    conf.set_initialize(true);
-    env.set_initialize(true);
     log.init(urn_lib_1.urn_log);
     urn_lib_1.urn_log.debug(`Uranio trx client initialization completed.`);
 }
 exports.init = init;
-// function _add_default_routes(){
-//   const core_atom_book = book.get_all_definitions();
-//   for(const [atom_name, atom_def] of Object.entries(core_atom_book)){
-//     if(atom_name === 'media'){
-//       (atom_def.dock as any).routes = {
-//         ...api_client.routes.default_routes,
-//         ...api_client.routes.media_routes
-//       };
-//     }else{
-//       (atom_def.dock as any).routes = api_client.routes.default_routes;
-//     }
-//     register.atom(atom_def as any, atom_name as any);
-//   }
-// }
 function _register_required_atoms() {
     const required_atoms = required.get();
     for (const [atom_name, atom_def] of Object.entries(required_atoms)) {

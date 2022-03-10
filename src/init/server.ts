@@ -4,16 +4,9 @@
  * @packageDocumentation
  */
 
-// import {urn_log, urn_exception} from 'urn-lib';
 import {urn_log} from 'urn-lib';
 
-// const urn_exc = urn_exception.init('INIT_TRX_MODULE', `TRX init module`);
-
 import api from 'uranio-api';
-
-import {trx_config} from '../conf/defaults';
-
-import {trx_env} from '../env/defaults';
 
 import * as register from '../reg/server';
 
@@ -24,8 +17,6 @@ import * as types from '../server/types';
 import * as client_types from '../client/types';
 
 import * as conf from '../conf/server';
-
-import * as env from '../env/server';
 
 import * as log from '../log/server';
 
@@ -38,12 +29,8 @@ export function init(
 	
 	api.init(config, false);
 	
-	env.set_from_env(trx_env);
-	
-	api.core.conf.set_from_file(trx_config);
-	
 	if(config){
-		conf.set(trx_config, config);
+		conf.set(config);
 	}
 	
 	if(register_required){
@@ -54,9 +41,6 @@ export function init(
 	
 	_validate_trx_variables();
 	_validate_trx_book();
-	
-	conf.set_initialize(true);
-	env.set_initialize(true);
 	
 	log.init(urn_log);
 	
