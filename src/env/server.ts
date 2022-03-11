@@ -14,9 +14,9 @@ import {Environment} from '../typ/env';
 
 const urn_ctx = urn_context.create<Required<Environment>>(
 	trx_env,
-	is_production()
+	is_production(),
+	'TRX:ENV'
 );
-urn_ctx.set_env();
 
 export function is_production():boolean{
 	return core.env.is_production();
@@ -34,4 +34,8 @@ export function get_all():Required<Environment>{
 
 export function set(env:Partial<Environment>):void{
 	urn_ctx.set(env);
+}
+
+export function set_env():void{
+	urn_ctx.set_env();
 }

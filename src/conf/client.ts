@@ -12,13 +12,11 @@ import {ClientConfiguration} from '../client/types';
 
 import * as env from '../env/client';
 
-import {client_toml} from '../client/toml';
-
 const urn_ctx = urn_context.create<Required<ClientConfiguration>>(
 	trx_client_config,
-	env.is_production()
+	env.is_production(),
+	'TRX:CONF:CLIENT'
 );
-urn_ctx.set(client_toml);
 
 export function get<k extends keyof ClientConfiguration>(
 	param_name:k

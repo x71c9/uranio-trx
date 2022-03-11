@@ -18,6 +18,8 @@ import * as client_types from '../client/types';
 
 import * as conf from '../conf/server';
 
+import * as env from '../env/server';
+
 import * as log from '../log/server';
 
 // import {raw_config} from '../raw/defaults';
@@ -28,6 +30,12 @@ export function init(
 ):void{
 	
 	api.init(config, false);
+	
+	conf.set(api.core.util.toml.read());
+	
+	env.set_env();
+	
+	log.init(urn_log);
 	
 	if(config){
 		conf.set(config);
@@ -41,8 +49,6 @@ export function init(
 	
 	_validate_trx_variables();
 	_validate_trx_book();
-	
-	log.init(urn_log);
 	
 	urn_log.debug(`Uranio trx initialization completed.`);
 	

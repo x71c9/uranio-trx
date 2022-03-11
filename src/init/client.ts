@@ -16,7 +16,11 @@ import * as types from '../client/types';
 
 import * as conf from '../conf/client';
 
+import * as env from '../env/client';
+
 import * as log from '../log/client';
+
+import {client_toml} from '../client/toml';
 
 export function init(
 	config?: Partial<types.ClientConfiguration>,
@@ -24,6 +28,12 @@ export function init(
 ):void{
 	
 	api_client.init(config, false);
+	
+	conf.set(client_toml);
+	
+	env.set_env();
+	
+	log.init(urn_log);
 	
 	if(config){
 		conf.set(config);
@@ -37,8 +47,6 @@ export function init(
 	
 	_validate_trx_client_variables();
 	_validate_trx_client_book();
-	
-	log.init(urn_log);
 	
 	urn_log.debug(`Uranio trx client initialization completed.`);
 	

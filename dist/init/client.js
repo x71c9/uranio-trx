@@ -37,9 +37,14 @@ const client_1 = __importDefault(require("uranio-api/client"));
 const register = __importStar(require("../reg/client"));
 const required = __importStar(require("../req/client"));
 const conf = __importStar(require("../conf/client"));
+const env = __importStar(require("../env/client"));
 const log = __importStar(require("../log/client"));
+const toml_1 = require("../client/toml");
 function init(config, register_required = true) {
     client_1.default.init(config, false);
+    conf.set(toml_1.client_toml);
+    env.set_env();
+    log.init(urn_lib_1.urn_log);
     if (config) {
         conf.set(config);
     }
@@ -49,7 +54,6 @@ function init(config, register_required = true) {
     // _set_raw();
     _validate_trx_client_variables();
     _validate_trx_client_book();
-    log.init(urn_lib_1.urn_log);
     urn_lib_1.urn_log.debug(`Uranio trx client initialization completed.`);
 }
 exports.init = init;
