@@ -104,7 +104,7 @@ function save_hooks_client(text) {
 }
 exports.save_hooks_client = save_hooks_client;
 function client_config(server_config) {
-    urn_lib_1.urn_log.debug('Started generating uranio core client config...');
+    urn_lib_1.urn_log.debug('Started generating uranio trx client config...');
     init();
     const text = uranio_api_1.default.util.generate.client_config(server_config);
     urn_lib_1.urn_log.debug(`TRX client config generated.`);

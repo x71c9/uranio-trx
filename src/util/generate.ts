@@ -93,7 +93,7 @@ export function save_hooks_client(text:string):void{
 }
 
 export function client_config(server_config:types.Configuration):string{
-	urn_log.debug('Started generating uranio core client config...');
+	urn_log.debug('Started generating uranio trx client config...');
 	init();
 	const text = api.util.generate.client_config(server_config);
 	urn_log.debug(`TRX client config generated.`);
