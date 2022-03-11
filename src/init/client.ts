@@ -30,6 +30,7 @@ export function init(
 	api_client.init(config, false);
 	
 	conf.set(client_toml);
+	api_client.conf.set(client_toml);
 	
 	env.set_env();
 	
