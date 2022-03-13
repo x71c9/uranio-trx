@@ -74,6 +74,12 @@ switch (urn_command) {
         util.generate.client_config_and_save(uranio.conf.get_all());
         break;
     }
+    case 'atoms': {
+        util.generate.schema_and_save();
+        util.generate.hooks_and_save();
+        util.generate.hook_types_and_save();
+        break;
+    }
     default: {
         util.generate.schema_and_save();
         util.generate.hooks_and_save();
