@@ -15,6 +15,8 @@ type OptionalConfigParam = {
 	fetch: RawName,
 	service_url: string
 	dev_service_url: string
+	fetch_url: string
+	dev_fetch_url: string
 }
 
 export type Configuration =

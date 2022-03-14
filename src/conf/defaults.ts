@@ -18,4 +18,8 @@ export const trx_config:Required<Configuration> = {
 	
 	dev_service_url: 'http://localhost:7777/uranio/api',
 	
+	fetch_url: 'http://localhost:7777/uranio/api',
+	
+	dev_fetch_url: 'http://localhost:7777/uranio/api',
+	
 };

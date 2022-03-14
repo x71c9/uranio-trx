@@ -15,5 +15,7 @@ exports.trx_config = {
     fetch: 'axios',
     service_url: 'http://localhost:7777/uranio/api',
     dev_service_url: 'http://localhost:7777/uranio/api',
+    fetch_url: 'http://localhost:7777/uranio/api',
+    dev_fetch_url: 'http://localhost:7777/uranio/api',
 };
 //# sourceMappingURL=defaults.js.map
