@@ -38,6 +38,11 @@ const dateformat_1 = __importDefault(require("dateformat"));
 const uranio_api_1 = __importDefault(require("uranio-api"));
 const urn_lib_1 = require("urn-lib");
 const book = __importStar(require("../book/server"));
+const conf = __importStar(require("../conf/server"));
+const required_server_config_client = [
+    'service_url',
+    'dev_service_url'
+];
 exports.process_params = {
     urn_command: `schema`,
     urn_trx_repo_path: 'node_modules/uranio-trx'
@@ -106,6 +111,10 @@ exports.save_hooks_client = save_hooks_client;
 function client_config(client_default) {
     urn_lib_1.urn_log.debug('Started generating uranio trx client config...');
     init();
+    const all_server_conf = conf.get_all();
+    for (const reqkey of required_server_config_client) {
+        client_config[`__server_${reqkey}`] = all_server_conf[reqkey];
+    }
     const text = uranio_api_1.default.util.generate.client_config(client_default);
     urn_lib_1.urn_log.debug(`TRX client config generated.`);
     return text;

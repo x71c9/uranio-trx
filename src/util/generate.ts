@@ -18,9 +18,16 @@ import {schema as schema_types} from '../sch/server';
 
 import * as book from '../book/server';
 
-// import * as types from '../server/types';
+import {Configuration} from '../typ/conf';
 
 import {ClientConfiguration} from '../typ/conf_cln';
+
+import * as conf from '../conf/server';
+
+const required_server_config_client:Array<keyof Configuration> = [
+	'service_url',
+	'dev_service_url'
+];
 
 export const process_params = {
 	urn_command: `schema`,
@@ -97,6 +104,12 @@ export function save_hooks_client(text:string):void{
 export function client_config(client_default:Required<ClientConfiguration>):string{
 	urn_log.debug('Started generating uranio trx client config...');
 	init();
+	
+	const all_server_conf = conf.get_all();
+	for(const reqkey of required_server_config_client){
+		(client_config as any)[`__server_${reqkey}`] = all_server_conf[reqkey];
+	}
+	
 	const text = api.util.generate.client_config(client_default);
 	urn_log.debug(`TRX client config generated.`);
 	return text;
