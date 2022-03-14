@@ -9,12 +9,14 @@ import api_client from 'uranio-api/client';
 import {RawName} from '../typ/raw_cln';
 
 type RequiredClientConfigParams = {
-	fetch: RawName
-	service_url: string
-	dev_service_url: string
 }
 
 type OptionalClientConfigParam = {
+	fetch: RawName
+	service_url: string
+	dev_service_url: string
+	fetch_url: string
+	dev_fetch_url: string
 }
 
 export type ClientConfiguration =
