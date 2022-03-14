@@ -103,16 +103,16 @@ function save_hooks_client(text) {
     urn_lib_1.urn_log.debug(`Client Hooks saved in [${output}].`);
 }
 exports.save_hooks_client = save_hooks_client;
-function client_config(server_config) {
+function client_config(client_default) {
     urn_lib_1.urn_log.debug('Started generating uranio trx client config...');
     init();
-    const text = uranio_api_1.default.util.generate.client_config(server_config);
+    const text = uranio_api_1.default.util.generate.client_config(client_default);
     urn_lib_1.urn_log.debug(`TRX client config generated.`);
     return text;
 }
 exports.client_config = client_config;
-function client_config_and_save(server_config) {
-    const text = client_config(server_config);
+function client_config_and_save(client_default) {
+    const text = client_config(client_default);
     save_client_config(text);
     urn_lib_1.urn_log.debug(`TRX Client config generated and saved.`);
 }
