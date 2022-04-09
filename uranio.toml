@@ -8,6 +8,7 @@ prefix_api = '/uranio/api'
 prefix_log = '/logs'
 lambda = 'netlify'
 fetch = 'axios'
+fetch_url = 'http://localhost:7775/uranio/api'
 [service]
 	platform = 'express'
 	protocol = 'http'
@@ -27,10 +28,12 @@ fetch = 'axios'
 	protocol = 'http'
 	domain = 'localhost'
 	port = 4477
+[dev.fetch]
+	url = 'http://localhost:7775/uranio/api'
 [client.fetch]
-	url = 'http://localhost:5454/uranio/api'
+	url = 'http://localhost:7775/uranio/api'
 [client.dev.fetch]
-	url = 'http://localhost:4477/uranio/api'
+	url = 'http://localhost:7775/uranio/api'
 [log]
 	debug_info = true
 	color = true
