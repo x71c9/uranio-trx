@@ -1034,5 +1034,166 @@ exports.hooks = {
             return await base.create('request', current_token).hook('delete_multiple')(args);
         },
     },
+    settings: {
+        count: async (parameters, token) => {
+            const args = {
+                ...parameters
+            };
+            let current_token;
+            const hook_token = exports.hooks.get_token();
+            if (typeof hook_token === 'string' && hook_token !== '') {
+                current_token = hook_token;
+            }
+            if (typeof token === 'string' && token !== '') {
+                current_token = token;
+            }
+            return await base.create('setting', current_token).hook('count')(args);
+        },
+        find_one: async (parameters, token) => {
+            const args = {
+                ...parameters
+            };
+            let current_token;
+            const hook_token = exports.hooks.get_token();
+            if (typeof hook_token === 'string' && hook_token !== '') {
+                current_token = hook_token;
+            }
+            if (typeof token === 'string' && token !== '') {
+                current_token = token;
+            }
+            return await base.create('setting', current_token).hook('find_one')(args);
+        },
+        find: async (parameters, token) => {
+            const args = {
+                ...parameters
+            };
+            let current_token;
+            const hook_token = exports.hooks.get_token();
+            if (typeof hook_token === 'string' && hook_token !== '') {
+                current_token = hook_token;
+            }
+            if (typeof token === 'string' && token !== '') {
+                current_token = token;
+            }
+            return await base.create('setting', current_token).hook('find')(args);
+        },
+        find_id: async (id, parameters, token) => {
+            const args = {
+                params: {
+                    id: id,
+                },
+                ...parameters
+            };
+            let current_token;
+            const hook_token = exports.hooks.get_token();
+            if (typeof hook_token === 'string' && hook_token !== '') {
+                current_token = hook_token;
+            }
+            if (typeof token === 'string' && token !== '') {
+                current_token = token;
+            }
+            return await base.create('setting', current_token).hook('find_id')(args);
+        },
+        insert: async (body, parameters, token) => {
+            const args = {
+                body: body,
+                ...parameters
+            };
+            let current_token;
+            const hook_token = exports.hooks.get_token();
+            if (typeof hook_token === 'string' && hook_token !== '') {
+                current_token = hook_token;
+            }
+            if (typeof token === 'string' && token !== '') {
+                current_token = token;
+            }
+            return await base.create('setting', current_token).hook('insert')(args);
+        },
+        update: async (id, body, parameters, token) => {
+            const args = {
+                params: {
+                    id: id,
+                },
+                body: body,
+                ...parameters
+            };
+            let current_token;
+            const hook_token = exports.hooks.get_token();
+            if (typeof hook_token === 'string' && hook_token !== '') {
+                current_token = hook_token;
+            }
+            if (typeof token === 'string' && token !== '') {
+                current_token = token;
+            }
+            return await base.create('setting', current_token).hook('update')(args);
+        },
+        delete: async (id, parameters, token) => {
+            const args = {
+                params: {
+                    id: id,
+                },
+                ...parameters
+            };
+            let current_token;
+            const hook_token = exports.hooks.get_token();
+            if (typeof hook_token === 'string' && hook_token !== '') {
+                current_token = hook_token;
+            }
+            if (typeof token === 'string' && token !== '') {
+                current_token = token;
+            }
+            return await base.create('setting', current_token).hook('delete')(args);
+        },
+        insert_multiple: async (body, parameters, token) => {
+            const args = {
+                body: body,
+                ...parameters
+            };
+            let current_token;
+            const hook_token = exports.hooks.get_token();
+            if (typeof hook_token === 'string' && hook_token !== '') {
+                current_token = hook_token;
+            }
+            if (typeof token === 'string' && token !== '') {
+                current_token = token;
+            }
+            return await base.create('setting', current_token).hook('insert_multiple')(args);
+        },
+        update_multiple: async (ids, body, parameters, token) => {
+            const args = {
+                params: {
+                    ids: ids,
+                },
+                body: body,
+                ...parameters
+            };
+            let current_token;
+            const hook_token = exports.hooks.get_token();
+            if (typeof hook_token === 'string' && hook_token !== '') {
+                current_token = hook_token;
+            }
+            if (typeof token === 'string' && token !== '') {
+                current_token = token;
+            }
+            return await base.create('setting', current_token).hook('update_multiple')(args);
+        },
+        delete_multiple: async (ids, parameters, token) => {
+            const args = {
+                params: {
+                    ids: ids,
+                },
+                ...parameters
+            };
+            let current_token;
+            const hook_token = exports.hooks.get_token();
+            if (typeof hook_token === 'string' && hook_token !== '') {
+                current_token = hook_token;
+            }
+            if (typeof token === 'string' && token !== '') {
+                current_token = token;
+            }
+            return await base.create('setting', current_token).hook('delete_multiple')(args);
+        },
+    },
 };
 //# sourceMappingURL=hooks_cln.js.map

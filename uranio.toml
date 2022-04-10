@@ -11,6 +11,7 @@ prefix_log = '/logs'
 lambda = 'netlify'
 fetch = 'axios'
 fetch_url = 'http://localhost:7773/uranio/api'
+dev_fetch_url = 'http://localhost:7773/uranio/api'
 [service]
 	platform = 'express'
 	protocol = 'http'
