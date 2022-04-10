@@ -42,12 +42,12 @@ const urn_lib_1 = require("urn-lib");
 const urn_exc = urn_lib_1.urn_exception.init(`BASE`, `Base module`);
 const client_1 = __importDefault(require("uranio-api/client"));
 const book = __importStar(require("../book/client"));
+const conf = __importStar(require("../conf/client"));
 const client_2 = require("../raw/client");
 let Base = class Base {
-    constructor(atom_name, token, prefix_log) {
+    constructor(atom_name, token) {
         this.atom_name = atom_name;
         this.token = token;
-        this.prefix_log = prefix_log;
         this.raw = (0, client_2.create)();
     }
     hook(route_name) {
@@ -70,7 +70,7 @@ let Base = class Base {
             const dock_def = book.get_dock_definition(this.atom_name);
             const atom_api_url = dock_def.url || `/${book.get_plural(this.atom_name)}`;
             const atom_def = book.get_definition(this.atom_name);
-            const connection_url = (atom_def.connection && atom_def.connection === 'log') ? this.prefix_log : '';
+            const connection_url = (atom_def.connection && atom_def.connection === 'log') ? conf.get('prefix_log') : '';
             let url = `${connection_url}${atom_api_url}${route.url}`;
             for (const param of params) {
                 if (urn_lib_1.urn_util.object.has_key(args, 'params') &&

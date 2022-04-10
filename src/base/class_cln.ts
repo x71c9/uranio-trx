@@ -14,6 +14,8 @@ import * as book from '../book/client';
 
 import * as client_types from '../client/types';
 
+import * as conf from '../conf/client';
+
 import {schema} from '../sch/client';
 
 import {create as create_raw} from '../raw/client';
@@ -24,7 +26,7 @@ export class Base<A extends schema.AtomName> {
 	
 	protected raw:client_types.RAW<A>;
 	
-	constructor(public atom_name:A, public token?:string, private prefix_log?:string){
+	constructor(public atom_name:A, public token?:string){
 		this.raw = create_raw() as client_types.RAW<A>;
 	}
 	
@@ -51,7 +53,7 @@ export class Base<A extends schema.AtomName> {
 			const dock_def = book.get_dock_definition(this.atom_name);
 			const atom_api_url = dock_def.url || `/${book.get_plural(this.atom_name)}`;
 			const atom_def = book.get_definition(this.atom_name);
-			const connection_url = (atom_def.connection && atom_def.connection === 'log') ? this.prefix_log : '';
+			const connection_url = (atom_def.connection && atom_def.connection === 'log') ? conf.get('prefix_log') : '';
 			let url = `${connection_url}${atom_api_url}${route.url}`;
 			for(const param of params){
 				if(
