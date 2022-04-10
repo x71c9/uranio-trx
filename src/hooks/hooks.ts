@@ -1264,5 +1264,4 @@ export const hooks:Hooks = {
 			return await base.create('request',current_token).hook<'delete_multiple',D>('delete_multiple')(args);
 		},
 	},
-};
-
+}

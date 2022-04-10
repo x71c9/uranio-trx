@@ -11,6 +11,7 @@ import * as types from '../server/types';
 import * as auth from '../auth/server';
 import * as base from '../base/server';
 import * as media from '../media/server';
+import {Hooks} from './types';
 
 let hook_token:string|undefined;
 
