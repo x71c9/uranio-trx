@@ -28,7 +28,7 @@ let MediaBase = class MediaBase extends class_1.Base {
             headers['urn-auth-token'] = token;
         }
         const url = `/media/upload`;
-        return await this.raw.post(url, file, undefined, headers);
+        return await this.base.raw.post(url, file, undefined, headers);
     }
     async presigned(filename, size, type, token) {
         const headers = {};
@@ -48,7 +48,7 @@ let MediaBase = class MediaBase extends class_1.Base {
             query.type = type;
         }
         const url = `/media/presigned`;
-        return await this.raw.get(url, query, headers);
+        return await this.base.raw.get(url, query, headers);
     }
 };
 MediaBase = __decorate([

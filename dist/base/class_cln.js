@@ -54,7 +54,7 @@ let Base = class Base {
         _check_atom_name(this.atom_name);
         const route = book.get_route_definition(this.atom_name, route_name);
         const splitted_url = route.url.split('/');
-        const params = [];
+        const param_names = [];
         for (const split of splitted_url) {
             if (split.includes(':')) {
                 const splitted_split = split.split(':');
@@ -62,20 +62,28 @@ let Base = class Base {
                     throw urn_exc.create(`INVALID_ROUTE_URL`, `Invalid Route URL format \`${route.url}\``);
                 }
                 const param_name = splitted_split[1];
-                params.push(param_name);
+                param_names.push(param_name);
             }
         }
         return async (args, token) => {
-            var _a;
             const dock_def = book.get_dock_definition(this.atom_name);
             const atom_api_url = dock_def.url || `/${book.get_plural(this.atom_name)}`;
             const atom_def = book.get_definition(this.atom_name);
             const connection_url = (atom_def.connection && atom_def.connection === 'log') ? conf.get('prefix_log') : '';
             let url = `${connection_url}${atom_api_url}${route.url}`;
-            for (const param of params) {
-                if (urn_lib_1.urn_util.object.has_key(args, 'params') &&
-                    typeof ((_a = args.params) === null || _a === void 0 ? void 0 : _a[param]) === 'string') {
-                    url = url.replace(`:${param}`, args.params[param]);
+            // let arg_params:{[k:string]: string | string[]} = {};
+            let arg_params = {};
+            if (urn_lib_1.urn_util.object.has_key(args, 'params')) {
+                arg_params = args['params'];
+            }
+            // for(const [param_name, param_value] of Object.entries(arg_params)){
+            for (const param_name of param_names) {
+                const param_value = arg_params[param_name];
+                if (typeof param_value === 'string') {
+                    url = url.replace(`:${param_name}`, param_value);
+                }
+                else if (Array.isArray(param_value) && param_value.length > 0 && typeof param_value[0] === 'string') {
+                    url = url.replace(`:${param_name}`, param_value.join(','));
                 }
             }
             const headers = {};

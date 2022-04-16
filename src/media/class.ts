@@ -38,7 +38,7 @@ class MediaBase extends Base<'media'>{
 			headers['urn-auth-token'] = token;
 		}
 		const url = `/media/upload`;
-		return await this.raw.post(url, file, undefined, headers) as
+		return await this.base.raw.post(url, file, undefined, headers) as
 			urn_response.General<schema.Molecule<'media', D>>;
 	}
 	
@@ -65,7 +65,7 @@ class MediaBase extends Base<'media'>{
 			query.type = type;
 		}
 		const url = `/media/presigned`;
-		return await this.raw.get(url, query as any, headers) as
+		return await this.base.raw.get(url, query as any, headers) as
 			urn_response.General<string>;
 	}
 }
