@@ -202,6 +202,40 @@ const hooks = {
         current_token = token;
       }
       return await base.create("superuser", current_token).hook("delete_multiple")(args);
+    },
+    search_count: async (q, parameters, token) => {
+      const args = {
+        params: {
+          q
+        },
+        ...parameters
+      };
+      let current_token;
+      const hook_token2 = hooks.get_token();
+      if (typeof hook_token2 === "string" && hook_token2 !== "") {
+        current_token = hook_token2;
+      }
+      if (typeof token === "string" && token !== "") {
+        current_token = token;
+      }
+      return await base.create("superuser", current_token).hook("search_count")(args);
+    },
+    search: async (q, parameters, token) => {
+      const args = {
+        params: {
+          q
+        },
+        ...parameters
+      };
+      let current_token;
+      const hook_token2 = hooks.get_token();
+      if (typeof hook_token2 === "string" && hook_token2 !== "") {
+        current_token = hook_token2;
+      }
+      if (typeof token === "string" && token !== "") {
+        current_token = token;
+      }
+      return await base.create("superuser", current_token).hook("search")(args);
     }
   },
   users: {
@@ -366,6 +400,40 @@ const hooks = {
         current_token = token;
       }
       return await base.create("user", current_token).hook("delete_multiple")(args);
+    },
+    search_count: async (q, parameters, token) => {
+      const args = {
+        params: {
+          q
+        },
+        ...parameters
+      };
+      let current_token;
+      const hook_token2 = hooks.get_token();
+      if (typeof hook_token2 === "string" && hook_token2 !== "") {
+        current_token = hook_token2;
+      }
+      if (typeof token === "string" && token !== "") {
+        current_token = token;
+      }
+      return await base.create("user", current_token).hook("search_count")(args);
+    },
+    search: async (q, parameters, token) => {
+      const args = {
+        params: {
+          q
+        },
+        ...parameters
+      };
+      let current_token;
+      const hook_token2 = hooks.get_token();
+      if (typeof hook_token2 === "string" && hook_token2 !== "") {
+        current_token = hook_token2;
+      }
+      if (typeof token === "string" && token !== "") {
+        current_token = token;
+      }
+      return await base.create("user", current_token).hook("search")(args);
     }
   },
   groups: {
@@ -527,6 +595,40 @@ const hooks = {
         current_token = token;
       }
       return await base.create("group", current_token).hook("delete_multiple")(args);
+    },
+    search_count: async (q, parameters, token) => {
+      const args = {
+        params: {
+          q
+        },
+        ...parameters
+      };
+      let current_token;
+      const hook_token2 = hooks.get_token();
+      if (typeof hook_token2 === "string" && hook_token2 !== "") {
+        current_token = hook_token2;
+      }
+      if (typeof token === "string" && token !== "") {
+        current_token = token;
+      }
+      return await base.create("group", current_token).hook("search_count")(args);
+    },
+    search: async (q, parameters, token) => {
+      const args = {
+        params: {
+          q
+        },
+        ...parameters
+      };
+      let current_token;
+      const hook_token2 = hooks.get_token();
+      if (typeof hook_token2 === "string" && hook_token2 !== "") {
+        current_token = hook_token2;
+      }
+      if (typeof token === "string" && token !== "") {
+        current_token = token;
+      }
+      return await base.create("group", current_token).hook("search")(args);
     }
   },
   media: {
@@ -710,6 +812,40 @@ const hooks = {
         current_token = token;
       }
       return await base.create("media", current_token).hook("delete_multiple")(args);
+    },
+    search_count: async (q, parameters, token) => {
+      const args = {
+        params: {
+          q
+        },
+        ...parameters
+      };
+      let current_token;
+      const hook_token2 = hooks.get_token();
+      if (typeof hook_token2 === "string" && hook_token2 !== "") {
+        current_token = hook_token2;
+      }
+      if (typeof token === "string" && token !== "") {
+        current_token = token;
+      }
+      return await base.create("media", current_token).hook("search_count")(args);
+    },
+    search: async (q, parameters, token) => {
+      const args = {
+        params: {
+          q
+        },
+        ...parameters
+      };
+      let current_token;
+      const hook_token2 = hooks.get_token();
+      if (typeof hook_token2 === "string" && hook_token2 !== "") {
+        current_token = hook_token2;
+      }
+      if (typeof token === "string" && token !== "") {
+        current_token = token;
+      }
+      return await base.create("media", current_token).hook("search")(args);
     }
   },
   errors: {
@@ -871,6 +1007,40 @@ const hooks = {
         current_token = token;
       }
       return await base.create("error", current_token).hook("delete_multiple")(args);
+    },
+    search_count: async (q, parameters, token) => {
+      const args = {
+        params: {
+          q
+        },
+        ...parameters
+      };
+      let current_token;
+      const hook_token2 = hooks.get_token();
+      if (typeof hook_token2 === "string" && hook_token2 !== "") {
+        current_token = hook_token2;
+      }
+      if (typeof token === "string" && token !== "") {
+        current_token = token;
+      }
+      return await base.create("error", current_token).hook("search_count")(args);
+    },
+    search: async (q, parameters, token) => {
+      const args = {
+        params: {
+          q
+        },
+        ...parameters
+      };
+      let current_token;
+      const hook_token2 = hooks.get_token();
+      if (typeof hook_token2 === "string" && hook_token2 !== "") {
+        current_token = hook_token2;
+      }
+      if (typeof token === "string" && token !== "") {
+        current_token = token;
+      }
+      return await base.create("error", current_token).hook("search")(args);
     }
   },
   requests: {
@@ -1032,6 +1202,40 @@ const hooks = {
         current_token = token;
       }
       return await base.create("request", current_token).hook("delete_multiple")(args);
+    },
+    search_count: async (q, parameters, token) => {
+      const args = {
+        params: {
+          q
+        },
+        ...parameters
+      };
+      let current_token;
+      const hook_token2 = hooks.get_token();
+      if (typeof hook_token2 === "string" && hook_token2 !== "") {
+        current_token = hook_token2;
+      }
+      if (typeof token === "string" && token !== "") {
+        current_token = token;
+      }
+      return await base.create("request", current_token).hook("search_count")(args);
+    },
+    search: async (q, parameters, token) => {
+      const args = {
+        params: {
+          q
+        },
+        ...parameters
+      };
+      let current_token;
+      const hook_token2 = hooks.get_token();
+      if (typeof hook_token2 === "string" && hook_token2 !== "") {
+        current_token = hook_token2;
+      }
+      if (typeof token === "string" && token !== "") {
+        current_token = token;
+      }
+      return await base.create("request", current_token).hook("search")(args);
     }
   }
 };

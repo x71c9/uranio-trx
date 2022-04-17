@@ -24,6 +24,8 @@ export type Hooks = {
 		insert_multiple<D extends schema.Depth>(body:Hook.Body<'superuser', 'insert_multiple'>,parameters?:Hook.Arguments<'superuser', 'insert_multiple', D>,token?:string):Hook.Response<'superuser', 'insert_multiple', D>;
 		update_multiple<D extends schema.Depth>(ids:string,body:Hook.Body<'superuser', 'update_multiple'>,parameters?:Hook.Arguments<'superuser', 'update_multiple', D>,token?:string):Hook.Response<'superuser', 'update_multiple', D>;
 		delete_multiple<D extends schema.Depth>(ids:string,parameters?:Hook.Arguments<'superuser', 'delete_multiple', D>,token?:string):Hook.Response<'superuser', 'delete_multiple', D>;
+		search_count<D extends schema.Depth>(q:string,parameters?:Hook.Arguments<'superuser', 'search_count', D>,token?:string):Hook.Response<'superuser', 'search_count', D>;
+		search<D extends schema.Depth>(q:string,parameters?:Hook.Arguments<'superuser', 'search', D>,token?:string):Hook.Response<'superuser', 'search', D>;
 	};
 	users: {
 		authenticate(email: string, password: string):Promise<urn_response.General<Api.AuthResponse>>;
@@ -37,6 +39,8 @@ export type Hooks = {
 		insert_multiple<D extends schema.Depth>(body:Hook.Body<'user', 'insert_multiple'>,parameters?:Hook.Arguments<'user', 'insert_multiple', D>,token?:string):Hook.Response<'user', 'insert_multiple', D>;
 		update_multiple<D extends schema.Depth>(ids:string,body:Hook.Body<'user', 'update_multiple'>,parameters?:Hook.Arguments<'user', 'update_multiple', D>,token?:string):Hook.Response<'user', 'update_multiple', D>;
 		delete_multiple<D extends schema.Depth>(ids:string,parameters?:Hook.Arguments<'user', 'delete_multiple', D>,token?:string):Hook.Response<'user', 'delete_multiple', D>;
+		search_count<D extends schema.Depth>(q:string,parameters?:Hook.Arguments<'user', 'search_count', D>,token?:string):Hook.Response<'user', 'search_count', D>;
+		search<D extends schema.Depth>(q:string,parameters?:Hook.Arguments<'user', 'search', D>,token?:string):Hook.Response<'user', 'search', D>;
 	};
 	groups: {
 		count<D extends schema.Depth>(parameters?:Hook.Arguments<'group', 'count', D>,token?:string):Hook.Response<'group', 'count', D>;
@@ -49,6 +53,8 @@ export type Hooks = {
 		insert_multiple<D extends schema.Depth>(body:Hook.Body<'group', 'insert_multiple'>,parameters?:Hook.Arguments<'group', 'insert_multiple', D>,token?:string):Hook.Response<'group', 'insert_multiple', D>;
 		update_multiple<D extends schema.Depth>(ids:string,body:Hook.Body<'group', 'update_multiple'>,parameters?:Hook.Arguments<'group', 'update_multiple', D>,token?:string):Hook.Response<'group', 'update_multiple', D>;
 		delete_multiple<D extends schema.Depth>(ids:string,parameters?:Hook.Arguments<'group', 'delete_multiple', D>,token?:string):Hook.Response<'group', 'delete_multiple', D>;
+		search_count<D extends schema.Depth>(q:string,parameters?:Hook.Arguments<'group', 'search_count', D>,token?:string):Hook.Response<'group', 'search_count', D>;
+		search<D extends schema.Depth>(q:string,parameters?:Hook.Arguments<'group', 'search', D>,token?:string):Hook.Response<'group', 'search', D>;
 	};
 	media: {
 		upload(file: Buffer | ArrayBuffer | Blob, token?: string):Promise<urn_response.General<schema.Atom<'media'>>>;
@@ -63,6 +69,8 @@ export type Hooks = {
 		insert_multiple<D extends schema.Depth>(body:Hook.Body<'media', 'insert_multiple'>,parameters?:Hook.Arguments<'media', 'insert_multiple', D>,token?:string):Hook.Response<'media', 'insert_multiple', D>;
 		update_multiple<D extends schema.Depth>(ids:string,body:Hook.Body<'media', 'update_multiple'>,parameters?:Hook.Arguments<'media', 'update_multiple', D>,token?:string):Hook.Response<'media', 'update_multiple', D>;
 		delete_multiple<D extends schema.Depth>(ids:string,parameters?:Hook.Arguments<'media', 'delete_multiple', D>,token?:string):Hook.Response<'media', 'delete_multiple', D>;
+		search_count<D extends schema.Depth>(q:string,parameters?:Hook.Arguments<'media', 'search_count', D>,token?:string):Hook.Response<'media', 'search_count', D>;
+		search<D extends schema.Depth>(q:string,parameters?:Hook.Arguments<'media', 'search', D>,token?:string):Hook.Response<'media', 'search', D>;
 	};
 	errors: {
 		count<D extends schema.Depth>(parameters?:Hook.Arguments<'error', 'count', D>,token?:string):Hook.Response<'error', 'count', D>;
@@ -75,6 +83,8 @@ export type Hooks = {
 		insert_multiple<D extends schema.Depth>(body:Hook.Body<'error', 'insert_multiple'>,parameters?:Hook.Arguments<'error', 'insert_multiple', D>,token?:string):Hook.Response<'error', 'insert_multiple', D>;
 		update_multiple<D extends schema.Depth>(ids:string,body:Hook.Body<'error', 'update_multiple'>,parameters?:Hook.Arguments<'error', 'update_multiple', D>,token?:string):Hook.Response<'error', 'update_multiple', D>;
 		delete_multiple<D extends schema.Depth>(ids:string,parameters?:Hook.Arguments<'error', 'delete_multiple', D>,token?:string):Hook.Response<'error', 'delete_multiple', D>;
+		search_count<D extends schema.Depth>(q:string,parameters?:Hook.Arguments<'error', 'search_count', D>,token?:string):Hook.Response<'error', 'search_count', D>;
+		search<D extends schema.Depth>(q:string,parameters?:Hook.Arguments<'error', 'search', D>,token?:string):Hook.Response<'error', 'search', D>;
 	};
 	requests: {
 		count<D extends schema.Depth>(parameters?:Hook.Arguments<'request', 'count', D>,token?:string):Hook.Response<'request', 'count', D>;
@@ -87,6 +97,8 @@ export type Hooks = {
 		insert_multiple<D extends schema.Depth>(body:Hook.Body<'request', 'insert_multiple'>,parameters?:Hook.Arguments<'request', 'insert_multiple', D>,token?:string):Hook.Response<'request', 'insert_multiple', D>;
 		update_multiple<D extends schema.Depth>(ids:string,body:Hook.Body<'request', 'update_multiple'>,parameters?:Hook.Arguments<'request', 'update_multiple', D>,token?:string):Hook.Response<'request', 'update_multiple', D>;
 		delete_multiple<D extends schema.Depth>(ids:string,parameters?:Hook.Arguments<'request', 'delete_multiple', D>,token?:string):Hook.Response<'request', 'delete_multiple', D>;
+		search_count<D extends schema.Depth>(q:string,parameters?:Hook.Arguments<'request', 'search_count', D>,token?:string):Hook.Response<'request', 'search_count', D>;
+		search<D extends schema.Depth>(q:string,parameters?:Hook.Arguments<'request', 'search', D>,token?:string):Hook.Response<'request', 'search', D>;
 	};
 };
 /** --uranio-generate-types-end */

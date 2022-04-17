@@ -227,6 +227,48 @@ export const hooks:Hooks = {
 			}
 			return await base.create('superuser',current_token).hook<'delete_multiple',D>('delete_multiple')(args);
 		},
+		search_count: async <D extends schema.Depth>(
+			q:string,
+			parameters?:types.Hook.Arguments<'superuser', 'search_count', D>,
+			token?:string
+		):types.Hook.Response<'superuser', 'search_count', D>  => {
+			const args:types.Hook.Arguments<'superuser', 'search_count', D> = {
+				params: {
+					q: q,
+				},
+				...parameters
+			};
+			let current_token:string|undefined;
+			const hook_token = hooks.get_token();
+			if(typeof hook_token === 'string' && hook_token !== ''){
+				current_token = hook_token;
+			}
+			if(typeof token === 'string' && token !== ''){
+				current_token = token;
+			}
+			return await base.create('superuser',current_token).hook<'search_count',D>('search_count')(args);
+		},
+		search: async <D extends schema.Depth>(
+			q:string,
+			parameters?:types.Hook.Arguments<'superuser', 'search', D>,
+			token?:string
+		):types.Hook.Response<'superuser', 'search', D>  => {
+			const args:types.Hook.Arguments<'superuser', 'search', D> = {
+				params: {
+					q: q,
+				},
+				...parameters
+			};
+			let current_token:string|undefined;
+			const hook_token = hooks.get_token();
+			if(typeof hook_token === 'string' && hook_token !== ''){
+				current_token = hook_token;
+			}
+			if(typeof token === 'string' && token !== ''){
+				current_token = token;
+			}
+			return await base.create('superuser',current_token).hook<'search',D>('search')(args);
+		},
 	},
 	users: {
 		authenticate: async (
@@ -433,6 +475,48 @@ export const hooks:Hooks = {
 			}
 			return await base.create('user',current_token).hook<'delete_multiple',D>('delete_multiple')(args);
 		},
+		search_count: async <D extends schema.Depth>(
+			q:string,
+			parameters?:types.Hook.Arguments<'user', 'search_count', D>,
+			token?:string
+		):types.Hook.Response<'user', 'search_count', D>  => {
+			const args:types.Hook.Arguments<'user', 'search_count', D> = {
+				params: {
+					q: q,
+				},
+				...parameters
+			};
+			let current_token:string|undefined;
+			const hook_token = hooks.get_token();
+			if(typeof hook_token === 'string' && hook_token !== ''){
+				current_token = hook_token;
+			}
+			if(typeof token === 'string' && token !== ''){
+				current_token = token;
+			}
+			return await base.create('user',current_token).hook<'search_count',D>('search_count')(args);
+		},
+		search: async <D extends schema.Depth>(
+			q:string,
+			parameters?:types.Hook.Arguments<'user', 'search', D>,
+			token?:string
+		):types.Hook.Response<'user', 'search', D>  => {
+			const args:types.Hook.Arguments<'user', 'search', D> = {
+				params: {
+					q: q,
+				},
+				...parameters
+			};
+			let current_token:string|undefined;
+			const hook_token = hooks.get_token();
+			if(typeof hook_token === 'string' && hook_token !== ''){
+				current_token = hook_token;
+			}
+			if(typeof token === 'string' && token !== ''){
+				current_token = token;
+			}
+			return await base.create('user',current_token).hook<'search',D>('search')(args);
+		},
 	},
 	groups: {
 		count: async <D extends schema.Depth>(
@@ -632,6 +716,48 @@ export const hooks:Hooks = {
 				current_token = token;
 			}
 			return await base.create('group',current_token).hook<'delete_multiple',D>('delete_multiple')(args);
+		},
+		search_count: async <D extends schema.Depth>(
+			q:string,
+			parameters?:types.Hook.Arguments<'group', 'search_count', D>,
+			token?:string
+		):types.Hook.Response<'group', 'search_count', D>  => {
+			const args:types.Hook.Arguments<'group', 'search_count', D> = {
+				params: {
+					q: q,
+				},
+				...parameters
+			};
+			let current_token:string|undefined;
+			const hook_token = hooks.get_token();
+			if(typeof hook_token === 'string' && hook_token !== ''){
+				current_token = hook_token;
+			}
+			if(typeof token === 'string' && token !== ''){
+				current_token = token;
+			}
+			return await base.create('group',current_token).hook<'search_count',D>('search_count')(args);
+		},
+		search: async <D extends schema.Depth>(
+			q:string,
+			parameters?:types.Hook.Arguments<'group', 'search', D>,
+			token?:string
+		):types.Hook.Response<'group', 'search', D>  => {
+			const args:types.Hook.Arguments<'group', 'search', D> = {
+				params: {
+					q: q,
+				},
+				...parameters
+			};
+			let current_token:string|undefined;
+			const hook_token = hooks.get_token();
+			if(typeof hook_token === 'string' && hook_token !== ''){
+				current_token = hook_token;
+			}
+			if(typeof token === 'string' && token !== ''){
+				current_token = token;
+			}
+			return await base.create('group',current_token).hook<'search',D>('search')(args);
 		},
 	},
 	media: {
@@ -863,6 +989,48 @@ export const hooks:Hooks = {
 			}
 			return await base.create('media',current_token).hook<'delete_multiple',D>('delete_multiple')(args);
 		},
+		search_count: async <D extends schema.Depth>(
+			q:string,
+			parameters?:types.Hook.Arguments<'media', 'search_count', D>,
+			token?:string
+		):types.Hook.Response<'media', 'search_count', D>  => {
+			const args:types.Hook.Arguments<'media', 'search_count', D> = {
+				params: {
+					q: q,
+				},
+				...parameters
+			};
+			let current_token:string|undefined;
+			const hook_token = hooks.get_token();
+			if(typeof hook_token === 'string' && hook_token !== ''){
+				current_token = hook_token;
+			}
+			if(typeof token === 'string' && token !== ''){
+				current_token = token;
+			}
+			return await base.create('media',current_token).hook<'search_count',D>('search_count')(args);
+		},
+		search: async <D extends schema.Depth>(
+			q:string,
+			parameters?:types.Hook.Arguments<'media', 'search', D>,
+			token?:string
+		):types.Hook.Response<'media', 'search', D>  => {
+			const args:types.Hook.Arguments<'media', 'search', D> = {
+				params: {
+					q: q,
+				},
+				...parameters
+			};
+			let current_token:string|undefined;
+			const hook_token = hooks.get_token();
+			if(typeof hook_token === 'string' && hook_token !== ''){
+				current_token = hook_token;
+			}
+			if(typeof token === 'string' && token !== ''){
+				current_token = token;
+			}
+			return await base.create('media',current_token).hook<'search',D>('search')(args);
+		},
 	},
 	errors: {
 		count: async <D extends schema.Depth>(
@@ -1063,6 +1231,48 @@ export const hooks:Hooks = {
 			}
 			return await base.create('error',current_token).hook<'delete_multiple',D>('delete_multiple')(args);
 		},
+		search_count: async <D extends schema.Depth>(
+			q:string,
+			parameters?:types.Hook.Arguments<'error', 'search_count', D>,
+			token?:string
+		):types.Hook.Response<'error', 'search_count', D>  => {
+			const args:types.Hook.Arguments<'error', 'search_count', D> = {
+				params: {
+					q: q,
+				},
+				...parameters
+			};
+			let current_token:string|undefined;
+			const hook_token = hooks.get_token();
+			if(typeof hook_token === 'string' && hook_token !== ''){
+				current_token = hook_token;
+			}
+			if(typeof token === 'string' && token !== ''){
+				current_token = token;
+			}
+			return await base.create('error',current_token).hook<'search_count',D>('search_count')(args);
+		},
+		search: async <D extends schema.Depth>(
+			q:string,
+			parameters?:types.Hook.Arguments<'error', 'search', D>,
+			token?:string
+		):types.Hook.Response<'error', 'search', D>  => {
+			const args:types.Hook.Arguments<'error', 'search', D> = {
+				params: {
+					q: q,
+				},
+				...parameters
+			};
+			let current_token:string|undefined;
+			const hook_token = hooks.get_token();
+			if(typeof hook_token === 'string' && hook_token !== ''){
+				current_token = hook_token;
+			}
+			if(typeof token === 'string' && token !== ''){
+				current_token = token;
+			}
+			return await base.create('error',current_token).hook<'search',D>('search')(args);
+		},
 	},
 	requests: {
 		count: async <D extends schema.Depth>(
@@ -1262,6 +1472,48 @@ export const hooks:Hooks = {
 				current_token = token;
 			}
 			return await base.create('request',current_token).hook<'delete_multiple',D>('delete_multiple')(args);
+		},
+		search_count: async <D extends schema.Depth>(
+			q:string,
+			parameters?:types.Hook.Arguments<'request', 'search_count', D>,
+			token?:string
+		):types.Hook.Response<'request', 'search_count', D>  => {
+			const args:types.Hook.Arguments<'request', 'search_count', D> = {
+				params: {
+					q: q,
+				},
+				...parameters
+			};
+			let current_token:string|undefined;
+			const hook_token = hooks.get_token();
+			if(typeof hook_token === 'string' && hook_token !== ''){
+				current_token = hook_token;
+			}
+			if(typeof token === 'string' && token !== ''){
+				current_token = token;
+			}
+			return await base.create('request',current_token).hook<'search_count',D>('search_count')(args);
+		},
+		search: async <D extends schema.Depth>(
+			q:string,
+			parameters?:types.Hook.Arguments<'request', 'search', D>,
+			token?:string
+		):types.Hook.Response<'request', 'search', D>  => {
+			const args:types.Hook.Arguments<'request', 'search', D> = {
+				params: {
+					q: q,
+				},
+				...parameters
+			};
+			let current_token:string|undefined;
+			const hook_token = hooks.get_token();
+			if(typeof hook_token === 'string' && hook_token !== ''){
+				current_token = hook_token;
+			}
+			if(typeof token === 'string' && token !== ''){
+				current_token = token;
+			}
+			return await base.create('request',current_token).hook<'search',D>('search')(args);
 		},
 	},
 };

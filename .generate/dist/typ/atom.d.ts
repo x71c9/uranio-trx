@@ -163,7 +163,7 @@ export declare type Atom<A extends AtomName> =
 	never
 
 
-declare type RouteDefaultName = 'count' | 'find_one' | 'find' | 'find_id' | 'insert' | 'update' | 'delete' | 'insert_multiple' | 'update_multiple' | 'delete_multiple'
+declare type RouteDefaultName = 'count' | 'find_one' | 'find' | 'find_id' | 'insert' | 'update' | 'delete' | 'insert_multiple' | 'update_multiple' | 'delete_multiple' | 'search_count' | 'search'
 
 declare type RouteCustomName<A extends AtomName> =
 	A extends 'superuser' ? never :
@@ -189,6 +189,8 @@ export declare type RouteURL<A extends AtomName, R extends RouteName<A>> =
 		R extends 'insert_multiple' ? '/multiple' :
 		R extends 'update_multiple' ? '/multiple/:ids' :
 		R extends 'delete_multiple' ? '/multiple/:ids' :
+		R extends 'search_count' ? '/search/count/:q' :
+		R extends 'search' ? '/search/:q' :
 		never :
 	A extends 'user' ?
 		R extends 'count' ? '/count' :
@@ -201,6 +203,8 @@ export declare type RouteURL<A extends AtomName, R extends RouteName<A>> =
 		R extends 'insert_multiple' ? '/multiple' :
 		R extends 'update_multiple' ? '/multiple/:ids' :
 		R extends 'delete_multiple' ? '/multiple/:ids' :
+		R extends 'search_count' ? '/search/count/:q' :
+		R extends 'search' ? '/search/:q' :
 		never :
 	A extends 'group' ?
 		R extends 'count' ? '/count' :
@@ -213,6 +217,8 @@ export declare type RouteURL<A extends AtomName, R extends RouteName<A>> =
 		R extends 'insert_multiple' ? '/multiple' :
 		R extends 'update_multiple' ? '/multiple/:ids' :
 		R extends 'delete_multiple' ? '/multiple/:ids' :
+		R extends 'search_count' ? '/search/count/:q' :
+		R extends 'search' ? '/search/:q' :
 		never :
 	A extends 'media' ?
 		R extends 'upload' ? '/upload' :
@@ -227,6 +233,8 @@ export declare type RouteURL<A extends AtomName, R extends RouteName<A>> =
 		R extends 'insert_multiple' ? '/multiple' :
 		R extends 'update_multiple' ? '/multiple/:ids' :
 		R extends 'delete_multiple' ? '/multiple/:ids' :
+		R extends 'search_count' ? '/search/count/:q' :
+		R extends 'search' ? '/search/:q' :
 		never :
 	A extends 'error' ?
 		R extends 'count' ? '/count' :
@@ -239,6 +247,8 @@ export declare type RouteURL<A extends AtomName, R extends RouteName<A>> =
 		R extends 'insert_multiple' ? '/multiple' :
 		R extends 'update_multiple' ? '/multiple/:ids' :
 		R extends 'delete_multiple' ? '/multiple/:ids' :
+		R extends 'search_count' ? '/search/count/:q' :
+		R extends 'search' ? '/search/:q' :
 		never :
 	A extends 'request' ?
 		R extends 'count' ? '/count' :
@@ -251,6 +261,8 @@ export declare type RouteURL<A extends AtomName, R extends RouteName<A>> =
 		R extends 'insert_multiple' ? '/multiple' :
 		R extends 'update_multiple' ? '/multiple/:ids' :
 		R extends 'delete_multiple' ? '/multiple/:ids' :
+		R extends 'search_count' ? '/search/count/:q' :
+		R extends 'search' ? '/search/:q' :
 		never :
 never
 
@@ -262,11 +274,13 @@ export declare type RouteQueryParam<A extends AtomName, R extends RouteName<A>> 
 		R extends 'find' ? 'filter' | 'options' :
 		R extends 'find_id' ? 'options' :
 		R extends 'insert' ? never :
-		R extends 'update' ? never :
+		R extends 'update' ? 'options' :
 		R extends 'delete' ? never :
 		R extends 'insert_multiple' ? never :
 		R extends 'update_multiple' ? never :
 		R extends 'delete_multiple' ? never :
+		R extends 'search_count' ? never :
+		R extends 'search' ? 'options' :
 		never :
 	A extends 'user' ?
 		R extends 'count' ? 'filter' :
@@ -274,11 +288,13 @@ export declare type RouteQueryParam<A extends AtomName, R extends RouteName<A>> 
 		R extends 'find' ? 'filter' | 'options' :
 		R extends 'find_id' ? 'options' :
 		R extends 'insert' ? never :
-		R extends 'update' ? never :
+		R extends 'update' ? 'options' :
 		R extends 'delete' ? never :
 		R extends 'insert_multiple' ? never :
 		R extends 'update_multiple' ? never :
 		R extends 'delete_multiple' ? never :
+		R extends 'search_count' ? never :
+		R extends 'search' ? 'options' :
 		never :
 	A extends 'group' ?
 		R extends 'count' ? 'filter' :
@@ -286,11 +302,13 @@ export declare type RouteQueryParam<A extends AtomName, R extends RouteName<A>> 
 		R extends 'find' ? 'filter' | 'options' :
 		R extends 'find_id' ? 'options' :
 		R extends 'insert' ? never :
-		R extends 'update' ? never :
+		R extends 'update' ? 'options' :
 		R extends 'delete' ? never :
 		R extends 'insert_multiple' ? never :
 		R extends 'update_multiple' ? never :
 		R extends 'delete_multiple' ? never :
+		R extends 'search_count' ? never :
+		R extends 'search' ? 'options' :
 		never :
 	A extends 'media' ?
 		R extends 'upload' ? never :
@@ -300,11 +318,13 @@ export declare type RouteQueryParam<A extends AtomName, R extends RouteName<A>> 
 		R extends 'find' ? 'filter' | 'options' :
 		R extends 'find_id' ? 'options' :
 		R extends 'insert' ? never :
-		R extends 'update' ? never :
+		R extends 'update' ? 'options' :
 		R extends 'delete' ? never :
 		R extends 'insert_multiple' ? never :
 		R extends 'update_multiple' ? never :
 		R extends 'delete_multiple' ? never :
+		R extends 'search_count' ? never :
+		R extends 'search' ? 'options' :
 		never :
 	A extends 'error' ?
 		R extends 'count' ? 'filter' :
@@ -312,11 +332,13 @@ export declare type RouteQueryParam<A extends AtomName, R extends RouteName<A>> 
 		R extends 'find' ? 'filter' | 'options' :
 		R extends 'find_id' ? 'options' :
 		R extends 'insert' ? never :
-		R extends 'update' ? never :
+		R extends 'update' ? 'options' :
 		R extends 'delete' ? never :
 		R extends 'insert_multiple' ? never :
 		R extends 'update_multiple' ? never :
 		R extends 'delete_multiple' ? never :
+		R extends 'search_count' ? never :
+		R extends 'search' ? 'options' :
 		never :
 	A extends 'request' ?
 		R extends 'count' ? 'filter' :
@@ -324,11 +346,13 @@ export declare type RouteQueryParam<A extends AtomName, R extends RouteName<A>> 
 		R extends 'find' ? 'filter' | 'options' :
 		R extends 'find_id' ? 'options' :
 		R extends 'insert' ? never :
-		R extends 'update' ? never :
+		R extends 'update' ? 'options' :
 		R extends 'delete' ? never :
 		R extends 'insert_multiple' ? never :
 		R extends 'update_multiple' ? never :
 		R extends 'delete_multiple' ? never :
+		R extends 'search_count' ? never :
+		R extends 'search' ? 'options' :
 		never :
 never
 
@@ -348,6 +372,8 @@ export declare type CallResponse<A extends AtomName, R extends RouteName<A>, D e
 		R extends 'insert_multiple' ? Molecule<A,D>[] :
 		R extends 'update_multiple' ? Molecule<A,D>[] :
 		R extends 'delete_multiple' ? Molecule<A,D>[] :
+		R extends 'search_count' ? number :
+		R extends 'search' ? Molecule<A,D>[] :
 		never :
 	A extends 'user' ?
 		R extends 'count' ? number :
@@ -360,6 +386,8 @@ export declare type CallResponse<A extends AtomName, R extends RouteName<A>, D e
 		R extends 'insert_multiple' ? Molecule<A,D>[] :
 		R extends 'update_multiple' ? Molecule<A,D>[] :
 		R extends 'delete_multiple' ? Molecule<A,D>[] :
+		R extends 'search_count' ? number :
+		R extends 'search' ? Molecule<A,D>[] :
 		never :
 	A extends 'group' ?
 		R extends 'count' ? number :
@@ -372,6 +400,8 @@ export declare type CallResponse<A extends AtomName, R extends RouteName<A>, D e
 		R extends 'insert_multiple' ? Molecule<A,D>[] :
 		R extends 'update_multiple' ? Molecule<A,D>[] :
 		R extends 'delete_multiple' ? Molecule<A,D>[] :
+		R extends 'search_count' ? number :
+		R extends 'search' ? Molecule<A,D>[] :
 		never :
 	A extends 'media' ?
 		R extends 'upload' ? Molecule<A,D>[] :
@@ -386,6 +416,8 @@ export declare type CallResponse<A extends AtomName, R extends RouteName<A>, D e
 		R extends 'insert_multiple' ? Molecule<A,D>[] :
 		R extends 'update_multiple' ? Molecule<A,D>[] :
 		R extends 'delete_multiple' ? Molecule<A,D>[] :
+		R extends 'search_count' ? number :
+		R extends 'search' ? Molecule<A,D>[] :
 		never :
 	A extends 'error' ?
 		R extends 'count' ? number :
@@ -398,6 +430,8 @@ export declare type CallResponse<A extends AtomName, R extends RouteName<A>, D e
 		R extends 'insert_multiple' ? Molecule<A,D>[] :
 		R extends 'update_multiple' ? Molecule<A,D>[] :
 		R extends 'delete_multiple' ? Molecule<A,D>[] :
+		R extends 'search_count' ? number :
+		R extends 'search' ? Molecule<A,D>[] :
 		never :
 	A extends 'request' ?
 		R extends 'count' ? number :
@@ -410,6 +444,8 @@ export declare type CallResponse<A extends AtomName, R extends RouteName<A>, D e
 		R extends 'insert_multiple' ? Molecule<A,D>[] :
 		R extends 'update_multiple' ? Molecule<A,D>[] :
 		R extends 'delete_multiple' ? Molecule<A,D>[] :
+		R extends 'search_count' ? number :
+		R extends 'search' ? Molecule<A,D>[] :
 		never :
 	never
 
