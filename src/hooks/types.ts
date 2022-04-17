@@ -100,5 +100,19 @@ export type Hooks = {
 		search_count<D extends schema.Depth>(q:string,parameters?:Hook.Arguments<'request', 'search_count', D>,token?:string):Hook.Response<'request', 'search_count', D>;
 		search<D extends schema.Depth>(q:string,parameters?:Hook.Arguments<'request', 'search', D>,token?:string):Hook.Response<'request', 'search', D>;
 	};
+	settings: {
+		count<D extends schema.Depth>(parameters?:Hook.Arguments<'setting', 'count', D>,token?:string):Hook.Response<'setting', 'count', D>;
+		find_one<D extends schema.Depth>(parameters?:Hook.Arguments<'setting', 'find_one', D>,token?:string):Hook.Response<'setting', 'find_one', D>;
+		find<D extends schema.Depth>(parameters?:Hook.Arguments<'setting', 'find', D>,token?:string):Hook.Response<'setting', 'find', D>;
+		find_id<D extends schema.Depth>(id:string,parameters?:Hook.Arguments<'setting', 'find_id', D>,token?:string):Hook.Response<'setting', 'find_id', D>;
+		insert<D extends schema.Depth>(body:Hook.Body<'setting', 'insert'>,parameters?:Hook.Arguments<'setting', 'insert', D>,token?:string):Hook.Response<'setting', 'insert', D>;
+		update<D extends schema.Depth>(id:string,body:Hook.Body<'setting', 'update'>,parameters?:Hook.Arguments<'setting', 'update', D>,token?:string):Hook.Response<'setting', 'update', D>;
+		delete<D extends schema.Depth>(id:string,parameters?:Hook.Arguments<'setting', 'delete', D>,token?:string):Hook.Response<'setting', 'delete', D>;
+		insert_multiple<D extends schema.Depth>(body:Hook.Body<'setting', 'insert_multiple'>,parameters?:Hook.Arguments<'setting', 'insert_multiple', D>,token?:string):Hook.Response<'setting', 'insert_multiple', D>;
+		update_multiple<D extends schema.Depth>(ids:string,body:Hook.Body<'setting', 'update_multiple'>,parameters?:Hook.Arguments<'setting', 'update_multiple', D>,token?:string):Hook.Response<'setting', 'update_multiple', D>;
+		delete_multiple<D extends schema.Depth>(ids:string,parameters?:Hook.Arguments<'setting', 'delete_multiple', D>,token?:string):Hook.Response<'setting', 'delete_multiple', D>;
+		search_count<D extends schema.Depth>(q:string,parameters?:Hook.Arguments<'setting', 'search_count', D>,token?:string):Hook.Response<'setting', 'search_count', D>;
+		search<D extends schema.Depth>(q:string,parameters?:Hook.Arguments<'setting', 'search', D>,token?:string):Hook.Response<'setting', 'search', D>;
+	};
 };
 /** --uranio-generate-types-end */
