@@ -29,8 +29,8 @@
 			]
 		}
 	},
-	"repository": "git@github.com:nbl7/uranio-trx.git",
-	"author": "Andrea Reni <mail@nbl7.net>",
+	"repository": "git@github.com:x71c9/uranio-trx.git",
+	"author": "Andrea Reni <108585118+x71c9@users.noreply.github.com>",
 	"scripts": {
 		"build": "yarn tsc -b",
 		"dev": "yarn tsc-watch --onSuccess \"node -r source-map-support/register -r dotenv/config ./dist/dev.js\"",
@@ -43,16 +43,16 @@
 		"generate:client-config": "yarn generate urn_command=client-config"
 	},
 	"devDependencies": {
-		"uranio-dev": "git+ssh://git@github.com/nbl7/uranio-dev.git#master"
+		"uranio-dev": "git+ssh://git@github.com/x71c9/uranio-dev.git#master"
 	},
 	"dependencies": {
 		"axios": "^0.26.0",
 		"dateformat": "^3",
 		"dotenv": "^16.0.0",
 		"esbuild": "^0.14.25",
-		"uranio-api": "git+ssh://git@github.com/nbl7/uranio-api.git#master",
-		"uranio-core": "git+ssh://git@github.com/nbl7/uranio-core.git#master",
-		"uranio-schema": "ssh://git@github.com/nbl7/uranio-schema.git#master",
-		"urn-lib": "git+ssh://git@github.com/nbl7/uranio-lib.git#master"
+		"uranio-api": "git+ssh://git@github.com/x71c9/uranio-api.git#master",
+		"uranio-core": "git+ssh://git@github.com/x71c9/uranio-core.git#master",
+		"uranio-schema": "ssh://git@github.com/x71c9/uranio-schema.git#master",
+		"urn-lib": "git+ssh://git@github.com/x71c9/uranio-lib.git#master"
 	}
 }
