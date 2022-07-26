@@ -1,5 +1,5 @@
 /**
- * Env module
+ * TRX Env module
  *
  * @packageDocumentation
  */
