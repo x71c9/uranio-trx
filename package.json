@@ -1,5 +1,6 @@
 {
 	"name": "uranio-trx",
+	"license": "UNLICENSED",
 	"version": "0.0.1",
 	"description": "Uranio TRX - Uranio transreceiver",
 	"main": "dist/server.js",
@@ -32,7 +33,6 @@
 	"repository": "git@github.com:x71c9/uranio-trx.git",
 	"author": "Andrea Reni <108585118+x71c9@users.noreply.github.com>",
 	"scripts": {
-		"dev:sync": "yarn tsc-watch --onSuccess \"node -r source-map-support/register -r dotenv/config ./dist/dev.js\"",
 		"build": "yarn tsc -b",
 		"dev": "yarn tsc-watch --onSuccess \"node -r source-map-support/register -r dotenv/config ./dist/dev.js\"",
 		"plain:generate": "node -r source-map-support/register -r dotenv/config ./dist/server/generate.js",
