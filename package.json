@@ -40,7 +40,10 @@
 		"generate:schema": "yarn generate urn_command=schema",
 		"generate:hooks": "yarn generate urn_command=hooks",
 		"generate:hook-types": "yarn generate urn_command=hook-types",
-		"generate:client-config": "yarn generate urn_command=client-config"
+		"generate:client-config": "yarn generate urn_command=client-config",
+		"dev:generate:hooks":"yarn tsc-watch --onSuccess \"yarn generate:hooks\"",
+		"dev:generate:hooks-types":"yarn tsc-watch --onSuccess \"yarn generate:hooks-types\"",
+		"dev:generate:client-config":"yarn tsc-watch --onSuccess \"yarn generate:client-config\""
 	},
 	"devDependencies": {
 		"uranio-dev": "git+ssh://git@github.com/x71c9/uranio-dev.git#master"
