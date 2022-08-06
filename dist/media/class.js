@@ -56,7 +56,7 @@ MediaBase = __decorate([
     urn_lib_1.urn_log.util.decorators.debug_methods
 ], MediaBase);
 function create(token) {
-    urn_lib_1.urn_log.fn_debug(`Create MediaBase`);
+    urn_lib_1.urn_log.trace(`Create MediaBase`);
     return new MediaBase(token);
 }
 exports.create = create;

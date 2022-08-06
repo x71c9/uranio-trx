@@ -61,7 +61,7 @@ export type AuthBaseInstance = InstanceType<typeof AuthBase>;
 
 export function create<A extends schema.AuthName>(auth_name:A)
 		:AuthBase<A>{
-	urn_log.fn_debug(`Create AuthBase [${auth_name}]`);
+	urn_log.trace(`Create AuthBase [${auth_name}]`);
 	return new AuthBase(auth_name);
 }
 

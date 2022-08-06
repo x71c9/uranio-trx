@@ -186,7 +186,7 @@ export type AxiosRawInstance = InstanceType<typeof AxiosRaw>;
 export function create(is_auth=false)
 		:AxiosRawInstance{
 	
-	urn_log.fn_debug('Create URNTRXRaw');
+	urn_log.trace('Create URNTRXRaw');
 	
 	const fetch_url = conf.get(`fetch_url`);
 	

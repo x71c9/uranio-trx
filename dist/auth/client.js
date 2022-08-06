@@ -68,7 +68,7 @@ function _check_auth_name(auth_name) {
     throw urn_exc.create(`INVALID_AUTH_NAME`, `Invalid AuthName \`${auth_name}\`.`);
 }
 function create(auth_name) {
-    urn_lib_1.urn_log.fn_debug(`Create AuthBase [${auth_name}]`);
+    urn_lib_1.urn_log.trace(`Create AuthBase [${auth_name}]`);
     return new AuthBase(auth_name);
 }
 exports.create = create;

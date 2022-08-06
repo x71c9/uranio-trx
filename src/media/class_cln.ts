@@ -74,7 +74,7 @@ export type MediaBaseInstance = InstanceType<typeof MediaBase>;
 
 export function create(token?:string)
 		:MediaBase{
-	urn_log.fn_debug(`Create MediaBase`);
+	urn_log.trace(`Create MediaBase`);
 	return new MediaBase(token);
 }
 

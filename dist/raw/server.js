@@ -158,7 +158,7 @@ async function _handle_axios_call(handler) {
  * A function the will create an AxiosRawInstance.
  */
 function create(is_auth = false) {
-    urn_lib_1.urn_log.fn_debug('Create URNTRXRaw');
+    urn_lib_1.urn_log.trace('Create URNTRXRaw');
     const fetch_url = conf.get(`fetch_url`);
     const axios_config = {
         baseURL: fetch_url
