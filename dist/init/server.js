@@ -55,7 +55,7 @@ function init(config, register_required = true) {
     // _set_raw();
     _validate_trx_variables();
     _validate_trx_book();
-    urn_lib_1.urn_log.debug(`Uranio trx initialization completed.`);
+    urn_lib_1.urn_log.trace(`Uranio trx initialization completed.`);
 }
 exports.init = init;
 // function _add_default_routes(){

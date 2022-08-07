@@ -52,7 +52,7 @@ export function init(
 	_validate_trx_variables();
 	_validate_trx_book();
 	
-	urn_log.debug(`Uranio trx initialization completed.`);
+	urn_log.trace(`Uranio trx initialization completed.`);
 	
 }
 

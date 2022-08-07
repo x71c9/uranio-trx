@@ -35,18 +35,18 @@ export const process_params = {
 };
 
 export function schema():string{
-	urn_log.debug('Started generating uranio trx schema...');
+	urn_log.trace('Started generating uranio trx schema...');
 	init();
 	const api_schema = api.util.generate.schema();
 	const text = _generate_uranio_schema_text(api_schema);
-	urn_log.debug(`TRX Schema generated.`);
+	urn_log.trace(`TRX Schema generated.`);
 	return text;
 }
 
 export function schema_and_save():void{
 	const text = schema();
 	save_schema(text);
-	urn_log.debug(`Schema generated and saved.`);
+	urn_log.trace(`Schema generated and saved.`);
 }
 
 export function save_schema(text:string):void{
@@ -55,19 +55,19 @@ export function save_schema(text:string):void{
 
 // export function hooks(repo:string):string{
 export function hooks_client():string{
-	urn_log.debug('Started generating uranio trx hooks...');
+	urn_log.trace('Started generating uranio trx hooks...');
 	init();
 	// const text = _generate_hooks_text(repo);
 	const text = _generate_hooks_text_client();
-	urn_log.debug(`TRX Client Hooks generated.`);
+	urn_log.trace(`TRX Client Hooks generated.`);
 	return text;
 }
 
 export function hooks_server():string{
-	urn_log.debug('Started generating uranio trx hooks...');
+	urn_log.trace('Started generating uranio trx hooks...');
 	init();
 	const text = _generate_hooks_text_server();
-	urn_log.debug(`TRX Server Hooks generated.`);
+	urn_log.trace(`TRX Server Hooks generated.`);
 	return text;
 }
 
@@ -80,7 +80,7 @@ export function hooks_and_save():void{
 	save_hooks_client(text_client);
 	_compile_hooks_server();
 	_compile_hooks_client();
-	urn_log.debug(`Hooks generated and saved.`);
+	urn_log.trace(`Hooks generated and saved.`);
 }
 
 export function save_hooks_server(text:string):void{
@@ -89,7 +89,7 @@ export function save_hooks_server(text:string):void{
 		output,
 		text
 	);
-	urn_log.debug(`Server Hooks saved in [${output}].`);
+	urn_log.trace(`Server Hooks saved in [${output}].`);
 }
 
 export function save_hooks_client(text:string):void{
@@ -98,25 +98,25 @@ export function save_hooks_client(text:string):void{
 		output,
 		text
 	);
-	urn_log.debug(`Client Hooks saved in [${output}].`);
+	urn_log.trace(`Client Hooks saved in [${output}].`);
 }
 
 export function client_config(client_default:Required<ClientConfiguration>):string{
-	urn_log.debug('Started generating uranio trx client config...');
+	urn_log.trace('Started generating uranio trx client config...');
 	init();
 	// const all_server_conf = conf.get_all();
 	// for(const reqkey of required_server_config_client){
 	//   (client_default as any)[`__server_${reqkey}`] = all_server_conf[reqkey];
 	// }
 	const text = api.util.generate.client_config(client_default);
-	urn_log.debug(`TRX client config generated.`);
+	urn_log.trace(`TRX client config generated.`);
 	return text;
 }
 
 export function client_config_and_save(client_default:Required<ClientConfiguration>):void{
 	const text = client_config(client_default);
 	save_client_config(text);
-	urn_log.debug(`TRX Client config generated and saved.`);
+	urn_log.trace(`TRX Client config generated and saved.`);
 }
 
 export function save_client_config(text:string):void{
@@ -154,7 +154,7 @@ function _compile(src:string, dest:string){
 		platform: 'node',
 		format: 'cjs'
 	});
-	urn_log.debug(`TRX Compiled [${src}] to [${dest}].`);
+	urn_log.trace(`TRX Compiled [${src}] to [${dest}].`);
 }
 
 function _compile_hooks_server(){
@@ -177,10 +177,10 @@ function _compile_hooks_types(){
 }
 
 export function hook_types():string{
-	urn_log.debug('Started generating uranio trx types...');
+	urn_log.trace('Started generating uranio trx types...');
 	init();
 	const text = _generate_uranio_hook_types_text();
-	urn_log.debug(`TRX Hook types generated.`);
+	urn_log.trace(`TRX Hook types generated.`);
 	return text;
 }
 
@@ -188,16 +188,16 @@ export function hook_types_and_save():void{
 	const text = hook_types();
 	save_hook_types(text);
 	_compile_hooks_types();
-	urn_log.debug(`Hook types generated and saved.`);
+	urn_log.trace(`Hook types generated and saved.`);
 }
 
 export function save_hook_types(text:string):void{
 	// const now = dateformat(new Date(), `yyyymmddHHMMssl`);
 	// const backup_path = `${_get_hook_types_path_src()}.${now}.bkp`;
 	// fs.copyFileSync(_get_hook_types_path_src(), backup_path);
-	// urn_log.debug(`Copied backup file for atom schema in [${backup_path}].`);
+	// urn_log.trace(`Copied backup file for atom schema in [${backup_path}].`);
 	fs.writeFileSync(_get_hook_types_path_src(), text);
-	urn_log.debug(`Update hook types [${_get_hook_types_path_src()}].`);
+	urn_log.trace(`Update hook types [${_get_hook_types_path_src()}].`);
 }
 
 export function init():void{

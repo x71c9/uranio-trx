@@ -56,7 +56,7 @@ function init(config, register_required = true) {
     // _set_raw();
     _validate_trx_client_variables();
     _validate_trx_client_book();
-    urn_lib_1.urn_log.debug(`Uranio trx client initialization completed.`);
+    urn_lib_1.urn_log.trace(`Uranio trx client initialization completed.`);
 }
 exports.init = init;
 function _register_required_atoms() {

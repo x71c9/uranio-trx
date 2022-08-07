@@ -50,7 +50,7 @@ export function init(
 	_validate_trx_client_variables();
 	_validate_trx_client_book();
 	
-	urn_log.debug(`Uranio trx client initialization completed.`);
+	urn_log.trace(`Uranio trx client initialization completed.`);
 	
 }
 
