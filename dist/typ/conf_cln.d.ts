@@ -10,8 +10,6 @@ declare type OptionalClientConfigParam = {
     fetch: RawName;
     service_url: string;
     dev_service_url: string;
-    fetch_url: string;
-    dev_fetch_url: string;
 };
 export declare type ClientConfiguration = api_client.types.ClientConfiguration & RequiredClientConfigParams & Partial<OptionalClientConfigParam>;
 export {};

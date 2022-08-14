@@ -21,9 +21,11 @@ const client_1 = __importDefault(require("uranio-api/client"));
 exports.trx_client_config = {
     ...client_1.default.conf.get_all(),
     fetch: 'axios',
-    service_url: 'http://localhost:7777/uranio/api',
-    dev_service_url: 'http://localhost:7777/uranio/api',
-    fetch_url: 'http://localhost:7777/uranio/api',
-    dev_fetch_url: 'http://localhost:7777/uranio/api'
+    service_url: 'http://0.0.0.0:7777/uranio/api',
+    dev_service_url: 'http://0.0.0.0:7777/uranio/api',
+    // service_domain: '0.0.0.0',
+    // dev_service_domain: '0.0.0.0'
+    // fetch_url: 'http://localhost:7777/uranio/api',
+    // dev_fetch_url: 'http://localhost:7777/uranio/api'
 };
 //# sourceMappingURL=default_conf.js.map

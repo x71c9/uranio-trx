@@ -159,7 +159,7 @@ async function _handle_axios_call(handler) {
  */
 function create(is_auth = false) {
     urn_lib_1.urn_log.trace('Create URNTRXRaw');
-    const fetch_url = conf.get(`fetch_url`);
+    const fetch_url = conf.get(`service_url`);
     const axios_config = {
         baseURL: fetch_url
     };

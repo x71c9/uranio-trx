@@ -188,7 +188,7 @@ export function create(is_auth=false)
 	
 	urn_log.trace('Create URNTRXRaw');
 	
-	const fetch_url = conf.get(`fetch_url`);
+	const fetch_url = conf.get(`service_url`);
 	
 	const axios_config:AxiosRequestConfig = {
 		baseURL: fetch_url
