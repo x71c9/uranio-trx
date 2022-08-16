@@ -13,10 +13,10 @@ const uranio_api_1 = __importDefault(require("uranio-api"));
 exports.trx_config = {
     ...uranio_api_1.default.conf.get_all(),
     fetch: 'axios',
-    service_url: 'http://0.0.0.0:7777/uranio/api',
-    dev_service_url: 'http://0.0.0.0:7777/uranio/api',
-    // service_domain: 'localhost',
-    // dev_service_domain: 'localhost'
+    service_domain: '0.0.0.0',
+    dev_service_domain: '0.0.0.0'
+    // service_url: 'http://0.0.0.0:7777/uranio/api',
+    // dev_service_url: 'http://0.0.0.0:7777/uranio/api',
     // service_protocol: 'http',
     // dev_service_protocol: 'http',
     // service_port: '7777',

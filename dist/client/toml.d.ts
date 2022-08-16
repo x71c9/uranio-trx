@@ -1,5 +1,6 @@
 /**
- * Uranio generate script will replace this file with the client part
+ * Module for default client configuration object
+ * Uranio `generate` script will replace this file with the client part
  * of the uranio.toml configration file.
  *
  * All properties starting with `client_` will populate this object.

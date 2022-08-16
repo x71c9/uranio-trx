@@ -28,7 +28,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.get_all = exports.set = exports.get = void 0;
+exports.get_service_url = exports.get_all = exports.set = exports.get = void 0;
 const urn_lib_1 = require("urn-lib");
 const default_conf_1 = require("../client/default_conf");
 const env = __importStar(require("../env/client"));
@@ -45,4 +45,21 @@ function get_all() {
     return urn_ctx.get_all();
 }
 exports.get_all = get_all;
+function get_service_url() {
+    const prefix = get(`prefix_api`);
+    // If the configuraion cotains `panel_protocol`
+    // it means the repo is uranio-adm, therefore the service url
+    // is proxied by the panel
+    if (typeof urn_ctx.get_any(`panel_protocol`) === 'string') {
+        const panel_protocol = urn_ctx.get_any(`panel_protocol`);
+        const panel_domain = urn_ctx.get_any(`panel_domain`);
+        const panel_port = urn_ctx.get_any(`panel_port`);
+        return `${panel_protocol}://${panel_domain}:${panel_port}${prefix}`;
+    }
+    const protocol = get(`service_protocol`);
+    const domain = get(`service_domain`);
+    const port = get(`service_port`);
+    return `${protocol}://${domain}:${port}${prefix}`;
+}
+exports.get_service_url = get_service_url;
 //# sourceMappingURL=client.js.map

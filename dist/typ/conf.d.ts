@@ -8,8 +8,8 @@ import { RawName } from '../typ/raw';
 declare type RequiredConfigParams = {};
 declare type OptionalConfigParam = {
     fetch: RawName;
-    service_url: string;
-    dev_service_url: string;
+    service_domain: string;
+    dev_service_domain: string;
 };
 export declare type Configuration = api.types.Configuration & RequiredConfigParams & Partial<OptionalConfigParam>;
 export {};

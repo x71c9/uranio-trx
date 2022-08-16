@@ -10,8 +10,6 @@ prefix_api = '/uranio/api'
 prefix_log = '/logs'
 lambda = 'netlify'
 fetch = 'axios'
-fetch_url = 'http://localhost:7773/uranio/api'
-dev_fetch_url = 'http://localhost:7773/uranio/api'
 [default_atoms]
 	superuser = true
 	group = true
@@ -21,19 +19,13 @@ dev_fetch_url = 'http://localhost:7773/uranio/api'
 	error = true
 [service]
 	platform = 'express'
-	protocol = 'http'
-	domain = 'localhost'
+	protocol = 'https'
+	domain = '0.0.0.0'
 	port = 7773
-	url = 'http://localhost:7773/uranio/api'
 [dev.service]
-	protocol = 'http'
-	domain = 'localhost'
+	protocol = 'https'
+	domain = '0.0.0.0'
 	port = 7773
-	url = 'http://localhost:7773/uranio/api'
-[client.fetch]
-	url = 'http://localhost:7773/uranio/api'
-[client.dev.fetch]
-	url = 'http://localhost:7773/uranio/api'
 [log]
 	debug_info = true
 	color = true

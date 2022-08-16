@@ -38,10 +38,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.create = void 0;
+const https_1 = __importDefault(require("https"));
 const axios_1 = __importDefault(require("axios"));
 const urn_lib_1 = require("urn-lib");
 const urn_ret = urn_lib_1.urn_return.create();
 const conf = __importStar(require("../conf/client"));
+const env = __importStar(require("../env/client"));
 const axios_config = {
     // headers: {'user-agent': 'Uranio TRX 0.0.1'}
     withCredentials: true
@@ -61,6 +63,7 @@ let AxiosRaw = class AxiosRaw {
             axios_config.headers = headers;
         }
         return await _handle_axios_call(async () => {
+            // console.log(_url_with_query(url, query));
             return await this._axios_instance.get(_url_with_query(url, query), this.axios_config);
         });
     }
@@ -159,10 +162,14 @@ async function _handle_axios_call(handler) {
  */
 function create(is_auth = false) {
     urn_lib_1.urn_log.trace('Create URNTRXRaw');
-    const fetch_url = conf.get(`service_url`);
+    const service_url = conf.get_service_url();
     const axios_config = {
-        baseURL: fetch_url
+        baseURL: service_url,
     };
+    const https_agent = new https_1.default.Agent({
+        rejectUnauthorized: (env.is_production() === true) ? true : false
+    });
+    axios_config.httpsAgent = https_agent;
     const axios_instance = axios_1.default.create(axios_config);
     // axios_instance.interceptors.request.use(request => {
     //   console.log('Starting Request', JSON.stringify(request, null, 2));

@@ -188,10 +188,10 @@ export function create(is_auth=false)
 	
 	urn_log.trace('Create URNTRXRaw');
 	
-	const fetch_url = conf.get(`service_url`);
+	const service_url = conf.get_service_url();
 	
 	const axios_config:AxiosRequestConfig = {
-		baseURL: fetch_url
+		baseURL: service_url
 	};
 	const axios_instance = axios.create(axios_config);
 	// axios_instance.interceptors.request.use(request => {

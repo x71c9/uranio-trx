@@ -13,16 +13,20 @@ type RequiredClientConfigParams = {
 
 type OptionalClientConfigParam = {
 	fetch: RawName
-	service_url: string
-	dev_service_url: string
+	service_domain: string
+	dev_service_domain: string
+	// service_url: string
+	// dev_service_url: string
 	// service_domain: string
 	// dev_service_domain: string
-	// service_protocol: string
-	// dev_service_protocol: string
-	// service_port: number
-	// dev_service_port: number
+	service_protocol: string
+	dev_service_protocol: string
+	service_port: number
+	dev_service_port: number
 	// fetch_url: string
 	// dev_fetch_url: string
+	prefix_api: string
+	dev_prefix_api: string
 }
 
 export type ClientConfiguration =
