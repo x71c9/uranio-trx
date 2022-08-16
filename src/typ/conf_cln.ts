@@ -27,6 +27,8 @@ type OptionalClientConfigParam = {
 	// dev_fetch_url: string
 	prefix_api: string
 	dev_prefix_api: string
+	ssl_secure: boolean
+	dev_ssl_secure: boolean
 }
 
 export type ClientConfiguration =

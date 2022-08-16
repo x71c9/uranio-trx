@@ -33,5 +33,7 @@ exports.trx_client_config = {
     // dev_service_url: 'http://0.0.0.0:7777/uranio/api',
     // fetch_url: 'http://localhost:7777/uranio/api',
     // dev_fetch_url: 'http://localhost:7777/uranio/api'
+    ssl_secure: true,
+    dev_ssl_secure: false
 };
 //# sourceMappingURL=default_conf.js.map

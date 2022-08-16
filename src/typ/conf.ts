@@ -23,6 +23,8 @@ type OptionalConfigParam = {
 	// dev_service_port: number
 	// fetch_url: string
 	// dev_fetch_url: string
+	ssl_secure: boolean
+	dev_ssl_secure: boolean
 }
 
 export type Configuration =

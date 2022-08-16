@@ -43,7 +43,6 @@ const axios_1 = __importDefault(require("axios"));
 const urn_lib_1 = require("urn-lib");
 const urn_ret = urn_lib_1.urn_return.create();
 const conf = __importStar(require("../conf/client"));
-const env = __importStar(require("../env/client"));
 const axios_config = {
     // headers: {'user-agent': 'Uranio TRX 0.0.1'}
     withCredentials: true
@@ -167,7 +166,7 @@ function create(is_auth = false) {
         baseURL: service_url,
     };
     const https_agent = new https_1.default.Agent({
-        rejectUnauthorized: (env.is_production() === true) ? true : false
+        rejectUnauthorized: (conf.get(`ssl_secure`) === true) ? true : false
     });
     axios_config.httpsAgent = https_agent;
     const axios_instance = axios_1.default.create(axios_config);

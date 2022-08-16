@@ -20,8 +20,6 @@ import {RAW} from '../typ/raw_cln';
 
 import * as conf from '../conf/client';
 
-import * as env from '../env/client';
-
 const axios_config = {
 	// headers: {'user-agent': 'Uranio TRX 0.0.1'}
 	withCredentials: true
@@ -199,7 +197,7 @@ export function create(is_auth=false)
 		baseURL: service_url,
 	};
 	const https_agent = new https.Agent({
-		rejectUnauthorized: (env.is_production() === true) ? true : false
+		rejectUnauthorized: (conf.get(`ssl_secure`) === true) ? true : false
   });
 	axios_config.httpsAgent = https_agent;
 	

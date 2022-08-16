@@ -16,7 +16,7 @@ export const trx_config:Required<Configuration> = {
 	
 	service_domain: '0.0.0.0',
 	
-	dev_service_domain: '0.0.0.0'
+	dev_service_domain: '0.0.0.0',
 	
 	// service_url: 'http://0.0.0.0:7777/uranio/api',
 	
@@ -33,5 +33,9 @@ export const trx_config:Required<Configuration> = {
 	// fetch_url: 'http://localhost:7777/uranio/api',
 	
 	// dev_fetch_url: 'http://localhost:7777/uranio/api',
+	
+	ssl_secure: true,
+	
+	dev_ssl_secure: false
 	
 };

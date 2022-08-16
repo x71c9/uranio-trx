@@ -47,5 +47,8 @@ export const trx_client_config:Required<ClientConfiguration> = {
 	
 	// dev_fetch_url: 'http://localhost:7777/uranio/api'
 	
+	ssl_secure: true,
+	
+	dev_ssl_secure: false
 	
 };
