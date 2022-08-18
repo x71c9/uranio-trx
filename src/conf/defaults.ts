@@ -14,9 +14,9 @@ export const trx_config:Required<Configuration> = {
 	
 	fetch: 'axios',
 	
-	service_domain: '0.0.0.0',
+	// service_domain: '0.0.0.0',
 	
-	dev_service_domain: '0.0.0.0',
+	// dev_service_domain: '0.0.0.0',
 	
 	// service_url: 'http://0.0.0.0:7777/uranio/api',
 	

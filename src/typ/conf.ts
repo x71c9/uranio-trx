@@ -13,8 +13,8 @@ type RequiredConfigParams = {
 
 type OptionalConfigParam = {
 	fetch: RawName,
-	service_domain: string
-	dev_service_domain: string
+	// service_domain: string
+	// dev_service_domain: string
 	// service_url: string
 	// dev_service_url: string
 	// service_protocol: string
