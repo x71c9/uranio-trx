@@ -29,29 +29,29 @@ export declare type AuthAtom<A extends AuthName> = Atom<A>;
 export declare type AuthAtomShape<A extends AuthName> = AtomShape<A>;
 /** --uranio-generate-start */
 
-export declare type AtomName = 'superuser' | 'user' | 'group' | 'media' | 'error' | 'request'
+export declare type AtomName = '_superuser' | '_group' | '_user' | '_media' | '_error' | '_request'
 
-export declare type AuthName = 'superuser' | 'user'
+export declare type AuthName = '_superuser' | '_user'
 
-export declare type LogName = 'error' | 'request'
+export declare type LogName = '_error' | '_request'
 
-declare type SuperuserShape = AtomCommonProperties & {
+declare type _superuserShape = AtomCommonProperties & {
 	email: string
 	password: string
 	groups?: string[]
 }
 
-declare type UserShape = AtomCommonProperties & {
-	email: string
-	password: string
-	groups?: string[]
-}
-
-declare type GroupShape = AtomCommonProperties & {
+declare type _groupShape = AtomCommonProperties & {
 	name: string
 }
 
-declare type MediaShape = AtomCommonProperties & {
+declare type _userShape = AtomCommonProperties & {
+	email: string
+	password: string
+	groups?: string[]
+}
+
+declare type _mediaShape = AtomCommonProperties & {
 	src: string
 	filename: string
 	type: string
@@ -60,7 +60,7 @@ declare type MediaShape = AtomCommonProperties & {
 	height?: number
 }
 
-declare type ErrorShape = AtomCommonProperties & {
+declare type _errorShape = AtomCommonProperties & {
 	status: number
 	msg: string
 	error_code: string
@@ -69,7 +69,7 @@ declare type ErrorShape = AtomCommonProperties & {
 	stack?: string
 }
 
-declare type RequestShape = AtomCommonProperties & {
+declare type _requestShape = AtomCommonProperties & {
 	full_path: string
 	route_path?: string
 	atom_path?: string
@@ -88,97 +88,97 @@ declare type RequestShape = AtomCommonProperties & {
 }
 
 declare type BondProperties<A extends AtomName> =
-	A extends 'superuser' ? 'groups' :
-	A extends 'user' ? 'groups' :
-	A extends 'group' ? never :
-	A extends 'media' ? never :
-	A extends 'error' ? 'request' :
-	A extends 'request' ? never :
+	A extends '_superuser' ? 'groups' :
+	A extends '_group' ? never :
+	A extends '_user' ? 'groups' :
+	A extends '_media' ? never :
+	A extends '_error' ? 'request' :
+	A extends '_request' ? never :
 	never
 
 declare type BondShapeDepth1<A extends AtomName> =
-	A extends 'superuser' ? {groups?: Atom<'group'>[]} :
-	A extends 'user' ? {groups?: Atom<'group'>[]} :
-	A extends 'group' ? Record<never, unknown> :
-	A extends 'media' ? Record<never, unknown> :
-	A extends 'error' ? {request?: Atom<'request'>} :
-	A extends 'request' ? Record<never, unknown> :
+	A extends '_superuser' ? {groups?: Atom<'_group'>[]} :
+	A extends '_group' ? Record<never, unknown> :
+	A extends '_user' ? {groups?: Atom<'_group'>[]} :
+	A extends '_media' ? Record<never, unknown> :
+	A extends '_error' ? {request?: Atom<'_request'>} :
+	A extends '_request' ? Record<never, unknown> :
 	never
 
 declare type BondShapeDepth2<A extends AtomName> =
-	A extends 'superuser' ? {groups?: Molecule<'group', 1>[]} :
-	A extends 'user' ? {groups?: Molecule<'group', 1>[]} :
-	A extends 'group' ? Record<never, unknown> :
-	A extends 'media' ? Record<never, unknown> :
-	A extends 'error' ? {request?: Molecule<'request', 1>} :
-	A extends 'request' ? Record<never, unknown> :
+	A extends '_superuser' ? {groups?: Molecule<'_group', 1>[]} :
+	A extends '_group' ? Record<never, unknown> :
+	A extends '_user' ? {groups?: Molecule<'_group', 1>[]} :
+	A extends '_media' ? Record<never, unknown> :
+	A extends '_error' ? {request?: Molecule<'_request', 1>} :
+	A extends '_request' ? Record<never, unknown> :
 	never
 
 declare type BondShapeDepth3<A extends AtomName> =
-	A extends 'superuser' ? {groups?: Molecule<'group', 2>[]} :
-	A extends 'user' ? {groups?: Molecule<'group', 2>[]} :
-	A extends 'group' ? Record<never, unknown> :
-	A extends 'media' ? Record<never, unknown> :
-	A extends 'error' ? {request?: Molecule<'request', 2>} :
-	A extends 'request' ? Record<never, unknown> :
+	A extends '_superuser' ? {groups?: Molecule<'_group', 2>[]} :
+	A extends '_group' ? Record<never, unknown> :
+	A extends '_user' ? {groups?: Molecule<'_group', 2>[]} :
+	A extends '_media' ? Record<never, unknown> :
+	A extends '_error' ? {request?: Molecule<'_request', 2>} :
+	A extends '_request' ? Record<never, unknown> :
 	never
 
 declare type BondShapeDepth4<A extends AtomName> =
-	A extends 'superuser' ? {groups?: Molecule<'group', 3>[]} :
-	A extends 'user' ? {groups?: Molecule<'group', 3>[]} :
-	A extends 'group' ? Record<never, unknown> :
-	A extends 'media' ? Record<never, unknown> :
-	A extends 'error' ? {request?: Molecule<'request', 3>} :
-	A extends 'request' ? Record<never, unknown> :
+	A extends '_superuser' ? {groups?: Molecule<'_group', 3>[]} :
+	A extends '_group' ? Record<never, unknown> :
+	A extends '_user' ? {groups?: Molecule<'_group', 3>[]} :
+	A extends '_media' ? Record<never, unknown> :
+	A extends '_error' ? {request?: Molecule<'_request', 3>} :
+	A extends '_request' ? Record<never, unknown> :
 	never
 
-declare type Superuser = AtomHardProperties & SuperuserShape
+declare type _superuser = AtomHardProperties & _superuserShape
 
-declare type User = AtomHardProperties & UserShape
+declare type _group = AtomHardProperties & _groupShape
 
-declare type Group = AtomHardProperties & GroupShape
+declare type _user = AtomHardProperties & _userShape
 
-declare type Media = AtomHardProperties & MediaShape
+declare type _media = AtomHardProperties & _mediaShape
 
-declare type Error = AtomHardProperties & ErrorShape
+declare type _error = AtomHardProperties & _errorShape
 
-declare type Request = AtomHardProperties & RequestShape
+declare type _request = AtomHardProperties & _requestShape
 
 export declare type AtomShape<A extends AtomName> =
-	A extends 'superuser' ? SuperuserShape :
-	A extends 'user' ? UserShape :
-	A extends 'group' ? GroupShape :
-	A extends 'media' ? MediaShape :
-	A extends 'error' ? ErrorShape :
-	A extends 'request' ? RequestShape :
+	A extends '_superuser' ? _superuserShape :
+	A extends '_group' ? _groupShape :
+	A extends '_user' ? _userShape :
+	A extends '_media' ? _mediaShape :
+	A extends '_error' ? _errorShape :
+	A extends '_request' ? _requestShape :
 	never
 
 export declare type Atom<A extends AtomName> =
-	A extends 'superuser' ? Superuser :
-	A extends 'user' ? User :
-	A extends 'group' ? Group :
-	A extends 'media' ? Media :
-	A extends 'error' ? Error :
-	A extends 'request' ? Request :
+	A extends '_superuser' ? _superuser :
+	A extends '_group' ? _group :
+	A extends '_user' ? _user :
+	A extends '_media' ? _media :
+	A extends '_error' ? _error :
+	A extends '_request' ? _request :
 	never
 
 
 declare type RouteDefaultName = 'count' | 'find_one' | 'find' | 'find_id' | 'insert' | 'update' | 'delete' | 'insert_multiple' | 'update_multiple' | 'delete_multiple' | 'search_count' | 'search'
 
 declare type RouteCustomName<A extends AtomName> =
-	A extends 'superuser' ? never :
-	A extends 'user' ? never :
-	A extends 'group' ? never :
-	A extends 'media' ? 'upload' | 'presigned' :
-	A extends 'error' ? never :
-	A extends 'request' ? never :
+	A extends '_superuser' ? never :
+	A extends '_group' ? never :
+	A extends '_user' ? never :
+	A extends '_media' ? 'upload' | 'presigned' :
+	A extends '_error' ? never :
+	A extends '_request' ? never :
 	never
 
 export declare type RouteName<A extends AtomName> =
 	RouteCustomName<A> | RouteDefaultName;
 
 export declare type RouteURL<A extends AtomName, R extends RouteName<A>> =
-	A extends 'superuser' ?
+	A extends '_superuser' ?
 		R extends 'count' ? '/count' :
 		R extends 'find_one' ? '/first' :
 		R extends 'find' ? '/' :
@@ -192,7 +192,7 @@ export declare type RouteURL<A extends AtomName, R extends RouteName<A>> =
 		R extends 'search_count' ? '/search/count/:q' :
 		R extends 'search' ? '/search/:q' :
 		never :
-	A extends 'user' ?
+	A extends '_group' ?
 		R extends 'count' ? '/count' :
 		R extends 'find_one' ? '/first' :
 		R extends 'find' ? '/' :
@@ -206,7 +206,7 @@ export declare type RouteURL<A extends AtomName, R extends RouteName<A>> =
 		R extends 'search_count' ? '/search/count/:q' :
 		R extends 'search' ? '/search/:q' :
 		never :
-	A extends 'group' ?
+	A extends '_user' ?
 		R extends 'count' ? '/count' :
 		R extends 'find_one' ? '/first' :
 		R extends 'find' ? '/' :
@@ -220,7 +220,7 @@ export declare type RouteURL<A extends AtomName, R extends RouteName<A>> =
 		R extends 'search_count' ? '/search/count/:q' :
 		R extends 'search' ? '/search/:q' :
 		never :
-	A extends 'media' ?
+	A extends '_media' ?
 		R extends 'upload' ? '/upload' :
 		R extends 'presigned' ? '/presigned' :
 		R extends 'count' ? '/count' :
@@ -236,7 +236,7 @@ export declare type RouteURL<A extends AtomName, R extends RouteName<A>> =
 		R extends 'search_count' ? '/search/count/:q' :
 		R extends 'search' ? '/search/:q' :
 		never :
-	A extends 'error' ?
+	A extends '_error' ?
 		R extends 'count' ? '/count' :
 		R extends 'find_one' ? '/first' :
 		R extends 'find' ? '/' :
@@ -250,7 +250,7 @@ export declare type RouteURL<A extends AtomName, R extends RouteName<A>> =
 		R extends 'search_count' ? '/search/count/:q' :
 		R extends 'search' ? '/search/:q' :
 		never :
-	A extends 'request' ?
+	A extends '_request' ?
 		R extends 'count' ? '/count' :
 		R extends 'find_one' ? '/first' :
 		R extends 'find' ? '/' :
@@ -268,7 +268,7 @@ never
 
 
 export declare type RouteQueryParam<A extends AtomName, R extends RouteName<A>> =
-	A extends 'superuser' ?
+	A extends '_superuser' ?
 		R extends 'count' ? 'filter' :
 		R extends 'find_one' ? 'filter' | 'options' :
 		R extends 'find' ? 'filter' | 'options' :
@@ -282,7 +282,7 @@ export declare type RouteQueryParam<A extends AtomName, R extends RouteName<A>> 
 		R extends 'search_count' ? never :
 		R extends 'search' ? 'options' :
 		never :
-	A extends 'user' ?
+	A extends '_group' ?
 		R extends 'count' ? 'filter' :
 		R extends 'find_one' ? 'filter' | 'options' :
 		R extends 'find' ? 'filter' | 'options' :
@@ -296,7 +296,7 @@ export declare type RouteQueryParam<A extends AtomName, R extends RouteName<A>> 
 		R extends 'search_count' ? never :
 		R extends 'search' ? 'options' :
 		never :
-	A extends 'group' ?
+	A extends '_user' ?
 		R extends 'count' ? 'filter' :
 		R extends 'find_one' ? 'filter' | 'options' :
 		R extends 'find' ? 'filter' | 'options' :
@@ -310,7 +310,7 @@ export declare type RouteQueryParam<A extends AtomName, R extends RouteName<A>> 
 		R extends 'search_count' ? never :
 		R extends 'search' ? 'options' :
 		never :
-	A extends 'media' ?
+	A extends '_media' ?
 		R extends 'upload' ? never :
 		R extends 'presigned' ? 'filename' | 'size' | 'type' :
 		R extends 'count' ? 'filter' :
@@ -326,7 +326,7 @@ export declare type RouteQueryParam<A extends AtomName, R extends RouteName<A>> 
 		R extends 'search_count' ? never :
 		R extends 'search' ? 'options' :
 		never :
-	A extends 'error' ?
+	A extends '_error' ?
 		R extends 'count' ? 'filter' :
 		R extends 'find_one' ? 'filter' | 'options' :
 		R extends 'find' ? 'filter' | 'options' :
@@ -340,7 +340,7 @@ export declare type RouteQueryParam<A extends AtomName, R extends RouteName<A>> 
 		R extends 'search_count' ? never :
 		R extends 'search' ? 'options' :
 		never :
-	A extends 'request' ?
+	A extends '_request' ?
 		R extends 'count' ? 'filter' :
 		R extends 'find_one' ? 'filter' | 'options' :
 		R extends 'find' ? 'filter' | 'options' :
@@ -361,7 +361,7 @@ never
 import {urn_response} from 'urn-lib';
 
 export declare type CallResponse<A extends AtomName, R extends RouteName<A>, D extends Depth = 0> =
-	A extends 'superuser' ?
+	A extends '_superuser' ?
 		R extends 'count' ? number :
 		R extends 'find_one' ? Molecule<A,D> :
 		R extends 'find' ? Molecule<A,D>[] :
@@ -375,7 +375,7 @@ export declare type CallResponse<A extends AtomName, R extends RouteName<A>, D e
 		R extends 'search_count' ? number :
 		R extends 'search' ? Molecule<A,D>[] :
 		never :
-	A extends 'user' ?
+	A extends '_group' ?
 		R extends 'count' ? number :
 		R extends 'find_one' ? Molecule<A,D> :
 		R extends 'find' ? Molecule<A,D>[] :
@@ -389,7 +389,7 @@ export declare type CallResponse<A extends AtomName, R extends RouteName<A>, D e
 		R extends 'search_count' ? number :
 		R extends 'search' ? Molecule<A,D>[] :
 		never :
-	A extends 'group' ?
+	A extends '_user' ?
 		R extends 'count' ? number :
 		R extends 'find_one' ? Molecule<A,D> :
 		R extends 'find' ? Molecule<A,D>[] :
@@ -403,7 +403,7 @@ export declare type CallResponse<A extends AtomName, R extends RouteName<A>, D e
 		R extends 'search_count' ? number :
 		R extends 'search' ? Molecule<A,D>[] :
 		never :
-	A extends 'media' ?
+	A extends '_media' ?
 		R extends 'upload' ? Molecule<A,D>[] :
 		R extends 'presigned' ? string :
 		R extends 'count' ? number :
@@ -419,7 +419,7 @@ export declare type CallResponse<A extends AtomName, R extends RouteName<A>, D e
 		R extends 'search_count' ? number :
 		R extends 'search' ? Molecule<A,D>[] :
 		never :
-	A extends 'error' ?
+	A extends '_error' ?
 		R extends 'count' ? number :
 		R extends 'find_one' ? Molecule<A,D> :
 		R extends 'find' ? Molecule<A,D>[] :
@@ -433,7 +433,7 @@ export declare type CallResponse<A extends AtomName, R extends RouteName<A>, D e
 		R extends 'search_count' ? number :
 		R extends 'search' ? Molecule<A,D>[] :
 		never :
-	A extends 'request' ?
+	A extends '_request' ?
 		R extends 'count' ? number :
 		R extends 'find_one' ? Molecule<A,D> :
 		R extends 'find' ? Molecule<A,D>[] :

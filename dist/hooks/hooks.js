@@ -40,9 +40,9 @@ exports.hooks = {
     get_token: () => {
         return hook_token;
     },
-    superusers: {
+    _superusers: {
         authenticate: async (email, password) => {
-            return await auth.create('superuser').authenticate(email, password);
+            return await auth.create('_superuser').authenticate(email, password);
         },
         count: async (parameters, token) => {
             const args = {
@@ -56,7 +56,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('superuser', current_token).hook('count')(args);
+            return await base.create('_superuser', current_token).hook('count')(args);
         },
         find_one: async (parameters, token) => {
             const args = {
@@ -70,7 +70,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('superuser', current_token).hook('find_one')(args);
+            return await base.create('_superuser', current_token).hook('find_one')(args);
         },
         find: async (parameters, token) => {
             const args = {
@@ -84,7 +84,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('superuser', current_token).hook('find')(args);
+            return await base.create('_superuser', current_token).hook('find')(args);
         },
         find_id: async (id, parameters, token) => {
             const args = {
@@ -101,7 +101,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('superuser', current_token).hook('find_id')(args);
+            return await base.create('_superuser', current_token).hook('find_id')(args);
         },
         insert: async (body, parameters, token) => {
             const args = {
@@ -116,7 +116,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('superuser', current_token).hook('insert')(args);
+            return await base.create('_superuser', current_token).hook('insert')(args);
         },
         update: async (id, body, parameters, token) => {
             const args = {
@@ -134,7 +134,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('superuser', current_token).hook('update')(args);
+            return await base.create('_superuser', current_token).hook('update')(args);
         },
         delete: async (id, parameters, token) => {
             const args = {
@@ -151,7 +151,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('superuser', current_token).hook('delete')(args);
+            return await base.create('_superuser', current_token).hook('delete')(args);
         },
         insert_multiple: async (body, parameters, token) => {
             const args = {
@@ -166,7 +166,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('superuser', current_token).hook('insert_multiple')(args);
+            return await base.create('_superuser', current_token).hook('insert_multiple')(args);
         },
         update_multiple: async (ids, body, parameters, token) => {
             const args = {
@@ -184,7 +184,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('superuser', current_token).hook('update_multiple')(args);
+            return await base.create('_superuser', current_token).hook('update_multiple')(args);
         },
         delete_multiple: async (ids, parameters, token) => {
             const args = {
@@ -201,7 +201,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('superuser', current_token).hook('delete_multiple')(args);
+            return await base.create('_superuser', current_token).hook('delete_multiple')(args);
         },
         search_count: async (q, parameters, token) => {
             const args = {
@@ -218,7 +218,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('superuser', current_token).hook('search_count')(args);
+            return await base.create('_superuser', current_token).hook('search_count')(args);
         },
         search: async (q, parameters, token) => {
             const args = {
@@ -235,12 +235,207 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('superuser', current_token).hook('search')(args);
+            return await base.create('_superuser', current_token).hook('search')(args);
         },
     },
-    users: {
+    _groups: {
+        count: async (parameters, token) => {
+            const args = {
+                ...parameters
+            };
+            let current_token;
+            const hook_token = exports.hooks.get_token();
+            if (typeof hook_token === 'string' && hook_token !== '') {
+                current_token = hook_token;
+            }
+            if (typeof token === 'string' && token !== '') {
+                current_token = token;
+            }
+            return await base.create('_group', current_token).hook('count')(args);
+        },
+        find_one: async (parameters, token) => {
+            const args = {
+                ...parameters
+            };
+            let current_token;
+            const hook_token = exports.hooks.get_token();
+            if (typeof hook_token === 'string' && hook_token !== '') {
+                current_token = hook_token;
+            }
+            if (typeof token === 'string' && token !== '') {
+                current_token = token;
+            }
+            return await base.create('_group', current_token).hook('find_one')(args);
+        },
+        find: async (parameters, token) => {
+            const args = {
+                ...parameters
+            };
+            let current_token;
+            const hook_token = exports.hooks.get_token();
+            if (typeof hook_token === 'string' && hook_token !== '') {
+                current_token = hook_token;
+            }
+            if (typeof token === 'string' && token !== '') {
+                current_token = token;
+            }
+            return await base.create('_group', current_token).hook('find')(args);
+        },
+        find_id: async (id, parameters, token) => {
+            const args = {
+                params: {
+                    id: id,
+                },
+                ...parameters
+            };
+            let current_token;
+            const hook_token = exports.hooks.get_token();
+            if (typeof hook_token === 'string' && hook_token !== '') {
+                current_token = hook_token;
+            }
+            if (typeof token === 'string' && token !== '') {
+                current_token = token;
+            }
+            return await base.create('_group', current_token).hook('find_id')(args);
+        },
+        insert: async (body, parameters, token) => {
+            const args = {
+                body: body,
+                ...parameters
+            };
+            let current_token;
+            const hook_token = exports.hooks.get_token();
+            if (typeof hook_token === 'string' && hook_token !== '') {
+                current_token = hook_token;
+            }
+            if (typeof token === 'string' && token !== '') {
+                current_token = token;
+            }
+            return await base.create('_group', current_token).hook('insert')(args);
+        },
+        update: async (id, body, parameters, token) => {
+            const args = {
+                params: {
+                    id: id,
+                },
+                body: body,
+                ...parameters
+            };
+            let current_token;
+            const hook_token = exports.hooks.get_token();
+            if (typeof hook_token === 'string' && hook_token !== '') {
+                current_token = hook_token;
+            }
+            if (typeof token === 'string' && token !== '') {
+                current_token = token;
+            }
+            return await base.create('_group', current_token).hook('update')(args);
+        },
+        delete: async (id, parameters, token) => {
+            const args = {
+                params: {
+                    id: id,
+                },
+                ...parameters
+            };
+            let current_token;
+            const hook_token = exports.hooks.get_token();
+            if (typeof hook_token === 'string' && hook_token !== '') {
+                current_token = hook_token;
+            }
+            if (typeof token === 'string' && token !== '') {
+                current_token = token;
+            }
+            return await base.create('_group', current_token).hook('delete')(args);
+        },
+        insert_multiple: async (body, parameters, token) => {
+            const args = {
+                body: body,
+                ...parameters
+            };
+            let current_token;
+            const hook_token = exports.hooks.get_token();
+            if (typeof hook_token === 'string' && hook_token !== '') {
+                current_token = hook_token;
+            }
+            if (typeof token === 'string' && token !== '') {
+                current_token = token;
+            }
+            return await base.create('_group', current_token).hook('insert_multiple')(args);
+        },
+        update_multiple: async (ids, body, parameters, token) => {
+            const args = {
+                params: {
+                    ids: ids,
+                },
+                body: body,
+                ...parameters
+            };
+            let current_token;
+            const hook_token = exports.hooks.get_token();
+            if (typeof hook_token === 'string' && hook_token !== '') {
+                current_token = hook_token;
+            }
+            if (typeof token === 'string' && token !== '') {
+                current_token = token;
+            }
+            return await base.create('_group', current_token).hook('update_multiple')(args);
+        },
+        delete_multiple: async (ids, parameters, token) => {
+            const args = {
+                params: {
+                    ids: ids,
+                },
+                ...parameters
+            };
+            let current_token;
+            const hook_token = exports.hooks.get_token();
+            if (typeof hook_token === 'string' && hook_token !== '') {
+                current_token = hook_token;
+            }
+            if (typeof token === 'string' && token !== '') {
+                current_token = token;
+            }
+            return await base.create('_group', current_token).hook('delete_multiple')(args);
+        },
+        search_count: async (q, parameters, token) => {
+            const args = {
+                params: {
+                    q: q,
+                },
+                ...parameters
+            };
+            let current_token;
+            const hook_token = exports.hooks.get_token();
+            if (typeof hook_token === 'string' && hook_token !== '') {
+                current_token = hook_token;
+            }
+            if (typeof token === 'string' && token !== '') {
+                current_token = token;
+            }
+            return await base.create('_group', current_token).hook('search_count')(args);
+        },
+        search: async (q, parameters, token) => {
+            const args = {
+                params: {
+                    q: q,
+                },
+                ...parameters
+            };
+            let current_token;
+            const hook_token = exports.hooks.get_token();
+            if (typeof hook_token === 'string' && hook_token !== '') {
+                current_token = hook_token;
+            }
+            if (typeof token === 'string' && token !== '') {
+                current_token = token;
+            }
+            return await base.create('_group', current_token).hook('search')(args);
+        },
+    },
+    _users: {
         authenticate: async (email, password) => {
-            return await auth.create('user').authenticate(email, password);
+            return await auth.create('_user').authenticate(email, password);
         },
         count: async (parameters, token) => {
             const args = {
@@ -254,7 +449,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('user', current_token).hook('count')(args);
+            return await base.create('_user', current_token).hook('count')(args);
         },
         find_one: async (parameters, token) => {
             const args = {
@@ -268,7 +463,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('user', current_token).hook('find_one')(args);
+            return await base.create('_user', current_token).hook('find_one')(args);
         },
         find: async (parameters, token) => {
             const args = {
@@ -282,7 +477,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('user', current_token).hook('find')(args);
+            return await base.create('_user', current_token).hook('find')(args);
         },
         find_id: async (id, parameters, token) => {
             const args = {
@@ -299,7 +494,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('user', current_token).hook('find_id')(args);
+            return await base.create('_user', current_token).hook('find_id')(args);
         },
         insert: async (body, parameters, token) => {
             const args = {
@@ -314,7 +509,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('user', current_token).hook('insert')(args);
+            return await base.create('_user', current_token).hook('insert')(args);
         },
         update: async (id, body, parameters, token) => {
             const args = {
@@ -332,7 +527,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('user', current_token).hook('update')(args);
+            return await base.create('_user', current_token).hook('update')(args);
         },
         delete: async (id, parameters, token) => {
             const args = {
@@ -349,7 +544,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('user', current_token).hook('delete')(args);
+            return await base.create('_user', current_token).hook('delete')(args);
         },
         insert_multiple: async (body, parameters, token) => {
             const args = {
@@ -364,7 +559,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('user', current_token).hook('insert_multiple')(args);
+            return await base.create('_user', current_token).hook('insert_multiple')(args);
         },
         update_multiple: async (ids, body, parameters, token) => {
             const args = {
@@ -382,7 +577,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('user', current_token).hook('update_multiple')(args);
+            return await base.create('_user', current_token).hook('update_multiple')(args);
         },
         delete_multiple: async (ids, parameters, token) => {
             const args = {
@@ -399,7 +594,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('user', current_token).hook('delete_multiple')(args);
+            return await base.create('_user', current_token).hook('delete_multiple')(args);
         },
         search_count: async (q, parameters, token) => {
             const args = {
@@ -416,7 +611,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('user', current_token).hook('search_count')(args);
+            return await base.create('_user', current_token).hook('search_count')(args);
         },
         search: async (q, parameters, token) => {
             const args = {
@@ -433,205 +628,10 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('user', current_token).hook('search')(args);
+            return await base.create('_user', current_token).hook('search')(args);
         },
     },
-    groups: {
-        count: async (parameters, token) => {
-            const args = {
-                ...parameters
-            };
-            let current_token;
-            const hook_token = exports.hooks.get_token();
-            if (typeof hook_token === 'string' && hook_token !== '') {
-                current_token = hook_token;
-            }
-            if (typeof token === 'string' && token !== '') {
-                current_token = token;
-            }
-            return await base.create('group', current_token).hook('count')(args);
-        },
-        find_one: async (parameters, token) => {
-            const args = {
-                ...parameters
-            };
-            let current_token;
-            const hook_token = exports.hooks.get_token();
-            if (typeof hook_token === 'string' && hook_token !== '') {
-                current_token = hook_token;
-            }
-            if (typeof token === 'string' && token !== '') {
-                current_token = token;
-            }
-            return await base.create('group', current_token).hook('find_one')(args);
-        },
-        find: async (parameters, token) => {
-            const args = {
-                ...parameters
-            };
-            let current_token;
-            const hook_token = exports.hooks.get_token();
-            if (typeof hook_token === 'string' && hook_token !== '') {
-                current_token = hook_token;
-            }
-            if (typeof token === 'string' && token !== '') {
-                current_token = token;
-            }
-            return await base.create('group', current_token).hook('find')(args);
-        },
-        find_id: async (id, parameters, token) => {
-            const args = {
-                params: {
-                    id: id,
-                },
-                ...parameters
-            };
-            let current_token;
-            const hook_token = exports.hooks.get_token();
-            if (typeof hook_token === 'string' && hook_token !== '') {
-                current_token = hook_token;
-            }
-            if (typeof token === 'string' && token !== '') {
-                current_token = token;
-            }
-            return await base.create('group', current_token).hook('find_id')(args);
-        },
-        insert: async (body, parameters, token) => {
-            const args = {
-                body: body,
-                ...parameters
-            };
-            let current_token;
-            const hook_token = exports.hooks.get_token();
-            if (typeof hook_token === 'string' && hook_token !== '') {
-                current_token = hook_token;
-            }
-            if (typeof token === 'string' && token !== '') {
-                current_token = token;
-            }
-            return await base.create('group', current_token).hook('insert')(args);
-        },
-        update: async (id, body, parameters, token) => {
-            const args = {
-                params: {
-                    id: id,
-                },
-                body: body,
-                ...parameters
-            };
-            let current_token;
-            const hook_token = exports.hooks.get_token();
-            if (typeof hook_token === 'string' && hook_token !== '') {
-                current_token = hook_token;
-            }
-            if (typeof token === 'string' && token !== '') {
-                current_token = token;
-            }
-            return await base.create('group', current_token).hook('update')(args);
-        },
-        delete: async (id, parameters, token) => {
-            const args = {
-                params: {
-                    id: id,
-                },
-                ...parameters
-            };
-            let current_token;
-            const hook_token = exports.hooks.get_token();
-            if (typeof hook_token === 'string' && hook_token !== '') {
-                current_token = hook_token;
-            }
-            if (typeof token === 'string' && token !== '') {
-                current_token = token;
-            }
-            return await base.create('group', current_token).hook('delete')(args);
-        },
-        insert_multiple: async (body, parameters, token) => {
-            const args = {
-                body: body,
-                ...parameters
-            };
-            let current_token;
-            const hook_token = exports.hooks.get_token();
-            if (typeof hook_token === 'string' && hook_token !== '') {
-                current_token = hook_token;
-            }
-            if (typeof token === 'string' && token !== '') {
-                current_token = token;
-            }
-            return await base.create('group', current_token).hook('insert_multiple')(args);
-        },
-        update_multiple: async (ids, body, parameters, token) => {
-            const args = {
-                params: {
-                    ids: ids,
-                },
-                body: body,
-                ...parameters
-            };
-            let current_token;
-            const hook_token = exports.hooks.get_token();
-            if (typeof hook_token === 'string' && hook_token !== '') {
-                current_token = hook_token;
-            }
-            if (typeof token === 'string' && token !== '') {
-                current_token = token;
-            }
-            return await base.create('group', current_token).hook('update_multiple')(args);
-        },
-        delete_multiple: async (ids, parameters, token) => {
-            const args = {
-                params: {
-                    ids: ids,
-                },
-                ...parameters
-            };
-            let current_token;
-            const hook_token = exports.hooks.get_token();
-            if (typeof hook_token === 'string' && hook_token !== '') {
-                current_token = hook_token;
-            }
-            if (typeof token === 'string' && token !== '') {
-                current_token = token;
-            }
-            return await base.create('group', current_token).hook('delete_multiple')(args);
-        },
-        search_count: async (q, parameters, token) => {
-            const args = {
-                params: {
-                    q: q,
-                },
-                ...parameters
-            };
-            let current_token;
-            const hook_token = exports.hooks.get_token();
-            if (typeof hook_token === 'string' && hook_token !== '') {
-                current_token = hook_token;
-            }
-            if (typeof token === 'string' && token !== '') {
-                current_token = token;
-            }
-            return await base.create('group', current_token).hook('search_count')(args);
-        },
-        search: async (q, parameters, token) => {
-            const args = {
-                params: {
-                    q: q,
-                },
-                ...parameters
-            };
-            let current_token;
-            const hook_token = exports.hooks.get_token();
-            if (typeof hook_token === 'string' && hook_token !== '') {
-                current_token = hook_token;
-            }
-            if (typeof token === 'string' && token !== '') {
-                current_token = token;
-            }
-            return await base.create('group', current_token).hook('search')(args);
-        },
-    },
-    media: {
+    _media: {
         upload: async (file, token) => {
             let current_token;
             const hook_token = exports.hooks.get_token();
@@ -666,7 +666,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('media', current_token).hook('count')(args);
+            return await base.create('_media', current_token).hook('count')(args);
         },
         find_one: async (parameters, token) => {
             const args = {
@@ -680,7 +680,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('media', current_token).hook('find_one')(args);
+            return await base.create('_media', current_token).hook('find_one')(args);
         },
         find: async (parameters, token) => {
             const args = {
@@ -694,7 +694,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('media', current_token).hook('find')(args);
+            return await base.create('_media', current_token).hook('find')(args);
         },
         find_id: async (id, parameters, token) => {
             const args = {
@@ -711,7 +711,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('media', current_token).hook('find_id')(args);
+            return await base.create('_media', current_token).hook('find_id')(args);
         },
         insert: async (body, parameters, token) => {
             const args = {
@@ -726,7 +726,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('media', current_token).hook('insert')(args);
+            return await base.create('_media', current_token).hook('insert')(args);
         },
         update: async (id, body, parameters, token) => {
             const args = {
@@ -744,7 +744,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('media', current_token).hook('update')(args);
+            return await base.create('_media', current_token).hook('update')(args);
         },
         delete: async (id, parameters, token) => {
             const args = {
@@ -761,7 +761,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('media', current_token).hook('delete')(args);
+            return await base.create('_media', current_token).hook('delete')(args);
         },
         insert_multiple: async (body, parameters, token) => {
             const args = {
@@ -776,7 +776,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('media', current_token).hook('insert_multiple')(args);
+            return await base.create('_media', current_token).hook('insert_multiple')(args);
         },
         update_multiple: async (ids, body, parameters, token) => {
             const args = {
@@ -794,7 +794,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('media', current_token).hook('update_multiple')(args);
+            return await base.create('_media', current_token).hook('update_multiple')(args);
         },
         delete_multiple: async (ids, parameters, token) => {
             const args = {
@@ -811,7 +811,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('media', current_token).hook('delete_multiple')(args);
+            return await base.create('_media', current_token).hook('delete_multiple')(args);
         },
         search_count: async (q, parameters, token) => {
             const args = {
@@ -828,7 +828,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('media', current_token).hook('search_count')(args);
+            return await base.create('_media', current_token).hook('search_count')(args);
         },
         search: async (q, parameters, token) => {
             const args = {
@@ -845,10 +845,10 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('media', current_token).hook('search')(args);
+            return await base.create('_media', current_token).hook('search')(args);
         },
     },
-    errors: {
+    _errors: {
         count: async (parameters, token) => {
             const args = {
                 ...parameters
@@ -861,7 +861,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('error', current_token).hook('count')(args);
+            return await base.create('_error', current_token).hook('count')(args);
         },
         find_one: async (parameters, token) => {
             const args = {
@@ -875,7 +875,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('error', current_token).hook('find_one')(args);
+            return await base.create('_error', current_token).hook('find_one')(args);
         },
         find: async (parameters, token) => {
             const args = {
@@ -889,7 +889,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('error', current_token).hook('find')(args);
+            return await base.create('_error', current_token).hook('find')(args);
         },
         find_id: async (id, parameters, token) => {
             const args = {
@@ -906,7 +906,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('error', current_token).hook('find_id')(args);
+            return await base.create('_error', current_token).hook('find_id')(args);
         },
         insert: async (body, parameters, token) => {
             const args = {
@@ -921,7 +921,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('error', current_token).hook('insert')(args);
+            return await base.create('_error', current_token).hook('insert')(args);
         },
         update: async (id, body, parameters, token) => {
             const args = {
@@ -939,7 +939,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('error', current_token).hook('update')(args);
+            return await base.create('_error', current_token).hook('update')(args);
         },
         delete: async (id, parameters, token) => {
             const args = {
@@ -956,7 +956,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('error', current_token).hook('delete')(args);
+            return await base.create('_error', current_token).hook('delete')(args);
         },
         insert_multiple: async (body, parameters, token) => {
             const args = {
@@ -971,7 +971,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('error', current_token).hook('insert_multiple')(args);
+            return await base.create('_error', current_token).hook('insert_multiple')(args);
         },
         update_multiple: async (ids, body, parameters, token) => {
             const args = {
@@ -989,7 +989,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('error', current_token).hook('update_multiple')(args);
+            return await base.create('_error', current_token).hook('update_multiple')(args);
         },
         delete_multiple: async (ids, parameters, token) => {
             const args = {
@@ -1006,7 +1006,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('error', current_token).hook('delete_multiple')(args);
+            return await base.create('_error', current_token).hook('delete_multiple')(args);
         },
         search_count: async (q, parameters, token) => {
             const args = {
@@ -1023,7 +1023,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('error', current_token).hook('search_count')(args);
+            return await base.create('_error', current_token).hook('search_count')(args);
         },
         search: async (q, parameters, token) => {
             const args = {
@@ -1040,10 +1040,10 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('error', current_token).hook('search')(args);
+            return await base.create('_error', current_token).hook('search')(args);
         },
     },
-    requests: {
+    _requests: {
         count: async (parameters, token) => {
             const args = {
                 ...parameters
@@ -1056,7 +1056,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('request', current_token).hook('count')(args);
+            return await base.create('_request', current_token).hook('count')(args);
         },
         find_one: async (parameters, token) => {
             const args = {
@@ -1070,7 +1070,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('request', current_token).hook('find_one')(args);
+            return await base.create('_request', current_token).hook('find_one')(args);
         },
         find: async (parameters, token) => {
             const args = {
@@ -1084,7 +1084,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('request', current_token).hook('find')(args);
+            return await base.create('_request', current_token).hook('find')(args);
         },
         find_id: async (id, parameters, token) => {
             const args = {
@@ -1101,7 +1101,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('request', current_token).hook('find_id')(args);
+            return await base.create('_request', current_token).hook('find_id')(args);
         },
         insert: async (body, parameters, token) => {
             const args = {
@@ -1116,7 +1116,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('request', current_token).hook('insert')(args);
+            return await base.create('_request', current_token).hook('insert')(args);
         },
         update: async (id, body, parameters, token) => {
             const args = {
@@ -1134,7 +1134,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('request', current_token).hook('update')(args);
+            return await base.create('_request', current_token).hook('update')(args);
         },
         delete: async (id, parameters, token) => {
             const args = {
@@ -1151,7 +1151,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('request', current_token).hook('delete')(args);
+            return await base.create('_request', current_token).hook('delete')(args);
         },
         insert_multiple: async (body, parameters, token) => {
             const args = {
@@ -1166,7 +1166,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('request', current_token).hook('insert_multiple')(args);
+            return await base.create('_request', current_token).hook('insert_multiple')(args);
         },
         update_multiple: async (ids, body, parameters, token) => {
             const args = {
@@ -1184,7 +1184,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('request', current_token).hook('update_multiple')(args);
+            return await base.create('_request', current_token).hook('update_multiple')(args);
         },
         delete_multiple: async (ids, parameters, token) => {
             const args = {
@@ -1201,7 +1201,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('request', current_token).hook('delete_multiple')(args);
+            return await base.create('_request', current_token).hook('delete_multiple')(args);
         },
         search_count: async (q, parameters, token) => {
             const args = {
@@ -1218,7 +1218,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('request', current_token).hook('search_count')(args);
+            return await base.create('_request', current_token).hook('search_count')(args);
         },
         search: async (q, parameters, token) => {
             const args = {
@@ -1235,202 +1235,7 @@ exports.hooks = {
             if (typeof token === 'string' && token !== '') {
                 current_token = token;
             }
-            return await base.create('request', current_token).hook('search')(args);
-        },
-    },
-    settings: {
-        count: async (parameters, token) => {
-            const args = {
-                ...parameters
-            };
-            let current_token;
-            const hook_token = exports.hooks.get_token();
-            if (typeof hook_token === 'string' && hook_token !== '') {
-                current_token = hook_token;
-            }
-            if (typeof token === 'string' && token !== '') {
-                current_token = token;
-            }
-            return await base.create('setting', current_token).hook('count')(args);
-        },
-        find_one: async (parameters, token) => {
-            const args = {
-                ...parameters
-            };
-            let current_token;
-            const hook_token = exports.hooks.get_token();
-            if (typeof hook_token === 'string' && hook_token !== '') {
-                current_token = hook_token;
-            }
-            if (typeof token === 'string' && token !== '') {
-                current_token = token;
-            }
-            return await base.create('setting', current_token).hook('find_one')(args);
-        },
-        find: async (parameters, token) => {
-            const args = {
-                ...parameters
-            };
-            let current_token;
-            const hook_token = exports.hooks.get_token();
-            if (typeof hook_token === 'string' && hook_token !== '') {
-                current_token = hook_token;
-            }
-            if (typeof token === 'string' && token !== '') {
-                current_token = token;
-            }
-            return await base.create('setting', current_token).hook('find')(args);
-        },
-        find_id: async (id, parameters, token) => {
-            const args = {
-                params: {
-                    id: id,
-                },
-                ...parameters
-            };
-            let current_token;
-            const hook_token = exports.hooks.get_token();
-            if (typeof hook_token === 'string' && hook_token !== '') {
-                current_token = hook_token;
-            }
-            if (typeof token === 'string' && token !== '') {
-                current_token = token;
-            }
-            return await base.create('setting', current_token).hook('find_id')(args);
-        },
-        insert: async (body, parameters, token) => {
-            const args = {
-                body: body,
-                ...parameters
-            };
-            let current_token;
-            const hook_token = exports.hooks.get_token();
-            if (typeof hook_token === 'string' && hook_token !== '') {
-                current_token = hook_token;
-            }
-            if (typeof token === 'string' && token !== '') {
-                current_token = token;
-            }
-            return await base.create('setting', current_token).hook('insert')(args);
-        },
-        update: async (id, body, parameters, token) => {
-            const args = {
-                params: {
-                    id: id,
-                },
-                body: body,
-                ...parameters
-            };
-            let current_token;
-            const hook_token = exports.hooks.get_token();
-            if (typeof hook_token === 'string' && hook_token !== '') {
-                current_token = hook_token;
-            }
-            if (typeof token === 'string' && token !== '') {
-                current_token = token;
-            }
-            return await base.create('setting', current_token).hook('update')(args);
-        },
-        delete: async (id, parameters, token) => {
-            const args = {
-                params: {
-                    id: id,
-                },
-                ...parameters
-            };
-            let current_token;
-            const hook_token = exports.hooks.get_token();
-            if (typeof hook_token === 'string' && hook_token !== '') {
-                current_token = hook_token;
-            }
-            if (typeof token === 'string' && token !== '') {
-                current_token = token;
-            }
-            return await base.create('setting', current_token).hook('delete')(args);
-        },
-        insert_multiple: async (body, parameters, token) => {
-            const args = {
-                body: body,
-                ...parameters
-            };
-            let current_token;
-            const hook_token = exports.hooks.get_token();
-            if (typeof hook_token === 'string' && hook_token !== '') {
-                current_token = hook_token;
-            }
-            if (typeof token === 'string' && token !== '') {
-                current_token = token;
-            }
-            return await base.create('setting', current_token).hook('insert_multiple')(args);
-        },
-        update_multiple: async (ids, body, parameters, token) => {
-            const args = {
-                params: {
-                    ids: ids,
-                },
-                body: body,
-                ...parameters
-            };
-            let current_token;
-            const hook_token = exports.hooks.get_token();
-            if (typeof hook_token === 'string' && hook_token !== '') {
-                current_token = hook_token;
-            }
-            if (typeof token === 'string' && token !== '') {
-                current_token = token;
-            }
-            return await base.create('setting', current_token).hook('update_multiple')(args);
-        },
-        delete_multiple: async (ids, parameters, token) => {
-            const args = {
-                params: {
-                    ids: ids,
-                },
-                ...parameters
-            };
-            let current_token;
-            const hook_token = exports.hooks.get_token();
-            if (typeof hook_token === 'string' && hook_token !== '') {
-                current_token = hook_token;
-            }
-            if (typeof token === 'string' && token !== '') {
-                current_token = token;
-            }
-            return await base.create('setting', current_token).hook('delete_multiple')(args);
-        },
-        search_count: async (q, parameters, token) => {
-            const args = {
-                params: {
-                    q: q,
-                },
-                ...parameters
-            };
-            let current_token;
-            const hook_token = exports.hooks.get_token();
-            if (typeof hook_token === 'string' && hook_token !== '') {
-                current_token = hook_token;
-            }
-            if (typeof token === 'string' && token !== '') {
-                current_token = token;
-            }
-            return await base.create('setting', current_token).hook('search_count')(args);
-        },
-        search: async (q, parameters, token) => {
-            const args = {
-                params: {
-                    q: q,
-                },
-                ...parameters
-            };
-            let current_token;
-            const hook_token = exports.hooks.get_token();
-            if (typeof hook_token === 'string' && hook_token !== '') {
-                current_token = hook_token;
-            }
-            if (typeof token === 'string' && token !== '') {
-                current_token = token;
-            }
-            return await base.create('setting', current_token).hook('search')(args);
+            return await base.create('_request', current_token).hook('search')(args);
         },
     },
 };

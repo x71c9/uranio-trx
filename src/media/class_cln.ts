@@ -20,16 +20,16 @@ type PresignedQuery = {
 
 @urn_log.util.decorators.debug_constructor
 @urn_log.util.decorators.debug_methods
-class MediaBase extends Base<'media'>{
+class MediaBase extends Base<'_media'>{
 	
 	constructor(public token?:string){
-		super('media', token);
+		super('_media', token);
 	}
 	
 	public async upload<D extends schema.Depth>(
 		file:Buffer | ArrayBuffer | Blob,
 		token?:string
-	):Promise<urn_response.General<schema.Molecule<'media',D>>>{
+	):Promise<urn_response.General<schema.Molecule<'_media',D>>>{
 		const headers = {} as client_types.Hook.Headers;
 		if(typeof this.token === 'string'){
 			headers['urn-auth-token'] = this.token;
@@ -37,9 +37,9 @@ class MediaBase extends Base<'media'>{
 		if(typeof token === 'string'){
 			headers['urn-auth-token'] = token;
 		}
-		const url = `/media/upload`;
+		const url = `/_media/upload`;
 		return await this.raw.post(url, file, undefined, headers) as
-			urn_response.General<schema.Molecule<'media', D>>;
+			urn_response.General<schema.Molecule<'_media', D>>;
 	}
 	
 	public async presigned(
@@ -64,7 +64,7 @@ class MediaBase extends Base<'media'>{
 		if(typeof type === 'string' && type !== ''){
 			query.type = type;
 		}
-		const url = `/media/presigned`;
+		const url = `/_media/presigned`;
 		return await this.raw.get(url, query as any, headers) as
 			urn_response.General<string>;
 	}

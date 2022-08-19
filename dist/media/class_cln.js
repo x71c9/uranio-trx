@@ -16,7 +16,7 @@ const urn_lib_1 = require("urn-lib");
 const class_cln_1 = require("../base/class_cln");
 let MediaBase = class MediaBase extends class_cln_1.Base {
     constructor(token) {
-        super('media', token);
+        super('_media', token);
         this.token = token;
     }
     async upload(file, token) {
@@ -27,7 +27,7 @@ let MediaBase = class MediaBase extends class_cln_1.Base {
         if (typeof token === 'string') {
             headers['urn-auth-token'] = token;
         }
-        const url = `/media/upload`;
+        const url = `/_media/upload`;
         return await this.raw.post(url, file, undefined, headers);
     }
     async presigned(filename, size, type, token) {
@@ -47,7 +47,7 @@ let MediaBase = class MediaBase extends class_cln_1.Base {
         if (typeof type === 'string' && type !== '') {
             query.type = type;
         }
-        const url = `/media/presigned`;
+        const url = `/_media/presigned`;
         return await this.raw.get(url, query, headers);
     }
 };

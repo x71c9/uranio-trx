@@ -39,4 +39,6 @@ export const client_toml:Partial<ClientConfiguration> = {
 	dev_service_protocol: "https",
 	dev_service_domain: "0.0.0.0",
 	dev_service_port: 7773,
+	ssl_secure: true,
+	dev_ssl_secure: false,
 };

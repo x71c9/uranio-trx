@@ -289,11 +289,11 @@ function _generate_hook_types_text_src() {
             text += `\t\tauthenticate(email: string, password: string):`;
             text += `Promise<urn_response.General<Api.AuthResponse>>;\n`;
         }
-        if (atom_name === 'media') {
+        if (atom_name === '_media') {
             text += `\t\tupload(`;
             text += `file: Buffer | ArrayBuffer | Blob, `;
             text += `token?: string`;
-            text += `):Promise<urn_response.General<schema.Atom<'media'>>>;\n`;
+            text += `):Promise<urn_response.General<schema.Atom<'_media'>>>;\n`;
             text += `\t\tpresigned(`;
             text += `filename: string, `;
             text += `size?: number, `;
@@ -303,7 +303,7 @@ function _generate_hook_types_text_src() {
         }
         const route_defs = book.get_routes_definition(atom_name);
         for (const [route_name, route_def] of Object.entries(route_defs)) {
-            if (atom_name === 'media' && route_name === 'upload' || route_name === 'presigned') {
+            if (atom_name === '_media' && route_name === 'upload' || route_name === 'presigned') {
                 continue;
             }
             const text_args = _text_args_for_url(route_def.url);
@@ -343,11 +343,11 @@ function _generate_hook_types_text_src() {
 // 			text += `\t\tauthenticate(email: string, password: string):`;
 // 			text += `Promise<urn_response.General<Api.AuthResponse>>;\n`;
 // 		}
-// 		if(atom_name === 'media'){
+// 		if(atom_name === '_media'){
 // 			text += `\t\tupload(`;
 // 			text += `file: Buffer | ArrayBuffer | Blob, `;
 // 			text += `token?: string`;
-// 			text += `):Promise<urn_response.General<schema.Atom<'media'>>>;\n`;
+// 			text += `):Promise<urn_response.General<schema.Atom<'_media'>>>;\n`;
 // 			text += `\t\tpresigned(`;
 // 			text += `filename: string, `;
 // 			text += `size?: number, `;
@@ -357,7 +357,7 @@ function _generate_hook_types_text_src() {
 // 		}
 // 		const route_defs = book.get_routes_definition(atom_name as schema_types.AtomName);
 // 		for(const [route_name, route_def] of Object.entries(route_defs)){
-// 			if(atom_name === 'media' && route_name === 'upload' || route_name === 'presigned'){
+// 			if(atom_name === '_media' && route_name === 'upload' || route_name === 'presigned'){
 // 				continue;
 // 			}
 // 			const text_args = _text_args_for_url(route_def.url);
@@ -457,7 +457,7 @@ function _generate_hooks_text(parent) {
             // text += _authenticate_hooks(atom_name, submodule);
             text += _authenticate_hooks(atom_name);
         }
-        if (atom_name === 'media') {
+        if (atom_name === '_media') {
             // text += _upload_hooks(submodule);
             // text += _presigned_hooks(submodule);
             text += _upload_hooks();
@@ -465,7 +465,7 @@ function _generate_hooks_text(parent) {
         }
         const route_defs = book.get_routes_definition(atom_name);
         for (const [route_name, route_def] of Object.entries(route_defs)) {
-            if (atom_name === 'media' && route_name === 'upload' || route_name === 'presigned') {
+            if (atom_name === '_media' && route_name === 'upload' || route_name === 'presigned') {
                 continue;
             }
             const text_args = _text_args_for_url(route_def.url);
@@ -587,7 +587,7 @@ function _upload_hooks() {
     text += `\t\tupload: async<D extends schema.Depth>(\n`;
     text += `\t\t\tfile: Buffer | ArrayBuffer | Blob,\n`;
     text += `\t\t\ttoken?: string\n`;
-    text += `\t\t): Promise<urn_response.General<schema.Atom<'media'>>> => {\n`;
+    text += `\t\t): Promise<urn_response.General<schema.Atom<'_media'>>> => {\n`;
     text += `\t\t\tlet current_token: string | undefined;\n`;
     text += `\t\t\tconst hook_token = hooks.get_token();\n`;
     text += `\t\t\tif (typeof hook_token === "string" && hook_token !== "") {\n`;

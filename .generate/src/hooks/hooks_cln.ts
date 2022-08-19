@@ -22,18 +22,18 @@ export const hooks:Hooks = {
 	get_token: ():string|undefined => {
 		return hook_token;
 	},
-	superusers: {
+	_superusers: {
 		authenticate: async (
 			email: string,
 			password: string
 		): Promise<urn_response.General<types.Api.AuthResponse>> => {
-			return await auth.create('superuser').authenticate(email, password);
+			return await auth.create('_superuser').authenticate(email, password);
 		},
 		count: async <D extends schema.Depth>(
-			parameters?:types.Hook.Arguments<'superuser', 'count', D>,
+			parameters?:types.Hook.Arguments<'_superuser', 'count', D>,
 			token?:string
-		):types.Hook.Response<'superuser', 'count', D>  => {
-			const args:types.Hook.Arguments<'superuser', 'count', D> = {
+		):types.Hook.Response<'_superuser', 'count', D>  => {
+			const args:types.Hook.Arguments<'_superuser', 'count', D> = {
 				...parameters
 			};
 			let current_token:string|undefined;
@@ -44,13 +44,13 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('superuser',current_token).hook<'count',D>('count')(args);
+			return await base.create('_superuser',current_token).hook<'count',D>('count')(args);
 		},
 		find_one: async <D extends schema.Depth>(
-			parameters?:types.Hook.Arguments<'superuser', 'find_one', D>,
+			parameters?:types.Hook.Arguments<'_superuser', 'find_one', D>,
 			token?:string
-		):types.Hook.Response<'superuser', 'find_one', D>  => {
-			const args:types.Hook.Arguments<'superuser', 'find_one', D> = {
+		):types.Hook.Response<'_superuser', 'find_one', D>  => {
+			const args:types.Hook.Arguments<'_superuser', 'find_one', D> = {
 				...parameters
 			};
 			let current_token:string|undefined;
@@ -61,13 +61,13 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('superuser',current_token).hook<'find_one',D>('find_one')(args);
+			return await base.create('_superuser',current_token).hook<'find_one',D>('find_one')(args);
 		},
 		find: async <D extends schema.Depth>(
-			parameters?:types.Hook.Arguments<'superuser', 'find', D>,
+			parameters?:types.Hook.Arguments<'_superuser', 'find', D>,
 			token?:string
-		):types.Hook.Response<'superuser', 'find', D>  => {
-			const args:types.Hook.Arguments<'superuser', 'find', D> = {
+		):types.Hook.Response<'_superuser', 'find', D>  => {
+			const args:types.Hook.Arguments<'_superuser', 'find', D> = {
 				...parameters
 			};
 			let current_token:string|undefined;
@@ -78,14 +78,14 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('superuser',current_token).hook<'find',D>('find')(args);
+			return await base.create('_superuser',current_token).hook<'find',D>('find')(args);
 		},
 		find_id: async <D extends schema.Depth>(
 			id:string,
-			parameters?:types.Hook.Arguments<'superuser', 'find_id', D>,
+			parameters?:types.Hook.Arguments<'_superuser', 'find_id', D>,
 			token?:string
-		):types.Hook.Response<'superuser', 'find_id', D>  => {
-			const args:types.Hook.Arguments<'superuser', 'find_id', D> = {
+		):types.Hook.Response<'_superuser', 'find_id', D>  => {
+			const args:types.Hook.Arguments<'_superuser', 'find_id', D> = {
 				params: {
 					id: id,
 				},
@@ -99,14 +99,14 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('superuser',current_token).hook<'find_id',D>('find_id')(args);
+			return await base.create('_superuser',current_token).hook<'find_id',D>('find_id')(args);
 		},
 		insert: async <D extends schema.Depth>(
-			body:types.Hook.Body<'superuser', 'insert'>,
-			parameters?:types.Hook.Arguments<'superuser', 'insert', D>,
+			body:types.Hook.Body<'_superuser', 'insert'>,
+			parameters?:types.Hook.Arguments<'_superuser', 'insert', D>,
 			token?:string
-		):types.Hook.Response<'superuser', 'insert', D>  => {
-			const args:types.Hook.Arguments<'superuser', 'insert', D> = {
+		):types.Hook.Response<'_superuser', 'insert', D>  => {
+			const args:types.Hook.Arguments<'_superuser', 'insert', D> = {
 				body: body,
 				...parameters
 			};
@@ -118,15 +118,15 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('superuser',current_token).hook<'insert',D>('insert')(args);
+			return await base.create('_superuser',current_token).hook<'insert',D>('insert')(args);
 		},
 		update: async <D extends schema.Depth>(
 			id:string,
-			body:types.Hook.Body<'superuser', 'update'>,
-			parameters?:types.Hook.Arguments<'superuser', 'update', D>,
+			body:types.Hook.Body<'_superuser', 'update'>,
+			parameters?:types.Hook.Arguments<'_superuser', 'update', D>,
 			token?:string
-		):types.Hook.Response<'superuser', 'update', D>  => {
-			const args:types.Hook.Arguments<'superuser', 'update', D> = {
+		):types.Hook.Response<'_superuser', 'update', D>  => {
+			const args:types.Hook.Arguments<'_superuser', 'update', D> = {
 				params: {
 					id: id,
 				},
@@ -141,14 +141,14 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('superuser',current_token).hook<'update',D>('update')(args);
+			return await base.create('_superuser',current_token).hook<'update',D>('update')(args);
 		},
 		delete: async <D extends schema.Depth>(
 			id:string,
-			parameters?:types.Hook.Arguments<'superuser', 'delete', D>,
+			parameters?:types.Hook.Arguments<'_superuser', 'delete', D>,
 			token?:string
-		):types.Hook.Response<'superuser', 'delete', D>  => {
-			const args:types.Hook.Arguments<'superuser', 'delete', D> = {
+		):types.Hook.Response<'_superuser', 'delete', D>  => {
+			const args:types.Hook.Arguments<'_superuser', 'delete', D> = {
 				params: {
 					id: id,
 				},
@@ -162,14 +162,14 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('superuser',current_token).hook<'delete',D>('delete')(args);
+			return await base.create('_superuser',current_token).hook<'delete',D>('delete')(args);
 		},
 		insert_multiple: async <D extends schema.Depth>(
-			body:types.Hook.Body<'superuser', 'insert_multiple'>,
-			parameters?:types.Hook.Arguments<'superuser', 'insert_multiple', D>,
+			body:types.Hook.Body<'_superuser', 'insert_multiple'>,
+			parameters?:types.Hook.Arguments<'_superuser', 'insert_multiple', D>,
 			token?:string
-		):types.Hook.Response<'superuser', 'insert_multiple', D>  => {
-			const args:types.Hook.Arguments<'superuser', 'insert_multiple', D> = {
+		):types.Hook.Response<'_superuser', 'insert_multiple', D>  => {
+			const args:types.Hook.Arguments<'_superuser', 'insert_multiple', D> = {
 				body: body,
 				...parameters
 			};
@@ -181,15 +181,15 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('superuser',current_token).hook<'insert_multiple',D>('insert_multiple')(args);
+			return await base.create('_superuser',current_token).hook<'insert_multiple',D>('insert_multiple')(args);
 		},
 		update_multiple: async <D extends schema.Depth>(
 			ids:string,
-			body:types.Hook.Body<'superuser', 'update_multiple'>,
-			parameters?:types.Hook.Arguments<'superuser', 'update_multiple', D>,
+			body:types.Hook.Body<'_superuser', 'update_multiple'>,
+			parameters?:types.Hook.Arguments<'_superuser', 'update_multiple', D>,
 			token?:string
-		):types.Hook.Response<'superuser', 'update_multiple', D>  => {
-			const args:types.Hook.Arguments<'superuser', 'update_multiple', D> = {
+		):types.Hook.Response<'_superuser', 'update_multiple', D>  => {
+			const args:types.Hook.Arguments<'_superuser', 'update_multiple', D> = {
 				params: {
 					ids: ids,
 				},
@@ -204,14 +204,14 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('superuser',current_token).hook<'update_multiple',D>('update_multiple')(args);
+			return await base.create('_superuser',current_token).hook<'update_multiple',D>('update_multiple')(args);
 		},
 		delete_multiple: async <D extends schema.Depth>(
 			ids:string,
-			parameters?:types.Hook.Arguments<'superuser', 'delete_multiple', D>,
+			parameters?:types.Hook.Arguments<'_superuser', 'delete_multiple', D>,
 			token?:string
-		):types.Hook.Response<'superuser', 'delete_multiple', D>  => {
-			const args:types.Hook.Arguments<'superuser', 'delete_multiple', D> = {
+		):types.Hook.Response<'_superuser', 'delete_multiple', D>  => {
+			const args:types.Hook.Arguments<'_superuser', 'delete_multiple', D> = {
 				params: {
 					ids: ids,
 				},
@@ -225,14 +225,14 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('superuser',current_token).hook<'delete_multiple',D>('delete_multiple')(args);
+			return await base.create('_superuser',current_token).hook<'delete_multiple',D>('delete_multiple')(args);
 		},
 		search_count: async <D extends schema.Depth>(
 			q:string,
-			parameters?:types.Hook.Arguments<'superuser', 'search_count', D>,
+			parameters?:types.Hook.Arguments<'_superuser', 'search_count', D>,
 			token?:string
-		):types.Hook.Response<'superuser', 'search_count', D>  => {
-			const args:types.Hook.Arguments<'superuser', 'search_count', D> = {
+		):types.Hook.Response<'_superuser', 'search_count', D>  => {
+			const args:types.Hook.Arguments<'_superuser', 'search_count', D> = {
 				params: {
 					q: q,
 				},
@@ -246,14 +246,14 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('superuser',current_token).hook<'search_count',D>('search_count')(args);
+			return await base.create('_superuser',current_token).hook<'search_count',D>('search_count')(args);
 		},
 		search: async <D extends schema.Depth>(
 			q:string,
-			parameters?:types.Hook.Arguments<'superuser', 'search', D>,
+			parameters?:types.Hook.Arguments<'_superuser', 'search', D>,
 			token?:string
-		):types.Hook.Response<'superuser', 'search', D>  => {
-			const args:types.Hook.Arguments<'superuser', 'search', D> = {
+		):types.Hook.Response<'_superuser', 'search', D>  => {
+			const args:types.Hook.Arguments<'_superuser', 'search', D> = {
 				params: {
 					q: q,
 				},
@@ -267,21 +267,263 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('superuser',current_token).hook<'search',D>('search')(args);
+			return await base.create('_superuser',current_token).hook<'search',D>('search')(args);
 		},
 	},
-	users: {
+	_groups: {
+		count: async <D extends schema.Depth>(
+			parameters?:types.Hook.Arguments<'_group', 'count', D>,
+			token?:string
+		):types.Hook.Response<'_group', 'count', D>  => {
+			const args:types.Hook.Arguments<'_group', 'count', D> = {
+				...parameters
+			};
+			let current_token:string|undefined;
+			const hook_token = hooks.get_token();
+			if(typeof hook_token === 'string' && hook_token !== ''){
+				current_token = hook_token;
+			}
+			if(typeof token === 'string' && token !== ''){
+				current_token = token;
+			}
+			return await base.create('_group',current_token).hook<'count',D>('count')(args);
+		},
+		find_one: async <D extends schema.Depth>(
+			parameters?:types.Hook.Arguments<'_group', 'find_one', D>,
+			token?:string
+		):types.Hook.Response<'_group', 'find_one', D>  => {
+			const args:types.Hook.Arguments<'_group', 'find_one', D> = {
+				...parameters
+			};
+			let current_token:string|undefined;
+			const hook_token = hooks.get_token();
+			if(typeof hook_token === 'string' && hook_token !== ''){
+				current_token = hook_token;
+			}
+			if(typeof token === 'string' && token !== ''){
+				current_token = token;
+			}
+			return await base.create('_group',current_token).hook<'find_one',D>('find_one')(args);
+		},
+		find: async <D extends schema.Depth>(
+			parameters?:types.Hook.Arguments<'_group', 'find', D>,
+			token?:string
+		):types.Hook.Response<'_group', 'find', D>  => {
+			const args:types.Hook.Arguments<'_group', 'find', D> = {
+				...parameters
+			};
+			let current_token:string|undefined;
+			const hook_token = hooks.get_token();
+			if(typeof hook_token === 'string' && hook_token !== ''){
+				current_token = hook_token;
+			}
+			if(typeof token === 'string' && token !== ''){
+				current_token = token;
+			}
+			return await base.create('_group',current_token).hook<'find',D>('find')(args);
+		},
+		find_id: async <D extends schema.Depth>(
+			id:string,
+			parameters?:types.Hook.Arguments<'_group', 'find_id', D>,
+			token?:string
+		):types.Hook.Response<'_group', 'find_id', D>  => {
+			const args:types.Hook.Arguments<'_group', 'find_id', D> = {
+				params: {
+					id: id,
+				},
+				...parameters
+			};
+			let current_token:string|undefined;
+			const hook_token = hooks.get_token();
+			if(typeof hook_token === 'string' && hook_token !== ''){
+				current_token = hook_token;
+			}
+			if(typeof token === 'string' && token !== ''){
+				current_token = token;
+			}
+			return await base.create('_group',current_token).hook<'find_id',D>('find_id')(args);
+		},
+		insert: async <D extends schema.Depth>(
+			body:types.Hook.Body<'_group', 'insert'>,
+			parameters?:types.Hook.Arguments<'_group', 'insert', D>,
+			token?:string
+		):types.Hook.Response<'_group', 'insert', D>  => {
+			const args:types.Hook.Arguments<'_group', 'insert', D> = {
+				body: body,
+				...parameters
+			};
+			let current_token:string|undefined;
+			const hook_token = hooks.get_token();
+			if(typeof hook_token === 'string' && hook_token !== ''){
+				current_token = hook_token;
+			}
+			if(typeof token === 'string' && token !== ''){
+				current_token = token;
+			}
+			return await base.create('_group',current_token).hook<'insert',D>('insert')(args);
+		},
+		update: async <D extends schema.Depth>(
+			id:string,
+			body:types.Hook.Body<'_group', 'update'>,
+			parameters?:types.Hook.Arguments<'_group', 'update', D>,
+			token?:string
+		):types.Hook.Response<'_group', 'update', D>  => {
+			const args:types.Hook.Arguments<'_group', 'update', D> = {
+				params: {
+					id: id,
+				},
+				body: body,
+				...parameters
+			};
+			let current_token:string|undefined;
+			const hook_token = hooks.get_token();
+			if(typeof hook_token === 'string' && hook_token !== ''){
+				current_token = hook_token;
+			}
+			if(typeof token === 'string' && token !== ''){
+				current_token = token;
+			}
+			return await base.create('_group',current_token).hook<'update',D>('update')(args);
+		},
+		delete: async <D extends schema.Depth>(
+			id:string,
+			parameters?:types.Hook.Arguments<'_group', 'delete', D>,
+			token?:string
+		):types.Hook.Response<'_group', 'delete', D>  => {
+			const args:types.Hook.Arguments<'_group', 'delete', D> = {
+				params: {
+					id: id,
+				},
+				...parameters
+			};
+			let current_token:string|undefined;
+			const hook_token = hooks.get_token();
+			if(typeof hook_token === 'string' && hook_token !== ''){
+				current_token = hook_token;
+			}
+			if(typeof token === 'string' && token !== ''){
+				current_token = token;
+			}
+			return await base.create('_group',current_token).hook<'delete',D>('delete')(args);
+		},
+		insert_multiple: async <D extends schema.Depth>(
+			body:types.Hook.Body<'_group', 'insert_multiple'>,
+			parameters?:types.Hook.Arguments<'_group', 'insert_multiple', D>,
+			token?:string
+		):types.Hook.Response<'_group', 'insert_multiple', D>  => {
+			const args:types.Hook.Arguments<'_group', 'insert_multiple', D> = {
+				body: body,
+				...parameters
+			};
+			let current_token:string|undefined;
+			const hook_token = hooks.get_token();
+			if(typeof hook_token === 'string' && hook_token !== ''){
+				current_token = hook_token;
+			}
+			if(typeof token === 'string' && token !== ''){
+				current_token = token;
+			}
+			return await base.create('_group',current_token).hook<'insert_multiple',D>('insert_multiple')(args);
+		},
+		update_multiple: async <D extends schema.Depth>(
+			ids:string,
+			body:types.Hook.Body<'_group', 'update_multiple'>,
+			parameters?:types.Hook.Arguments<'_group', 'update_multiple', D>,
+			token?:string
+		):types.Hook.Response<'_group', 'update_multiple', D>  => {
+			const args:types.Hook.Arguments<'_group', 'update_multiple', D> = {
+				params: {
+					ids: ids,
+				},
+				body: body,
+				...parameters
+			};
+			let current_token:string|undefined;
+			const hook_token = hooks.get_token();
+			if(typeof hook_token === 'string' && hook_token !== ''){
+				current_token = hook_token;
+			}
+			if(typeof token === 'string' && token !== ''){
+				current_token = token;
+			}
+			return await base.create('_group',current_token).hook<'update_multiple',D>('update_multiple')(args);
+		},
+		delete_multiple: async <D extends schema.Depth>(
+			ids:string,
+			parameters?:types.Hook.Arguments<'_group', 'delete_multiple', D>,
+			token?:string
+		):types.Hook.Response<'_group', 'delete_multiple', D>  => {
+			const args:types.Hook.Arguments<'_group', 'delete_multiple', D> = {
+				params: {
+					ids: ids,
+				},
+				...parameters
+			};
+			let current_token:string|undefined;
+			const hook_token = hooks.get_token();
+			if(typeof hook_token === 'string' && hook_token !== ''){
+				current_token = hook_token;
+			}
+			if(typeof token === 'string' && token !== ''){
+				current_token = token;
+			}
+			return await base.create('_group',current_token).hook<'delete_multiple',D>('delete_multiple')(args);
+		},
+		search_count: async <D extends schema.Depth>(
+			q:string,
+			parameters?:types.Hook.Arguments<'_group', 'search_count', D>,
+			token?:string
+		):types.Hook.Response<'_group', 'search_count', D>  => {
+			const args:types.Hook.Arguments<'_group', 'search_count', D> = {
+				params: {
+					q: q,
+				},
+				...parameters
+			};
+			let current_token:string|undefined;
+			const hook_token = hooks.get_token();
+			if(typeof hook_token === 'string' && hook_token !== ''){
+				current_token = hook_token;
+			}
+			if(typeof token === 'string' && token !== ''){
+				current_token = token;
+			}
+			return await base.create('_group',current_token).hook<'search_count',D>('search_count')(args);
+		},
+		search: async <D extends schema.Depth>(
+			q:string,
+			parameters?:types.Hook.Arguments<'_group', 'search', D>,
+			token?:string
+		):types.Hook.Response<'_group', 'search', D>  => {
+			const args:types.Hook.Arguments<'_group', 'search', D> = {
+				params: {
+					q: q,
+				},
+				...parameters
+			};
+			let current_token:string|undefined;
+			const hook_token = hooks.get_token();
+			if(typeof hook_token === 'string' && hook_token !== ''){
+				current_token = hook_token;
+			}
+			if(typeof token === 'string' && token !== ''){
+				current_token = token;
+			}
+			return await base.create('_group',current_token).hook<'search',D>('search')(args);
+		},
+	},
+	_users: {
 		authenticate: async (
 			email: string,
 			password: string
 		): Promise<urn_response.General<types.Api.AuthResponse>> => {
-			return await auth.create('user').authenticate(email, password);
+			return await auth.create('_user').authenticate(email, password);
 		},
 		count: async <D extends schema.Depth>(
-			parameters?:types.Hook.Arguments<'user', 'count', D>,
+			parameters?:types.Hook.Arguments<'_user', 'count', D>,
 			token?:string
-		):types.Hook.Response<'user', 'count', D>  => {
-			const args:types.Hook.Arguments<'user', 'count', D> = {
+		):types.Hook.Response<'_user', 'count', D>  => {
+			const args:types.Hook.Arguments<'_user', 'count', D> = {
 				...parameters
 			};
 			let current_token:string|undefined;
@@ -292,13 +534,13 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('user',current_token).hook<'count',D>('count')(args);
+			return await base.create('_user',current_token).hook<'count',D>('count')(args);
 		},
 		find_one: async <D extends schema.Depth>(
-			parameters?:types.Hook.Arguments<'user', 'find_one', D>,
+			parameters?:types.Hook.Arguments<'_user', 'find_one', D>,
 			token?:string
-		):types.Hook.Response<'user', 'find_one', D>  => {
-			const args:types.Hook.Arguments<'user', 'find_one', D> = {
+		):types.Hook.Response<'_user', 'find_one', D>  => {
+			const args:types.Hook.Arguments<'_user', 'find_one', D> = {
 				...parameters
 			};
 			let current_token:string|undefined;
@@ -309,13 +551,13 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('user',current_token).hook<'find_one',D>('find_one')(args);
+			return await base.create('_user',current_token).hook<'find_one',D>('find_one')(args);
 		},
 		find: async <D extends schema.Depth>(
-			parameters?:types.Hook.Arguments<'user', 'find', D>,
+			parameters?:types.Hook.Arguments<'_user', 'find', D>,
 			token?:string
-		):types.Hook.Response<'user', 'find', D>  => {
-			const args:types.Hook.Arguments<'user', 'find', D> = {
+		):types.Hook.Response<'_user', 'find', D>  => {
+			const args:types.Hook.Arguments<'_user', 'find', D> = {
 				...parameters
 			};
 			let current_token:string|undefined;
@@ -326,14 +568,14 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('user',current_token).hook<'find',D>('find')(args);
+			return await base.create('_user',current_token).hook<'find',D>('find')(args);
 		},
 		find_id: async <D extends schema.Depth>(
 			id:string,
-			parameters?:types.Hook.Arguments<'user', 'find_id', D>,
+			parameters?:types.Hook.Arguments<'_user', 'find_id', D>,
 			token?:string
-		):types.Hook.Response<'user', 'find_id', D>  => {
-			const args:types.Hook.Arguments<'user', 'find_id', D> = {
+		):types.Hook.Response<'_user', 'find_id', D>  => {
+			const args:types.Hook.Arguments<'_user', 'find_id', D> = {
 				params: {
 					id: id,
 				},
@@ -347,14 +589,14 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('user',current_token).hook<'find_id',D>('find_id')(args);
+			return await base.create('_user',current_token).hook<'find_id',D>('find_id')(args);
 		},
 		insert: async <D extends schema.Depth>(
-			body:types.Hook.Body<'user', 'insert'>,
-			parameters?:types.Hook.Arguments<'user', 'insert', D>,
+			body:types.Hook.Body<'_user', 'insert'>,
+			parameters?:types.Hook.Arguments<'_user', 'insert', D>,
 			token?:string
-		):types.Hook.Response<'user', 'insert', D>  => {
-			const args:types.Hook.Arguments<'user', 'insert', D> = {
+		):types.Hook.Response<'_user', 'insert', D>  => {
+			const args:types.Hook.Arguments<'_user', 'insert', D> = {
 				body: body,
 				...parameters
 			};
@@ -366,15 +608,15 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('user',current_token).hook<'insert',D>('insert')(args);
+			return await base.create('_user',current_token).hook<'insert',D>('insert')(args);
 		},
 		update: async <D extends schema.Depth>(
 			id:string,
-			body:types.Hook.Body<'user', 'update'>,
-			parameters?:types.Hook.Arguments<'user', 'update', D>,
+			body:types.Hook.Body<'_user', 'update'>,
+			parameters?:types.Hook.Arguments<'_user', 'update', D>,
 			token?:string
-		):types.Hook.Response<'user', 'update', D>  => {
-			const args:types.Hook.Arguments<'user', 'update', D> = {
+		):types.Hook.Response<'_user', 'update', D>  => {
+			const args:types.Hook.Arguments<'_user', 'update', D> = {
 				params: {
 					id: id,
 				},
@@ -389,14 +631,14 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('user',current_token).hook<'update',D>('update')(args);
+			return await base.create('_user',current_token).hook<'update',D>('update')(args);
 		},
 		delete: async <D extends schema.Depth>(
 			id:string,
-			parameters?:types.Hook.Arguments<'user', 'delete', D>,
+			parameters?:types.Hook.Arguments<'_user', 'delete', D>,
 			token?:string
-		):types.Hook.Response<'user', 'delete', D>  => {
-			const args:types.Hook.Arguments<'user', 'delete', D> = {
+		):types.Hook.Response<'_user', 'delete', D>  => {
+			const args:types.Hook.Arguments<'_user', 'delete', D> = {
 				params: {
 					id: id,
 				},
@@ -410,14 +652,14 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('user',current_token).hook<'delete',D>('delete')(args);
+			return await base.create('_user',current_token).hook<'delete',D>('delete')(args);
 		},
 		insert_multiple: async <D extends schema.Depth>(
-			body:types.Hook.Body<'user', 'insert_multiple'>,
-			parameters?:types.Hook.Arguments<'user', 'insert_multiple', D>,
+			body:types.Hook.Body<'_user', 'insert_multiple'>,
+			parameters?:types.Hook.Arguments<'_user', 'insert_multiple', D>,
 			token?:string
-		):types.Hook.Response<'user', 'insert_multiple', D>  => {
-			const args:types.Hook.Arguments<'user', 'insert_multiple', D> = {
+		):types.Hook.Response<'_user', 'insert_multiple', D>  => {
+			const args:types.Hook.Arguments<'_user', 'insert_multiple', D> = {
 				body: body,
 				...parameters
 			};
@@ -429,15 +671,15 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('user',current_token).hook<'insert_multiple',D>('insert_multiple')(args);
+			return await base.create('_user',current_token).hook<'insert_multiple',D>('insert_multiple')(args);
 		},
 		update_multiple: async <D extends schema.Depth>(
 			ids:string,
-			body:types.Hook.Body<'user', 'update_multiple'>,
-			parameters?:types.Hook.Arguments<'user', 'update_multiple', D>,
+			body:types.Hook.Body<'_user', 'update_multiple'>,
+			parameters?:types.Hook.Arguments<'_user', 'update_multiple', D>,
 			token?:string
-		):types.Hook.Response<'user', 'update_multiple', D>  => {
-			const args:types.Hook.Arguments<'user', 'update_multiple', D> = {
+		):types.Hook.Response<'_user', 'update_multiple', D>  => {
+			const args:types.Hook.Arguments<'_user', 'update_multiple', D> = {
 				params: {
 					ids: ids,
 				},
@@ -452,14 +694,14 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('user',current_token).hook<'update_multiple',D>('update_multiple')(args);
+			return await base.create('_user',current_token).hook<'update_multiple',D>('update_multiple')(args);
 		},
 		delete_multiple: async <D extends schema.Depth>(
 			ids:string,
-			parameters?:types.Hook.Arguments<'user', 'delete_multiple', D>,
+			parameters?:types.Hook.Arguments<'_user', 'delete_multiple', D>,
 			token?:string
-		):types.Hook.Response<'user', 'delete_multiple', D>  => {
-			const args:types.Hook.Arguments<'user', 'delete_multiple', D> = {
+		):types.Hook.Response<'_user', 'delete_multiple', D>  => {
+			const args:types.Hook.Arguments<'_user', 'delete_multiple', D> = {
 				params: {
 					ids: ids,
 				},
@@ -473,14 +715,14 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('user',current_token).hook<'delete_multiple',D>('delete_multiple')(args);
+			return await base.create('_user',current_token).hook<'delete_multiple',D>('delete_multiple')(args);
 		},
 		search_count: async <D extends schema.Depth>(
 			q:string,
-			parameters?:types.Hook.Arguments<'user', 'search_count', D>,
+			parameters?:types.Hook.Arguments<'_user', 'search_count', D>,
 			token?:string
-		):types.Hook.Response<'user', 'search_count', D>  => {
-			const args:types.Hook.Arguments<'user', 'search_count', D> = {
+		):types.Hook.Response<'_user', 'search_count', D>  => {
+			const args:types.Hook.Arguments<'_user', 'search_count', D> = {
 				params: {
 					q: q,
 				},
@@ -494,14 +736,14 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('user',current_token).hook<'search_count',D>('search_count')(args);
+			return await base.create('_user',current_token).hook<'search_count',D>('search_count')(args);
 		},
 		search: async <D extends schema.Depth>(
 			q:string,
-			parameters?:types.Hook.Arguments<'user', 'search', D>,
+			parameters?:types.Hook.Arguments<'_user', 'search', D>,
 			token?:string
-		):types.Hook.Response<'user', 'search', D>  => {
-			const args:types.Hook.Arguments<'user', 'search', D> = {
+		):types.Hook.Response<'_user', 'search', D>  => {
+			const args:types.Hook.Arguments<'_user', 'search', D> = {
 				params: {
 					q: q,
 				},
@@ -515,15 +757,17 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('user',current_token).hook<'search',D>('search')(args);
+			return await base.create('_user',current_token).hook<'search',D>('search')(args);
 		},
 	},
-	groups: {
-		count: async <D extends schema.Depth>(
-			parameters?:types.Hook.Arguments<'group', 'count', D>,
+	_media: {
+		upload: async <D extends schema.Depth>(
+			body:types.Hook.Body<'_media', 'upload'>,
+			parameters?:types.Hook.Arguments<'_media', 'upload', D>,
 			token?:string
-		):types.Hook.Response<'group', 'count', D>  => {
-			const args:types.Hook.Arguments<'group', 'count', D> = {
+		):types.Hook.Response<'_media', 'upload', D>  => {
+			const args:types.Hook.Arguments<'_media', 'upload', D> = {
+				body: body,
 				...parameters
 			};
 			let current_token:string|undefined;
@@ -534,13 +778,30 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('group',current_token).hook<'count',D>('count')(args);
+			return await base.create('_media',current_token).hook<'upload',D>('upload')(args);
+		},
+		count: async <D extends schema.Depth>(
+			parameters?:types.Hook.Arguments<'_media', 'count', D>,
+			token?:string
+		):types.Hook.Response<'_media', 'count', D>  => {
+			const args:types.Hook.Arguments<'_media', 'count', D> = {
+				...parameters
+			};
+			let current_token:string|undefined;
+			const hook_token = hooks.get_token();
+			if(typeof hook_token === 'string' && hook_token !== ''){
+				current_token = hook_token;
+			}
+			if(typeof token === 'string' && token !== ''){
+				current_token = token;
+			}
+			return await base.create('_media',current_token).hook<'count',D>('count')(args);
 		},
 		find_one: async <D extends schema.Depth>(
-			parameters?:types.Hook.Arguments<'group', 'find_one', D>,
+			parameters?:types.Hook.Arguments<'_media', 'find_one', D>,
 			token?:string
-		):types.Hook.Response<'group', 'find_one', D>  => {
-			const args:types.Hook.Arguments<'group', 'find_one', D> = {
+		):types.Hook.Response<'_media', 'find_one', D>  => {
+			const args:types.Hook.Arguments<'_media', 'find_one', D> = {
 				...parameters
 			};
 			let current_token:string|undefined;
@@ -551,13 +812,13 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('group',current_token).hook<'find_one',D>('find_one')(args);
+			return await base.create('_media',current_token).hook<'find_one',D>('find_one')(args);
 		},
 		find: async <D extends schema.Depth>(
-			parameters?:types.Hook.Arguments<'group', 'find', D>,
+			parameters?:types.Hook.Arguments<'_media', 'find', D>,
 			token?:string
-		):types.Hook.Response<'group', 'find', D>  => {
-			const args:types.Hook.Arguments<'group', 'find', D> = {
+		):types.Hook.Response<'_media', 'find', D>  => {
+			const args:types.Hook.Arguments<'_media', 'find', D> = {
 				...parameters
 			};
 			let current_token:string|undefined;
@@ -568,14 +829,14 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('group',current_token).hook<'find',D>('find')(args);
+			return await base.create('_media',current_token).hook<'find',D>('find')(args);
 		},
 		find_id: async <D extends schema.Depth>(
 			id:string,
-			parameters?:types.Hook.Arguments<'group', 'find_id', D>,
+			parameters?:types.Hook.Arguments<'_media', 'find_id', D>,
 			token?:string
-		):types.Hook.Response<'group', 'find_id', D>  => {
-			const args:types.Hook.Arguments<'group', 'find_id', D> = {
+		):types.Hook.Response<'_media', 'find_id', D>  => {
+			const args:types.Hook.Arguments<'_media', 'find_id', D> = {
 				params: {
 					id: id,
 				},
@@ -589,14 +850,14 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('group',current_token).hook<'find_id',D>('find_id')(args);
+			return await base.create('_media',current_token).hook<'find_id',D>('find_id')(args);
 		},
 		insert: async <D extends schema.Depth>(
-			body:types.Hook.Body<'group', 'insert'>,
-			parameters?:types.Hook.Arguments<'group', 'insert', D>,
+			body:types.Hook.Body<'_media', 'insert'>,
+			parameters?:types.Hook.Arguments<'_media', 'insert', D>,
 			token?:string
-		):types.Hook.Response<'group', 'insert', D>  => {
-			const args:types.Hook.Arguments<'group', 'insert', D> = {
+		):types.Hook.Response<'_media', 'insert', D>  => {
+			const args:types.Hook.Arguments<'_media', 'insert', D> = {
 				body: body,
 				...parameters
 			};
@@ -608,15 +869,15 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('group',current_token).hook<'insert',D>('insert')(args);
+			return await base.create('_media',current_token).hook<'insert',D>('insert')(args);
 		},
 		update: async <D extends schema.Depth>(
 			id:string,
-			body:types.Hook.Body<'group', 'update'>,
-			parameters?:types.Hook.Arguments<'group', 'update', D>,
+			body:types.Hook.Body<'_media', 'update'>,
+			parameters?:types.Hook.Arguments<'_media', 'update', D>,
 			token?:string
-		):types.Hook.Response<'group', 'update', D>  => {
-			const args:types.Hook.Arguments<'group', 'update', D> = {
+		):types.Hook.Response<'_media', 'update', D>  => {
+			const args:types.Hook.Arguments<'_media', 'update', D> = {
 				params: {
 					id: id,
 				},
@@ -631,14 +892,14 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('group',current_token).hook<'update',D>('update')(args);
+			return await base.create('_media',current_token).hook<'update',D>('update')(args);
 		},
 		delete: async <D extends schema.Depth>(
 			id:string,
-			parameters?:types.Hook.Arguments<'group', 'delete', D>,
+			parameters?:types.Hook.Arguments<'_media', 'delete', D>,
 			token?:string
-		):types.Hook.Response<'group', 'delete', D>  => {
-			const args:types.Hook.Arguments<'group', 'delete', D> = {
+		):types.Hook.Response<'_media', 'delete', D>  => {
+			const args:types.Hook.Arguments<'_media', 'delete', D> = {
 				params: {
 					id: id,
 				},
@@ -652,14 +913,14 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('group',current_token).hook<'delete',D>('delete')(args);
+			return await base.create('_media',current_token).hook<'delete',D>('delete')(args);
 		},
 		insert_multiple: async <D extends schema.Depth>(
-			body:types.Hook.Body<'group', 'insert_multiple'>,
-			parameters?:types.Hook.Arguments<'group', 'insert_multiple', D>,
+			body:types.Hook.Body<'_media', 'insert_multiple'>,
+			parameters?:types.Hook.Arguments<'_media', 'insert_multiple', D>,
 			token?:string
-		):types.Hook.Response<'group', 'insert_multiple', D>  => {
-			const args:types.Hook.Arguments<'group', 'insert_multiple', D> = {
+		):types.Hook.Response<'_media', 'insert_multiple', D>  => {
+			const args:types.Hook.Arguments<'_media', 'insert_multiple', D> = {
 				body: body,
 				...parameters
 			};
@@ -671,15 +932,15 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('group',current_token).hook<'insert_multiple',D>('insert_multiple')(args);
+			return await base.create('_media',current_token).hook<'insert_multiple',D>('insert_multiple')(args);
 		},
 		update_multiple: async <D extends schema.Depth>(
 			ids:string,
-			body:types.Hook.Body<'group', 'update_multiple'>,
-			parameters?:types.Hook.Arguments<'group', 'update_multiple', D>,
+			body:types.Hook.Body<'_media', 'update_multiple'>,
+			parameters?:types.Hook.Arguments<'_media', 'update_multiple', D>,
 			token?:string
-		):types.Hook.Response<'group', 'update_multiple', D>  => {
-			const args:types.Hook.Arguments<'group', 'update_multiple', D> = {
+		):types.Hook.Response<'_media', 'update_multiple', D>  => {
+			const args:types.Hook.Arguments<'_media', 'update_multiple', D> = {
 				params: {
 					ids: ids,
 				},
@@ -694,14 +955,14 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('group',current_token).hook<'update_multiple',D>('update_multiple')(args);
+			return await base.create('_media',current_token).hook<'update_multiple',D>('update_multiple')(args);
 		},
 		delete_multiple: async <D extends schema.Depth>(
 			ids:string,
-			parameters?:types.Hook.Arguments<'group', 'delete_multiple', D>,
+			parameters?:types.Hook.Arguments<'_media', 'delete_multiple', D>,
 			token?:string
-		):types.Hook.Response<'group', 'delete_multiple', D>  => {
-			const args:types.Hook.Arguments<'group', 'delete_multiple', D> = {
+		):types.Hook.Response<'_media', 'delete_multiple', D>  => {
+			const args:types.Hook.Arguments<'_media', 'delete_multiple', D> = {
 				params: {
 					ids: ids,
 				},
@@ -715,14 +976,14 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('group',current_token).hook<'delete_multiple',D>('delete_multiple')(args);
+			return await base.create('_media',current_token).hook<'delete_multiple',D>('delete_multiple')(args);
 		},
 		search_count: async <D extends schema.Depth>(
 			q:string,
-			parameters?:types.Hook.Arguments<'group', 'search_count', D>,
+			parameters?:types.Hook.Arguments<'_media', 'search_count', D>,
 			token?:string
-		):types.Hook.Response<'group', 'search_count', D>  => {
-			const args:types.Hook.Arguments<'group', 'search_count', D> = {
+		):types.Hook.Response<'_media', 'search_count', D>  => {
+			const args:types.Hook.Arguments<'_media', 'search_count', D> = {
 				params: {
 					q: q,
 				},
@@ -736,14 +997,14 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('group',current_token).hook<'search_count',D>('search_count')(args);
+			return await base.create('_media',current_token).hook<'search_count',D>('search_count')(args);
 		},
 		search: async <D extends schema.Depth>(
 			q:string,
-			parameters?:types.Hook.Arguments<'group', 'search', D>,
+			parameters?:types.Hook.Arguments<'_media', 'search', D>,
 			token?:string
-		):types.Hook.Response<'group', 'search', D>  => {
-			const args:types.Hook.Arguments<'group', 'search', D> = {
+		):types.Hook.Response<'_media', 'search', D>  => {
+			const args:types.Hook.Arguments<'_media', 'search', D> = {
 				params: {
 					q: q,
 				},
@@ -757,45 +1018,15 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('group',current_token).hook<'search',D>('search')(args);
+			return await base.create('_media',current_token).hook<'search',D>('search')(args);
 		},
 	},
-	media: {
-		upload: async<D extends schema.Depth>(
-			file: Buffer | ArrayBuffer | Blob,
-			token?: string
-		): Promise<urn_response.General<schema.Atom<'media'>>> => {
-			let current_token: string | undefined;
-			const hook_token = hooks.get_token();
-			if (typeof hook_token === "string" && hook_token !== "") {
-				current_token = hook_token;
-			}
-			if (typeof token === "string" && token !== "") {
-				current_token = token;
-			}
-			return await media.create(current_token).upload<D>(file, current_token);
-		},
-		presigned: async(
-			filename: string,
-			size?: number,
-			type?: string,
-			token?: string
-		): Promise<urn_response.General<string>> => {
-			let current_token: string | undefined;
-			const hook_token = hooks.get_token();
-			if (typeof hook_token === "string" && hook_token !== "") {
-				current_token = hook_token;
-			}
-			if (typeof token === "string" && token !== "") {
-				current_token = token;
-			}
-			return await media.create(current_token).presigned(filename, size, type, current_token);
-		},
+	_errors: {
 		count: async <D extends schema.Depth>(
-			parameters?:types.Hook.Arguments<'media', 'count', D>,
+			parameters?:types.Hook.Arguments<'_error', 'count', D>,
 			token?:string
-		):types.Hook.Response<'media', 'count', D>  => {
-			const args:types.Hook.Arguments<'media', 'count', D> = {
+		):types.Hook.Response<'_error', 'count', D>  => {
+			const args:types.Hook.Arguments<'_error', 'count', D> = {
 				...parameters
 			};
 			let current_token:string|undefined;
@@ -806,13 +1037,13 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('media',current_token).hook<'count',D>('count')(args);
+			return await base.create('_error',current_token).hook<'count',D>('count')(args);
 		},
 		find_one: async <D extends schema.Depth>(
-			parameters?:types.Hook.Arguments<'media', 'find_one', D>,
+			parameters?:types.Hook.Arguments<'_error', 'find_one', D>,
 			token?:string
-		):types.Hook.Response<'media', 'find_one', D>  => {
-			const args:types.Hook.Arguments<'media', 'find_one', D> = {
+		):types.Hook.Response<'_error', 'find_one', D>  => {
+			const args:types.Hook.Arguments<'_error', 'find_one', D> = {
 				...parameters
 			};
 			let current_token:string|undefined;
@@ -823,13 +1054,13 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('media',current_token).hook<'find_one',D>('find_one')(args);
+			return await base.create('_error',current_token).hook<'find_one',D>('find_one')(args);
 		},
 		find: async <D extends schema.Depth>(
-			parameters?:types.Hook.Arguments<'media', 'find', D>,
+			parameters?:types.Hook.Arguments<'_error', 'find', D>,
 			token?:string
-		):types.Hook.Response<'media', 'find', D>  => {
-			const args:types.Hook.Arguments<'media', 'find', D> = {
+		):types.Hook.Response<'_error', 'find', D>  => {
+			const args:types.Hook.Arguments<'_error', 'find', D> = {
 				...parameters
 			};
 			let current_token:string|undefined;
@@ -840,14 +1071,14 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('media',current_token).hook<'find',D>('find')(args);
+			return await base.create('_error',current_token).hook<'find',D>('find')(args);
 		},
 		find_id: async <D extends schema.Depth>(
 			id:string,
-			parameters?:types.Hook.Arguments<'media', 'find_id', D>,
+			parameters?:types.Hook.Arguments<'_error', 'find_id', D>,
 			token?:string
-		):types.Hook.Response<'media', 'find_id', D>  => {
-			const args:types.Hook.Arguments<'media', 'find_id', D> = {
+		):types.Hook.Response<'_error', 'find_id', D>  => {
+			const args:types.Hook.Arguments<'_error', 'find_id', D> = {
 				params: {
 					id: id,
 				},
@@ -861,14 +1092,14 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('media',current_token).hook<'find_id',D>('find_id')(args);
+			return await base.create('_error',current_token).hook<'find_id',D>('find_id')(args);
 		},
 		insert: async <D extends schema.Depth>(
-			body:types.Hook.Body<'media', 'insert'>,
-			parameters?:types.Hook.Arguments<'media', 'insert', D>,
+			body:types.Hook.Body<'_error', 'insert'>,
+			parameters?:types.Hook.Arguments<'_error', 'insert', D>,
 			token?:string
-		):types.Hook.Response<'media', 'insert', D>  => {
-			const args:types.Hook.Arguments<'media', 'insert', D> = {
+		):types.Hook.Response<'_error', 'insert', D>  => {
+			const args:types.Hook.Arguments<'_error', 'insert', D> = {
 				body: body,
 				...parameters
 			};
@@ -880,15 +1111,15 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('media',current_token).hook<'insert',D>('insert')(args);
+			return await base.create('_error',current_token).hook<'insert',D>('insert')(args);
 		},
 		update: async <D extends schema.Depth>(
 			id:string,
-			body:types.Hook.Body<'media', 'update'>,
-			parameters?:types.Hook.Arguments<'media', 'update', D>,
+			body:types.Hook.Body<'_error', 'update'>,
+			parameters?:types.Hook.Arguments<'_error', 'update', D>,
 			token?:string
-		):types.Hook.Response<'media', 'update', D>  => {
-			const args:types.Hook.Arguments<'media', 'update', D> = {
+		):types.Hook.Response<'_error', 'update', D>  => {
+			const args:types.Hook.Arguments<'_error', 'update', D> = {
 				params: {
 					id: id,
 				},
@@ -903,14 +1134,14 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('media',current_token).hook<'update',D>('update')(args);
+			return await base.create('_error',current_token).hook<'update',D>('update')(args);
 		},
 		delete: async <D extends schema.Depth>(
 			id:string,
-			parameters?:types.Hook.Arguments<'media', 'delete', D>,
+			parameters?:types.Hook.Arguments<'_error', 'delete', D>,
 			token?:string
-		):types.Hook.Response<'media', 'delete', D>  => {
-			const args:types.Hook.Arguments<'media', 'delete', D> = {
+		):types.Hook.Response<'_error', 'delete', D>  => {
+			const args:types.Hook.Arguments<'_error', 'delete', D> = {
 				params: {
 					id: id,
 				},
@@ -924,14 +1155,14 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('media',current_token).hook<'delete',D>('delete')(args);
+			return await base.create('_error',current_token).hook<'delete',D>('delete')(args);
 		},
 		insert_multiple: async <D extends schema.Depth>(
-			body:types.Hook.Body<'media', 'insert_multiple'>,
-			parameters?:types.Hook.Arguments<'media', 'insert_multiple', D>,
+			body:types.Hook.Body<'_error', 'insert_multiple'>,
+			parameters?:types.Hook.Arguments<'_error', 'insert_multiple', D>,
 			token?:string
-		):types.Hook.Response<'media', 'insert_multiple', D>  => {
-			const args:types.Hook.Arguments<'media', 'insert_multiple', D> = {
+		):types.Hook.Response<'_error', 'insert_multiple', D>  => {
+			const args:types.Hook.Arguments<'_error', 'insert_multiple', D> = {
 				body: body,
 				...parameters
 			};
@@ -943,15 +1174,15 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('media',current_token).hook<'insert_multiple',D>('insert_multiple')(args);
+			return await base.create('_error',current_token).hook<'insert_multiple',D>('insert_multiple')(args);
 		},
 		update_multiple: async <D extends schema.Depth>(
 			ids:string,
-			body:types.Hook.Body<'media', 'update_multiple'>,
-			parameters?:types.Hook.Arguments<'media', 'update_multiple', D>,
+			body:types.Hook.Body<'_error', 'update_multiple'>,
+			parameters?:types.Hook.Arguments<'_error', 'update_multiple', D>,
 			token?:string
-		):types.Hook.Response<'media', 'update_multiple', D>  => {
-			const args:types.Hook.Arguments<'media', 'update_multiple', D> = {
+		):types.Hook.Response<'_error', 'update_multiple', D>  => {
+			const args:types.Hook.Arguments<'_error', 'update_multiple', D> = {
 				params: {
 					ids: ids,
 				},
@@ -966,14 +1197,14 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('media',current_token).hook<'update_multiple',D>('update_multiple')(args);
+			return await base.create('_error',current_token).hook<'update_multiple',D>('update_multiple')(args);
 		},
 		delete_multiple: async <D extends schema.Depth>(
 			ids:string,
-			parameters?:types.Hook.Arguments<'media', 'delete_multiple', D>,
+			parameters?:types.Hook.Arguments<'_error', 'delete_multiple', D>,
 			token?:string
-		):types.Hook.Response<'media', 'delete_multiple', D>  => {
-			const args:types.Hook.Arguments<'media', 'delete_multiple', D> = {
+		):types.Hook.Response<'_error', 'delete_multiple', D>  => {
+			const args:types.Hook.Arguments<'_error', 'delete_multiple', D> = {
 				params: {
 					ids: ids,
 				},
@@ -987,14 +1218,14 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('media',current_token).hook<'delete_multiple',D>('delete_multiple')(args);
+			return await base.create('_error',current_token).hook<'delete_multiple',D>('delete_multiple')(args);
 		},
 		search_count: async <D extends schema.Depth>(
 			q:string,
-			parameters?:types.Hook.Arguments<'media', 'search_count', D>,
+			parameters?:types.Hook.Arguments<'_error', 'search_count', D>,
 			token?:string
-		):types.Hook.Response<'media', 'search_count', D>  => {
-			const args:types.Hook.Arguments<'media', 'search_count', D> = {
+		):types.Hook.Response<'_error', 'search_count', D>  => {
+			const args:types.Hook.Arguments<'_error', 'search_count', D> = {
 				params: {
 					q: q,
 				},
@@ -1008,14 +1239,14 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('media',current_token).hook<'search_count',D>('search_count')(args);
+			return await base.create('_error',current_token).hook<'search_count',D>('search_count')(args);
 		},
 		search: async <D extends schema.Depth>(
 			q:string,
-			parameters?:types.Hook.Arguments<'media', 'search', D>,
+			parameters?:types.Hook.Arguments<'_error', 'search', D>,
 			token?:string
-		):types.Hook.Response<'media', 'search', D>  => {
-			const args:types.Hook.Arguments<'media', 'search', D> = {
+		):types.Hook.Response<'_error', 'search', D>  => {
+			const args:types.Hook.Arguments<'_error', 'search', D> = {
 				params: {
 					q: q,
 				},
@@ -1029,15 +1260,15 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('media',current_token).hook<'search',D>('search')(args);
+			return await base.create('_error',current_token).hook<'search',D>('search')(args);
 		},
 	},
-	errors: {
+	_requests: {
 		count: async <D extends schema.Depth>(
-			parameters?:types.Hook.Arguments<'error', 'count', D>,
+			parameters?:types.Hook.Arguments<'_request', 'count', D>,
 			token?:string
-		):types.Hook.Response<'error', 'count', D>  => {
-			const args:types.Hook.Arguments<'error', 'count', D> = {
+		):types.Hook.Response<'_request', 'count', D>  => {
+			const args:types.Hook.Arguments<'_request', 'count', D> = {
 				...parameters
 			};
 			let current_token:string|undefined;
@@ -1048,13 +1279,13 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('error',current_token).hook<'count',D>('count')(args);
+			return await base.create('_request',current_token).hook<'count',D>('count')(args);
 		},
 		find_one: async <D extends schema.Depth>(
-			parameters?:types.Hook.Arguments<'error', 'find_one', D>,
+			parameters?:types.Hook.Arguments<'_request', 'find_one', D>,
 			token?:string
-		):types.Hook.Response<'error', 'find_one', D>  => {
-			const args:types.Hook.Arguments<'error', 'find_one', D> = {
+		):types.Hook.Response<'_request', 'find_one', D>  => {
+			const args:types.Hook.Arguments<'_request', 'find_one', D> = {
 				...parameters
 			};
 			let current_token:string|undefined;
@@ -1065,13 +1296,13 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('error',current_token).hook<'find_one',D>('find_one')(args);
+			return await base.create('_request',current_token).hook<'find_one',D>('find_one')(args);
 		},
 		find: async <D extends schema.Depth>(
-			parameters?:types.Hook.Arguments<'error', 'find', D>,
+			parameters?:types.Hook.Arguments<'_request', 'find', D>,
 			token?:string
-		):types.Hook.Response<'error', 'find', D>  => {
-			const args:types.Hook.Arguments<'error', 'find', D> = {
+		):types.Hook.Response<'_request', 'find', D>  => {
+			const args:types.Hook.Arguments<'_request', 'find', D> = {
 				...parameters
 			};
 			let current_token:string|undefined;
@@ -1082,14 +1313,14 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('error',current_token).hook<'find',D>('find')(args);
+			return await base.create('_request',current_token).hook<'find',D>('find')(args);
 		},
 		find_id: async <D extends schema.Depth>(
 			id:string,
-			parameters?:types.Hook.Arguments<'error', 'find_id', D>,
+			parameters?:types.Hook.Arguments<'_request', 'find_id', D>,
 			token?:string
-		):types.Hook.Response<'error', 'find_id', D>  => {
-			const args:types.Hook.Arguments<'error', 'find_id', D> = {
+		):types.Hook.Response<'_request', 'find_id', D>  => {
+			const args:types.Hook.Arguments<'_request', 'find_id', D> = {
 				params: {
 					id: id,
 				},
@@ -1103,14 +1334,14 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('error',current_token).hook<'find_id',D>('find_id')(args);
+			return await base.create('_request',current_token).hook<'find_id',D>('find_id')(args);
 		},
 		insert: async <D extends schema.Depth>(
-			body:types.Hook.Body<'error', 'insert'>,
-			parameters?:types.Hook.Arguments<'error', 'insert', D>,
+			body:types.Hook.Body<'_request', 'insert'>,
+			parameters?:types.Hook.Arguments<'_request', 'insert', D>,
 			token?:string
-		):types.Hook.Response<'error', 'insert', D>  => {
-			const args:types.Hook.Arguments<'error', 'insert', D> = {
+		):types.Hook.Response<'_request', 'insert', D>  => {
+			const args:types.Hook.Arguments<'_request', 'insert', D> = {
 				body: body,
 				...parameters
 			};
@@ -1122,15 +1353,15 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('error',current_token).hook<'insert',D>('insert')(args);
+			return await base.create('_request',current_token).hook<'insert',D>('insert')(args);
 		},
 		update: async <D extends schema.Depth>(
 			id:string,
-			body:types.Hook.Body<'error', 'update'>,
-			parameters?:types.Hook.Arguments<'error', 'update', D>,
+			body:types.Hook.Body<'_request', 'update'>,
+			parameters?:types.Hook.Arguments<'_request', 'update', D>,
 			token?:string
-		):types.Hook.Response<'error', 'update', D>  => {
-			const args:types.Hook.Arguments<'error', 'update', D> = {
+		):types.Hook.Response<'_request', 'update', D>  => {
+			const args:types.Hook.Arguments<'_request', 'update', D> = {
 				params: {
 					id: id,
 				},
@@ -1145,14 +1376,14 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('error',current_token).hook<'update',D>('update')(args);
+			return await base.create('_request',current_token).hook<'update',D>('update')(args);
 		},
 		delete: async <D extends schema.Depth>(
 			id:string,
-			parameters?:types.Hook.Arguments<'error', 'delete', D>,
+			parameters?:types.Hook.Arguments<'_request', 'delete', D>,
 			token?:string
-		):types.Hook.Response<'error', 'delete', D>  => {
-			const args:types.Hook.Arguments<'error', 'delete', D> = {
+		):types.Hook.Response<'_request', 'delete', D>  => {
+			const args:types.Hook.Arguments<'_request', 'delete', D> = {
 				params: {
 					id: id,
 				},
@@ -1166,14 +1397,14 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('error',current_token).hook<'delete',D>('delete')(args);
+			return await base.create('_request',current_token).hook<'delete',D>('delete')(args);
 		},
 		insert_multiple: async <D extends schema.Depth>(
-			body:types.Hook.Body<'error', 'insert_multiple'>,
-			parameters?:types.Hook.Arguments<'error', 'insert_multiple', D>,
+			body:types.Hook.Body<'_request', 'insert_multiple'>,
+			parameters?:types.Hook.Arguments<'_request', 'insert_multiple', D>,
 			token?:string
-		):types.Hook.Response<'error', 'insert_multiple', D>  => {
-			const args:types.Hook.Arguments<'error', 'insert_multiple', D> = {
+		):types.Hook.Response<'_request', 'insert_multiple', D>  => {
+			const args:types.Hook.Arguments<'_request', 'insert_multiple', D> = {
 				body: body,
 				...parameters
 			};
@@ -1185,15 +1416,15 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('error',current_token).hook<'insert_multiple',D>('insert_multiple')(args);
+			return await base.create('_request',current_token).hook<'insert_multiple',D>('insert_multiple')(args);
 		},
 		update_multiple: async <D extends schema.Depth>(
 			ids:string,
-			body:types.Hook.Body<'error', 'update_multiple'>,
-			parameters?:types.Hook.Arguments<'error', 'update_multiple', D>,
+			body:types.Hook.Body<'_request', 'update_multiple'>,
+			parameters?:types.Hook.Arguments<'_request', 'update_multiple', D>,
 			token?:string
-		):types.Hook.Response<'error', 'update_multiple', D>  => {
-			const args:types.Hook.Arguments<'error', 'update_multiple', D> = {
+		):types.Hook.Response<'_request', 'update_multiple', D>  => {
+			const args:types.Hook.Arguments<'_request', 'update_multiple', D> = {
 				params: {
 					ids: ids,
 				},
@@ -1208,14 +1439,14 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('error',current_token).hook<'update_multiple',D>('update_multiple')(args);
+			return await base.create('_request',current_token).hook<'update_multiple',D>('update_multiple')(args);
 		},
 		delete_multiple: async <D extends schema.Depth>(
 			ids:string,
-			parameters?:types.Hook.Arguments<'error', 'delete_multiple', D>,
+			parameters?:types.Hook.Arguments<'_request', 'delete_multiple', D>,
 			token?:string
-		):types.Hook.Response<'error', 'delete_multiple', D>  => {
-			const args:types.Hook.Arguments<'error', 'delete_multiple', D> = {
+		):types.Hook.Response<'_request', 'delete_multiple', D>  => {
+			const args:types.Hook.Arguments<'_request', 'delete_multiple', D> = {
 				params: {
 					ids: ids,
 				},
@@ -1229,14 +1460,14 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('error',current_token).hook<'delete_multiple',D>('delete_multiple')(args);
+			return await base.create('_request',current_token).hook<'delete_multiple',D>('delete_multiple')(args);
 		},
 		search_count: async <D extends schema.Depth>(
 			q:string,
-			parameters?:types.Hook.Arguments<'error', 'search_count', D>,
+			parameters?:types.Hook.Arguments<'_request', 'search_count', D>,
 			token?:string
-		):types.Hook.Response<'error', 'search_count', D>  => {
-			const args:types.Hook.Arguments<'error', 'search_count', D> = {
+		):types.Hook.Response<'_request', 'search_count', D>  => {
+			const args:types.Hook.Arguments<'_request', 'search_count', D> = {
 				params: {
 					q: q,
 				},
@@ -1250,14 +1481,14 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('error',current_token).hook<'search_count',D>('search_count')(args);
+			return await base.create('_request',current_token).hook<'search_count',D>('search_count')(args);
 		},
 		search: async <D extends schema.Depth>(
 			q:string,
-			parameters?:types.Hook.Arguments<'error', 'search', D>,
+			parameters?:types.Hook.Arguments<'_request', 'search', D>,
 			token?:string
-		):types.Hook.Response<'error', 'search', D>  => {
-			const args:types.Hook.Arguments<'error', 'search', D> = {
+		):types.Hook.Response<'_request', 'search', D>  => {
+			const args:types.Hook.Arguments<'_request', 'search', D> = {
 				params: {
 					q: q,
 				},
@@ -1271,249 +1502,7 @@ export const hooks:Hooks = {
 			if(typeof token === 'string' && token !== ''){
 				current_token = token;
 			}
-			return await base.create('error',current_token).hook<'search',D>('search')(args);
-		},
-	},
-	requests: {
-		count: async <D extends schema.Depth>(
-			parameters?:types.Hook.Arguments<'request', 'count', D>,
-			token?:string
-		):types.Hook.Response<'request', 'count', D>  => {
-			const args:types.Hook.Arguments<'request', 'count', D> = {
-				...parameters
-			};
-			let current_token:string|undefined;
-			const hook_token = hooks.get_token();
-			if(typeof hook_token === 'string' && hook_token !== ''){
-				current_token = hook_token;
-			}
-			if(typeof token === 'string' && token !== ''){
-				current_token = token;
-			}
-			return await base.create('request',current_token).hook<'count',D>('count')(args);
-		},
-		find_one: async <D extends schema.Depth>(
-			parameters?:types.Hook.Arguments<'request', 'find_one', D>,
-			token?:string
-		):types.Hook.Response<'request', 'find_one', D>  => {
-			const args:types.Hook.Arguments<'request', 'find_one', D> = {
-				...parameters
-			};
-			let current_token:string|undefined;
-			const hook_token = hooks.get_token();
-			if(typeof hook_token === 'string' && hook_token !== ''){
-				current_token = hook_token;
-			}
-			if(typeof token === 'string' && token !== ''){
-				current_token = token;
-			}
-			return await base.create('request',current_token).hook<'find_one',D>('find_one')(args);
-		},
-		find: async <D extends schema.Depth>(
-			parameters?:types.Hook.Arguments<'request', 'find', D>,
-			token?:string
-		):types.Hook.Response<'request', 'find', D>  => {
-			const args:types.Hook.Arguments<'request', 'find', D> = {
-				...parameters
-			};
-			let current_token:string|undefined;
-			const hook_token = hooks.get_token();
-			if(typeof hook_token === 'string' && hook_token !== ''){
-				current_token = hook_token;
-			}
-			if(typeof token === 'string' && token !== ''){
-				current_token = token;
-			}
-			return await base.create('request',current_token).hook<'find',D>('find')(args);
-		},
-		find_id: async <D extends schema.Depth>(
-			id:string,
-			parameters?:types.Hook.Arguments<'request', 'find_id', D>,
-			token?:string
-		):types.Hook.Response<'request', 'find_id', D>  => {
-			const args:types.Hook.Arguments<'request', 'find_id', D> = {
-				params: {
-					id: id,
-				},
-				...parameters
-			};
-			let current_token:string|undefined;
-			const hook_token = hooks.get_token();
-			if(typeof hook_token === 'string' && hook_token !== ''){
-				current_token = hook_token;
-			}
-			if(typeof token === 'string' && token !== ''){
-				current_token = token;
-			}
-			return await base.create('request',current_token).hook<'find_id',D>('find_id')(args);
-		},
-		insert: async <D extends schema.Depth>(
-			body:types.Hook.Body<'request', 'insert'>,
-			parameters?:types.Hook.Arguments<'request', 'insert', D>,
-			token?:string
-		):types.Hook.Response<'request', 'insert', D>  => {
-			const args:types.Hook.Arguments<'request', 'insert', D> = {
-				body: body,
-				...parameters
-			};
-			let current_token:string|undefined;
-			const hook_token = hooks.get_token();
-			if(typeof hook_token === 'string' && hook_token !== ''){
-				current_token = hook_token;
-			}
-			if(typeof token === 'string' && token !== ''){
-				current_token = token;
-			}
-			return await base.create('request',current_token).hook<'insert',D>('insert')(args);
-		},
-		update: async <D extends schema.Depth>(
-			id:string,
-			body:types.Hook.Body<'request', 'update'>,
-			parameters?:types.Hook.Arguments<'request', 'update', D>,
-			token?:string
-		):types.Hook.Response<'request', 'update', D>  => {
-			const args:types.Hook.Arguments<'request', 'update', D> = {
-				params: {
-					id: id,
-				},
-				body: body,
-				...parameters
-			};
-			let current_token:string|undefined;
-			const hook_token = hooks.get_token();
-			if(typeof hook_token === 'string' && hook_token !== ''){
-				current_token = hook_token;
-			}
-			if(typeof token === 'string' && token !== ''){
-				current_token = token;
-			}
-			return await base.create('request',current_token).hook<'update',D>('update')(args);
-		},
-		delete: async <D extends schema.Depth>(
-			id:string,
-			parameters?:types.Hook.Arguments<'request', 'delete', D>,
-			token?:string
-		):types.Hook.Response<'request', 'delete', D>  => {
-			const args:types.Hook.Arguments<'request', 'delete', D> = {
-				params: {
-					id: id,
-				},
-				...parameters
-			};
-			let current_token:string|undefined;
-			const hook_token = hooks.get_token();
-			if(typeof hook_token === 'string' && hook_token !== ''){
-				current_token = hook_token;
-			}
-			if(typeof token === 'string' && token !== ''){
-				current_token = token;
-			}
-			return await base.create('request',current_token).hook<'delete',D>('delete')(args);
-		},
-		insert_multiple: async <D extends schema.Depth>(
-			body:types.Hook.Body<'request', 'insert_multiple'>,
-			parameters?:types.Hook.Arguments<'request', 'insert_multiple', D>,
-			token?:string
-		):types.Hook.Response<'request', 'insert_multiple', D>  => {
-			const args:types.Hook.Arguments<'request', 'insert_multiple', D> = {
-				body: body,
-				...parameters
-			};
-			let current_token:string|undefined;
-			const hook_token = hooks.get_token();
-			if(typeof hook_token === 'string' && hook_token !== ''){
-				current_token = hook_token;
-			}
-			if(typeof token === 'string' && token !== ''){
-				current_token = token;
-			}
-			return await base.create('request',current_token).hook<'insert_multiple',D>('insert_multiple')(args);
-		},
-		update_multiple: async <D extends schema.Depth>(
-			ids:string,
-			body:types.Hook.Body<'request', 'update_multiple'>,
-			parameters?:types.Hook.Arguments<'request', 'update_multiple', D>,
-			token?:string
-		):types.Hook.Response<'request', 'update_multiple', D>  => {
-			const args:types.Hook.Arguments<'request', 'update_multiple', D> = {
-				params: {
-					ids: ids,
-				},
-				body: body,
-				...parameters
-			};
-			let current_token:string|undefined;
-			const hook_token = hooks.get_token();
-			if(typeof hook_token === 'string' && hook_token !== ''){
-				current_token = hook_token;
-			}
-			if(typeof token === 'string' && token !== ''){
-				current_token = token;
-			}
-			return await base.create('request',current_token).hook<'update_multiple',D>('update_multiple')(args);
-		},
-		delete_multiple: async <D extends schema.Depth>(
-			ids:string,
-			parameters?:types.Hook.Arguments<'request', 'delete_multiple', D>,
-			token?:string
-		):types.Hook.Response<'request', 'delete_multiple', D>  => {
-			const args:types.Hook.Arguments<'request', 'delete_multiple', D> = {
-				params: {
-					ids: ids,
-				},
-				...parameters
-			};
-			let current_token:string|undefined;
-			const hook_token = hooks.get_token();
-			if(typeof hook_token === 'string' && hook_token !== ''){
-				current_token = hook_token;
-			}
-			if(typeof token === 'string' && token !== ''){
-				current_token = token;
-			}
-			return await base.create('request',current_token).hook<'delete_multiple',D>('delete_multiple')(args);
-		},
-		search_count: async <D extends schema.Depth>(
-			q:string,
-			parameters?:types.Hook.Arguments<'request', 'search_count', D>,
-			token?:string
-		):types.Hook.Response<'request', 'search_count', D>  => {
-			const args:types.Hook.Arguments<'request', 'search_count', D> = {
-				params: {
-					q: q,
-				},
-				...parameters
-			};
-			let current_token:string|undefined;
-			const hook_token = hooks.get_token();
-			if(typeof hook_token === 'string' && hook_token !== ''){
-				current_token = hook_token;
-			}
-			if(typeof token === 'string' && token !== ''){
-				current_token = token;
-			}
-			return await base.create('request',current_token).hook<'search_count',D>('search_count')(args);
-		},
-		search: async <D extends schema.Depth>(
-			q:string,
-			parameters?:types.Hook.Arguments<'request', 'search', D>,
-			token?:string
-		):types.Hook.Response<'request', 'search', D>  => {
-			const args:types.Hook.Arguments<'request', 'search', D> = {
-				params: {
-					q: q,
-				},
-				...parameters
-			};
-			let current_token:string|undefined;
-			const hook_token = hooks.get_token();
-			if(typeof hook_token === 'string' && hook_token !== ''){
-				current_token = hook_token;
-			}
-			if(typeof token === 'string' && token !== ''){
-				current_token = token;
-			}
-			return await base.create('request',current_token).hook<'search',D>('search')(args);
+			return await base.create('_request',current_token).hook<'search',D>('search')(args);
 		},
 	},
 };
