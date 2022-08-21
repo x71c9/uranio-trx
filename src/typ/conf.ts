@@ -25,6 +25,8 @@ type OptionalConfigParam = {
 	// dev_fetch_url: string
 	ssl_secure: boolean
 	dev_ssl_secure: boolean
+	api_proxy: string
+	dev_api_proxy: string
 }
 
 export type Configuration =

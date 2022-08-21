@@ -44,6 +44,10 @@ export function get_service_url(){
 }
 
 function _build_service_url(){
+	const api_proxy = get(`api_proxy`);
+	if(typeof api_proxy === 'string' && api_proxy){
+		return api_proxy;
+	}
 	const prefix = get(`prefix_api`);
 	const protocol = get(`service_protocol`);
 	const domain = get(`service_domain`);
