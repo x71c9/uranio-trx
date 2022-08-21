@@ -49,6 +49,9 @@ export const trx_client_config:Required<ClientConfiguration> = {
 	
 	ssl_secure: true,
 	
-	dev_ssl_secure: false
+	dev_ssl_secure: false,
 	
+	api_proxy: '',
+	
+	dev_api_proxy: ''
 };
