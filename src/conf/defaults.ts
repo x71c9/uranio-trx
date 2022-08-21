@@ -38,8 +38,8 @@ export const trx_config:Required<Configuration> = {
 	
 	dev_ssl_secure: false,
 	
-	api_proxy: '',
+	service_proxy: '',
 	
-	dev_api_proxy: ''
+	dev_service_proxy: ''
 	
 };

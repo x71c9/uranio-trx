@@ -29,8 +29,8 @@ type OptionalClientConfigParam = {
 	dev_prefix_api: string
 	ssl_secure: boolean
 	dev_ssl_secure: boolean
-	api_proxy: string
-	dev_api_proxy: string
+	service_proxy: string
+	dev_service_proxy: string
 }
 
 export type ClientConfiguration =
