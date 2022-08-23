@@ -44,11 +44,14 @@ export function get_service_url(){
 }
 
 function _build_service_url(){
+	const prefix = get(`prefix_api`);
 	const service_proxy = get(`service_proxy`);
 	if(typeof service_proxy === 'string' && service_proxy){
-		return service_proxy;
+		const final_slash =
+			(service_proxy.charAt(service_proxy.length-1) === '/') ?
+			'' : '/';
+		return service_proxy + final_slash + prefix;
 	}
-	const prefix = get(`prefix_api`);
 	const protocol = get(`service_protocol`);
 	const domain = get(`service_domain`);
 	const port = get(`service_port`);
