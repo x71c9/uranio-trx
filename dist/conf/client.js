@@ -59,17 +59,14 @@ function _build_service_url() {
     const prefix = get(`prefix_api`);
     const service_proxy = get(`service_proxy`);
     if (typeof service_proxy === 'string' && service_proxy) {
-        let plus_prefix = service_proxy + prefix;
-        // if there is a repetition of // after the first one for https://
-        if (plus_prefix.indexOf(`//`, 8) !== -1) {
-            plus_prefix = plus_prefix.replaceAll('/' + prefix, prefix);
-        }
-        return plus_prefix;
+        return (service_proxy + prefix)
+            .replace(/([^:]\/)\/+/g, "$1"); // remove double slash
     }
     const protocol = get(`service_protocol`);
     const domain = get(`service_domain`);
     const port = get(`service_port`);
-    return `${protocol}://${domain}:${port}${prefix}`;
+    return `${protocol}://${domain}:${port}${prefix}`
+        .replace(/([^:]\/)\/+/g, "$1"); // remove double slash
 }
 // export function get_service_url(repo_ctx?:ReturnType<typeof urn_context.create>):string{
 // 	const prefix = get(`prefix_api`);
