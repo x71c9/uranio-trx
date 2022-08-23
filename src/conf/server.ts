@@ -47,10 +47,12 @@ function _build_service_url(){
 	const prefix = get(`prefix_api`);
 	const service_proxy = get(`service_proxy`);
 	if(typeof service_proxy === 'string' && service_proxy){
-		const final_slash =
-			(service_proxy.charAt(service_proxy.length-1) === '/') ?
-			'' : '/';
-		return service_proxy + final_slash + prefix;
+		let plus_prefix = service_proxy + prefix;
+		// if there is a repetition of // after the first one for https://
+		if(plus_prefix.indexOf(`//`, 8) !== -1){
+			plus_prefix = plus_prefix.replaceAll('/'+prefix, prefix);
+		}
+		return plus_prefix;
 	}
 	const protocol = get(`service_protocol`);
 	const domain = get(`service_domain`);
