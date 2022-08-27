@@ -57,7 +57,8 @@ export type Hooks = {
 		search<D extends schema.Depth>(q:string,parameters?:Hook.Arguments<'_user', 'search', D>,token?:string):Hook.Response<'_user', 'search', D>;
 	};
 	_media: {
-		upload<D extends schema.Depth>(body:Hook.Body<'_media', 'upload'>,parameters?:Hook.Arguments<'_media', 'upload', D>,token?:string):Hook.Response<'_media', 'upload', D>;
+		upload(file: Buffer | ArrayBuffer | Blob, token?: string):Promise<urn_response.General<schema.Atom<'_media'>>>;
+		presigned(filename: string, size?: number, type?: string, token?: string): Promise<urn_response.General<string>>;
 		count<D extends schema.Depth>(parameters?:Hook.Arguments<'_media', 'count', D>,token?:string):Hook.Response<'_media', 'count', D>;
 		find_one<D extends schema.Depth>(parameters?:Hook.Arguments<'_media', 'find_one', D>,token?:string):Hook.Response<'_media', 'find_one', D>;
 		find<D extends schema.Depth>(parameters?:Hook.Arguments<'_media', 'find', D>,token?:string):Hook.Response<'_media', 'find', D>;

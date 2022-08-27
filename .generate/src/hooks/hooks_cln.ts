@@ -7,7 +7,7 @@
 import {urn_response} from 'urn-lib';
 
 import {schema} from '../sch/client';
-import * as types from '../client/types';
+import * as types from '../cln/types';
 import * as auth from '../auth/client';
 import * as base from '../base/client';
 import * as media from '../media/client';
@@ -761,24 +761,35 @@ export const hooks:Hooks = {
 		},
 	},
 	_media: {
-		upload: async <D extends schema.Depth>(
-			body:types.Hook.Body<'_media', 'upload'>,
-			parameters?:types.Hook.Arguments<'_media', 'upload', D>,
-			token?:string
-		):types.Hook.Response<'_media', 'upload', D>  => {
-			const args:types.Hook.Arguments<'_media', 'upload', D> = {
-				body: body,
-				...parameters
-			};
-			let current_token:string|undefined;
+		upload: async<D extends schema.Depth>(
+			file: Buffer | ArrayBuffer | Blob,
+			token?: string
+		): Promise<urn_response.General<schema.Atom<'_media'>>> => {
+			let current_token: string | undefined;
 			const hook_token = hooks.get_token();
-			if(typeof hook_token === 'string' && hook_token !== ''){
+			if (typeof hook_token === "string" && hook_token !== "") {
 				current_token = hook_token;
 			}
-			if(typeof token === 'string' && token !== ''){
+			if (typeof token === "string" && token !== "") {
 				current_token = token;
 			}
-			return await base.create('_media',current_token).hook<'upload',D>('upload')(args);
+			return await media.create(current_token).upload<D>(file, current_token);
+		},
+		presigned: async(
+			filename: string,
+			size?: number,
+			type?: string,
+			token?: string
+		): Promise<urn_response.General<string>> => {
+			let current_token: string | undefined;
+			const hook_token = hooks.get_token();
+			if (typeof hook_token === "string" && hook_token !== "") {
+				current_token = hook_token;
+			}
+			if (typeof token === "string" && token !== "") {
+				current_token = token;
+			}
+			return await media.create(current_token).presigned(filename, size, type, current_token);
 		},
 		count: async <D extends schema.Depth>(
 			parameters?:types.Hook.Arguments<'_media', 'count', D>,

@@ -51,7 +51,9 @@ const client_toml = {
   dev_service_domain: "0.0.0.0",
   dev_service_port: 7773,
   ssl_secure: true,
-  dev_ssl_secure: false
+  dev_ssl_secure: false,
+  service_proxy: "",
+  dev_service_proxy: ""
 };
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {

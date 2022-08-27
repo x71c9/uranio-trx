@@ -29,6 +29,7 @@ __export(hooks_cln_exports, {
 module.exports = __toCommonJS(hooks_cln_exports);
 var auth = __toESM(require("../auth/client"));
 var base = __toESM(require("../base/client"));
+var media = __toESM(require("../media/client"));
 let hook_token;
 const hooks = {
   set_token: (token) => {
@@ -629,11 +630,7 @@ const hooks = {
     }
   },
   _media: {
-    upload: async (body, parameters, token) => {
-      const args = {
-        body,
-        ...parameters
-      };
+    upload: async (file, token) => {
       let current_token;
       const hook_token2 = hooks.get_token();
       if (typeof hook_token2 === "string" && hook_token2 !== "") {
@@ -642,7 +639,18 @@ const hooks = {
       if (typeof token === "string" && token !== "") {
         current_token = token;
       }
-      return await base.create("_media", current_token).hook("upload")(args);
+      return await media.create(current_token).upload(file, current_token);
+    },
+    presigned: async (filename, size, type, token) => {
+      let current_token;
+      const hook_token2 = hooks.get_token();
+      if (typeof hook_token2 === "string" && hook_token2 !== "") {
+        current_token = hook_token2;
+      }
+      if (typeof token === "string" && token !== "") {
+        current_token = token;
+      }
+      return await media.create(current_token).presigned(filename, size, type, current_token);
     },
     count: async (parameters, token) => {
       const args = {

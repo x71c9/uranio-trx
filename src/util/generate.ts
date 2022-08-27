@@ -439,6 +439,7 @@ function _generate_hooks_text_server(){
 // function _generate_hooks_text(repo:string){
 function _generate_hooks_text(parent:string){
 	// const submodule = _get_submodule(repo);
+	const short_dir = (parent==='client') ? 'cln' : 'srv';
 	let text = '';
 	text += `/**\n`;
 	text += ` * Auto generate hooks file\n`;
@@ -452,7 +453,7 @@ function _generate_hooks_text(parent:string){
 	// text += `import uranio from '../src/index';\n`;
 	// text += `import {Hooks} from './types';\n`;
 	text += `import {schema} from '../sch/${parent}';\n`;
-	text += `import * as types from '../${parent}/types';\n`;
+	text += `import * as types from '../${short_dir}/types';\n`;
 	text += `import * as auth from '../auth/${parent}';\n`;
 	text += `import * as base from '../base/${parent}';\n`;
 	text += `import * as media from '../media/${parent}';\n`;
