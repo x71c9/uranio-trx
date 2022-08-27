@@ -7,7 +7,7 @@
 import {urn_response} from 'urn-lib';
 
 import {schema} from '../sch/server';
-import * as types from '../server/types';
+import * as types from '../srv/types';
 import * as auth from '../auth/server';
 import * as base from '../base/server';
 import * as media from '../media/server';

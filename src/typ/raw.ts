@@ -12,7 +12,7 @@ import {RawName} from './raw_cln';
 
 export {RawName};
 
-import * as types from '../server/types';
+import * as types from '../srv/types';
 
 import {schema} from '../sch/server';
 

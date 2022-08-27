@@ -4,7 +4,7 @@
  * @packageDocumentation
  */
 
-import * as client_types from '../client/types';
+import * as client_types from '../cln/types';
 
 import {schema} from '../sch/client';
 

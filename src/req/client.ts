@@ -8,7 +8,7 @@ import api_client from 'uranio-api/client';
 
 import {required_atoms} from './atoms';
 
-import * as types from '../server/types';
+import * as types from '../srv/types';
 
 export function get():types.Book{
 	return {

@@ -3,7 +3,7 @@
  *
  * @packageDocumentation
  */
-import * as client_types from '../client/types';
+import * as client_types from '../cln/types';
 import { schema } from '../sch/client';
 export declare namespace Hook {
     type Arguments<A extends schema.AtomName, R extends schema.RouteName<A>, D extends schema.Depth = 0> = {

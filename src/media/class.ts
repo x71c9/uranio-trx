@@ -8,7 +8,7 @@ import {urn_log, urn_response} from 'urn-lib';
 
 import {schema} from '../sch/client';
 
-import * as client_types from '../client/types';
+import * as client_types from '../cln/types';
 
 import {Base} from '../base/class';
 

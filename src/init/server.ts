@@ -14,9 +14,9 @@ import * as register from '../reg/server';
 
 import * as required from '../req/server';
 
-import * as types from '../server/types';
+import * as types from '../srv/types';
 
-import * as client_types from '../client/types';
+import * as client_types from '../cln/types';
 
 import * as conf from '../conf/server';
 

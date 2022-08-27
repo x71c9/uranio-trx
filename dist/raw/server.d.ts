@@ -4,7 +4,7 @@
  * @packageDocumentation
  */
 import { AxiosInstance } from 'axios';
-import * as types from '../server/types';
+import * as types from '../srv/types';
 import { schema } from '../sch/server';
 import { RAW } from '../typ/raw';
 declare class AxiosRaw<A extends schema.AtomName> implements RAW<A> {

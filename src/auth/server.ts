@@ -10,7 +10,7 @@ const urn_exc = urn_exception.init(`AUTH_MODULE`, `Auth module.`);
 
 import * as book from '../book/server';
 
-import * as client_types from '../server/types';
+import * as client_types from '../srv/types';
 
 import {schema} from '../sch/server';
 

@@ -32,7 +32,7 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 // export * from './server/register';
-const urn_trx = __importStar(require("./server/main"));
-__exportStar(require("./server/main"), exports);
+const urn_trx = __importStar(require("./srv/main"));
+__exportStar(require("./srv/main"), exports);
 exports.default = urn_trx;
 //# sourceMappingURL=server.js.map

@@ -4,7 +4,7 @@
  * @packageDocumentation
  */
 import { urn_response } from 'urn-lib';
-import * as client_types from '../server/types';
+import * as client_types from '../srv/types';
 import { schema } from '../sch/server';
 declare class AuthBase<A extends schema.AuthName> {
     auth_name: A;

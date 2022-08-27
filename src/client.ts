@@ -6,8 +6,8 @@
 
 // export * from './client/register';
 
-import * as urn_trx_client from './client/main';
+import * as urn_trx_client from './cln/main';
 
-export * from './client/main';
+export * from './cln/main';
 
 export default urn_trx_client;

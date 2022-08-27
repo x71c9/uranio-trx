@@ -32,7 +32,7 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 // export * from './client/register';
-const urn_trx_client = __importStar(require("./client/main"));
-__exportStar(require("./client/main"), exports);
+const urn_trx_client = __importStar(require("./cln/main"));
+__exportStar(require("./cln/main"), exports);
 exports.default = urn_trx_client;
 //# sourceMappingURL=client.js.map

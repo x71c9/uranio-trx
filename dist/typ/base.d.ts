@@ -3,7 +3,7 @@
  *
  * @packageDocumentation
  */
-import * as types from '../server/types';
+import * as types from '../srv/types';
 import { schema } from '../sch/server';
 export declare namespace Hook {
     type Arguments<A extends schema.AtomName, R extends schema.RouteName<A>, D extends schema.Depth = 0> = {

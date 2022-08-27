@@ -3,7 +3,7 @@
  *
  * @packageDocumentation
  */
-import * as client_types from '../client/types';
+import * as client_types from '../cln/types';
 import { schema } from '../sch/client';
 export declare class Base<A extends schema.AtomName> {
     atom_name: A;
