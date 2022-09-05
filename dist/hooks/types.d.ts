@@ -5,7 +5,7 @@
  */
 /** --uranio-generate-types-start */
 /// <reference types="node" />
-import { urn_response } from 'urn-lib';
+import { urn_response } from 'uranio-utils';
 import { Api } from '../typ/api_cln';
 import { schema } from '../sch/client';
 import { Hook } from '../typ/base_cln';

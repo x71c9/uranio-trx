@@ -12,7 +12,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.create = void 0;
-const urn_lib_1 = require("urn-lib");
+const uranio_utils_1 = require("uranio-utils");
 const class_cln_1 = require("../base/class_cln");
 let MediaBase = class MediaBase extends class_cln_1.Base {
     constructor(token) {
@@ -52,11 +52,11 @@ let MediaBase = class MediaBase extends class_cln_1.Base {
     }
 };
 MediaBase = __decorate([
-    urn_lib_1.urn_log.util.decorators.debug_constructor,
-    urn_lib_1.urn_log.util.decorators.debug_methods
+    uranio_utils_1.urn_log.util.decorators.debug_constructor,
+    uranio_utils_1.urn_log.util.decorators.debug_methods
 ], MediaBase);
 function create(token) {
-    urn_lib_1.urn_log.trace(`Create MediaBase`);
+    uranio_utils_1.urn_log.trace(`Create MediaBase`);
     return new MediaBase(token);
 }
 exports.create = create;

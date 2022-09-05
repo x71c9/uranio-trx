@@ -6,7 +6,7 @@
 
 import axios, {AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios';
 
-import {urn_util, urn_log, urn_return, urn_response} from 'urn-lib';
+import {urn_util, urn_log, urn_return, urn_response} from 'uranio-utils';
 
 const urn_ret = urn_return.create();
 

@@ -9,7 +9,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.trx_client_config = void 0;
-// import {urn_log} from 'urn-lib';
+// import {urn_log} from 'uranio-utils';
 const client_1 = __importDefault(require("uranio-api/client"));
 /**
  * IMPORTANT: if new variable are added here they must be added on

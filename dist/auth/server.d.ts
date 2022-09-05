@@ -3,7 +3,7 @@
  *
  * @packageDocumentation
  */
-import { urn_response } from 'urn-lib';
+import { urn_response } from 'uranio-utils';
 import * as client_types from '../srv/types';
 import { schema } from '../sch/server';
 declare class AuthBase<A extends schema.AuthName> {

@@ -12,8 +12,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Base = void 0;
-// import {urn_util, urn_log, urn_exception} from 'urn-lib';
-const urn_lib_1 = require("urn-lib");
+// import {urn_util, urn_log, urn_exception} from 'uranio-utils';
+const uranio_utils_1 = require("uranio-utils");
 // import {create as create_raw} from '../raw/server';
 const class_cln_1 = require("./class_cln");
 let Base = class Base {
@@ -27,8 +27,8 @@ let Base = class Base {
     }
 };
 Base = __decorate([
-    urn_lib_1.urn_log.util.decorators.debug_constructor,
-    urn_lib_1.urn_log.util.decorators.debug_methods
+    uranio_utils_1.urn_log.util.decorators.debug_constructor,
+    uranio_utils_1.urn_log.util.decorators.debug_methods
 ], Base);
 exports.Base = Base;
 //# sourceMappingURL=class.js.map

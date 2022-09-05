@@ -40,8 +40,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.create = void 0;
 const https_1 = __importDefault(require("https"));
 const axios_1 = __importDefault(require("axios"));
-const urn_lib_1 = require("urn-lib");
-const urn_ret = urn_lib_1.urn_return.create();
+const uranio_utils_1 = require("uranio-utils");
+const urn_ret = uranio_utils_1.urn_return.create();
 const conf = __importStar(require("../conf/client"));
 const axios_config = {
     // headers: {'user-agent': 'Uranio TRX 0.0.1'}
@@ -84,8 +84,8 @@ let AxiosRaw = class AxiosRaw {
     }
 };
 AxiosRaw = __decorate([
-    urn_lib_1.urn_log.util.decorators.debug_constructor,
-    urn_lib_1.urn_log.util.decorators.debug_methods
+    uranio_utils_1.urn_log.util.decorators.debug_constructor,
+    uranio_utils_1.urn_log.util.decorators.debug_methods
 ], AxiosRaw);
 // function _serialize(obj:any, prefix=''):string{
 //   const str = [];
@@ -105,7 +105,7 @@ AxiosRaw = __decorate([
 function _url_with_query(url, query) {
     let full_url = url;
     if (query) {
-        const query_string = urn_lib_1.urn_util.object.serialize(query);
+        const query_string = uranio_utils_1.urn_util.object.serialize(query);
         full_url += `?${query_string}`;
     }
     return full_url;
@@ -160,7 +160,7 @@ async function _handle_axios_call(handler) {
  * A function the will create an AxiosRawInstance.
  */
 function create(is_auth = false) {
-    urn_lib_1.urn_log.trace('Create URNTRXRaw');
+    uranio_utils_1.urn_log.trace('Create URNTRXRaw');
     const service_url = conf.get_service_url();
     const axios_config = {
         baseURL: service_url,

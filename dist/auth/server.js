@@ -35,8 +35,8 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.create = void 0;
-const urn_lib_1 = require("urn-lib");
-const urn_exc = urn_lib_1.urn_exception.init(`AUTH_MODULE`, `Auth module.`);
+const uranio_utils_1 = require("uranio-utils");
+const urn_exc = uranio_utils_1.urn_exception.init(`AUTH_MODULE`, `Auth module.`);
 const book = __importStar(require("../book/server"));
 const server_1 = require("../raw/server");
 let AuthBase = class AuthBase {
@@ -51,8 +51,8 @@ let AuthBase = class AuthBase {
     }
 };
 AuthBase = __decorate([
-    urn_lib_1.urn_log.util.decorators.debug_constructor,
-    urn_lib_1.urn_log.util.decorators.debug_methods
+    uranio_utils_1.urn_log.util.decorators.debug_constructor,
+    uranio_utils_1.urn_log.util.decorators.debug_methods
 ], AuthBase);
 function _get_auth_url(auth_name) {
     const dock_def = book.get_definition(auth_name).dock;
@@ -68,7 +68,7 @@ function _check_auth_name(auth_name) {
     throw urn_exc.create(`INVALID_AUTH_NAME`, `Invalid AuthName \`${auth_name}\`.`);
 }
 function create(auth_name) {
-    urn_lib_1.urn_log.trace(`Create AuthBase [${auth_name}]`);
+    uranio_utils_1.urn_log.trace(`Create AuthBase [${auth_name}]`);
     return new AuthBase(auth_name);
 }
 exports.create = create;

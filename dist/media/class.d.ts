@@ -4,7 +4,7 @@
  * @packageDocumentation
  */
 /// <reference types="node" />
-import { urn_response } from 'urn-lib';
+import { urn_response } from 'uranio-utils';
 import { schema } from '../sch/client';
 import { Base } from '../base/class';
 declare class MediaBase extends Base<'_media'> {

@@ -12,7 +12,7 @@ import * as esbuild from 'esbuild';
 
 import api from 'uranio-api';
 
-import {urn_log} from 'urn-lib';
+import {urn_log} from 'uranio-utils';
 
 import {schema as schema_types} from '../sch/server';
 
@@ -285,7 +285,7 @@ function _generate_uranio_hook_types_text(){
 
 function _generate_hook_types_text_src(){
 	let text = '';
-	text += `import {urn_response} from 'urn-lib';\n`;
+	text += `import {urn_response} from 'uranio-utils';\n`;
 	text += `import {Api} from '../typ/api_cln';\n`;
 	text += `import {schema} from '../sch/client';\n`;
 	text += `import {Hook} from '../typ/base_cln';\n`;
@@ -342,7 +342,7 @@ function _generate_hook_types_text_src(){
 
 // function _generate_hook_types_text_dist(){
 // 	let text = '';
-// 	text += `import {urn_response} from 'urn-lib';\n`;
+// 	text += `import {urn_response} from 'uranio-utils';\n`;
 // 	text += `import {Api} from '../typ/api_cln';\n`;
 // 	text += `import {schema} from '../sch/client';\n`;
 // 	text += `import {Hook} from '../typ/base_cln';\n`;
@@ -413,7 +413,7 @@ function _generate_trx_schema_text(){
 	// const atom_book = book.get_all_definitions();
 	// let txt = '';
 	// txt += `\n`;
-	// txt += `import {urn_response} from 'urn-lib';\n`;
+	// txt += `import {urn_response} from 'uranio-utils';\n`;
 	// txt += _generate_default_response();
 	// txt += _generate_custom_response(atom_book);
 	// txt += _generate_response();
@@ -447,7 +447,7 @@ function _generate_hooks_text(parent:string){
 	text += ` * @packageDocumentation\n`;
 	text += ` */\n`;
 	text += `\n`;
-	text += `import {urn_response} from 'urn-lib';\n`;
+	text += `import {urn_response} from 'uranio-utils';\n`;
 	text += `\n`;
 	// text += `import uranio from 'uranio/client';\n`;
 	// text += `import uranio from '../src/index';\n`;

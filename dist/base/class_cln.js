@@ -38,8 +38,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Base = void 0;
-const urn_lib_1 = require("urn-lib");
-const urn_exc = urn_lib_1.urn_exception.init(`BASE`, `Base module`);
+const uranio_utils_1 = require("uranio-utils");
+const urn_exc = uranio_utils_1.urn_exception.init(`BASE`, `Base module`);
 const client_1 = __importDefault(require("uranio-api/client"));
 const book = __importStar(require("../book/client"));
 const conf = __importStar(require("../conf/client"));
@@ -73,7 +73,7 @@ let Base = class Base {
             let url = `${connection_url}${atom_api_url}${route.url}`;
             // let arg_params:{[k:string]: string | string[]} = {};
             let arg_params = {};
-            if (urn_lib_1.urn_util.object.has_key(args, 'params')) {
+            if (uranio_utils_1.urn_util.object.has_key(args, 'params')) {
                 arg_params = args['params'];
             }
             // for(const [param_name, param_value] of Object.entries(arg_params)){
@@ -108,8 +108,8 @@ let Base = class Base {
     }
 };
 Base = __decorate([
-    urn_lib_1.urn_log.util.decorators.debug_constructor,
-    urn_lib_1.urn_log.util.decorators.debug_methods
+    uranio_utils_1.urn_log.util.decorators.debug_constructor,
+    uranio_utils_1.urn_log.util.decorators.debug_methods
 ], Base);
 exports.Base = Base;
 function _check_atom_name(atom_name) {

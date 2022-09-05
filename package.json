@@ -57,6 +57,6 @@
 		"uranio-api": "git+ssh://git@github.com/x71c9/uranio-api.git#master",
 		"uranio-core": "git+ssh://git@github.com/x71c9/uranio-core.git#master",
 		"uranio-schema": "ssh://git@github.com/x71c9/uranio-schema.git#master",
-		"urn-lib": "git+ssh://git@github.com/x71c9/uranio-lib.git#master"
+		"uranio-utils": "git+ssh://git@github.com/x71c9/uranio-utils.git#master"
 	}
 }

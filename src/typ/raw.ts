@@ -4,7 +4,7 @@
  * @packageDocumentation
  */
 
-// import {urn_response} from 'urn-lib';
+// import {urn_response} from 'uranio-utils';
 
 // export type RawName = 'axios'; // japi, fetch
 
