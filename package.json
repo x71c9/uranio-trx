@@ -47,16 +47,16 @@
 		"dev:generate:client-config":"yarn tsc-watch --onSuccess \"yarn generate:client-config\""
 	},
 	"devDependencies": {
-		"uranio-dev": "git+ssh://git@github.com/x71c9/uranio-dev.git#master"
+		"uranio-dev": "https://github.com/x71c9/uranio-dev.git#master"
 	},
 	"dependencies": {
 		"axios": "^0.26.0",
 		"dateformat": "^3",
 		"dotenv": "^16.0.0",
 		"esbuild": "^0.14.25",
-		"uranio-api": "git+ssh://git@github.com/x71c9/uranio-api.git#master",
-		"uranio-core": "git+ssh://git@github.com/x71c9/uranio-core.git#master",
-		"uranio-schema": "ssh://git@github.com/x71c9/uranio-schema.git#master",
-		"uranio-utils": "git+ssh://git@github.com/x71c9/uranio-utils.git#master"
+		"uranio-api": "https://github.com/x71c9/uranio-api.git#master",
+		"uranio-core": "https://github.com/x71c9/uranio-core.git#master",
+		"uranio-schema": "https://github.com/x71c9/uranio-schema.git#master",
+		"uranio-utils": "https://github.com/x71c9/uranio-utils.git#master"
 	}
 }
